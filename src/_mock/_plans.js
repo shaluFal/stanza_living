@@ -2,11 +2,13 @@ import { PlanFreeIcon, PlanStarterIcon, PlanPremiumIcon } from '../assets';
 
 // ----------------------------------------------------------------------
 
-const LICENSES = ['Standard', 'Standard Plus', 'Extended'];
+// const LICENSES = ['fgf', 'cfvgg', 'fkkf'];
 
 export const _homePlans = [...Array(3)].map((_, index) => ({
-  license: LICENSES[index],
-  commons: ['One end products', '12 months updates', '6 months of support'],
+  license: ['Tell us what you crave', 'All payments and dues, in one place', 'Be heard. Without saying a word'],
+  commons: ['Not only are our meals deliciously homely, they are also customisable. Pick and choose from our varied menu on the app and we will serve it up, piping hot.', 
+  'No running around here and there paying all your bills. While paying, tracking and managing your rent and other expenses on your app, the only thing that will move would be your fingertips.', 
+  'If you need help with anything, wish to register a complaint, or if you think we can do something better, do tell us through the support and real-time feedback feature on the app.'],
   options: ['JavaScript version', 'TypeScript version', 'Design Resources', 'Commercial applications'],
   icons: [
     'https://minimal-assets-api-dev.vercel.app/assets/images/home/ic_sketch.svg',

@@ -80,12 +80,12 @@ export default function HomeDarkMode() {
             <m.div variants={varFade().inUp}>
               <Image
                 alt="light mode"
-                src="https://minimal-assets-api-dev.vercel.app/assets/images/home/lightmode.png"
+                src="images/room_1.jpg"
               />
             </m.div>
 
-            <Box component={m.div} variants={varFade().inDown} sx={{ top: 0, right: 0, position: 'absolute' }}>
-              <Image alt="dark mode" src="https://minimal-assets-api-dev.vercel.app/assets/images/home/darkmode.png" />
+            <Box component={m.div} variants={varFade().inDown} sx={{ top: 0, right: 0, position: 'absolute', width: '55%' }}>
+              <Image alt="dark mode" src="images/room_2.jpg" />
             </Box>
           </Grid>
         </Grid>

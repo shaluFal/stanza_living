@@ -52,16 +52,16 @@ export default function AboutTeam() {
   };
 
   return (
-    <Container component={MotionViewport} sx={{ pb: 10, textAlign: 'center' }}>
-      <m.div variants={varFade().inDown}>
+    <Container component={MotionViewport} sx={{ pb: 10, textAlign: 'center', marginTop: '5%' }}>
+      {/* <m.div variants={varFade().inDown}>
         <Typography component="p" variant="overline" sx={{ mb: 2, color: 'text.secondary' }}>
           Dream team
         </Typography>
-      </m.div>
+      </m.div> */}
 
       <m.div variants={varFade().inUp}>
         <Typography variant="h2" sx={{ mb: 3 }}>
-          Great team is the key
+          The spotlight on us.
         </Typography>
       </m.div>
 
@@ -73,8 +73,7 @@ export default function AboutTeam() {
             color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'common.white'),
           }}
         >
-          Minimal will provide you support if you have any problems, our support team will reply within a day and we
-          also have detailed documentation.
+          We don't just make second homes. We make headlines as well.
         </Typography>
       </m.div>
 
@@ -89,7 +88,7 @@ export default function AboutTeam() {
           </Slider>
         </CarouselArrows>
       </Box>
-      <Button
+      {/* <Button
         variant="outlined"
         color="inherit"
         size="large"
@@ -97,7 +96,7 @@ export default function AboutTeam() {
         sx={{ mx: 'auto' }}
       >
         View all team members
-      </Button>
+      </Button> */}
     </Container>
   );
 }
@@ -116,17 +115,17 @@ function MemberCard({ member }) {
   const { name, role, avatar } = member;
 
   return (
-    <Card key={name} sx={{ p: 1 }}>
-      <Typography variant="subtitle1" sx={{ mt: 2, mb: 0.5 }}>
+    <Card key={name} sx={{ p: 1, width: '100%' }}>
+      {/* <Typography variant="subtitle1" sx={{ mt: 2, mb: 0.5 }}>
         {name}
       </Typography>
       <Typography variant="body2" sx={{ mb: 2, color: 'text.secondary' }}>
         {role}
-      </Typography>
-      <Image alt={name} src={avatar} ratio="1/1" sx={{ borderRadius: 1.5 }} />
-      <Stack alignItems="center" sx={{ mt: 2, mb: 1 }}>
+      </Typography> */}
+      <Image alt={name} src={avatar} ratio="1/1" sx={{ borderRadius: 1.5, width: '100%' }} />
+      {/* <Stack alignItems="center" sx={{ mt: 2, mb: 1 }}>
         <SocialsButton sx={{ color: 'action.active' }} />
-      </Stack>
+      </Stack> */}
     </Card>
   );
 }

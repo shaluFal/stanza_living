@@ -20,11 +20,11 @@ const RootStyle = styled('div')(({ theme }) => ({
 
 export default function Contact() {
   return (
-    <Page title="Contact us">
+    <Page title="Search Property">
       <RootStyle>
         <ContactHero />
 
-        <Container sx={{ my: 10 }}>
+        {/* <Container sx={{ my: 10 }}>
           <Grid container spacing={10}>
             <Grid item xs={12} md={6}>
               <ContactForm />
@@ -34,7 +34,7 @@ export default function Contact() {
               <ContactMap contacts={_mapContact} />
             </Grid>
           </Grid>
-        </Container>
+        </Container> */}
       </RootStyle>
     </Page>
   );

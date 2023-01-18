@@ -91,18 +91,15 @@ export default function HomeHero() {
           <m.div>
             <AppFeatured list={_appFeatured} />
             </m.div>
-            <m.div variants={varFade().inRight}>
+            {/* <m.div variants={varFade().inRight}>
               <Typography variant="h1" sx={{ color: 'common.white' }}>
                 Come, live new kind of living.
-                {/* <Typography component="span" variant="h1" sx={{ color: 'primary.main' }}>
-                  &nbsp;Minimal
-                </Typography> */}
               </Typography>
             </m.div>
 
             <m.div variants={varFade().inRight}>
               <Typography sx={{ color: 'common.white' }}>Life at a professionally managed accommodation.</Typography>
-            </m.div>
+            </m.div> */}
 
             <m.div variants={varFade().inUp}>
               <InputStyle

@@ -16,6 +16,7 @@ import {
   HomeCleanInterfaces,
   HomeHugePackElements,
 } from '../sections/home';
+import { AboutTeam } from '../sections/about';
 
 // ----------------------------------------------------------------------
 
@@ -45,7 +46,8 @@ export default function HomePage() {
 
         <HomePricingPlans />
 
-        <HomeLookingFor />
+        {/* <HomeLookingFor /> */}
+        <AboutTeam />
 
         {/* <HomeAdvertisement /> */}
         <MainFooter />

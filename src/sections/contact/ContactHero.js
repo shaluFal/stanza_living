@@ -1,9 +1,11 @@
 import { m } from 'framer-motion';
 // @mui
 import { styled } from '@mui/material/styles';
-import { Box, Container, Typography, Grid } from '@mui/material';
+import { Box, Container, Typography, Grid, InputAdornment } from '@mui/material';
 //
 import { TextAnimate, MotionContainer, varFade } from '../../components/animate';
+import InputStyle from '../../components/InputStyle';
+import Iconify from '../../components/Iconify';
 
 // ----------------------------------------------------------------------
 
@@ -33,8 +35,8 @@ const CONTACTS = [
 const RootStyle = styled('div')(({ theme }) => ({
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-  backgroundImage:
-    'url(/assets/overlay.svg), url(https://minimal-assets-api-dev.vercel.app/assets/images/contact/hero.jpg)',
+  // backgroundImage:
+  //   'url(/assets/overlay.svg), url(https://minimal-assets-api-dev.vercel.app/assets/images/contact/hero.jpg)',
   padding: theme.spacing(10, 0),
   [theme.breakpoints.up('md')]: {
     height: 560,
@@ -47,7 +49,7 @@ const ContentStyle = styled('div')(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
     textAlign: 'left',
     position: 'absolute',
-    bottom: theme.spacing(10),
+    // bottom: theme.spacing(10),
   },
 }));
 
@@ -58,15 +60,43 @@ export default function ContactHero() {
     <RootStyle>
       <Container component={MotionContainer} sx={{ position: 'relative', height: '100%' }}>
         <ContentStyle>
-          <TextAnimate text="Where" sx={{ color: 'primary.main' }} variants={varFade().inRight} />
+          
+        <m.div variants={varFade().inUp}>
+              <InputStyle
+                stretchStart={280}
+                placeholder="Search for your second home..."
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Iconify icon={'eva:search-fill'} sx={{ color: 'text.disabled', width: 20, height: 20 }} />
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    color: 'common.white',
+                  },
+                }}
+              />
+            </m.div>
+
+            <m.div>
+            <Typography sx={{marginTop: "10%"}}>Stanza Living/PG in Bengaluru</Typography>
+          </m.div>
+
+          <m.div>
+            <Typography sx={{marginTop: "10%", fontWeight: "700"}}>143 PGs waiting to be yours in Bengaluru</Typography>
+          </m.div>
+
+          {/* <TextAnimate text="Where" sx={{ color: 'primary.main' }} variants={varFade().inRight} />
           <br />
           <Box sx={{ display: 'inline-flex', color: 'common.white' }}>
             <TextAnimate text="to" sx={{ mr: 2 }} />
             <TextAnimate text="find" sx={{ mr: 2 }} />
             <TextAnimate text="us?" />
-          </Box>
+          </Box> */}
 
-          <Grid container spacing={5} sx={{ mt: 5, color: 'common.white' }}>
+          {/* <Grid container spacing={5} sx={{ mt: 5, color: 'common.white' }}>
             {CONTACTS.map((contact) => (
               <Grid key={contact.country} item xs={12} sm={6} md={3} lg={2} sx={{ pr: { md: 5 } }}>
                 <m.div variants={varFade().in}>
@@ -82,7 +112,8 @@ export default function ContactHero() {
                 </m.div>
               </Grid>
             ))}
-          </Grid>
+          </Grid> */}
+          
         </ContentStyle>
       </Container>
     </RootStyle>

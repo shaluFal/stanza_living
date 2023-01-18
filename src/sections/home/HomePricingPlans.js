@@ -38,8 +38,7 @@ export default function HomePricingPlans() {
           </m.div> */}
           <m.div variants={varFade().inDown}>
             <Typography variant="h2" sx={{ mb: 3 }}>
-            Always have us
-at your fingertips
+              Always have us at your fingertips
             </Typography>
           </m.div>
           <m.div variants={varFade().inDown}>
@@ -48,8 +47,8 @@ at your fingertips
                 color: isLight ? 'text.secondary' : 'text.primary',
               }}
             >
-             Tell us what you crave. Not only are our meals deliciously homely, they are also customisable. 
-             Pick and choose from our varied menu on the app and we'll serve it up, piping hot.
+              Tell us what you crave. Not only are our meals deliciously homely, they are also customisable. Pick and
+              choose from our varied menu on the app and we'll serve it up, piping hot.
             </Typography>
           </m.div>
         </Box>
@@ -98,36 +97,27 @@ PlanCard.propTypes = {
   plan: PropTypes.shape({
     license: PropTypes.string,
     commons: PropTypes.arrayOf(PropTypes.string),
-    icons: PropTypes.arrayOf(PropTypes.string),
-    options: PropTypes.arrayOf(PropTypes.string),
+    // icons: PropTypes.arrayOf(PropTypes.string),
+    // options: PropTypes.arrayOf(PropTypes.string),
   }),
 };
 
 function PlanCard({ plan }) {
-  const { license, commons, options, icons } = plan;
+  const { license, commons } = plan;
 
-  const standard = license === 'Standard';
-  const plus = license === 'Standard Plus';
+  // const standard = license === 'Standard';
+  // const plus = license === 'Standard Plus';
 
   return (
     <Card
-      sx={{
-        p: 5,
-        boxShadow: 0,
-        ...(plus && {
-          boxShadow: (theme) => theme.customShadows.z24,
-        }),
-      }}
+      sx={{padding: '4%'}}
     >
       <Stack spacing={5}>
         <div>
-          <Typography variant="overline" component="div" sx={{ mb: 2, color: 'text.disabled' }}>
-            LICENSE
-          </Typography>
           <Typography variant="h4">{license}</Typography>
         </div>
 
-        {standard ? (
+        {/* {standard ? (
           <Image alt="package" src={icons[2]} sx={{ width: 40, height: 40 }} />
         ) : (
           <Stack direction="row" spacing={1}>
@@ -135,7 +125,7 @@ function PlanCard({ plan }) {
               <Image key={icon} alt="package" src={icon} sx={{ width: 40, height: 40 }} />
             ))}
           </Stack>
-        )}
+        )} */}
 
         <Stack spacing={2.5}>
           {commons.map((option) => (
@@ -147,7 +137,7 @@ function PlanCard({ plan }) {
 
           <Divider sx={{ borderStyle: 'dashed' }} />
 
-          {options.map((option, optionIndex) => {
+          {/* {options.map((option, optionIndex) => {
             const disabledLine =
               (standard && optionIndex === 1) ||
               (standard && optionIndex === 2) ||
@@ -176,10 +166,10 @@ function PlanCard({ plan }) {
                 <Typography variant="body2">{option}</Typography>
               </Stack>
             );
-          })}
+          })} */}
         </Stack>
 
-        <Stack direction="row" justifyContent="flex-end">
+        {/* <Stack direction="row" justifyContent="flex-end">
           <Link
             color="text.secondary"
             underline="always"
@@ -190,9 +180,9 @@ function PlanCard({ plan }) {
           >
             Learn more <Iconify icon={'eva:chevron-right-fill'} width={20} height={20} />
           </Link>
-        </Stack>
+        </Stack> */}
 
-        <Button
+        {/* <Button
           size="large"
           fullWidth
           variant={plus ? 'contained' : 'outlined'}
@@ -201,7 +191,7 @@ function PlanCard({ plan }) {
           href="https://material-ui.com/store/items/minimal-dashboard/"
         >
           Choose Plan
-        </Button>
+        </Button> */}
       </Stack>
     </Card>
   );

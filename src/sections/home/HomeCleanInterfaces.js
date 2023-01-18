@@ -37,7 +37,7 @@ export default function HomeCleanInterfaces() {
 
   return (
     <RootStyle>
-      <Container component={MotionViewport}>
+      <Container component={MotionViewport} sx={{marginTop: '30%', marginBottom: '30%'}}>
         <ContentStyle>
           {/* <m.div variants={varFade().inUp}>
             <Typography component="div" variant="overline" sx={{ mb: 2, color: 'text.disabled' }}>
@@ -71,7 +71,7 @@ export default function HomeCleanInterfaces() {
         </m.div>
         </ContentStyle>
 
-        <Box sx={{ position: 'relative' }}>
+        <Box sx={{ position: 'relative', left: '60%' }}>
           {IMG.map((_, index) => (
             <Box
               key={index}
@@ -81,15 +81,15 @@ export default function HomeCleanInterfaces() {
                 top: 0,
                 left: 0,
                 position: 'absolute',
-                ...(index === 0 && { zIndex: 8 }),
-                ...(index === 9 && { position: 'relative', zIndex: 9 }),
+                ...(index === 0 && { zIndex: 5 }),
+                ...(index === 9 && { position: 'relative', zIndex: 1 }),
               }}
             >
               <Image
                 disabledEffect
                 visibleByDefault
-                alt={`clean-${index + 1}`}
-                src={`https://minimal-assets-api-dev.vercel.app/assets/images/home/clean-${index + 1}.png`}
+                alt=""
+                src={`images/chill_${index + 1}.jpg`}
               />
             </Box>
           ))}

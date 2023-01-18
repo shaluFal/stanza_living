@@ -17,9 +17,9 @@ const OverlayStyle = styled('div')(({ theme }) => ({
   left: 0,
   right: 0,
   bottom: 0,
-  zIndex: 8,
+  zIndex: 4,
   position: 'absolute',
-  backgroundColor: alpha(theme.palette.grey[900], 0.64),
+  backgroundColor: alpha(theme.palette.grey[900], 0.2),
 }));
 
 // ----------------------------------------------------------------------
@@ -105,7 +105,7 @@ function CarouselItem({ item, isActive,index }) {
   const { image, title, description } = item;
 
   return (
-    <Box sx={{ position: 'relative' }}>
+    <Box sx={{ position: 'relative', width: '200%' }}>
       <CardContent
         component={MotionContainer}
         animate={isActive}
@@ -142,7 +142,7 @@ function CarouselItem({ item, isActive,index }) {
 
       <OverlayStyle />
 
-      <Image alt={title} src={`images/feed_${index}.jpg`} sx={{ height: { xs: 280, xl: 320 } }} />
+      <Image alt={title} src={`images/feed_${index}.jpg`} sx={{ height: { xs: 300, xl: 500 }, width: {xs: 300, xl: 600}, textAlign: 'right' }} />
     </Box>
   );
 }

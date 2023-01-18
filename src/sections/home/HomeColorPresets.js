@@ -126,36 +126,36 @@ export default function HomeColorPresets() {
           </Stack>
         </RadioGroup> */}
 
-        <Box sx={{ position: 'relative' }}>
-          <Image
+        <Box sx={{ position: 'relative', marginLeft: '20%', marginTop: '5%', marginBottom: '10%' }}>
+          {/* <Image
             disabledEffect
             alt="grid"
-            src="https://minimal-assets-api-dev.vercel.app/assets/images/home/theme-color/grid.png"
-          />
+            src="images/chores_2.jpg"
+          /> */}
 
-          <Box sx={{ position: 'absolute', top: 0 }}>
+          <Box sx={{ position: 'absolute', top: 0, width: '60%' }}>
             <m.div variants={varFade().inUp}>
               <Image
                 disabledEffect
                 alt="screen"
-                src={`https://minimal-assets-api-dev.vercel.app/assets/images/home/theme-color/screen-${themeColorPresets}.png`}
+                src={`images/chores.jpg`}
               />
             </m.div>
           </Box>
 
-          <Box sx={{ position: 'absolute', top: 0 }}>
+          <Box sx={{ position: 'absolute', top: 0, width: '20%' }}>
             <m.div variants={varFade().inDown}>
               <m.div animate={{ y: [0, -15, 0] }} transition={{ duration: 8, repeat: Infinity }}>
                 <Image
                   disabledEffect
                   alt="sidebar"
-                  src={`https://minimal-assets-api-dev.vercel.app/assets/images/home/theme-color/block1-${themeColorPresets}.png`}
+                  src={`images/chores_2.jpg`}
                 />
               </m.div>
             </m.div>
           </Box>
 
-          <Box sx={{ position: 'absolute', top: 0 }}>
+          {/* <Box sx={{ position: 'absolute', top: 0 }}>
             <m.div variants={varFade().inDown}>
               <m.div animate={{ y: [-5, 10, -5] }} transition={{ duration: 8, repeat: Infinity }}>
                 <Image
@@ -165,19 +165,19 @@ export default function HomeColorPresets() {
                 />
               </m.div>
             </m.div>
-          </Box>
-
+          </Box> */}
+{/* 
           <Box sx={{ position: 'absolute', top: 0 }}>
             <m.div variants={varFade().inDown}>
               <m.div animate={{ y: [-25, 5, -25] }} transition={{ duration: 10, repeat: Infinity }}>
                 <Image
                   disabledEffect
                   alt="sidebar"
-                  src={`https://minimal-assets-api-dev.vercel.app/assets/images/home/theme-color/sidebar-${themeColorPresets}.png`}
+                  src={`images/chores.jpg`}
                 />
               </m.div>
             </m.div>
-          </Box>
+          </Box> */}
         </Box>
       </Container>
     </RootStyle>
