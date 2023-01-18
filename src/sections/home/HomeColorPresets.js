@@ -33,15 +33,15 @@ export default function HomeColorPresets() {
   return (
     <RootStyle>
       <Container component={MotionViewport} sx={{ position: 'relative', textAlign: 'center' }}>
-        <m.div variants={varFade().inUp}>
+        {/* <m.div variants={varFade().inUp}>
           <Typography component="div" variant="overline" sx={{ mb: 2, color: 'text.disabled' }}>
             choose your style
           </Typography>
-        </m.div>
+        </m.div> */}
 
         <m.div variants={varFade().inUp}>
           <Typography variant="h2" sx={{ mb: 3 }}>
-            Color presets
+            Take your daily list of chores. And tear it up
           </Typography>
         </m.div>
 
@@ -51,11 +51,11 @@ export default function HomeColorPresets() {
               color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'text.primary'),
             }}
           >
-            Express your own style with just one click.
+            You have better things to do than wash your clothes, clean up your room and cook your meals. So our team of pros will do them all for you.
           </Typography>
         </m.div>
 
-        <RadioGroup name="themeColorPresets" value={themeColorPresets} onChange={onChangeColor} sx={{ my: 5 }}>
+        {/* <RadioGroup name="themeColorPresets" value={themeColorPresets} onChange={onChangeColor} sx={{ my: 5 }}>
           <Stack
             direction={{ xs: 'row', lg: 'column' }}
             justifyContent="center"
@@ -124,7 +124,7 @@ export default function HomeColorPresets() {
               );
             })}
           </Stack>
-        </RadioGroup>
+        </RadioGroup> */}
 
         <Box sx={{ position: 'relative' }}>
           <Image

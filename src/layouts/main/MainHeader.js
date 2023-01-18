@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 // @mui
 import { styled, useTheme } from '@mui/material/styles';
 import { Box, Button, AppBar, Toolbar, Container, Link } from '@mui/material';
+import PhoneIcon from '@mui/icons-material/Phone';
 // hooks
 import useOffSetTop from '../../hooks/useOffSetTop';
 import useResponsive from '../../hooks/useResponsive';
@@ -78,7 +79,7 @@ export default function MainHeader() {
 
           <Link href="https://docs-minimals.vercel.app/changelog" target="_blank" rel="noopener" underline="none">
             <Label color="info" sx={{ ml: 1 }}>
-              v3.5.0
+              Stanza Living
             </Label>
           </Link>
 
@@ -86,14 +87,16 @@ export default function MainHeader() {
 
           {isDesktop && <MenuDesktop isOffset={isOffset} isHome={isHome} navConfig={navConfig} />}
 
-          <Button
-            variant="contained"
-            target="_blank"
-            rel="noopener"
-            href="https://material-ui.com/store/items/minimal-dashboard/"
-          >
-            Purchase Now
-          </Button>
+          {isDesktop && (
+            <Button
+              variant="contained"
+              target="_blank"
+              rel="noopener"
+              href="https://material-ui.com/store/items/minimal-dashboard/"
+            >
+              <PhoneIcon /> &nbsp; Request A Callback
+            </Button>
+          )}
 
           {!isDesktop && <MenuMobile isOffset={isOffset} isHome={isHome} navConfig={navConfig} />}
         </Container>

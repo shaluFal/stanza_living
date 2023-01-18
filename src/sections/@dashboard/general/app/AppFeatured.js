@@ -64,11 +64,11 @@ export default function AppFeatured({ list, ...other }) {
     <Card {...other}>
       <Slider ref={carouselRef} {...settings}>
         {list.map((app, index) => (
-          <CarouselItem key={app.id} item={app} isActive={index === currentIndex} />
+          <CarouselItem key={app.id} item={app} isActive={index === currentIndex} index={index+1}/>
         ))}
       </Slider>
 
-      <CarouselArrows
+      {/* <CarouselArrows
         onNext={handleNext}
         onPrevious={handlePrevious}
         spacing={0}
@@ -85,7 +85,7 @@ export default function AppFeatured({ list, ...other }) {
             '&:hover': { color: 'common.white', opacity: 1 },
           },
         }}
-      />
+      /> */}
     </Card>
   );
 }
@@ -101,7 +101,7 @@ CarouselItem.propTypes = {
   }),
 };
 
-function CarouselItem({ item, isActive }) {
+function CarouselItem({ item, isActive,index }) {
   const { image, title, description } = item;
 
   return (
@@ -119,11 +119,11 @@ function CarouselItem({ item, isActive }) {
           color: 'common.white',
         }}
       >
-        <m.div variants={varFade().inRight}>
+        {/* <m.div variants={varFade().inRight}>
           <Typography variant="overline" component="div" sx={{ mb: 1, opacity: 0.48 }}>
             Featured App
           </Typography>
-        </m.div>
+        </m.div> */}
 
         <m.div variants={varFade().inRight}>
           <Link color="inherit" underline="none">
@@ -142,7 +142,7 @@ function CarouselItem({ item, isActive }) {
 
       <OverlayStyle />
 
-      <Image alt={title} src={image} sx={{ height: { xs: 280, xl: 320 } }} />
+      <Image alt={title} src={`images/feed_${index}.jpg`} sx={{ height: { xs: 280, xl: 320 } }} />
     </Box>
   );
 }

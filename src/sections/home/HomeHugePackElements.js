@@ -88,16 +88,15 @@ export default function HomeHugePackElements() {
           <Grid container spacing={5} justifyContent="center">
             <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
               <ContentStyle>
-                <m.div variants={varFade().inUp}>
+                {/* <m.div variants={varFade().inUp}>
                   <Typography component="div" variant="overline" sx={{ mb: 2, color: 'text.disabled' }}>
                     Interface Starter Kit
                   </Typography>
-                </m.div>
+                </m.div> */}
 
                 <m.div variants={varFade().inUp}>
                   <Typography variant="h2" sx={{ mb: 3 }}>
-                    Huge pack <br />
-                    of elements
+                  Not just four walls and a roof
                   </Typography>
                 </m.div>
 
@@ -108,11 +107,11 @@ export default function HomeHugePackElements() {
                       color: isLight ? 'text.secondary' : 'common.white',
                     }}
                   >
-                    We collected most popular elements. Menu, sliders, buttons, inputs etc. are all here. Just dive in!
+                    Come over and experience how a place to stay can be so much more.
                   </Typography>
                 </m.div>
 
-                <m.div variants={varFade().inUp}>
+                {/* <m.div variants={varFade().inUp}>
                   <Button
                     size="large"
                     color="inherit"
@@ -123,7 +122,7 @@ export default function HomeHugePackElements() {
                   >
                     View All Components
                   </Button>
-                </m.div>
+                </m.div> */}
               </ContentStyle>
             </Grid>
 

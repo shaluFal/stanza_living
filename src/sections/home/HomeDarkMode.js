@@ -55,21 +55,22 @@ export default function HomeDarkMode() {
         <Grid container spacing={5} direction="row-reverse" justifyContent="space-between">
           <Grid item xs={12} md={4}>
             <ContentStyle>
-              <m.div variants={varFade().inUp}>
+              {/* <m.div variants={varFade().inUp}>
                 <Typography component="div" variant="overline" sx={{ mb: 2, color: 'text.disabled' }}>
                   Easy switch between styles.
                 </Typography>
-              </m.div>
+              </m.div> */}
 
               <m.div variants={varFade().inUp}>
                 <Typography variant="h2" sx={{ mb: 3, color: 'common.white' }}>
-                  Dark mode
+                  Step into a room that has room for everything
                 </Typography>
               </m.div>
 
               <m.div variants={varFade().inUp}>
                 <Typography sx={{ color: 'common.white', mb: 5 }}>
-                  A dark theme that feels easier on the eyes.
+                Your clothes and bag will not be fighting for space on the same chair.
+                At Stanza Living, there's ample room for all your possessions. Even a framed photo of your family, for the rare occasions you miss home
                 </Typography>
               </m.div>
             </ContentStyle>

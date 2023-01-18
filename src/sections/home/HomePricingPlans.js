@@ -31,14 +31,15 @@ export default function HomePricingPlans() {
     <RootStyle>
       <Container component={MotionViewport}>
         <Box sx={{ mb: 10, textAlign: 'center' }}>
-          <m.div variants={varFade().inUp}>
+          {/* <m.div variants={varFade().inUp}>
             <Typography component="div" variant="overline" sx={{ mb: 2, color: 'text.disabled' }}>
               pricing plans
             </Typography>
-          </m.div>
+          </m.div> */}
           <m.div variants={varFade().inDown}>
             <Typography variant="h2" sx={{ mb: 3 }}>
-              The right plan for your business
+            Always have us
+at your fingertips
             </Typography>
           </m.div>
           <m.div variants={varFade().inDown}>
@@ -47,7 +48,8 @@ export default function HomePricingPlans() {
                 color: isLight ? 'text.secondary' : 'text.primary',
               }}
             >
-              Choose the perfect plan for your needs. Always flexible to grow
+             Tell us what you crave. Not only are our meals deliciously homely, they are also customisable. 
+             Pick and choose from our varied menu on the app and we'll serve it up, piping hot.
             </Typography>
           </m.div>
         </Box>

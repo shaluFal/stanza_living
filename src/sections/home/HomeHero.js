@@ -2,7 +2,11 @@ import { m } from 'framer-motion';
 import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { styled } from '@mui/material/styles';
-import { Button, Box, Link, Container, Typography, Stack } from '@mui/material';
+import { Button, Box, Link, Container, Typography, Stack, InputAdornment } from '@mui/material';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import BedIcon from '@mui/icons-material/Bed';
+import { _appFeatured } from '../../_mock';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // components
@@ -10,6 +14,10 @@ import Image from '../../components/Image';
 import Iconify from '../../components/Iconify';
 import TextIconLabel from '../../components/TextIconLabel';
 import { MotionContainer, varFade } from '../../components/animate';
+import InputStyle from '../../components/InputStyle';
+import { AppFeatured } from '../@dashboard/general/app';
+
+// import Searchbar from '../../layouts/dashboard/header/Searchbar';
 
 // ----------------------------------------------------------------------
 
@@ -80,24 +88,67 @@ export default function HomeHero() {
 
         <Container>
           <ContentStyle>
+          <m.div>
+            <AppFeatured list={_appFeatured} />
+            </m.div>
             <m.div variants={varFade().inRight}>
               <Typography variant="h1" sx={{ color: 'common.white' }}>
-                Start a <br />
-                new project <br /> with
-                <Typography component="span" variant="h1" sx={{ color: 'primary.main' }}>
+                Come, live new kind of living.
+                {/* <Typography component="span" variant="h1" sx={{ color: 'primary.main' }}>
                   &nbsp;Minimal
-                </Typography>
+                </Typography> */}
               </Typography>
             </m.div>
 
             <m.div variants={varFade().inRight}>
-              <Typography sx={{ color: 'common.white' }}>
-                The starting point for your next project based on easy-to-customize MUI helps you build apps faster and
-                better.
-              </Typography>
+              <Typography sx={{ color: 'common.white' }}>Life at a professionally managed accommodation.</Typography>
             </m.div>
 
-            <Stack spacing={2.5} alignItems="center" direction={{ xs: 'column', md: 'row' }}>
+            <m.div variants={varFade().inUp}>
+              <InputStyle
+                stretchStart={280}
+                placeholder="Search for your second home..."
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Iconify icon={'eva:search-fill'} sx={{ color: 'text.disabled', width: 20, height: 20 }} />
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    color: 'common.white',
+                  },
+                }}
+              />
+            </m.div>
+
+            <m.div>
+              <Box sx={{ py: 3, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
+                <div>
+                  <Typography variant="caption" component="div" sx={{ mb: 0.75, color: 'text.disabled' }}>
+                    <LocationCityIcon /> 24+ Cities
+                  </Typography>
+                  {/* <Typography variant="subtitle1">{fShortenNumber(follower)}</Typography> */}
+                </div>
+                <div>
+                  <Typography variant="caption" component="div" sx={{ mb: 0.75, color: 'text.disabled' }}>
+                    <ApartmentIcon /> 450+ Residences
+                  </Typography>
+                  {/* <Typography variant="subtitle1">{fShortenNumber(following)}</Typography> */}
+                </div>
+                <div>
+                  <Typography variant="caption" component="div" sx={{ mb: 0.75, color: 'text.disabled' }}>
+                    <BedIcon /> 70,000+ Beds
+                  </Typography>
+                  {/* <Typography variant="subtitle1">{fShortenNumber(totalPost)}</Typography> */}
+                </div>
+              </Box>
+            </m.div>
+
+            
+
+            {/* <Stack spacing={2.5} alignItems="center" direction={{ xs: 'column', md: 'row' }}>
               <m.div variants={varFade().inRight}>
                 <TextIconLabel
                   icon={
@@ -143,9 +194,9 @@ export default function HomeHero() {
                   }
                 />
               </m.div>
-            </Stack>
+            </Stack> */}
 
-            <m.div variants={varFade().inRight}>
+            {/* <m.div variants={varFade().inRight}>
               <Button
                 size="large"
                 variant="contained"
@@ -155,9 +206,9 @@ export default function HomeHero() {
               >
                 Live Preview
               </Button>
-            </m.div>
+            </m.div> */}
 
-            <Stack spacing={2.5}>
+            {/* <Stack spacing={2.5}>
               <m.div variants={varFade().inRight}>
                 <Typography variant="overline" sx={{ color: 'primary.light' }}>
                   Available For
@@ -173,7 +224,7 @@ export default function HomeHero() {
                   />
                 ))}
               </Stack>
-            </Stack>
+            </Stack> */}
           </ContentStyle>
         </Container>
       </RootStyle>

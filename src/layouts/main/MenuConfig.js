@@ -14,12 +14,12 @@ const ICON_SIZE = {
 
 const menuConfig = [
   {
-    title: 'Home',
+    title: 'Explore Residences',
     icon: <Iconify icon={'eva:home-fill'} {...ICON_SIZE} />,
     path: '/',
   },
   {
-    title: 'Pages',
+    title: 'Know More',
     path: '/pages',
     icon: <Iconify icon={'eva:file-fill'} {...ICON_SIZE} />,
     children: [
@@ -58,11 +58,11 @@ const menuConfig = [
       },
     ],
   },
-  {
-    title: 'Documentation',
-    icon: <Iconify icon={'eva:book-open-fill'} {...ICON_SIZE} />,
-    path: PATH_DOCS,
-  },
+  // {
+  //   title: 'Documentation',
+  //   icon: <Iconify icon={'eva:book-open-fill'} {...ICON_SIZE} />,
+  //   path: PATH_DOCS,
+  // },
 ];
 
 export default menuConfig;

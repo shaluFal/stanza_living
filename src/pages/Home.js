@@ -1,5 +1,7 @@
 // @mui
 import { styled } from '@mui/material/styles';
+import { GridFooter } from '@mui/x-data-grid';
+import MainFooter from '../layouts/main/MainFooter';
 // components
 import Page from '../components/Page';
 // sections
@@ -27,11 +29,11 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 export default function HomePage() {
   return (
-    <Page title="The starting point for your next project">
+    <Page title="Stanza Living">
       <HomeHero />
 
       <ContentStyle>
-        <HomeMinimal />
+        {/* <HomeMinimal /> */}
 
         <HomeHugePackElements />
 
@@ -45,7 +47,8 @@ export default function HomePage() {
 
         <HomeLookingFor />
 
-        <HomeAdvertisement />
+        {/* <HomeAdvertisement /> */}
+        <MainFooter />
       </ContentStyle>
     </Page>
   );

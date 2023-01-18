@@ -39,11 +39,11 @@ export default function HomeCleanInterfaces() {
     <RootStyle>
       <Container component={MotionViewport}>
         <ContentStyle>
-          <m.div variants={varFade().inUp}>
+          {/* <m.div variants={varFade().inUp}>
             <Typography component="div" variant="overline" sx={{ mb: 2, color: 'text.disabled' }}>
               clean & clear
             </Typography>
-          </m.div>
+          </m.div> */}
 
           <m.div variants={varFade().inUp}>
             <Typography
@@ -55,9 +55,20 @@ export default function HomeCleanInterfaces() {
                 }),
               }}
             >
-              Beautiful, modern and clean user interfaces
+              Chill in a common area that's anything but common
             </Typography>
           </m.div>
+
+          <m.div variants={varFade().inUp}>
+          <Typography
+            sx={{
+              color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'text.primary'),
+            }}
+          >
+            Nope, we don't try to pass off a few plastic chairs and a TV as a common area.
+            We've replaced them with sofas, bean bags and large-screen TVs. And we've also added gaming zones, fitness centres and chillout corners as a bonus.
+          </Typography>
+        </m.div>
         </ContentStyle>
 
         <Box sx={{ position: 'relative' }}>

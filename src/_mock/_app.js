@@ -24,7 +24,7 @@ export const _appInstalled = ['de', 'en', 'fr', 'kr', 'us'].map((country, index)
   flag: `/assets/icons/flags/ic_flag_${country}.svg`,
 }));
 
-export const _appAuthors = [...Array(3)].map((_, index) => ({
+export const _appAuthors = [...Array(4)].map((_, index) => ({
   id: _mock.id(index),
   name: _mock.name.fullName(index),
   avatar: _mock.image.avatar(index),
@@ -38,9 +38,9 @@ export const _appInvoices = [...Array(5)].map((_, index) => ({
   status: randomInArray(['paid', 'out_of_date', 'in_progress']),
 }));
 
-export const _appFeatured = [...Array(3)].map((_, index) => ({
+export const _appFeatured = [...Array(4)].map((_, index) => ({
   id: _mock.id(index),
-  title: ['Harry Potter and the Deathly Hallows - Part 2', 'Disney Zombies 2', 'Lightroom mobile - Koloro'][index],
+  title: ['Come, live the new kind of living.', 'Rooms that give local PGs serious #DecorGoals', 'Multiple options. Zero judgements passed', 'Your daily joblist shouldnt include room cleaning'][index],
   description: _mock.text.title(index),
   image: _mock.image.feed(index),
 }));
