@@ -108,7 +108,7 @@ export default function ContactHero() {
                       <Grid item xs={12} md={4}>
                         <Box sx={{ mb: 5 }}>
                           <Typography variant="subtitle1">Starts from</Typography>
-                          <Typography>Rs 10,000/mo*</Typography>
+                          <Typography >Rs 10,000/mo*</Typography>
                         </Box>
                       </Grid>
                       <Grid item xs={12} md={4}>
@@ -117,7 +117,7 @@ export default function ContactHero() {
                             variant="contained"
                             target="_blank"
                             rel="noopener"
-                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                            href=""
                           >
                             Schedule a visit
                           </Button>
@@ -129,9 +129,9 @@ export default function ContactHero() {
                             variant="contained"
                             target="_blank"
                             rel="noopener"
-                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                            href=""
                           >
-                            Unlock a discount
+                            Unlock discount
                           </Button>
                         </Box>
                       </Grid>
@@ -153,7 +153,7 @@ export default function ContactHero() {
                 <Grid item xs={12} md={8}>
                   <Box>
                     <Typography variant="subtitle1">Amsterdam House</Typography>
-                    <Typography>Electronic City Phase 1</Typography>
+                    <Typography >Electronic City Phase 1</Typography>
 
                     <Grid container spacing={3} sx={{ marginTop: '15%',}}>
                       <Grid item xs={12} md={4}>

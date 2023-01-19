@@ -65,21 +65,16 @@ export default function HomeCleanInterfaces() {
                 color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'text.primary'),
               }}
             >
-             Instead, bring along a big appetite for healthy, yummy meals. With flavours that have a local touch. And that, at the same time, take your taste buds on a journey 
-             back home.
+              Instead, bring along a big appetite for healthy, yummy meals. With flavours that have a local touch. And
+              that, at the same time, take your taste buds on a journey back home.
             </Typography>
- <Image alt="" src={`images/pgfood_3.jpg`} sx={{width: '120%', marginTop: '10%', marginLeft: '10%'}}/>
+            <Image alt="" src={`images/pgfood_3.jpg`} sx={{ width: '95%', marginTop: '5%', marginLeft: '5%' }} />
           </m.div>
         </ContentStyle>
 
-        <Box sx={{ position: 'relative', left: '60%' }}>
-          
-              <Image alt="" src={`images/pgfood_1.jpg`} sx={{width: '30%', marginTop: '2%'}} xs={12}/>
-              <Image alt="" src={`images/pgfood_2.jpg`} sx={{width: '30%'}}/>
-             
-             
-
-              
+        <Box sx={{ position: 'relative', left: '55%' }}>
+          <Image alt="" src={`images/pgfood_1.jpg`} sx={{ width: '25%' }} />
+          <Image alt="" src={`images/pgfood_2.jpg`} sx={{ width: '35%', marginTop: '2%' }} />
         </Box>
       </Container>
     </RootStyle>

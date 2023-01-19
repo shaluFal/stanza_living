@@ -34,7 +34,7 @@ export default function HomePage() {
       <HomeHero />
 
       <ContentStyle>
-        {/* <HomeMinimal /> */}
+     
 
         <HomeHugePackElements />
 
@@ -44,7 +44,8 @@ export default function HomePage() {
 
         <HomeCleanInterfaces />
 
-        <HomePricingPlans />
+        {/* <HomePricingPlans /> */}
+           <HomeMinimal />
 
         {/* <HomeLookingFor /> */}
         <AboutTeam />

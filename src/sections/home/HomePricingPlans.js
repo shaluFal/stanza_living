@@ -30,7 +30,7 @@ export default function HomePricingPlans() {
   return (
     <RootStyle>
       <Container component={MotionViewport}>
-        <Box sx={{ mb: 10, textAlign: 'center' }}>
+        <Box sx={{ mb: 10, textAlign: 'center', marginTop: "5%" }}>
           {/* <m.div variants={varFade().inUp}>
             <Typography component="div" variant="overline" sx={{ mb: 2, color: 'text.disabled' }}>
               pricing plans

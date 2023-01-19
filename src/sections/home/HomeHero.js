@@ -3,6 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { styled } from '@mui/material/styles';
 import { Button, Box, Link, Container, Typography, Stack, InputAdornment, Grid, Card, Divider } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import BedIcon from '@mui/icons-material/Bed';
@@ -37,7 +38,7 @@ const RootStyle = styled(m.div)(({ theme }) => ({
 
 const ContentStyle = styled((props) => <Stack spacing={5} {...props} />)(({ theme }) => ({
   zIndex: 10,
-  maxWidth: 520,
+  maxWidth: '100%',
   margin: 'auto',
   textAlign: 'center',
   position: 'relative',
@@ -57,20 +58,20 @@ const HeroOverlayStyle = styled(m.img)({
   position: 'absolute',
 });
 
-const HeroImgStyle = styled(m.img)(({ theme }) => ({
-  top: 0,
-  right: 0,
-  bottom: 0,
-  zIndex: 8,
-  width: '100%',
-  margin: 'auto',
-  position: 'absolute',
-  [theme.breakpoints.up('lg')]: {
-    right: '8%',
-    width: 'auto',
-    height: '48vh',
-  },
-}));
+// const HeroImgStyle = styled(m.img)(({ theme }) => ({
+//   top: 0,
+//   right: 0,
+//   bottom: 0,
+//   zIndex: 8,
+//   width: '100%',
+//   margin: 'auto',
+//   position: 'absolute',
+//   [theme.breakpoints.up('lg')]: {
+//     right: '8%',
+//     width: 'auto',
+//     height: '48vh',
+//   },
+// }));
 
 // ----------------------------------------------------------------------
 
@@ -80,14 +81,39 @@ export default function HomeHero() {
       <RootStyle>
         <HeroOverlayStyle alt="overlay" src="/assets/overlay.svg" variants={varFade().in} />
 
-        <HeroImgStyle
-        src=""
-        />
-
         <Container>
           <ContentStyle>
             <m.div>
-              <AppFeatured list={_appFeatured} />
+              <Grid container>
+                <Grid item xs={12} md={6} lg={6}>
+                  <AppFeatured list={_appFeatured} sx={{ marginRight: '2%', width: '100%' }} />
+                </Grid>
+                <Grid item xs={12} md={6} lg={6}>
+                  <Grid container sx={{ marginLeft:'2%'}}>
+                    <Grid item xs={12} md={12} lg={12}>
+                      <Card sx={{  marginBottom: '2%', width: '70%' }}>
+                        <Typography sx={{ position: 'absolute', top: '5%', left: '2%' }}>Modern Student Housing</Typography>
+                        <img src="images/modern_1.jpg" alt=""  style={{width:'initial'}}/>
+                        <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
+                      </Card>
+                    </Grid>
+                    <Grid item xs={12} md={12} lg={12}>
+                      <Card sx={{ marginBottom: '2%',  width: '70%' }}>
+                        <Typography sx={{ position: 'absolute', top: '5%', left: '2%'  }}>Co-living Professionals</Typography>
+                        <img src="images/modern_2.jpg" alt=""  style={{width:'initial'}}/>
+                        <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
+                      </Card>
+                    </Grid>
+                    <Grid item xs={12} md={12} lg={12}>
+                      <Card sx={{marginBottom: '2%', width: '70%' }}>
+                        <Typography  sx={{ position: 'absolute', top: '5%', left: '2%'  }}>Managed Apartments</Typography>
+                        <img src="images/modern_3.jpg" alt="" style={{width:'initial'}}/>
+                        <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
+                      </Card>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
             </m.div>
 
             <m.div variants={varFade().inUp}>
@@ -130,7 +156,29 @@ export default function HomeHero() {
               </Box>
               <Divider />
             </m.div>
-         
+
+            {/* <m.div>
+            <Grid container>
+                <Grid item xs={12} md={12} lg={12}>
+                  <Card sx={{ padding: '10%', marginBottom: '5%' }}>
+                    <Typography>Modern Student Housing</Typography>
+                    <img src="" alt="" />
+                  </Card>
+                </Grid>
+                <Grid item xs={12} md={12} lg={12}>
+                  <Card sx={{ padding: '10%', marginBottom: '5%' }}>
+                    <Typography>Co-living Professionals</Typography>
+                    <img src="" alt="" />
+                  </Card>
+                </Grid>
+                <Grid item xs={12} md={12} lg={12}>
+                  <Card sx={{ padding: '10%', marginBottom: '5%' }}>
+                    <Typography>Managed Apartments</Typography>
+                    <img src="" alt="" />
+                  </Card>
+                </Grid>
+              </Grid>
+            </m.div> */}
           </ContentStyle>
         </Container>
       </RootStyle>

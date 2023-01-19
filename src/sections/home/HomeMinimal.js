@@ -2,6 +2,7 @@ import { m } from 'framer-motion';
 // @mui
 import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, Card, Container, Typography } from '@mui/material';
+import RamenDiningIcon from '@mui/icons-material/RamenDining';
 // components
 import Image from '../../components/Image';
 import { MotionViewport, varFade } from '../../components/animate';
@@ -10,20 +11,20 @@ import { MotionViewport, varFade } from '../../components/animate';
 
 const CARDS = [
   {
-    icon: 'https://minimal-assets-api-dev.vercel.app/assets/icons/ic_design.svg',
-    title: 'UI & UX Design',
+    icon: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZGVsaWNpb3VzJTIwZm9vZHxlbnwwfHwwfHw%3D&w=1000&q=80',
+    title: 'Tell us what you crave',
     description:
-      'The set is built on the principles of the atomic design system. It helps you to create projects fastest and easily customized packages for your projects.',
+      'Not only are our meals deliciously homely, they are also customisable. Pick and choose from our varied menu on the app and we will serve it up, piping hot.',
   },
   {
-    icon: 'https://minimal-assets-api-dev.vercel.app/assets/icons/ic_code.svg',
-    title: 'Development',
-    description: 'Easy to customize and extend each component, saving you time and money.',
+    // icon: 'https://minimal-assets-api-dev.vercel.app/assets/icons/ic_code.svg',
+    title: 'All payments and dues, in one place',
+    description: 'No running around here and there paying all your bills. While paying, tracking and managing your rent and other expenses on your app, the only thing that will move would be your fingertips.',
   },
   {
-    icon: '/logo/logo_single.svg',
-    title: 'Branding',
-    description: 'Consistent design in colors, fonts ... makes brand recognition easy.',
+    // icon: '/logo/logo_single.svg',
+    title: 'Be heard. Without saying a word',
+    description: 'If you need help with anything, wish to register a complaint, or if you think we can do something better, do tell us through the support and real-time feedback feature on the app.',
   },
 ];
 
@@ -98,13 +99,13 @@ export default function HomeMinimal() {
             mb: { xs: 10, md: 25 },
           }}
         >
-          <m.div variants={varFade().inUp}>
+          {/* <m.div variants={varFade().inUp}>
             <Typography component="div" variant="overline" sx={{ mb: 2, color: 'text.disabled' }}>
               Minimal
             </Typography>
-          </m.div>
+          </m.div> */}
           <m.div variants={varFade().inDown}>
-            <Typography variant="h2">What minimal helps you?</Typography>
+            <Typography variant="h2">Always have us at your fingertips</Typography>
           </m.div>
         </Box>
 
@@ -118,7 +119,7 @@ export default function HomeMinimal() {
           {CARDS.map((card, index) => (
             <m.div variants={varFade().inUp} key={card.title}>
               <CardStyle className={(index === 0 && 'cardLeft') || (index === 1 && 'cardCenter') || ''}>
-                <Image
+                {/* <Image
                   src={card.icon}
                   alt={card.title}
                   sx={{
@@ -134,7 +135,7 @@ export default function HomeMinimal() {
                       filter: (theme) => shadowIcon(theme.palette.error.main),
                     }),
                   }}
-                />
+                /> */}
                 <Typography variant="h5" paragraph>
                   {card.title}
                 </Typography>
