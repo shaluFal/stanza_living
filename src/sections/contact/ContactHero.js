@@ -83,6 +83,36 @@ export default function ContactHero() {
 
           <m.div>
             <Typography sx={{ marginTop: '5%' }}>Coliving/PG in Bengaluru</Typography>
+            {/* <Grid container>
+                <Grid item xs={12} md={6} lg={6}>
+                  <AppFeatured list={_appFeatured} sx={{ marginRight: '2%', width: '100%' }} />
+                </Grid>
+                <Grid item xs={12} md={6} lg={6}>
+                  <Grid container sx={{ marginLeft:'2%'}}>
+                    <Grid item xs={12} md={12} lg={12}>
+                      <Card sx={{  marginBottom: '2%', width: '70%' }}>
+                        <Typography sx={{ position: 'absolute', top: '5%', left: '2%' }}>Modern Student Housing</Typography>
+                        <img src="images/modern_1.jpg" alt=""  style={{width:'initial'}}/>
+                        <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
+                      </Card>
+                    </Grid>
+                    <Grid item xs={12} md={12} lg={12}>
+                      <Card sx={{ marginBottom: '2%',  width: '70%' }}>
+                        <Typography sx={{ position: 'absolute', top: '5%', left: '2%'  }}>Co-living Professionals</Typography>
+                        <img src="images/modern_2.jpg" alt=""  style={{width:'initial'}}/>
+                        <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
+                      </Card>
+                    </Grid>
+                    <Grid item xs={12} md={12} lg={12}>
+                      <Card sx={{marginBottom: '2%', width: '70%' }}>
+                        <Typography  sx={{ position: 'absolute', top: '5%', left: '2%'  }}>Managed Apartments</Typography>
+                        <img src="images/modern_3.jpg" alt="" style={{width:'initial'}}/>
+                        <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
+                      </Card>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid> */}
           </m.div>
 
           <m.div>

@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import Slider from 'react-slick';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Box, Stack, Card, Button, Container, Typography } from '@mui/material';
+import { Box, Stack, Card, Button, Container, Typography, Grid } from '@mui/material';
 // _mock_
 import { _carouselsMembers } from '../../_mock';
 // components
@@ -81,8 +81,9 @@ export default function AboutTeam() {
         <CarouselArrows filled onNext={handleNext} onPrevious={handlePrevious}>
           <Slider ref={carouselRef} {...settings}>
             {_carouselsMembers.map((member) => (
-              <Box key={member.id} component={m.div} variants={varFade().in} sx={{ px: 1.5, py: 10 }}>
-                <MemberCard member={member} />
+              <Box key={member.id} component={m.div} variants={varFade().in} sx={{ px: 1.5, py: 10, display: 'flex', alignItems:'center' }}>
+                {/* <MemberCard member={member} /> */}
+                <img src={member.avatar} alt="" width={"250px"} height="100px" />
               </Box>
             ))}
           </Slider>
@@ -115,17 +116,11 @@ function MemberCard({ member }) {
   const { name, role, avatar } = member;
 
   return (
-    <Card key={name} sx={{ p: 1, width: '100%' }}>
-      {/* <Typography variant="subtitle1" sx={{ mt: 2, mb: 0.5 }}>
-        {name}
-      </Typography>
-      <Typography variant="body2" sx={{ mb: 2, color: 'text.secondary' }}>
-        {role}
-      </Typography> */}
-      <Image alt={name} src={avatar} ratio="1/1" sx={{ borderRadius: 1.5, width: '100%' }} />
-      {/* <Stack alignItems="center" sx={{ mt: 2, mb: 1 }}>
-        <SocialsButton sx={{ color: 'action.active' }} />
-      </Stack> */}
-    </Card>
+    <Grid container sx={{height:"100%"}}>
+    <Grid item xs={10} sx={{height: "100%"}}>
+      <img src={avatar} alt="" width={"100%"} />
+    {/* <Image alt={name} src={avatar} ratio="1/1" sx={{ borderRadius: 1.5, width: '100%' }} /> */}
+    </Grid>
+  </Grid>
   );
 }

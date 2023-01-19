@@ -81,7 +81,7 @@ export default function HomeHero() {
       <RootStyle>
         <HeroOverlayStyle alt="overlay" src="/assets/overlay.svg" variants={varFade().in} />
 
-        <Container>
+        <Container style={{marginTop: '6%'}}>
           <ContentStyle>
             <m.div>
               <Grid container>
@@ -140,17 +140,17 @@ export default function HomeHero() {
               <Box sx={{ py: 3, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
                 <div>
                   <Typography variant="caption" component="div" sx={{ mb: 0.75, color: 'text.disabled' }}>
-                    <LocationCityIcon /> 24+ Cities
+                    <LocationCityIcon /> &nbsp; 24+ Cities
                   </Typography>
                 </div>
                 <div>
                   <Typography variant="caption" component="div" sx={{ mb: 0.75, color: 'text.disabled' }}>
-                    <ApartmentIcon /> 450+ Residences
+                    <ApartmentIcon />  &nbsp;450+ Residences
                   </Typography>
                 </div>
                 <div>
                   <Typography variant="caption" component="div" sx={{ mb: 0.75, color: 'text.disabled' }}>
-                    <BedIcon /> 70,000+ Beds
+                    <BedIcon /> &nbsp; 70,000+ Beds
                   </Typography>
                 </div>
               </Box>
