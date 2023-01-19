@@ -2,7 +2,7 @@ import { m } from 'framer-motion';
 import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { styled } from '@mui/material/styles';
-import { Button, Box, Link, Container, Typography, Stack, InputAdornment } from '@mui/material';
+import { Button, Box, Link, Container, Typography, Stack, InputAdornment, Grid, Card, Divider } from '@mui/material';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import BedIcon from '@mui/icons-material/Bed';
@@ -81,25 +81,14 @@ export default function HomeHero() {
         <HeroOverlayStyle alt="overlay" src="/assets/overlay.svg" variants={varFade().in} />
 
         <HeroImgStyle
-          alt="hero"
-          src="https://minimal-assets-api-dev.vercel.app/assets/images/home/hero.png"
-          variants={varFade().inUp}
+        src=""
         />
 
         <Container>
           <ContentStyle>
-          <m.div>
-            <AppFeatured list={_appFeatured} />
+            <m.div>
+              <AppFeatured list={_appFeatured} />
             </m.div>
-            {/* <m.div variants={varFade().inRight}>
-              <Typography variant="h1" sx={{ color: 'common.white' }}>
-                Come, live new kind of living.
-              </Typography>
-            </m.div>
-
-            <m.div variants={varFade().inRight}>
-              <Typography sx={{ color: 'common.white' }}>Life at a professionally managed accommodation.</Typography>
-            </m.div> */}
 
             <m.div variants={varFade().inUp}>
               <InputStyle
@@ -121,107 +110,27 @@ export default function HomeHero() {
             </m.div>
 
             <m.div>
+              <Divider />
               <Box sx={{ py: 3, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
                 <div>
                   <Typography variant="caption" component="div" sx={{ mb: 0.75, color: 'text.disabled' }}>
                     <LocationCityIcon /> 24+ Cities
                   </Typography>
-                  {/* <Typography variant="subtitle1">{fShortenNumber(follower)}</Typography> */}
                 </div>
                 <div>
                   <Typography variant="caption" component="div" sx={{ mb: 0.75, color: 'text.disabled' }}>
                     <ApartmentIcon /> 450+ Residences
                   </Typography>
-                  {/* <Typography variant="subtitle1">{fShortenNumber(following)}</Typography> */}
                 </div>
                 <div>
                   <Typography variant="caption" component="div" sx={{ mb: 0.75, color: 'text.disabled' }}>
                     <BedIcon /> 70,000+ Beds
                   </Typography>
-                  {/* <Typography variant="subtitle1">{fShortenNumber(totalPost)}</Typography> */}
                 </div>
               </Box>
+              <Divider />
             </m.div>
-
-            
-
-            {/* <Stack spacing={2.5} alignItems="center" direction={{ xs: 'column', md: 'row' }}>
-              <m.div variants={varFade().inRight}>
-                <TextIconLabel
-                  icon={
-                    <Image
-                      alt="sketch icon"
-                      src="https://minimal-assets-api-dev.vercel.app/assets/images/home/ic_sketch_small.svg"
-                      sx={{ width: 20, height: 20, mr: 1 }}
-                    />
-                  }
-                  value={
-                    <Link
-                      href="https://www.sketch.com/s/76388a4d-d6e5-4b7f-8770-e5446bfa1268"
-                      target="_blank"
-                      rel="noopener"
-                      color="common.white"
-                      sx={{ typography: 'body2' }}
-                    >
-                      Preview Sketch
-                    </Link>
-                  }
-                />
-              </m.div>
-
-              <m.div variants={varFade().inRight}>
-                <TextIconLabel
-                  icon={
-                    <Image
-                      alt="sketch icon"
-                      src="https://minimal-assets-api-dev.vercel.app/assets/images/home/ic_figma_small.svg"
-                      sx={{ width: 20, height: 20, mr: 1 }}
-                    />
-                  }
-                  value={
-                    <Link
-                      href="https://www.figma.com/file/sI9fbKHIqlikUtfYCPb9lj/%5BPreview%5D-Minimal-Web.03.07.22?node-id=0%3A10803"
-                      target="_blank"
-                      rel="noopener"
-                      color="common.white"
-                      sx={{ typography: 'body2' }}
-                    >
-                      Preview Figma
-                    </Link>
-                  }
-                />
-              </m.div>
-            </Stack> */}
-
-            {/* <m.div variants={varFade().inRight}>
-              <Button
-                size="large"
-                variant="contained"
-                component={RouterLink}
-                to={PATH_DASHBOARD.root}
-                startIcon={<Iconify icon={'eva:flash-fill'} width={20} height={20} />}
-              >
-                Live Preview
-              </Button>
-            </m.div> */}
-
-            {/* <Stack spacing={2.5}>
-              <m.div variants={varFade().inRight}>
-                <Typography variant="overline" sx={{ color: 'primary.light' }}>
-                  Available For
-                </Typography>
-              </m.div>
-
-              <Stack direction="row" spacing={1.5} justifyContent={{ xs: 'center', md: 'flex-start' }}>
-                {['ic_sketch', 'ic_figma', 'ic_js', 'ic_ts', 'ic_nextjs'].map((resource) => (
-                  <m.img
-                    key={resource}
-                    variants={varFade().inRight}
-                    src={`https://minimal-assets-api-dev.vercel.app/assets/images/home/${resource}.svg`}
-                  />
-                ))}
-              </Stack>
-            </Stack> */}
+         
           </ContentStyle>
         </Container>
       </RootStyle>

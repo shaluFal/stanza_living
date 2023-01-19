@@ -70,7 +70,7 @@ export default function HomeDarkMode() {
               <m.div variants={varFade().inUp}>
                 <Typography sx={{ color: 'common.white', mb: 5 }}>
                 Your clothes and bag will not be fighting for space on the same chair.
-                At Stanza Living, there's ample room for all your possessions. Even a framed photo of your family, for the rare occasions you miss home
+                At Coliving, there's ample room for all your possessions. Even a framed photo of your family, for the rare occasions you miss home
                 </Typography>
               </m.div>
             </ContentStyle>

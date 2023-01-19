@@ -1,11 +1,12 @@
 import { m } from 'framer-motion';
 // @mui
 import { styled } from '@mui/material/styles';
-import { Box, Container, Typography, Grid, InputAdornment } from '@mui/material';
+import { Box, Container, Typography, Grid, InputAdornment, Card, Button, Divider } from '@mui/material';
 //
 import { TextAnimate, MotionContainer, varFade } from '../../components/animate';
 import InputStyle from '../../components/InputStyle';
 import Iconify from '../../components/Iconify';
+
 
 // ----------------------------------------------------------------------
 
@@ -42,6 +43,7 @@ const RootStyle = styled('div')(({ theme }) => ({
     height: 560,
     padding: 0,
   },
+  overflow:'scroll',
 }));
 
 const ContentStyle = styled('div')(({ theme }) => ({
@@ -58,35 +60,658 @@ const ContentStyle = styled('div')(({ theme }) => ({
 export default function ContactHero() {
   return (
     <RootStyle>
-      <Container component={MotionContainer} sx={{ position: 'relative', height: '100%' }}>
+      <Container component={MotionContainer} sx={{ position: 'relative'}}>
         <ContentStyle>
-          
-        <m.div variants={varFade().inUp}>
-              <InputStyle
-                stretchStart={280}
-                placeholder="Search for your second home..."
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Iconify icon={'eva:search-fill'} sx={{ color: 'text.disabled', width: 20, height: 20 }} />
-                    </InputAdornment>
-                  ),
-                }}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    color: 'common.white',
-                  },
-                }}
-              />
-            </m.div>
-
-            <m.div>
-            <Typography sx={{marginTop: "10%"}}>Stanza Living/PG in Bengaluru</Typography>
+          <m.div variants={varFade().inUp}>
+            <InputStyle
+              stretchStart={280}
+              placeholder="Search for your second home..."
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Iconify icon={'eva:search-fill'} sx={{ color: 'text.disabled' }} />
+                  </InputAdornment>
+                ),
+              }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  color: 'common.white',
+                },
+              }}
+            />
           </m.div>
 
           <m.div>
-            <Typography sx={{marginTop: "10%", fontWeight: "700"}}>143 PGs waiting to be yours in Bengaluru</Typography>
+            <Typography sx={{ marginTop: '5%' }}>Coliving/PG in Bengaluru</Typography>
           </m.div>
+
+          <m.div>
+            <Typography sx={{ marginTop: '2%', fontWeight: '700', marginBottom: '5%' }}>
+              143 PGs waiting to be yours in Bengaluru
+            </Typography>
+          </m.div>
+
+          <m.div>
+            <Card sx={{ padding: '5%' }}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={4}>
+                  <Box sx={{ mb: 5 }}>
+                    <img src="/images/pg_1.jpg" alt="" style={{ width: '100%', height: '70%', marginRight: '15%' }} />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={8}>
+                  <Box>
+                    <Typography variant="subtitle1">Amsterdam House</Typography>
+                    <Typography>Electronic City Phase 1</Typography>
+
+                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 5 }}>
+                          <Typography variant="subtitle1">Starts from</Typography>
+                          <Typography>Rs 10,000/mo*</Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Schedule a visit
+                          </Button>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Unlock a discount
+                          </Button>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Card>
+          </m.div>
+
+          <m.div>
+            <Card sx={{ padding: '5%', marginTop: '5%' }}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={4}>
+                  <Box sx={{ mb: 5 }}>
+                    <img src="/images/pg_1.jpg" alt="" style={{ width: '100%', height: '70%', marginRight: '15%' }} />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={8}>
+                  <Box>
+                    <Typography variant="subtitle1">Amsterdam House</Typography>
+                    <Typography>Electronic City Phase 1</Typography>
+
+                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 5 }}>
+                          <Typography variant="subtitle1">Starts from</Typography>
+                          <Typography>Rs 10,000/mo*</Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Schedule a visit
+                          </Button>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Unlock a discount
+                          </Button>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Card>
+          </m.div>
+
+          <m.div>
+            <Card sx={{ padding: '5%', marginTop: '5%' }}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={4}>
+                  <Box sx={{ mb: 5 }}>
+                    <img src="/images/pg_1.jpg" alt="" style={{ width: '100%', height: '70%', marginRight: '15%' }} />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={8}>
+                  <Box>
+                    <Typography variant="subtitle1">Amsterdam House</Typography>
+                    <Typography>Electronic City Phase 1</Typography>
+
+                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 5 }}>
+                          <Typography variant="subtitle1">Starts from</Typography>
+                          <Typography>Rs 10,000/mo*</Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Schedule a visit
+                          </Button>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Unlock a discount
+                          </Button>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Card>
+          </m.div>
+
+          <m.div>
+            <Card sx={{ padding: '5%', marginTop: '5%' }}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={4}>
+                  <Box sx={{ mb: 5 }}>
+                    <img src="/images/pg_1.jpg" alt="" style={{ width: '100%', height: '70%', marginRight: '15%' }} />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={8}>
+                  <Box>
+                    <Typography variant="subtitle1">Amsterdam House</Typography>
+                    <Typography>Electronic City Phase 1</Typography>
+
+                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 5 }}>
+                          <Typography variant="subtitle1">Starts from</Typography>
+                          <Typography>Rs 10,000/mo*</Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Schedule a visit
+                          </Button>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Unlock a discount
+                          </Button>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Card>
+          </m.div>
+
+
+          <m.div>
+            <Card sx={{ padding: '5%', marginTop: '5%' }}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={4}>
+                  <Box sx={{ mb: 5 }}>
+                    <img src="/images/pg_1.jpg" alt="" style={{ width: '100%', height: '70%', marginRight: '15%' }} />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={8}>
+                  <Box>
+                    <Typography variant="subtitle1">Amsterdam House</Typography>
+                    <Typography>Electronic City Phase 1</Typography>
+
+                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 5 }}>
+                          <Typography variant="subtitle1">Starts from</Typography>
+                          <Typography>Rs 10,000/mo*</Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Schedule a visit
+                          </Button>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Unlock a discount
+                          </Button>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Card>
+          </m.div>
+
+
+          <m.div>
+            <Card sx={{ padding: '5%', marginTop: '5%' }}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={4}>
+                  <Box sx={{ mb: 5 }}>
+                    <img src="/images/pg_1.jpg" alt="" style={{ width: '100%', height: '70%', marginRight: '15%' }} />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={8}>
+                  <Box>
+                    <Typography variant="subtitle1">Amsterdam House</Typography>
+                    <Typography>Electronic City Phase 1</Typography>
+
+                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 5 }}>
+                          <Typography variant="subtitle1">Starts from</Typography>
+                          <Typography>Rs 10,000/mo*</Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Schedule a visit
+                          </Button>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Unlock a discount
+                          </Button>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Card>
+          </m.div>
+
+
+          <m.div>
+            <Card sx={{ padding: '5%', marginTop: '5%' }}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={4}>
+                  <Box sx={{ mb: 5 }}>
+                    <img src="/images/pg_1.jpg" alt="" style={{ width: '100%', height: '70%', marginRight: '15%' }} />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={8}>
+                  <Box>
+                    <Typography variant="subtitle1">Amsterdam House</Typography>
+                    <Typography>Electronic City Phase 1</Typography>
+
+                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 5 }}>
+                          <Typography variant="subtitle1">Starts from</Typography>
+                          <Typography>Rs 10,000/mo*</Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Schedule a visit
+                          </Button>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Unlock a discount
+                          </Button>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Card>
+          </m.div>
+
+
+          <m.div>
+            <Card sx={{ padding: '5%', marginTop: '5%' }}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={4}>
+                  <Box sx={{ mb: 5 }}>
+                    <img src="/images/pg_1.jpg" alt="" style={{ width: '100%', height: '70%', marginRight: '15%' }} />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={8}>
+                  <Box>
+                    <Typography variant="subtitle1">Amsterdam House</Typography>
+                    <Typography>Electronic City Phase 1</Typography>
+
+                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 5 }}>
+                          <Typography variant="subtitle1">Starts from</Typography>
+                          <Typography>Rs 10,000/mo*</Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Schedule a visit
+                          </Button>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Unlock a discount
+                          </Button>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Card>
+          </m.div>
+
+
+          <m.div>
+            <Card sx={{ padding: '5%', marginTop: '5%' }}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={4}>
+                  <Box sx={{ mb: 5 }}>
+                    <img src="/images/pg_1.jpg" alt="" style={{ width: '100%', height: '70%', marginRight: '15%' }} />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={8}>
+                  <Box>
+                    <Typography variant="subtitle1">Amsterdam House</Typography>
+                    <Typography>Electronic City Phase 1</Typography>
+
+                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 5 }}>
+                          <Typography variant="subtitle1">Starts from</Typography>
+                          <Typography>Rs 10,000/mo*</Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Schedule a visit
+                          </Button>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Unlock a discount
+                          </Button>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Card>
+          </m.div>
+
+
+          <m.div>
+            <Card sx={{ padding: '5%', marginTop: '5%' }}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={4}>
+                  <Box sx={{ mb: 5 }}>
+                    <img src="/images/pg_1.jpg" alt="" style={{ width: '100%', height: '70%', marginRight: '15%' }} />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={8}>
+                  <Box>
+                    <Typography variant="subtitle1">Amsterdam House</Typography>
+                    <Typography>Electronic City Phase 1</Typography>
+
+                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 5 }}>
+                          <Typography variant="subtitle1">Starts from</Typography>
+                          <Typography>Rs 10,000/mo*</Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Schedule a visit
+                          </Button>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Unlock a discount
+                          </Button>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Card>
+          </m.div>
+
+
+          <m.div>
+            <Card sx={{ padding: '5%', marginTop: '5%' }}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={4}>
+                  <Box sx={{ mb: 5 }}>
+                    <img src="/images/pg_1.jpg" alt="" style={{ width: '100%', height: '70%', marginRight: '15%' }} />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={8}>
+                  <Box>
+                    <Typography variant="subtitle1">Amsterdam House</Typography>
+                    <Typography>Electronic City Phase 1</Typography>
+
+                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 5 }}>
+                          <Typography variant="subtitle1">Starts from</Typography>
+                          <Typography>Rs 10,000/mo*</Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Schedule a visit
+                          </Button>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Unlock a discount
+                          </Button>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Card>
+          </m.div>
+
+          <m.div>
+            <Card sx={{ padding: '5%', marginTop: '5%', paddingBottom: '10%' }}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={4}>
+                  <Box sx={{ mb: 5 }}>
+                    <img src="/images/pg_1.jpg" alt="" style={{ width: '100%', height: '70%', marginRight: '15%' }} />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={8}>
+                  <Box>
+                    <Typography variant="subtitle1">Amsterdam House</Typography>
+                    <Typography>Electronic City Phase 1</Typography>
+
+                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 5 }}>
+                          <Typography variant="subtitle1">Starts from</Typography>
+                          <Typography>Rs 10,000/mo*</Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Schedule a visit
+                          </Button>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <Box sx={{ mb: 4 }}>
+                          <Button
+                            variant="contained"
+                            target="_blank"
+                            rel="noopener"
+                            href="https://material-ui.com/store/items/minimal-dashboard/"
+                          >
+                            Unlock a discount
+                          </Button>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Card>
+          </m.div>
+
+
+          <Divider />
 
           {/* <TextAnimate text="Where" sx={{ color: 'primary.main' }} variants={varFade().inRight} />
           <br />
@@ -113,7 +738,6 @@ export default function ContactHero() {
               </Grid>
             ))}
           </Grid> */}
-          
         </ContentStyle>
       </Container>
     </RootStyle>

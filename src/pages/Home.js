@@ -30,7 +30,7 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 export default function HomePage() {
   return (
-    <Page title="Stanza Living">
+    <Page title="Coliving">
       <HomeHero />
 
       <ContentStyle>

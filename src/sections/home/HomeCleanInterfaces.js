@@ -37,7 +37,7 @@ export default function HomeCleanInterfaces() {
 
   return (
     <RootStyle>
-      <Container component={MotionViewport} sx={{marginTop: '30%', marginBottom: '30%'}}>
+      <Container component={MotionViewport} sx={{ marginTop: '20%', marginBottom: '10%' }}>
         <ContentStyle>
           {/* <m.div variants={varFade().inUp}>
             <Typography component="div" variant="overline" sx={{ mb: 2, color: 'text.disabled' }}>
@@ -55,44 +55,31 @@ export default function HomeCleanInterfaces() {
                 }),
               }}
             >
-              Chill in a common area that's anything but common
+              Don't come expecting "hostel-PG food"
             </Typography>
           </m.div>
 
           <m.div variants={varFade().inUp}>
-          <Typography
-            sx={{
-              color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'text.primary'),
-            }}
-          >
-            Nope, we don't try to pass off a few plastic chairs and a TV as a common area.
-            We've replaced them with sofas, bean bags and large-screen TVs. And we've also added gaming zones, fitness centres and chillout corners as a bonus.
-          </Typography>
-        </m.div>
+            <Typography
+              sx={{
+                color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'text.primary'),
+              }}
+            >
+             Instead, bring along a big appetite for healthy, yummy meals. With flavours that have a local touch. And that, at the same time, take your taste buds on a journey 
+             back home.
+            </Typography>
+ <Image alt="" src={`images/pgfood_3.jpg`} sx={{width: '120%', marginTop: '10%', marginLeft: '10%'}}/>
+          </m.div>
         </ContentStyle>
 
         <Box sx={{ position: 'relative', left: '60%' }}>
-          {IMG.map((_, index) => (
-            <Box
-              key={index}
-              component={m.div}
-              variants={varFade().inUp}
-              sx={{
-                top: 0,
-                left: 0,
-                position: 'absolute',
-                ...(index === 0 && { zIndex: 5 }),
-                ...(index === 9 && { position: 'relative', zIndex: 1 }),
-              }}
-            >
-              <Image
-                disabledEffect
-                visibleByDefault
-                alt=""
-                src={`images/chill_${index + 1}.jpg`}
-              />
-            </Box>
-          ))}
+          
+              <Image alt="" src={`images/pgfood_1.jpg`} sx={{width: '30%', marginTop: '2%'}} xs={12}/>
+              <Image alt="" src={`images/pgfood_2.jpg`} sx={{width: '30%'}}/>
+             
+             
+
+              
         </Box>
       </Container>
     </RootStyle>

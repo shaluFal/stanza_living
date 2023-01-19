@@ -12,10 +12,10 @@ import SocialsButton from '../../components/SocialsButton';
 
 const LINKS = [
   {
-    headline: 'Minimal',
+    headline: 'Coliving',
     children: [
       { name: 'About us', href: PATH_PAGE.about },
-      { name: 'Contact us', href: PATH_PAGE.contact },
+      { name: 'Search Property', href: PATH_PAGE.contact },
       { name: 'FAQs', href: PATH_PAGE.faqs },
     ],
   },
@@ -29,7 +29,7 @@ const LINKS = [
   {
     headline: 'Contact',
     children: [
-      { name: 'support@minimals.cc', href: '#' },
+      { name: 'support@coliving.cc', href: '#' },
       { name: 'Los Angeles, 359  Hidden Valley Road', href: '#' },
     ],
   },

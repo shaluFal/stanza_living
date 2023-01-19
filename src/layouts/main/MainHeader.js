@@ -79,7 +79,7 @@ export default function MainHeader() {
 
           <Link href="https://docs-minimals.vercel.app/changelog" target="_blank" rel="noopener" underline="none">
             <Label color="info" sx={{ ml: 1 }}>
-              Stanza Living
+              Coliving
             </Label>
           </Link>
 

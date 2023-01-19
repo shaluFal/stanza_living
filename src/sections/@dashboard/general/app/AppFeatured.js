@@ -127,7 +127,7 @@ function CarouselItem({ item, isActive,index }) {
 
         <m.div variants={varFade().inRight}>
           <Link color="inherit" underline="none">
-            <Typography variant="h5" gutterBottom noWrap>
+            <Typography variant="h5" gutterBottom noWrap sx={{fontWeight: '900'}}>
               {title}
             </Typography>
           </Link>
