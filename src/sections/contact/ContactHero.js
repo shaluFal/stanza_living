@@ -69,7 +69,7 @@ export default function ContactHero() {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Iconify icon={'eva:search-fill'} sx={{ color: 'text.disabled' }} />
+                    <Iconify icon={'eva:search-fill'} sx={{ color: 'text.disabled'}} />
                   </InputAdornment>
                 ),
               }}
@@ -77,6 +77,7 @@ export default function ContactHero() {
                 '& .MuiOutlinedInput-root': {
                   color: 'common.white',
                 },
+                
               }}
             />
           </m.div>
@@ -133,6 +134,10 @@ export default function ContactHero() {
                   <Box>
                     <Typography variant="subtitle1">Amsterdam House</Typography>
                     <Typography>Electronic City Phase 1</Typography>
+
+                    {/* <Grid container>
+                      <Grid item xs={12}>Unisex | </Grid>
+                    </Grid> */}
 
                     <Grid container spacing={3} sx={{ marginTop: '15%',}}>
                       <Grid item xs={12} md={4}>

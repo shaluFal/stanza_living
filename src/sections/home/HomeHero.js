@@ -81,33 +81,37 @@ export default function HomeHero() {
       <RootStyle>
         <HeroOverlayStyle alt="overlay" src="/assets/overlay.svg" variants={varFade().in} />
 
-        <Container style={{marginTop: '6%'}}>
+        <Container style={{ marginTop: '6%' }}>
           <ContentStyle>
             <m.div>
               <Grid container>
                 <Grid item xs={12} md={6} lg={6}>
-                  <AppFeatured list={_appFeatured} sx={{ marginRight: '2%', width: '100%' }} />
+                  <AppFeatured list={_appFeatured} sx={{ marginRight: '2%', width: '100%', marginBottom: '2%' }} />
                 </Grid>
                 <Grid item xs={12} md={6} lg={6}>
-                  <Grid container sx={{ marginLeft:'2%'}}>
+                  <Grid container sx={{ marginLeft: '2%' }}>
                     <Grid item xs={12} md={12} lg={12}>
-                      <Card sx={{  marginBottom: '2%', width: '70%' }}>
-                        <Typography sx={{ position: 'absolute', top: '5%', left: '2%' }}>Modern Student Housing</Typography>
-                        <img src="images/modern_1.jpg" alt=""  style={{width:'initial'}}/>
+                      <Card sx={{ marginBottom: '2%', width: '70%' }}>
+                        <Typography sx={{ position: 'absolute', top: '5%', left: '2%' }}>
+                          Modern Student Housing
+                        </Typography>
+                        <img src="images/modern_1.jpg" alt="" style={{ width: 'initial' }} />
                         <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
                       </Card>
                     </Grid>
                     <Grid item xs={12} md={12} lg={12}>
-                      <Card sx={{ marginBottom: '2%',  width: '70%' }}>
-                        <Typography sx={{ position: 'absolute', top: '5%', left: '2%'  }}>Co-living Professionals</Typography>
-                        <img src="images/modern_2.jpg" alt=""  style={{width:'initial'}}/>
+                      <Card sx={{ marginBottom: '2%', width: '70%' }}>
+                        <Typography sx={{ position: 'absolute', top: '5%', left: '2%' }}>
+                          Co-living Professionals
+                        </Typography>
+                        <img src="images/modern_2.jpg" alt="" style={{ width: 'initial' }} />
                         <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
                       </Card>
                     </Grid>
                     <Grid item xs={12} md={12} lg={12}>
-                      <Card sx={{marginBottom: '2%', width: '70%' }}>
-                        <Typography  sx={{ position: 'absolute', top: '5%', left: '2%'  }}>Managed Apartments</Typography>
-                        <img src="images/modern_3.jpg" alt="" style={{width:'initial'}}/>
+                      <Card sx={{ marginBottom: '2%', width: '70%' }}>
+                        <Typography sx={{ position: 'absolute', top: '5%', left: '2%' }}>Managed Apartments</Typography>
+                        <img src="images/modern_3.jpg" alt="" style={{ width: 'initial' }} />
                         <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
                       </Card>
                     </Grid>
@@ -128,9 +132,11 @@ export default function HomeHero() {
                   ),
                 }}
                 sx={{
-                  '& .MuiOutlinedInput-root': {
-                    color: 'common.white',
-                  },
+                  position: 'absolute',
+                  top: '55%',
+                  marginLeft: '2%',
+                  borderRadius: '20px 20px 20px 20px',
+                  backgroundColor: 'white',
                 }}
               />
             </m.div>
@@ -139,46 +145,23 @@ export default function HomeHero() {
               <Divider />
               <Box sx={{ py: 3, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
                 <div>
-                  <Typography variant="caption" component="div" sx={{ mb: 0.75, color: 'text.disabled' }}>
-                    <LocationCityIcon /> &nbsp; 24+ Cities
+                  <Typography variant="caption" component="div" sx={{ color: '#000', width: '40%' }}>
+                    <LocationCityIcon sx={{ width: '30%', color: 'rgb(0, 171, 85)' }} /> &nbsp; 24+ Cities
                   </Typography>
                 </div>
                 <div>
-                  <Typography variant="caption" component="div" sx={{ mb: 0.75, color: 'text.disabled' }}>
-                    <ApartmentIcon />  &nbsp;450+ Residences
+                  <Typography variant="caption" component="div" sx={{ color: '#000' }}>
+                    <ApartmentIcon sx={{ width: '30%', color: 'rgb(0, 171, 85)' }} /> &nbsp;450+ Residences
                   </Typography>
                 </div>
                 <div>
-                  <Typography variant="caption" component="div" sx={{ mb: 0.75, color: 'text.disabled' }}>
-                    <BedIcon /> &nbsp; 70,000+ Beds
+                  <Typography variant="caption" component="div" sx={{ color: '#000' }}>
+                    <BedIcon sx={{ width: '30%', color: 'rgb(0, 171, 85)' }} /> &nbsp; 70,000+ Beds
                   </Typography>
                 </div>
               </Box>
               <Divider />
             </m.div>
-
-            {/* <m.div>
-            <Grid container>
-                <Grid item xs={12} md={12} lg={12}>
-                  <Card sx={{ padding: '10%', marginBottom: '5%' }}>
-                    <Typography>Modern Student Housing</Typography>
-                    <img src="" alt="" />
-                  </Card>
-                </Grid>
-                <Grid item xs={12} md={12} lg={12}>
-                  <Card sx={{ padding: '10%', marginBottom: '5%' }}>
-                    <Typography>Co-living Professionals</Typography>
-                    <img src="" alt="" />
-                  </Card>
-                </Grid>
-                <Grid item xs={12} md={12} lg={12}>
-                  <Card sx={{ padding: '10%', marginBottom: '5%' }}>
-                    <Typography>Managed Apartments</Typography>
-                    <img src="" alt="" />
-                  </Card>
-                </Grid>
-              </Grid>
-            </m.div> */}
           </ContentStyle>
         </Container>
       </RootStyle>

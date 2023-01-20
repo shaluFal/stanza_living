@@ -117,6 +117,7 @@ function CarouselItem({ item, isActive,index }) {
           textAlign: 'left',
           position: 'absolute',
           color: 'common.white',
+          top: '10%'
         }}
       >
         {/* <m.div variants={varFade().inRight}>

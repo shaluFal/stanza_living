@@ -10,7 +10,7 @@ import { MotionViewport, varFade } from '../../components/animate';
 
 const RootStyle = styled('div')(({ theme }) => ({
   padding: theme.spacing(28, 0),
-  backgroundColor: theme.palette.grey[900],
+  backgroundColor: '#fff',
 }));
 
 const ContentStyle = styled('div')(({ theme }) => ({
@@ -45,7 +45,7 @@ export default function HomeDarkMode() {
             bottom: 0,
             width: 720,
             height: 720,
-            opacity: 0.48,
+            opacity: 0.8,
             my: 'auto',
             position: 'absolute',
             display: { xs: 'none', md: 'block' },
@@ -62,13 +62,13 @@ export default function HomeDarkMode() {
               </m.div> */}
 
               <m.div variants={varFade().inUp}>
-                <Typography variant="h2" sx={{ mb: 3, color: 'common.white' }}>
+                <Typography variant="h2" sx={{ mb: 3, color: 'black' }}>
                   Step into a room that has room for everything
                 </Typography>
               </m.div>
 
               <m.div variants={varFade().inUp}>
-                <Typography sx={{ color: 'common.white', mb: 5 }}>
+                <Typography sx={{ color: 'black', mb: 5 }}>
                 Your clothes and bag will not be fighting for space on the same chair.
                 At Coliving, there's ample room for all your possessions. Even a framed photo of your family, for the rare occasions you miss home
                 </Typography>
