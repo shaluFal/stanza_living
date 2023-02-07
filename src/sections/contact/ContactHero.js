@@ -1,12 +1,12 @@
 import { m } from 'framer-motion';
-// @mui
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import { Box, Container, Typography, Grid, InputAdornment, Card, Button, Divider } from '@mui/material';
-//
+import axios from 'axios';
 import { TextAnimate, MotionContainer, varFade } from '../../components/animate';
 import InputStyle from '../../components/InputStyle';
 import Iconify from '../../components/Iconify';
-
+import API from '../../Helper/api';
 
 // ----------------------------------------------------------------------
 
@@ -43,7 +43,7 @@ const RootStyle = styled('div')(({ theme }) => ({
     height: 560,
     padding: 0,
   },
-  overflow:'scroll',
+  overflowY: 'scroll',
 }));
 
 const ContentStyle = styled('div')(({ theme }) => ({
@@ -57,10 +57,26 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
+// http://pmsapis.crisprsys.net/api/WebsiteAPI/GetPropertyData?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&FacilityCode=PMS1000
+
+// const baseURL =
+//   'http://pmsapis.crisprsys.net/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd';
+
 export default function ContactHero() {
+  const [location, setLocation] = React.useState([]);
+
+  React.useEffect(() => {
+    API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd').then(
+      (response) => {
+        console.log(response.data);
+        setLocation(response.data);
+      }
+    );
+  }, []);
+
   return (
     <RootStyle>
-      <Container component={MotionContainer} sx={{ position: 'relative'}}>
+      <Container component={MotionContainer} sx={{ position: 'relative' }}>
         <ContentStyle>
           <m.div variants={varFade().inUp}>
             <InputStyle
@@ -69,7 +85,7 @@ export default function ContactHero() {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Iconify icon={'eva:search-fill'} sx={{ color: 'text.disabled'}} />
+                    <Iconify icon={'eva:search-fill'} sx={{ color: 'text.disabled' }} />
                   </InputAdornment>
                 ),
               }}
@@ -77,95 +93,50 @@ export default function ContactHero() {
                 '& .MuiOutlinedInput-root': {
                   color: 'common.white',
                 },
-                
               }}
             />
           </m.div>
 
           <m.div>
             <Typography sx={{ marginTop: '5%' }}>Coliving/PG in Bengaluru</Typography>
-            {/* <Grid container>
-                <Grid item xs={12} md={6} lg={6}>
-                  <AppFeatured list={_appFeatured} sx={{ marginRight: '2%', width: '100%' }} />
-                </Grid>
-                <Grid item xs={12} md={6} lg={6}>
-                  <Grid container sx={{ marginLeft:'2%'}}>
-                    <Grid item xs={12} md={12} lg={12}>
-                      <Card sx={{  marginBottom: '2%', width: '70%' }}>
-                        <Typography sx={{ position: 'absolute', top: '5%', left: '2%' }}>Modern Student Housing</Typography>
-                        <img src="images/modern_1.jpg" alt=""  style={{width:'initial'}}/>
-                        <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
-                      </Card>
-                    </Grid>
-                    <Grid item xs={12} md={12} lg={12}>
-                      <Card sx={{ marginBottom: '2%',  width: '70%' }}>
-                        <Typography sx={{ position: 'absolute', top: '5%', left: '2%'  }}>Co-living Professionals</Typography>
-                        <img src="images/modern_2.jpg" alt=""  style={{width:'initial'}}/>
-                        <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
-                      </Card>
-                    </Grid>
-                    <Grid item xs={12} md={12} lg={12}>
-                      <Card sx={{marginBottom: '2%', width: '70%' }}>
-                        <Typography  sx={{ position: 'absolute', top: '5%', left: '2%'  }}>Managed Apartments</Typography>
-                        <img src="images/modern_3.jpg" alt="" style={{width:'initial'}}/>
-                        <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
-                      </Card>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid> */}
           </m.div>
 
-          <m.div>
+          {/* <m.div>
             <Typography sx={{ marginTop: '2%', fontWeight: '700', marginBottom: '5%' }}>
               143 PGs waiting to be yours in Bengaluru
             </Typography>
-          </m.div>
+          </m.div> */}
 
-          <m.div>
+          {/* <m.div>
             <Card sx={{ padding: '5%' }}>
               <Grid container spacing={3}>
                 <Grid item xs={12} md={4}>
                   <Box sx={{ mb: 5 }}>
-                    <img src="/images/pg_1.jpg" alt="" style={{ width: '100%', height: '70%', marginRight: '15%' }} />
+                    <img src="/images/pg_1.jpg" alt="" style={{ width: '100%', height: '100%', marginRight: '15%' }} />
                   </Box>
                 </Grid>
                 <Grid item xs={12} md={8}>
                   <Box>
                     <Typography variant="subtitle1">Amsterdam House</Typography>
-                    <Typography>Electronic City Phase 1</Typography>
+                  
 
-                    {/* <Grid container>
-                      <Grid item xs={12}>Unisex | </Grid>
-                    </Grid> */}
-
-                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                    <Grid container spacing={3} sx={{ marginTop: '15%' }}>
                       <Grid item xs={12} md={4}>
                         <Box sx={{ mb: 5 }}>
                           <Typography variant="subtitle1">Starts from</Typography>
-                          <Typography >Rs 10,000/mo*</Typography>
+                          <Typography>Rs 10,000/mo*</Typography>
                         </Box>
                       </Grid>
                       <Grid item xs={12} md={4}>
                         <Box sx={{ mb: 4 }}>
-                          <Button
-                            variant="contained"
-                            target="_blank"
-                            rel="noopener"
-                            href=""
-                          >
+                          <Button variant="contained" target="_blank" rel="noopener" href="">
                             Schedule a visit
                           </Button>
                         </Box>
                       </Grid>
                       <Grid item xs={12} md={4}>
                         <Box sx={{ mb: 4 }}>
-                          <Button
-                            variant="contained"
-                            target="_blank"
-                            rel="noopener"
-                            href=""
-                          >
+                          <Button variant="contained" target="_blank" rel="noopener" href="">
                             Unlock discount
                           </Button>
                         </Box>
@@ -175,9 +146,130 @@ export default function ContactHero() {
                 </Grid>
               </Grid>
             </Card>
-          </m.div>
+          </m.div> */}
 
           <m.div>
+            <Grid container>
+              <Grid item md={8}>
+                <Typography sx={{ marginTop: '2%', fontWeight: '700', marginBottom: '5%' }}>
+                  143 PGs waiting to be yours in Bengaluru
+                </Typography>
+
+                <Card sx={{ padding: '3%' }}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} md={4}>
+                      {/* <Box > */}
+                      <img src="/images/pg_1.jpg" alt="" style={{ width: '120%', height: '100%' }} />
+                      {/* </Box> */}
+                    </Grid>
+                    <Grid item xs={12} md={8}>
+                      <Box>
+                        <Typography variant="subtitle1">Amsterdam House</Typography>
+                        <Typography>Electronic City Phase 1</Typography>
+                        {/* <Typography>{location.message} </Typography> */}
+
+                        {/* {location.map((loc) => {
+                      console.log(loc.listOfLocations[0].value)
+                      return(
+                        loc.listOfLocations[0].value
+                        );
+                    })} */}
+
+                        <Grid container sx={{ marginTop: '2%' }}>
+                          <Grid item xs={12} md={8}>
+                            Unisex | Double, Triple
+                          </Grid>
+                          <Grid item xs={12} md={4}>
+                            <Typography>View Directions</Typography>
+                          </Grid>
+                        </Grid>
+
+                        <Grid container sx={{ marginTop: '2%' }} spacing={1}>
+                          <Grid item md={12}>
+                            <Typography>Amenities</Typography>
+                          </Grid>
+
+                          <Grid item xs={12} md={5}>
+                            <Card
+                              sx={{
+                                borderRadius: '30px 30px',
+                                padding: '6px',
+                                border: '0.6px solid rgb(190, 190, 190)',
+                              }}
+                            >
+                              <Typography>Attached Washrooms</Typography>
+                            </Card>
+                          </Grid>
+                          <Grid item xs={12} md={5}>
+                            <Card
+                              sx={{
+                                borderRadius: '30px 30px',
+                                padding: '6px',
+                                border: '0.6px solid rgb(190, 190, 190)',
+                              }}
+                            >
+                              <Typography>Attached Washrooms</Typography>
+                            </Card>
+                          </Grid>
+                          <Grid item xs={12} md={6}>
+                            <Card
+                              sx={{
+                                borderRadius: '30px 30px',
+                                padding: '6px',
+                                border: '0.6px solid rgb(190, 190, 190)',
+                              }}
+                            >
+                              <Typography>Attached Washrooms</Typography>
+                            </Card>
+                          </Grid>
+                        </Grid>
+
+                        <Grid container spacing={1} sx={{ marginTop: '4%' }}>
+                          <Grid item xs={12} md={4}>
+                            <Box sx={{ mb: 5 }}>
+                              <Typography variant="subtitle1">Starts from</Typography>
+                              <Typography>Rs 10,000/mo*</Typography>
+                            </Box>
+                          </Grid>
+                          <Grid item xs={12} md={4}>
+                            <Box sx={{ mb: 4 }}>
+                              <Button
+                                variant="contained"
+                                target="_blank"
+                                rel="noopener"
+                                href=""
+                                style={{ fontSize: '12px', padding: '10px' }}
+                              >
+                                Schedule a visit
+                              </Button>
+                            </Box>
+                          </Grid>
+                          <Grid item xs={12} md={4}>
+                            <Box sx={{ mb: 4 }}>
+                              <Button
+                                variant="contained"
+                                target="_blank"
+                                rel="noopener"
+                                href=""
+                                style={{ fontSize: '12px', padding: '10px' }}
+                              >
+                                Unlock discount
+                              </Button>
+                            </Box>
+                          </Grid>
+                        </Grid>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Card>
+              </Grid>
+              <Grid item md={4}>
+                <Typography>Map</Typography>
+              </Grid>
+            </Grid>
+          </m.div>
+
+          {/* <m.div>
             <Card sx={{ padding: '5%', marginTop: '5%' }}>
               <Grid container spacing={3}>
                 <Grid item xs={12} md={4}>
@@ -188,9 +280,9 @@ export default function ContactHero() {
                 <Grid item xs={12} md={8}>
                   <Box>
                     <Typography variant="subtitle1">Amsterdam House</Typography>
-                    <Typography >Electronic City Phase 1</Typography>
+                    <Typography>Electronic City Phase 1</Typography>
 
-                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                    <Grid container spacing={3} sx={{ marginTop: '15%' }}>
                       <Grid item xs={12} md={4}>
                         <Box sx={{ mb: 5 }}>
                           <Typography variant="subtitle1">Starts from</Typography>
@@ -241,7 +333,7 @@ export default function ContactHero() {
                     <Typography variant="subtitle1">Amsterdam House</Typography>
                     <Typography>Electronic City Phase 1</Typography>
 
-                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                    <Grid container spacing={3} sx={{ marginTop: '15%' }}>
                       <Grid item xs={12} md={4}>
                         <Box sx={{ mb: 5 }}>
                           <Typography variant="subtitle1">Starts from</Typography>
@@ -292,7 +384,7 @@ export default function ContactHero() {
                     <Typography variant="subtitle1">Amsterdam House</Typography>
                     <Typography>Electronic City Phase 1</Typography>
 
-                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                    <Grid container spacing={3} sx={{ marginTop: '15%' }}>
                       <Grid item xs={12} md={4}>
                         <Box sx={{ mb: 5 }}>
                           <Typography variant="subtitle1">Starts from</Typography>
@@ -330,7 +422,6 @@ export default function ContactHero() {
             </Card>
           </m.div>
 
-
           <m.div>
             <Card sx={{ padding: '5%', marginTop: '5%' }}>
               <Grid container spacing={3}>
@@ -344,7 +435,7 @@ export default function ContactHero() {
                     <Typography variant="subtitle1">Amsterdam House</Typography>
                     <Typography>Electronic City Phase 1</Typography>
 
-                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                    <Grid container spacing={3} sx={{ marginTop: '15%' }}>
                       <Grid item xs={12} md={4}>
                         <Box sx={{ mb: 5 }}>
                           <Typography variant="subtitle1">Starts from</Typography>
@@ -382,7 +473,6 @@ export default function ContactHero() {
             </Card>
           </m.div>
 
-
           <m.div>
             <Card sx={{ padding: '5%', marginTop: '5%' }}>
               <Grid container spacing={3}>
@@ -396,7 +486,7 @@ export default function ContactHero() {
                     <Typography variant="subtitle1">Amsterdam House</Typography>
                     <Typography>Electronic City Phase 1</Typography>
 
-                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                    <Grid container spacing={3} sx={{ marginTop: '15%' }}>
                       <Grid item xs={12} md={4}>
                         <Box sx={{ mb: 5 }}>
                           <Typography variant="subtitle1">Starts from</Typography>
@@ -434,7 +524,6 @@ export default function ContactHero() {
             </Card>
           </m.div>
 
-
           <m.div>
             <Card sx={{ padding: '5%', marginTop: '5%' }}>
               <Grid container spacing={3}>
@@ -448,7 +537,7 @@ export default function ContactHero() {
                     <Typography variant="subtitle1">Amsterdam House</Typography>
                     <Typography>Electronic City Phase 1</Typography>
 
-                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                    <Grid container spacing={3} sx={{ marginTop: '15%' }}>
                       <Grid item xs={12} md={4}>
                         <Box sx={{ mb: 5 }}>
                           <Typography variant="subtitle1">Starts from</Typography>
@@ -486,7 +575,6 @@ export default function ContactHero() {
             </Card>
           </m.div>
 
-
           <m.div>
             <Card sx={{ padding: '5%', marginTop: '5%' }}>
               <Grid container spacing={3}>
@@ -500,7 +588,7 @@ export default function ContactHero() {
                     <Typography variant="subtitle1">Amsterdam House</Typography>
                     <Typography>Electronic City Phase 1</Typography>
 
-                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                    <Grid container spacing={3} sx={{ marginTop: '15%' }}>
                       <Grid item xs={12} md={4}>
                         <Box sx={{ mb: 5 }}>
                           <Typography variant="subtitle1">Starts from</Typography>
@@ -538,7 +626,6 @@ export default function ContactHero() {
             </Card>
           </m.div>
 
-
           <m.div>
             <Card sx={{ padding: '5%', marginTop: '5%' }}>
               <Grid container spacing={3}>
@@ -552,7 +639,7 @@ export default function ContactHero() {
                     <Typography variant="subtitle1">Amsterdam House</Typography>
                     <Typography>Electronic City Phase 1</Typography>
 
-                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                    <Grid container spacing={3} sx={{ marginTop: '15%' }}>
                       <Grid item xs={12} md={4}>
                         <Box sx={{ mb: 5 }}>
                           <Typography variant="subtitle1">Starts from</Typography>
@@ -590,7 +677,6 @@ export default function ContactHero() {
             </Card>
           </m.div>
 
-
           <m.div>
             <Card sx={{ padding: '5%', marginTop: '5%' }}>
               <Grid container spacing={3}>
@@ -604,7 +690,7 @@ export default function ContactHero() {
                     <Typography variant="subtitle1">Amsterdam House</Typography>
                     <Typography>Electronic City Phase 1</Typography>
 
-                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                    <Grid container spacing={3} sx={{ marginTop: '15%' }}>
                       <Grid item xs={12} md={4}>
                         <Box sx={{ mb: 5 }}>
                           <Typography variant="subtitle1">Starts from</Typography>
@@ -642,7 +728,6 @@ export default function ContactHero() {
             </Card>
           </m.div>
 
-
           <m.div>
             <Card sx={{ padding: '5%', marginTop: '5%' }}>
               <Grid container spacing={3}>
@@ -656,7 +741,7 @@ export default function ContactHero() {
                     <Typography variant="subtitle1">Amsterdam House</Typography>
                     <Typography>Electronic City Phase 1</Typography>
 
-                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                    <Grid container spacing={3} sx={{ marginTop: '15%' }}>
                       <Grid item xs={12} md={4}>
                         <Box sx={{ mb: 5 }}>
                           <Typography variant="subtitle1">Starts from</Typography>
@@ -707,7 +792,7 @@ export default function ContactHero() {
                     <Typography variant="subtitle1">Amsterdam House</Typography>
                     <Typography>Electronic City Phase 1</Typography>
 
-                    <Grid container spacing={3} sx={{ marginTop: '15%',}}>
+                    <Grid container spacing={3} sx={{ marginTop: '15%' }}>
                       <Grid item xs={12} md={4}>
                         <Box sx={{ mb: 5 }}>
                           <Typography variant="subtitle1">Starts from</Typography>
@@ -743,10 +828,9 @@ export default function ContactHero() {
                 </Grid>
               </Grid>
             </Card>
-          </m.div>
-
-
-          <Divider />
+          </m.div> */}
+          {/* 
+          <Divider /> */}
 
           {/* <TextAnimate text="Where" sx={{ color: 'primary.main' }} variants={varFade().inRight} />
           <br />
