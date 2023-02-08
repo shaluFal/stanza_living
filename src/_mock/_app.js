@@ -44,3 +44,5 @@ export const _appFeatured = [...Array(4)].map((_, index) => ({
   description: _mock.text.title(index),
   image: _mock.image.feed(index),
 }));
+
+

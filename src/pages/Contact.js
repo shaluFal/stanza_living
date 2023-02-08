@@ -6,6 +6,7 @@ import { _mapContact } from '../_mock';
 // components
 import Page from '../components/Page';
 import { ContactHero, ContactForm, ContactMap } from '../sections/contact';
+import SearchPropertyDetailPage from './SearchPropertyDetailPage';
 
 // ----------------------------------------------------------------------
 
@@ -23,6 +24,8 @@ export default function Contact() {
     <Page title="Search Property">
       <RootStyle>
         <ContactHero />
+
+        {/* <SearchPropertyDetailPage /> */}
 
         {/* <Container sx={{ my: 10 }}>
           <Grid container spacing={10}>

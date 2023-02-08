@@ -1,5 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { Navigate, useRoutes, useLocation } from 'react-router-dom';
+import SearchPropertyDetailPage from '../pages/SearchPropertyDetailPage'
 // import PgCard from '../pages/dashboard/PgCard';
 // layouts
 import MainLayout from '../layouts/main';
@@ -13,6 +14,7 @@ import AuthGuard from '../guards/AuthGuard';
 import { PATH_AFTER_LOGIN } from '../config';
 // components
 import LoadingScreen from '../components/LoadingScreen';
+
 
 
 
@@ -138,7 +140,7 @@ export default function Router() {
         },
         { path: 'calendar', element: <Calendar /> },
         { path: 'kanban', element: <Kanban /> },
-        { path: 'permission-denied', element: <PermissionDenied /> },
+        { path: 'permission-denied', element: <PermissionDenied /> }
       ],
     },
 
@@ -165,6 +167,7 @@ export default function Router() {
         { path: 'about-us', element: <About /> },
         { path: 'contact-us', element: <Contact /> },
         { path: 'faqs', element: <Faqs /> },
+        {path: 'search-property-detail', element: <SearchPropertyDetailPage />}
       ],
     },
     { path: '*', element: <Navigate to="/404" replace /> },
@@ -227,6 +230,7 @@ const PermissionDenied = Loadable(lazy(() => import('../pages/dashboard/Permissi
 const HomePage = Loadable(lazy(() => import('../pages/Home')));
 const About = Loadable(lazy(() => import('../pages/About')));
 const Contact = Loadable(lazy(() => import('../pages/Contact')));
+
 const Faqs = Loadable(lazy(() => import('../pages/Faqs')));
 const ComingSoon = Loadable(lazy(() => import('../pages/ComingSoon')));
 const Maintenance = Loadable(lazy(() => import('../pages/Maintenance')));
