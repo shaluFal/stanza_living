@@ -1,5 +1,5 @@
 import { m } from 'framer-motion';
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import { Box, Container, Typography, Grid, InputAdornment, Card, Button, Divider } from '@mui/material';
 import axios from 'axios';
@@ -15,34 +15,9 @@ import SearchPropertyDetailPage from '../../pages/SearchPropertyDetailPage';
 
 // ----------------------------------------------------------------------
 
-// const CONTACTS = [
-//   {
-//     country: 'Bali',
-//     address: '508 Bridle Avenue Newnan, GA 30263',
-//     phoneNumber: '(239) 555-0108',
-//   },
-//   {
-//     country: 'London',
-//     address: '508 Bridle Avenue Newnan, GA 30263',
-//     phoneNumber: '(319) 555-0115',
-//   },
-//   {
-//     country: 'Prague',
-//     address: '508 Bridle Avenue Newnan, GA 30263',
-//     phoneNumber: '(252) 555-0126',
-//   },
-//   {
-//     country: 'Moscow',
-//     address: '508 Bridle Avenue Newnan, GA 30263',
-//     phoneNumber: '(307) 555-0133',
-//   },
-// ];
-
 const RootStyle = styled('div')(({ theme }) => ({
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-  // backgroundImage:
-  //   'url(/assets/overlay.svg), url(https://minimal-assets-api-dev.vercel.app/assets/images/contact/hero.jpg)',
   padding: theme.spacing(10, 0),
   [theme.breakpoints.up('md')]: {
     height: 560,
@@ -62,21 +37,33 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-// http://pmsapis.crisprsys.net/api/WebsiteAPI/GetPropertyData?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&FacilityCode=PMS1000
-
-// const baseURL =
-//   'http://pmsapis.crisprsys.net/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd';
-
 export default function ContactHero() {
   const [location, setLocation] = React.useState([]);
 
-  React.useEffect(() => {
-    API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd').then(
-      (response) => {
-        setLocation(response.data);
-      }
-    );
+  const getAllLocations = useCallback(async () => {
+    const locationid = window.location.pathname.split('/')[2];
+
+    try {
+      await API.post('http://pmsapis.crisprsys.net/api/WebsiteAPI/GetListOfProperties', {
+        apiKey: 'eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=',
+        location: locationid,
+        amenities: '',
+        services: '',
+        amountStartRange: '0',
+        amountEndRange: '10000000',
+      })
+        .then((res) => {
+          setLocation(res.data.listOfProperties);
+        })
+        .catch((err) => console.log(err));
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
+
+  useEffect(() => {
+    getAllLocations();
+  }, [getAllLocations]);
 
   const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -121,31 +108,44 @@ export default function ContactHero() {
                     143 PGs waiting to be yours in Bengaluru
                   </Typography>
 
-                  {location.listOfLocations &&
-                    location.listOfLocations.map((loc) => {
+                  {location &&
+                    location.map((loc) => {
                       return (
                         <div>
-                          {/* <a href="/search-property-detail"> */}
-                          {loc.value ? (
+                          <Link to="/search-property-detail">
                             <Card sx={{ padding: '3%', marginBottom: '4%', textDecoration: 'none' }}>
                               <Grid container spacing={2}>
                                 <Grid item xs={12} md={4}>
-                                  <img src="/images/pg_1.jpg" alt="" style={{ width: '120%', height: '100%' }} />
+                                  {loc.listOfFacilityImages &&
+                                    loc.listOfFacilityImages.map((fc) => {
+                                      return (
+                                        <>
+                                          <img src={fc.photoURL} alt="" style={{ width: '120%', height: '100%' }} />
+                                        </>
+                                      );
+                                    })}
                                 </Grid>
                                 <Grid item xs={12} md={8}>
                                   <Box>
-                                    <Typography variant="subtitle1">Amsterdam House</Typography>
+                                    <Typography variant="subtitle1">
+                                      {/* Amsterdam House */}
+                                      {loc.facilityName}
+                                    </Typography>
                                     <Typography>
                                       {/* {location.listOfLocations &&
                                           location.listOfLocations.map((loc) => {
                                             return <div key={loc.id}>{loc.value}</div>;
                                           })} */}
-                                      {loc.value}
+                                      {/* {loc.value} */}
                                     </Typography>
 
                                     <Grid container sx={{ marginTop: '2%' }}>
                                       <Grid item xs={12} md={8}>
-                                        Unisex | Double, Triple
+                                        {/* Unisex | Double, Triple */}
+                                        {loc.listOfUnitTypes &&
+                                          loc.listOfUnitTypes.map((typ) => {
+                                            return <>{typ.unitType} &nbsp;</>;
+                                          })}
                                       </Grid>
                                       <Grid item xs={12} md={4}>
                                         <Typography>View Directions</Typography>
@@ -157,46 +157,31 @@ export default function ContactHero() {
                                         <Typography>Amenities</Typography>
                                       </Grid>
 
-                                      <Grid item xs={12} md={5}>
-                                        <Card
-                                          sx={{
-                                            borderRadius: '30px 30px',
-                                            padding: '6px',
-                                            border: '0.6px solid rgb(190, 190, 190)',
-                                          }}
-                                        >
-                                          <Typography>Attached Washrooms</Typography>
-                                        </Card>
-                                      </Grid>
-                                      <Grid item xs={12} md={5}>
-                                        <Card
-                                          sx={{
-                                            borderRadius: '30px 30px',
-                                            padding: '6px',
-                                            border: '0.6px solid rgb(190, 190, 190)',
-                                          }}
-                                        >
-                                          <Typography>Attached Washrooms</Typography>
-                                        </Card>
-                                      </Grid>
-                                      <Grid item xs={12} md={6}>
-                                        <Card
-                                          sx={{
-                                            borderRadius: '30px 30px',
-                                            padding: '6px',
-                                            border: '0.6px solid rgb(190, 190, 190)',
-                                          }}
-                                        >
-                                          <Typography>Attached Washrooms</Typography>
-                                        </Card>
-                                      </Grid>
+                                      {loc.facilityAmenities?.length > 0 &&
+                                        loc.facilityAmenities[0].amenityNames?.split(',').map((amn) => {
+                                          return (
+                                            <>
+                                              <Grid item>
+                                                <Card
+                                                  sx={{
+                                                    borderRadius: '30px 30px',
+                                                    padding: '6px',
+                                                    border: '0.6px solid rgb(190, 190, 190)',
+                                                  }}
+                                                >
+                                                  <Typography sx={{ fontSize: '12px' }}>{amn}</Typography>
+                                                </Card>
+                                              </Grid>
+                                            </>
+                                          );
+                                        })}
                                     </Grid>
 
                                     <Grid container spacing={1} sx={{ marginTop: '4%' }}>
                                       <Grid item xs={12} md={4}>
                                         <Box sx={{ mb: 5 }}>
                                           <Typography variant="subtitle1">Starts from</Typography>
-                                          <Typography>Rs 10,000/mo*</Typography>
+                                          <Typography>Rs {loc.rentMonthly}/mo*</Typography>
                                         </Box>
                                       </Grid>
                                       <Grid item xs={12} md={4}>
@@ -230,8 +215,7 @@ export default function ContactHero() {
                                 </Grid>
                               </Grid>
                             </Card>
-                          ) : null}
-                          {/* </a> */}
+                          </Link>
                         </div>
                       );
                     })}
@@ -272,13 +256,13 @@ export default function ContactHero() {
               </Grid>
             ))}
           </Grid> */}
-          {/* <Slider ref={carouselRef} {...settings}>
+            {/* <Slider ref={carouselRef} {...settings}>
         {list.map((app, index) => (
           <CarouselItem key={app.id} item={app} isActive={index === currentIndex} index={index+1}/>
         ))}
       </Slider> */}
 
-                  {/* <Typography> <AppFeatured list={_appFeatured}  /></Typography> */}
+            {/* <Typography> <AppFeatured list={_appFeatured}  /></Typography> */}
 
             {/* <m.div>
               <Grid container spacing={4}>

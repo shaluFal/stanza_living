@@ -1,10 +1,31 @@
 import PropTypes from 'prop-types';
+// import Button from 'react-bootstrap/Button';
+// import Modal from 'react-bootstrap/Modal';
+import Modal from '@mui/material/Modal';
 import { m } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { NavLink as RouterLink, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+
 // @mui
 import { styled } from '@mui/material/styles';
-import { Box, Link, Grid, List, Stack, Popover, ListItem, ListSubheader, CardActionArea } from '@mui/material';
+import {
+  Box,
+  Link,
+  Grid,
+  List,
+  Stack,
+  Popover,
+  ListItem,
+  ListSubheader,
+  CardActionArea,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Typography,
+} from '@mui/material';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
+import API from '../../Helper/api';
 // components
 import Iconify from '../../components/Iconify';
 
@@ -50,9 +71,24 @@ MenuDesktop.propTypes = {
 };
 
 export default function MenuDesktop({ isOffset, isHome, navConfig }) {
-  const { pathname } = useLocation();
+  const [locations, setLocation] = React.useState([]);
 
+  React.useEffect(() => {
+    API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd').then(
+      (response) => {
+        setLocation(response.data?.listOfLocations);
+      }
+    );
+  }, []);
+
+  const { pathname } = useLocation();
+  const [openModal, setOpenModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [open, setOpen] = useState(false);
+  const handleModalClose = () => setShowModal(false);
+  const handleModalShow = () => {
+    setShowModal(true);
+  };
 
   useEffect(() => {
     if (open) {
@@ -70,19 +106,25 @@ export default function MenuDesktop({ isOffset, isHome, navConfig }) {
   };
 
   return (
-    <Stack direction="row">
-      {navConfig.map((link) => (
-        <MenuDesktopItem
-          key={link.title}
-          item={link}
-          isOpen={open}
-          onOpen={handleOpen}
-          onClose={handleClose}
-          isOffset={isOffset}
-          isHome={isHome}
-        />
-      ))}
-    </Stack>
+    <>
+      <Stack direction="row">
+        {navConfig.map((link) => (
+          <MenuDesktopItem
+            key={link.title}
+            item={link}
+            isOpen={open}
+            onOpen={handleOpen}
+            onClose={handleClose}
+            isOffset={isOffset}
+            isHome={isHome}
+            handleModalShow={handleModalShow}
+            handleModalClose={handleModalClose}
+            showModal={showModal}
+            locations={locations}
+          />
+        ))}
+      </Stack>
+    </>
   );
 }
 
@@ -101,9 +143,20 @@ MenuDesktopItem.propTypes = {
   }),
 };
 
-function MenuDesktopItem({ item, isHome, isOpen, isOffset, onOpen, onClose }) {
+function MenuDesktopItem({
+  item,
+  isHome,
+  isOpen,
+  isOffset,
+  onOpen,
+  onClose,
+  handleModalShow,
+  handleModalClose,
+  showModal,
+  locations,
+}) {
   const { pathname } = useLocation();
-
+  const navigate = useNavigate();
   const { title, path, children } = item;
 
   const isActive = (path) => pathname === path;
@@ -117,7 +170,7 @@ function MenuDesktopItem({ item, isHome, isOpen, isOffset, onOpen, onClose }) {
             display: 'flex',
             cursor: 'pointer',
             alignItems: 'center',
-            ...(isHome && { color: title === 'Know More' ? 'black':'common.white' }),
+            ...(isHome && { color: title === 'Know More' ? 'black' : 'common.white' }),
             ...(isOffset && { color: 'text.primary' }),
             ...(isOpen && { opacity: 0.48 }),
           }}
@@ -237,20 +290,62 @@ function MenuDesktopItem({ item, isHome, isOpen, isOffset, onOpen, onClose }) {
   }
 
   return (
-    <LinkStyle
-      to={path}
-      component={RouterLink}
-      end={path === '/'}
-      sx={{
-        ...(isHome && { color: 'common.white' }),
-        ...(isOffset && { color: 'text.primary' }),
-        '&.active': {
-          color: 'primary.main',
-        },
-      }}
-    >
-      {title}
-    </LinkStyle>
+    <>
+      <LinkStyle
+        onClick={handleModalShow}
+        to={path}
+        component={RouterLink}
+        end={path === '/'}
+        sx={{
+          ...(isHome && { color: 'common.white' }),
+          ...(isOffset && { color: 'text.primary' }),
+          '&.active': {
+            color: 'primary.main',
+          },
+        }}
+      >
+        {title}
+      </LinkStyle>
+
+      <Popover
+        open={showModal}
+        anchorReference="anchorPosition"
+        anchorPosition={{ top: 70, left: 0 }}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+        onClose={handleModalClose}
+        PaperProps={{
+          sx: {
+            px: 3,
+            pt: 5,
+            pb: 3,
+            right: 16,
+            m: 'auto',
+            borderRadius: 2,
+            maxWidth: (theme) => theme.breakpoints.values.lg,
+            boxShadow: (theme) => theme.customShadows.z24,
+            width: '20%',
+          },
+        }}
+      >
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Choose Property Type</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="choose property type"
+            onChange={(e) => {
+              handleModalClose();
+              navigate(`/contact-us/${e.target.value}/`);
+            }}
+          >
+            {locations.map((lt) => {
+              return <MenuItem value={lt.id}>{lt.value}</MenuItem>;
+            })}
+          </Select>
+        </FormControl>
+      </Popover>
+    </>
   );
 }
 

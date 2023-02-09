@@ -165,7 +165,7 @@ export default function Router() {
       children: [
         { element: <HomePage />, index: true },
         { path: 'about-us', element: <About /> },
-        { path: 'contact-us', element: <Contact /> },
+        { path: 'contact-us/:id', element: <Contact /> },
         { path: 'faqs', element: <Faqs /> },
         {path: 'search-property-detail', element: <SearchPropertyDetailPage />}
       ],
