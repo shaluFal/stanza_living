@@ -167,7 +167,7 @@ export default function Router() {
         { path: 'about-us', element: <About /> },
         { path: 'contact-us/:id', element: <Contact /> },
         { path: 'faqs', element: <Faqs /> },
-        {path: 'search-property-detail', element: <SearchPropertyDetailPage />}
+        {path: 'search-property-detail/:id', element: <SearchPropertyDetailPage />}
       ],
     },
     { path: '*', element: <Navigate to="/404" replace /> },

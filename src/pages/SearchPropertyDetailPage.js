@@ -6,13 +6,15 @@ const SearchPropertyDetailPage = () => {
   const [property, setProperty] = React.useState([]);
 
   React.useEffect(() => {
+    const facilityCode = window.location.pathname.split('/')[2];
     API.get(
-      '/api/WebsiteAPI/GetPropertyData?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&FacilityCode=PMS1000'
+      `/api/WebsiteAPI/GetPropertyData?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&FacilityCode=${facilityCode}`
     ).then((response) => {
       console.log(response.data);
-      setProperty(response.data.propertyObject);
+      setProperty(response.data.propertyObject ? response.data.propertyObject : {});
     });
   }, []);
+
   return (
     <div style={{ marginTop: '10%', marginLeft: '20%' }}>
       <div>
@@ -24,7 +26,30 @@ const SearchPropertyDetailPage = () => {
               Exeter House, Unnamed Road, Gachibowli, Hyderabad, Telangana 500075, India
             </Typography>
 
-            <img src="/images/search_property_1.jpg" alt="" />
+            {/* {property.listOfFacilityImages?.length > 0 &&
+              property.listOfFacilityImages[0] */}
+            {/* .map((fc, index) => { */}
+            {/* return (
+                  <div>
+                  <img src={fc.photoURL} alt="" style={{ width: '120%', height: '100%' }} />
+                  </div>
+                 );
+               })} */}
+
+            {property.listOfFacilityImages?.length > 0 ? (
+              <div>
+                <img
+                  src={property.listOfFacilityImages[0]?.photoURL}
+                  alt=""
+                  style={{ width: '120%', height: '100%' }}
+                />
+              </div>
+            ) : (
+              <div>
+                <img src={''} alt="" style={{ width: '120%', height: '100%' }} />
+              </div>
+            )}
+
             <Typography sx={{ marginTop: '20px' }}>Starts from</Typography>
             <Typography sx={{ fontWeight: '900', fontSize: '20px' }}>₹{property.rentMonthly}/mo*</Typography>
             <Typography>
@@ -36,28 +61,21 @@ const SearchPropertyDetailPage = () => {
               <Grid item md={12}>
                 <Typography sx={{ marginTop: '5%', fontWeight: '600' }}>Available occupancies</Typography>
               </Grid>
-              <Grid item md={4}>
-                <Card
-                  sx={{
-                    borderRadius: '30px 30px',
-                    padding: '6px',
-                    border: '0.6px solid rgb(190, 190, 190)',
-                  }}
-                >
-                  single
-                </Card>
-              </Grid>
-              <Grid item md={4}>
-                <Card
-                  sx={{
-                    borderRadius: '30px 30px',
-                    padding: '6px',
-                    border: '0.6px solid rgb(190, 190, 190)',
-                  }}
-                >
-                  Double
-                </Card>
-              </Grid>
+              {property.listOfUnitTypes?.map((lt) => {
+                return (
+                  <Grid item md={4}>
+                    <Card
+                      sx={{
+                        borderRadius: '30px 30px',
+                        padding: '6px',
+                        border: '0.6px solid rgb(190, 190, 190)',
+                      }}
+                    >
+                      {lt.unitType}
+                    </Card>
+                  </Grid>
+                );
+              })}
             </Grid>
 
             <Grid container spacing={2}>
@@ -66,9 +84,9 @@ const SearchPropertyDetailPage = () => {
               </Grid>
 
               {property.facilityAmenities?.length > 0 &&
-                property.facilityAmenities[0].amenityNames?.split(',').map((loc, index) => {
+                property.facilityAmenities[0].amenityNames?.split(',').map((loc) => {
                   return (
-                    <>
+                    <div key={loc.facilityCode} style={{ margin: '5px' }}>
                       <Grid item>
                         <Card
                           sx={{
@@ -80,21 +98,19 @@ const SearchPropertyDetailPage = () => {
                           {loc}
                         </Card>
                       </Grid>
-                    </>
+                    </div>
                   );
                 })}
             </Grid>
-          </Grid>
-
-          <Grid container spacing={2}>
+            <Grid container spacing={2}>
             <Grid item md={12}>
               <Typography sx={{ marginTop: '5%', fontWeight: '600' }}>Services</Typography>
             </Grid>
 
             {property.facilityServices?.length > 0 &&
-              property.facilityServices[0].serviceNames?.split(',').map((loc, index) => {
+              property.facilityServices[0].serviceNames?.split(',').map((loc) => {
                 return (
-                  <>
+                  <div key={loc.facilityCode} style={{ margin: '5px' }}>
                     <Grid item>
                       <Card
                         sx={{
@@ -106,7 +122,7 @@ const SearchPropertyDetailPage = () => {
                         {loc}
                       </Card>
                     </Grid>
-                  </>
+                  </div>
                 );
               })}
           </Grid>
@@ -136,25 +152,30 @@ const SearchPropertyDetailPage = () => {
             {property.listOfFoodItems &&
               property.listOfFoodItems.map((loc, index) => {
                 return (
-                  <>
-                    <Grid item>
+                  <Grid container key={loc.facilityCode}>
+                    <Grid item md={12}>
                       <Card
                         sx={{
                           borderRadius: '30px 30px',
-                          padding: '6px',
+                          padding: '10px 6px 10px 15px',
                           border: '0.6px solid rgb(190, 190, 190)',
+                          margin: '5px',
+                            
                         }}
                       >
-                        {loc.day}: &nbsp;
-                        {loc.breakfast} &nbsp;
-                        {loc.lunch} &nbsp;
-                        {loc.dinner} 
+                        <p style={{ fontWeight: 'bold' }}>{loc.day}</p>
+                        <p>Breakfast : {loc.breakfast}</p>
+                        <p>Lunch: {loc.lunch} </p>
+                        <p>Dinner : {loc.dinner}</p>
                       </Card>
                     </Grid>
-                  </>
+                  </Grid>
                 );
               })}
           </Grid>
+          </Grid>
+
+         
         </Grid>
       </div>
     </div>

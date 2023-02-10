@@ -111,111 +111,114 @@ export default function ContactHero() {
                   {location &&
                     location.map((loc) => {
                       return (
-                        <div>
-                          <Link to="/search-property-detail">
-                            <Card sx={{ padding: '3%', marginBottom: '4%', textDecoration: 'none' }}>
-                              <Grid container spacing={2}>
-                                <Grid item xs={12} md={4}>
-                                  {loc.listOfFacilityImages &&
-                                    loc.listOfFacilityImages.map((fc) => {
-                                      return (
-                                        <>
-                                          <img src={fc.photoURL} alt="" style={{ width: '120%', height: '100%' }} />
-                                        </>
-                                      );
-                                    })}
-                                </Grid>
-                                <Grid item xs={12} md={8}>
-                                  <Box>
-                                    <Typography variant="subtitle1">
-                                      {/* Amsterdam House */}
+                        <div key={loc.facilityCode}>
+                          <Card sx={{ padding: '3%', marginBottom: '4%', textDecoration: 'none' }}>
+                            <Grid container spacing={2}>
+                              <Grid item xs={12} md={4}>
+                                {loc.listOfFacilityImages &&
+                                  loc.listOfFacilityImages.map((fc, index) => {
+                                    return (
+                                      <div key={index}>
+                                        <img src={fc.photoURL} alt="" style={{ width: '120%', height: '100%' }} />
+                                      </div>
+                                    );
+                                  })}
+                              </Grid>
+                              <Grid item xs={12} md={8}>
+                                <Box>
+                                  <Typography variant="subtitle1">
+                                    <Link
+                                      to={`/search-property-detail/${loc.facilityCode}`}
+                                      style={{ textDecoration: 'none', color: '#000' }}
+                                    >
+                                      {console.log(loc.facility)}
                                       {loc.facilityName}
-                                    </Typography>
-                                    <Typography>
-                                      {/* {location.listOfLocations &&
+                                    </Link>
+                                  </Typography>
+                                  <Typography>
+                                    {/* {location.listOfLocations &&
                                           location.listOfLocations.map((loc) => {
                                             return <div key={loc.id}>{loc.value}</div>;
                                           })} */}
-                                      {/* {loc.value} */}
-                                    </Typography>
+                                    {/* {loc.value} */}
+                                  </Typography>
 
-                                    <Grid container sx={{ marginTop: '2%' }}>
-                                      <Grid item xs={12} md={8}>
-                                        {/* Unisex | Double, Triple */}
-                                        {loc.listOfUnitTypes &&
-                                          loc.listOfUnitTypes.map((typ) => {
-                                            return <>{typ.unitType} &nbsp;</>;
-                                          })}
-                                      </Grid>
-                                      <Grid item xs={12} md={4}>
-                                        <Typography>View Directions</Typography>
-                                      </Grid>
-                                    </Grid>
-
-                                    <Grid container sx={{ marginTop: '2%' }} spacing={1}>
-                                      <Grid item md={12}>
-                                        <Typography>Amenities</Typography>
-                                      </Grid>
-
-                                      {loc.facilityAmenities?.length > 0 &&
-                                        loc.facilityAmenities[0].amenityNames?.split(',').map((amn) => {
-                                          return (
-                                            <>
-                                              <Grid item>
-                                                <Card
-                                                  sx={{
-                                                    borderRadius: '30px 30px',
-                                                    padding: '6px',
-                                                    border: '0.6px solid rgb(190, 190, 190)',
-                                                  }}
-                                                >
-                                                  <Typography sx={{ fontSize: '12px' }}>{amn}</Typography>
-                                                </Card>
-                                              </Grid>
-                                            </>
-                                          );
+                                  <Grid container sx={{ marginTop: '2%' }}>
+                                    <Grid item xs={12} md={8}>
+                                      {/* Unisex | Double, Triple */}
+                                      {loc.listOfUnitTypes &&
+                                        loc.listOfUnitTypes.map((typ) => {
+                                          return <div key={typ.facilityCode}>{typ.unitType} &nbsp;</div>;
                                         })}
                                     </Grid>
-
-                                    <Grid container spacing={1} sx={{ marginTop: '4%' }}>
-                                      <Grid item xs={12} md={4}>
-                                        <Box sx={{ mb: 5 }}>
-                                          <Typography variant="subtitle1">Starts from</Typography>
-                                          <Typography>Rs {loc.rentMonthly}/mo*</Typography>
-                                        </Box>
-                                      </Grid>
-                                      <Grid item xs={12} md={4}>
-                                        <Box sx={{ mb: 4 }}>
-                                          <Button
-                                            variant="contained"
-                                            target="_blank"
-                                            rel="noopener"
-                                            href=""
-                                            style={{ fontSize: '12px', padding: '10px' }}
-                                          >
-                                            Schedule a visit
-                                          </Button>
-                                        </Box>
-                                      </Grid>
-                                      <Grid item xs={12} md={4}>
-                                        <Box sx={{ mb: 4 }}>
-                                          <Button
-                                            variant="contained"
-                                            target="_blank"
-                                            rel="noopener"
-                                            href=""
-                                            style={{ fontSize: '12px', padding: '10px' }}
-                                          >
-                                            Unlock discount
-                                          </Button>
-                                        </Box>
-                                      </Grid>
+                                    <Grid item xs={12} md={4}>
+                                      <Typography>View Directions</Typography>
                                     </Grid>
-                                  </Box>
-                                </Grid>
+                                  </Grid>
+
+                                  <Grid container sx={{ marginTop: '2%' }} spacing={1}>
+                                    <Grid item md={12}>
+                                      <Typography>Amenities</Typography>
+                                    </Grid>
+
+                                    {loc.facilityAmenities?.length > 0 &&
+                                      loc.facilityAmenities[0].amenityNames?.split(',').map((amn) => {
+                                        return (
+                                          <div key={amn.facilityCode}>
+                                            <Grid item>
+                                              <Card
+                                                sx={{
+                                                  borderRadius: '30px 30px',
+                                                  padding: '6px',
+                                                  border: '0.6px solid rgb(190, 190, 190)',
+                                                }}
+                                              >
+                                                <Typography sx={{ fontSize: '12px' }}>{amn}</Typography>
+                                              </Card>
+                                            </Grid>
+                                          </div>
+                                        );
+                                      })}
+                                  </Grid>
+
+                                  <Grid container spacing={1} sx={{ marginTop: '4%' }}>
+                                    <Grid item xs={12} md={4}>
+                                      <Box sx={{ mb: 5 }}>
+                                        <Typography variant="subtitle1">Starts from</Typography>
+                                        <Typography>Rs {loc.rentMonthly}/mo*</Typography>
+                                      </Box>
+                                    </Grid>
+                                    <Grid item xs={12} md={4}>
+                                      <Box sx={{ mb: 4 }}>
+                                        <Button
+                                          variant="contained"
+                                          target="_blank"
+                                          rel="noopener"
+                                          href=""
+                                          style={{ fontSize: '12px', padding: '10px' }}
+                                        >
+                                          Schedule a visit
+                                        </Button>
+                                      </Box>
+                                    </Grid>
+                                    <Grid item xs={12} md={4}>
+                                      <Box sx={{ mb: 4 }}>
+                                        <Button
+                                          variant="contained"
+                                          target="_blank"
+                                          rel="noopener"
+                                          href=""
+                                          style={{ fontSize: '12px', padding: '10px' }}
+                                        >
+                                          Unlock discount
+                                        </Button>
+                                      </Box>
+                                    </Grid>
+                                  </Grid>
+                                </Box>
                               </Grid>
-                            </Card>
-                          </Link>
+                            </Grid>
+                          </Card>
                         </div>
                       );
                     })}
