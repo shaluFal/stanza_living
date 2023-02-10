@@ -105,7 +105,7 @@ function CarouselItem({ item, isActive,index }) {
   const { image, title, description } = item;
 
   return (
-    <Box sx={{ position: 'relative', width: '200%' }}>
+    <Box sx={{ position: 'relative', width: '300%' }}>
       <CardContent
         component={MotionContainer}
         animate={isActive}
@@ -128,14 +128,14 @@ function CarouselItem({ item, isActive,index }) {
 
         <m.div variants={varFade().inRight}>
           <Link color="inherit" underline="none">
-            <Typography variant="h5" gutterBottom noWrap sx={{fontWeight: '900'}}>
+            <Typography  gutterBottom noWrap sx={{fontWeight: '900', fontSize: "30px"}}>
               {title}
             </Typography>
           </Link>
         </m.div>
 
         <m.div variants={varFade().inRight}>
-          <Typography variant="body2" noWrap>
+          <Typography variant="body2" noWrap sx={{fontSize: "14px"}}>
             {description}
           </Typography>
         </m.div>
@@ -143,7 +143,7 @@ function CarouselItem({ item, isActive,index }) {
 
       <OverlayStyle />
 
-      <Image alt={title} src={`images/feed_${index}.jpg`} sx={{ height: { xs: 300, xl: 500 }, width: {xs: 300, xl: 600}, textAlign: 'right' }} />
+      <Image alt={title} src={`/images/feed_${index}.jpg`} sx={{ height: { xs: 300, lg: 550 }, width: {xs: 300, lg: 550}, textAlign: 'left' }} />
     </Box>
   );
 }

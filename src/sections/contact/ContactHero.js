@@ -99,13 +99,13 @@ export default function ContactHero() {
               />
             </m.div>
             <m.div>
-              <Typography sx={{ marginTop: '5%' }}>Coliving/PG in Bengaluru</Typography>
+              <Typography sx={{ marginTop: '5%' }}>Coliving/PG in Hyderabad</Typography>
             </m.div>
             <m.div>
               <Grid container spacing={2}>
                 <Grid item md={8}>
                   <Typography sx={{ marginTop: '2%', fontWeight: '700', marginBottom: '5%' }}>
-                    143 PGs waiting to be yours in Bengaluru
+                    143 PGs waiting to be yours in Hyderabad
                   </Typography>
 
                   {location &&

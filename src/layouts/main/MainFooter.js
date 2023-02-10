@@ -47,7 +47,7 @@ export default function MainFooter() {
     <RootStyle>
       <Divider />
 
-      <Container sx={{ pt: 10 }}>
+      <Container sx={{ pt: 4 }}>
         <Grid
           container
           justifyContent={{ xs: 'center', md: 'space-between' }}
@@ -102,8 +102,8 @@ export default function MainFooter() {
           component="p"
           variant="body2"
           sx={{
-            mt: 10,
-            pb: 5,
+            mt: 3,
+            pb: 2,
             fontSize: 13,
             textAlign: { xs: 'center', md: 'left' },
           }}

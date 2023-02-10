@@ -15,7 +15,7 @@ const RootStyle = styled('div')(({ theme }) => ({
 const ContentStyle = styled('div')(({ theme }) => ({
   width: '100%',
   textAlign: 'center',
-  marginBottom: theme.spacing(10),
+  marginBottom: theme.spacing(5),
   [theme.breakpoints.up('md')]: {
     textAlign: 'left',
     marginBottom: 0,
@@ -96,7 +96,7 @@ export default function HomeHugePackElements() {
 
                 <m.div variants={varFade().inUp}>
                   <Typography variant="h2" sx={{ mb: 3 }}>
-                  Not just four walls and a roof
+                    Not just four walls and a roof
                   </Typography>
                 </m.div>
 
@@ -126,7 +126,7 @@ export default function HomeHugePackElements() {
               </ContentStyle>
             </Grid>
 
-            <Grid item xs={12} md={8} dir="ltr">
+            {/* <Grid item xs={12} md={8} dir="ltr">
               <Box
                 sx={{
                   display: 'flex',
@@ -164,11 +164,30 @@ export default function HomeHugePackElements() {
                     <Image
                       disabledEffect
                       alt={`screen ${index + 1}`}
-                      src={`images/walls_${index + 1}.jpg`}
+                      src={`/images/walls_${index + 1}.jpg`}
                     />
                   </ScreenStyle>
                 ))}
               </Box>
+            </Grid> */}
+
+            <Grid item xs={12} md={8}>
+              <Grid container spacing={1}>
+                <Grid item xs={12} md={8} lg={6}>
+                  <Image alt="" src={`/images/walls_1.jpg`}  style={{width: "100%"}}/>
+                </Grid>
+                <Grid item xs={12} md={4} lg={6}>
+                  <Grid container spacing={1}>
+                    <Grid item >
+                      <Image alt="" src={`/images/walls_2.jpg`}   style={{borderRadius: "10px 10px"}}/>
+                    </Grid>
+
+                    <Grid item >
+                      <Image alt="" src={`/images/walls_3.jpg`} style={{borderRadius: "10px 10px"}} />
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Container>

@@ -1,8 +1,8 @@
 import { m } from 'framer-motion';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Navigate } from 'react-router-dom';
 // @mui
 import { styled } from '@mui/material/styles';
-import { Button, Box, Link, Container, Typography, Stack, InputAdornment, Grid, Card, Divider } from '@mui/material';
+import { Button, Box, Link, Container, Typography, Stack, InputAdornment, Grid, Card, Divider, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import ApartmentIcon from '@mui/icons-material/Apartment';
@@ -36,14 +36,14 @@ const RootStyle = styled(m.div)(({ theme }) => ({
   },
 }));
 
-const ContentStyle = styled((props) => <Stack spacing={5} {...props} />)(({ theme }) => ({
+const ContentStyle = styled((props) => <Stack spacing={2} {...props} />)(({ theme }) => ({
   zIndex: 10,
   maxWidth: '100%',
   margin: 'auto',
   textAlign: 'center',
   position: 'relative',
-  paddingTop: theme.spacing(15),
-  paddingBottom: theme.spacing(15),
+
+  paddingBottom: theme.spacing(2),
   [theme.breakpoints.up('md')]: {
     margin: 'unset',
     textAlign: 'left',
@@ -76,42 +76,58 @@ const HeroOverlayStyle = styled(m.img)({
 // ----------------------------------------------------------------------
 
 export default function HomeHero() {
+
+  // const [locations, setLocation] = React.useState([]);
+
+  // React.useEffect(() => {
+  //   API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd').then(
+  //     (response) => {
+  //       setLocation(response.data?.listOfLocations);
+  //     }
+  //   );
+  // }, []);
+
   return (
     <MotionContainer>
       <RootStyle>
-        <HeroOverlayStyle alt="" src="/stanza/assets/overlay.svg" variants={varFade().in} />
+        <HeroOverlayStyle alt="" src="/assets/overlay.svg" variants={varFade().in} />
 
-        <Container style={{ marginTop: '6%' }}>
+        <Container>
           <ContentStyle>
             <m.div>
-              <Grid container>
-                <Grid item xs={12} md={6} lg={6}>
-                  <AppFeatured list={_appFeatured} sx={{ marginRight: '2%', width: '100%', marginBottom: '2%' }} />
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={8} lg={8}>
+                  <AppFeatured list={_appFeatured} sx={{ marginBottom: '2%' }} />
                 </Grid>
-                <Grid item xs={12} md={6} lg={6}>
-                  <Grid container sx={{ marginLeft: '2%' }}>
+                <Grid item xs={12} md={4} lg={4}>
+                  <Grid container spacing={5}>
                     <Grid item xs={12} md={12} lg={12}>
-                      <Card sx={{ marginBottom: '2%', width: '70%' }}>
-                        <Typography sx={{ position: 'absolute', top: '5%', left: '2%' }}>
-                          Modern Student Housing
+                      <Card sx={{ width: '100%', height: '112%' }}>
+                        <Typography sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700' }}>
+                          Modern Student
+                          <br /> Housing
                         </Typography>
-                        <img src="images/modern_1.jpg" alt="" style={{ width: 'initial' }} />
+                        <img src="/images/modern_1.jpg" alt="" style={{ width: 'initial', height: '112%' }} />
                         <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
                       </Card>
                     </Grid>
+
                     <Grid item xs={12} md={12} lg={12}>
-                      <Card sx={{ marginBottom: '2%', width: '70%' }}>
-                        <Typography sx={{ position: 'absolute', top: '5%', left: '2%' }}>
-                          Co-living Professionals
+                      <Card sx={{ width: '100%', height: '112%' }}>
+                        <Typography sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700' }}>
+                          Co-living <br /> Professionals
                         </Typography>
-                        <img src="images/modern_2.jpg" alt="" style={{ width: 'initial' }} />
+                        <img src="/images/modern_2.jpg" alt="" style={{ width: 'initial', height: '112%' }} />
                         <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
                       </Card>
                     </Grid>
+
                     <Grid item xs={12} md={12} lg={12}>
-                      <Card sx={{ marginBottom: '2%', width: '70%' }}>
-                        <Typography sx={{ position: 'absolute', top: '5%', left: '2%' }}>Managed Apartments</Typography>
-                        <img src="images/modern_3.jpg" alt="" style={{ width: 'initial' }} />
+                      <Card sx={{ width: '100%', height: '114%' }}>
+                        <Typography sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700' }}>
+                          Managed <br /> Apartments
+                        </Typography>
+                        <img src="/images/modern_3.jpg" alt="" style={{ width: 'initial', height: '114%' }} />
                         <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
                       </Card>
                     </Grid>
@@ -122,41 +138,66 @@ export default function HomeHero() {
 
             <m.div variants={varFade().inUp}>
               <InputStyle
-                stretchStart={280}
+                stretchStart={400}
                 placeholder="Search for your second home..."
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Iconify icon={'eva:search-fill'} sx={{ color: 'text.disabled', width: 20, height: 20 }} />
+                      <Iconify icon={'eva:search-fill'} sx={{ color: 'text.disabled', width: 30, height: 20 }} />
                     </InputAdornment>
                   ),
                 }}
                 sx={{
                   position: 'absolute',
-                  top: '55%',
+                  top: {lg: '60%', md: '20%', xs: '20%'},
+                  right: {xs: '0', md: '0', lg: '60%'},
                   marginLeft: '2%',
                   borderRadius: '20px 20px 20px 20px',
                   backgroundColor: 'white',
+                   display: "inline"
                 }}
               />
+
+              {/* <FormControl fullWidth >
+                <InputLabel id="demo-simple-select-label">Choose Property Type</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  label="choose property type"
+                  onChange={(e) => {
+                    handleModalClose();
+                    Navigate(`/contact-us/${e.target.value}/`);
+                  }}
+                >
+                  {locations.map((lt) => {
+                    return <MenuItem value={lt.id}>{lt.value}</MenuItem>;
+                  })}
+                </Select>
+              </FormControl> */}
             </m.div>
 
             <m.div>
               <Divider />
-              <Box sx={{ py: 3, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
+              <Box sx={{ py: 2, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', textAlign: 'center' }}>
                 <div>
-                  <Typography variant="caption" component="div" sx={{ color: '#000', width: '40%' }}>
-                    <LocationCityIcon sx={{ width: '30%', color: 'rgb(0, 171, 85)' }} /> &nbsp; 24+ Cities
+                  <Typography variant="caption" component="div" sx={{ color: '#000' }}>
+                    <LocationCityIcon style={{ fontSize: '2rem', color: 'rgb(0, 171, 85)' }} />
+                    &nbsp;
+                    <span style={{ verticalAlign: 'super', fontWeight: '600', fontSize: '18px' }}>24+ Cities</span>
                   </Typography>
                 </div>
                 <div>
                   <Typography variant="caption" component="div" sx={{ color: '#000' }}>
-                    <ApartmentIcon sx={{ width: '30%', color: 'rgb(0, 171, 85)' }} /> &nbsp;450+ Residences
+                    <ApartmentIcon sx={{ color: 'rgb(0, 171, 85)' }} />
+                    &nbsp;
+                    <span style={{ verticalAlign: 'super', fontWeight: '600', fontSize: '18px' }}>450+ Residences</span>
                   </Typography>
                 </div>
                 <div>
                   <Typography variant="caption" component="div" sx={{ color: '#000' }}>
-                    <BedIcon sx={{ width: '30%', color: 'rgb(0, 171, 85)' }} /> &nbsp; 70,000+ Beds
+                    <BedIcon sx={{ color: 'rgb(0, 171, 85)' }} />
+                    &nbsp;
+                    <span style={{ verticalAlign: 'super', fontWeight: '600', fontSize: '18px' }}>70,000+ Beds</span>
                   </Typography>
                 </div>
               </Box>

@@ -317,14 +317,14 @@ function MenuDesktopItem({
         PaperProps={{
           sx: {
             px: 3,
-            pt: 5,
-            pb: 3,
-            right: 16,
+            pt: 2,
+            pb: 2,
+            right: -390,
             m: 'auto',
             borderRadius: 2,
             maxWidth: (theme) => theme.breakpoints.values.lg,
             boxShadow: (theme) => theme.customShadows.z24,
-            width: '20%',
+            width: '15%',
           },
         }}
       >
