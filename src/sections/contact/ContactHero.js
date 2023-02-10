@@ -41,7 +41,7 @@ export default function ContactHero() {
   const [location, setLocation] = React.useState([]);
 
   const getAllLocations = useCallback(async () => {
-    const locationid = window.location.pathname.split('/')[2];
+    const locationid = window.location.pathname.split('/')[3];
 
     try {
       await API.post('http://pmsapis.crisprsys.net/api/WebsiteAPI/GetListOfProperties', {
@@ -115,14 +115,23 @@ export default function ContactHero() {
                           <Card sx={{ padding: '3%', marginBottom: '4%', textDecoration: 'none' }}>
                             <Grid container spacing={2}>
                               <Grid item xs={12} md={4}>
-                                {loc.listOfFacilityImages &&
+                                {/* {loc.listOfFacilityImages &&
                                   loc.listOfFacilityImages.map((fc, index) => {
                                     return (
                                       <div key={index}>
                                         <img src={fc.photoURL} alt="" style={{ width: '120%', height: '100%' }} />
                                       </div>
                                     );
-                                  })}
+                                  })} */}
+                                {loc.listOfFacilityImages?.length > 0 ? (
+                                  <img
+                                    src={loc.listOfFacilityImages[0]?.photoURL}
+                                    alt=""
+                                    style={{ width: '120%', height: '100%' }}
+                                  />
+                                ) : (
+                                  <img src={''} alt="" style={{ width: '120%', height: '100%' }} />
+                                )}
                               </Grid>
                               <Grid item xs={12} md={8}>
                                 <Box>

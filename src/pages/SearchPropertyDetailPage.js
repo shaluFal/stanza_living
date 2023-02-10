@@ -6,7 +6,7 @@ const SearchPropertyDetailPage = () => {
   const [property, setProperty] = React.useState([]);
 
   React.useEffect(() => {
-    const facilityCode = window.location.pathname.split('/')[2];
+    const facilityCode = window.location.pathname.split('/')[3];
     API.get(
       `/api/WebsiteAPI/GetPropertyData?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&FacilityCode=${facilityCode}`
     ).then((response) => {
