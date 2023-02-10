@@ -40,7 +40,7 @@ export default function Image({ ratio, disabledEffect = false, effect = 'blur', 
           component={LazyLoadImage}
           wrapperClassName="wrapper"
           effect={disabledEffect ? undefined : effect}
-          placeholderSrc="/assets/placeholder.svg"
+          placeholderSrc="/stanza/assets/placeholder.svg"
           sx={{ width: 1, height: 1, objectFit: 'cover' }}
           {...other}
         />
@@ -63,7 +63,7 @@ export default function Image({ ratio, disabledEffect = false, effect = 'blur', 
         component={LazyLoadImage}
         wrapperClassName="wrapper"
         effect={disabledEffect ? undefined : effect}
-        placeholderSrc="/assets/placeholder.svg"
+        placeholderSrc="/stanza/assets/placeholder.svg"
         sx={{ width: 1, height: 1, objectFit: 'cover' }}
         {...other}
       />

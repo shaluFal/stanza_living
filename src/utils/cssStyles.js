@@ -36,7 +36,7 @@ export default function cssStyles(theme) {
       };
     },
     bgImage: (props) => {
-      const url = props?.url || '/assets/bg_gradient.jpg';
+      const url = props?.url || '/stanza/assets/bg_gradient.jpg';
       const direction = getDirection(props?.direction);
       const startColor = props?.startColor || alpha(theme?.palette.grey[900] || '#000000', 0.88);
       const endColor = props?.endColor || alpha(theme?.palette.grey[900] || '#000000', 0.88);

@@ -7,7 +7,7 @@ import SvgIconStyle from '../../../components/SvgIconStyle';
 
 // ----------------------------------------------------------------------
 
-const getIcon = (name) => <SvgIconStyle src={`/assets/icons/navbar/${name}.svg`} sx={{ width: 1, height: 1 }} />;
+const getIcon = (name) => <SvgIconStyle src={`/stanza/assets/icons/navbar/${name}.svg`} sx={{ width: 1, height: 1 }} />;
 
 const ICONS = {
   blog: getIcon('ic_blog'),

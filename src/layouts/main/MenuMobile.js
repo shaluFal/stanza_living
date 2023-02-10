@@ -128,7 +128,7 @@ function MenuMobileItem({ item, isOpen, onOpen }) {
                   backgroundPosition: 'center',
                   bgcolor: 'background.neutral',
                   backgroundRepeat: 'no-repeat',
-                  backgroundImage: 'url(/assets/illustrations/illustration_dashboard.png)',
+                  backgroundImage: 'url(/stanza/assets/illustrations/illustration_dashboard.png)',
                   '& > *:not(.MuiTouchRipple-root)': { display: 'none' },
                 },
               }}

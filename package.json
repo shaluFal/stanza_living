@@ -144,5 +144,6 @@
   },
   "overrides": {
     "@svgr/webpack": "^6.2.1"
-  }
+  },
+  "homepage": "http://15.207.22.79/stanza"
 }

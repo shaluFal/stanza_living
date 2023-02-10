@@ -31,7 +31,7 @@ const CardItemStyle = styled('div')(({ theme }) => ({
   padding: theme.spacing(3),
   backgroundRepeat: 'no-repeat',
   color: theme.palette.common.white,
-  backgroundImage: 'url("/assets/bg_card.png")',
+  backgroundImage: 'url("/stanza/assets/bg_card.png")',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',

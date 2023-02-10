@@ -252,7 +252,7 @@ function MenuDesktopItem({
                                 hover: { scale: 1.02 },
                                 tap: { scale: 0.98 },
                               }}
-                              src="/assets/illustrations/illustration_dashboard.png"
+                              src="/stanza/assets/illustrations/illustration_dashboard.png"
                             />
                           </CardActionArea>
                         ) : (

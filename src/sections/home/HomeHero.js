@@ -79,7 +79,7 @@ export default function HomeHero() {
   return (
     <MotionContainer>
       <RootStyle>
-        <HeroOverlayStyle alt="overlay" src="/assets/overlay.svg" variants={varFade().in} />
+        <HeroOverlayStyle alt="" src="/stanza/assets/overlay.svg" variants={varFade().in} />
 
         <Container style={{ marginTop: '6%' }}>
           <ContentStyle>
