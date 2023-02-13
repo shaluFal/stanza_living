@@ -174,16 +174,16 @@ export default function HomeHugePackElements() {
             <Grid item xs={12} md={8}>
               <Grid container spacing={1}>
                 <Grid item xs={12} md={8} lg={6}>
-                  <Image alt="" src={`/images/walls_1.jpg`}  style={{width: "100%"}}/>
+                  <Image alt="" src={`images/walls_1.jpg`}  style={{width: "100%"}}/>
                 </Grid>
                 <Grid item xs={12} md={4} lg={6}>
                   <Grid container spacing={1}>
                     <Grid item >
-                      <Image alt="" src={`/images/walls_2.jpg`}   style={{borderRadius: "10px 10px"}}/>
+                      <Image alt="" src={`images/walls_2.jpg`}   style={{borderRadius: "10px 10px"}}/>
                     </Grid>
 
                     <Grid item >
-                      <Image alt="" src={`/images/walls_3.jpg`} style={{borderRadius: "10px 10px"}} />
+                      <Image alt="" src={`images/walls_3.jpg`} style={{borderRadius: "10px 10px"}} />
                     </Grid>
                   </Grid>
                 </Grid>

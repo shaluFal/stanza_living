@@ -68,7 +68,7 @@ export default function HomeColorPresets() {
               <Image
                 disabledEffect
                 alt="screen"
-                src={`/images/chores.jpg`}
+                src={`images/chores.jpg`}
               />
             </m.div>
           </Box>
@@ -79,7 +79,7 @@ export default function HomeColorPresets() {
                 <Image
                   disabledEffect
                   alt="sidebar"
-                  src={`/images/chores_2.jpg`}
+                  src={`images/chores_2.jpg`}
                 />
               </m.div>
             </m.div>

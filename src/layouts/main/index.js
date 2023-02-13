@@ -27,20 +27,20 @@ export default function MainLayout() {
       ) : (
         <Box
           sx={{
-            py: 2,
+            // py: 1,
             textAlign: 'center',
             position: 'relative',
             bgcolor: 'background.default',
           }}
         >
           <Container>
-            <Logo sx={{ mb: 1, mx: 'auto' }} />
+            {/* <Logo sx={{ mb: 1, mx: 'auto' }} /> */}
 
-            <Typography variant="caption" component="p">
+            {/* <Typography variant="caption" component="p">
               © All rights reserved
               <br /> made by &nbsp;
               <Link href="https://minimals.cc/">minimals.cc</Link>
-            </Typography>
+            </Typography> */}
           </Container>
         </Box>
       )}

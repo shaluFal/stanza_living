@@ -1,10 +1,29 @@
 import { m } from 'framer-motion';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
-import { Box, Container, Typography, Grid, InputAdornment, Card, Button, Divider } from '@mui/material';
+import {
+  Box,
+  Container,
+  Typography,
+  Grid,
+  InputAdornment,
+  Card,
+  Button,
+  Divider,
+  MenuItem,
+  TextField,
+  Select,
+  InputLabel,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  Checkbox,
+} from '@mui/material';
 import axios from 'axios';
 import GoogleMapReact from 'google-map-react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import SearchIcon from '@mui/icons-material/Search';
+import TuneIcon from '@mui/icons-material/Tune';
 import { _appFeatured } from '../../_mock';
 import { TextAnimate, MotionContainer, varFade } from '../../components/animate';
 import InputStyle from '../../components/InputStyle';
@@ -23,7 +42,7 @@ const RootStyle = styled('div')(({ theme }) => ({
     height: 560,
     padding: 0,
   },
-  overflowY: 'scroll',
+  // overflowY: 'scroll',
 }));
 
 const ContentStyle = styled('div')(({ theme }) => ({
@@ -39,6 +58,32 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 export default function ContactHero() {
   const [location, setLocation] = React.useState([]);
+  const [locations, setLocations] = React.useState([]);
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd').then(
+      (response) => {
+        setLocations(response.data?.listOfLocations);
+      }
+    );
+  }, []);
+
+  const [openModal, setOpenModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [open, setOpen] = useState(false);
+  const handleModalClose = () => setShowModal(false);
+  const handleModalShow = () => {
+    setShowModal(true);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const getAllLocations = useCallback(async () => {
     const locationid = window.location.pathname.split('/')[3];
@@ -78,9 +123,9 @@ export default function ContactHero() {
   return (
     <>
       <RootStyle>
-        <Container component={MotionContainer} sx={{ position: 'relative' }}>
+        <Container component={MotionContainer}>
           <ContentStyle>
-            <m.div variants={varFade().inUp}>
+            {/* <m.div variants={varFade().inUp}>
               <InputStyle
                 stretchStart={280}
                 placeholder="Search for your second home..."
@@ -97,9 +142,211 @@ export default function ContactHero() {
                   },
                 }}
               />
+            </m.div> */}
+            <m.div variants={varFade().inUp}>
+              <Grid container sx={{ position: 'absolute', top: '-1%', left: '12%' }}>
+                <Grid item lg={3} md={2} xs={2}>
+                  <FormControl fullWidth>
+                    <InputLabel>Choose property type</InputLabel>
+                    <Select
+                      id="demo-simple-select"
+                      label="choose property type"
+                      onChange={(e) => {
+                        handleModalClose();
+                        navigate(`/contact-us/${e.target.value}/`);
+                      }}
+                      sx={{ background: 'white' }}
+                    >
+                      {locations.map((lt) => {
+                        return <MenuItem value={lt.id}>{lt.value}</MenuItem>;
+                      })}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item lg={2} md={1} xs={1}>
+                  <TextField
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          Find in and around.. &nbsp;
+                          <SearchIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                    variant="outlined"
+                  />
+                </Grid>
+              </Grid>
             </m.div>
             <m.div>
-              <Typography sx={{ marginTop: '5%' }}>Coliving/PG in Hyderabad</Typography>
+              <Typography sx={{ marginTop: '2%' }}>Stanza Living/PG in Hyderabad</Typography>
+
+              <Grid container sx={{ marginTop: '5px' }} spacing={2}>
+                <Grid item lg={1} xs={1} md={1}>
+                  <Card
+                    sx={{
+                      borderRadius: '25px 25px',
+                      padding: '4px',
+                      border: '0.6px solid rgb(190, 190, 190)',
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '10px' }}>
+                      <FormControl fullWidth variant="standard">
+                        <InputLabel>Locality</InputLabel>
+                        <Select label="" disableUnderline>
+                          <MenuItem>Ameerpet</MenuItem>
+                          <MenuItem>Gachibowli</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Typography>
+                  </Card>
+                </Grid>
+                <Grid item lg={1} xs={1} md={1}>
+                  <Card
+                    sx={{
+                      borderRadius: '25px 25px',
+                      padding: '4px',
+                      border: '0.6px solid rgb(190, 190, 190)',
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '10px' }}>
+                      <FormControl fullWidth variant="standard">
+                        <InputLabel>Budget</InputLabel>
+                        <Select label="" disableUnderline>
+                          <MenuItem>Ameerpet</MenuItem>
+                          <MenuItem>Gachibowli</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Typography>
+                  </Card>
+                </Grid>
+                <Grid item lg={1.2} xs={1} md={1}>
+                  <Card
+                    sx={{
+                      borderRadius: '25px 25px',
+                      padding: '4px',
+                      border: '0.6px solid rgb(190, 190, 190)',
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '10px' }}>
+                      <FormControl fullWidth variant="standard">
+                        <InputLabel>Occupancy</InputLabel>
+                        <Select label="" disableUnderline>
+                          <MenuItem>Ameerpet</MenuItem>
+                          <MenuItem>Gachibowli</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Typography>
+                  </Card>
+                </Grid>
+
+                <Grid item lg={1} xs={1} md={1}>
+                  <Card
+                    sx={{
+                      borderRadius: '25px 25px',
+                      padding: '4px',
+                      border: '0.6px solid rgb(190, 190, 190)',
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '10px' }}>
+                      <FormControl fullWidth variant="standard">
+                        <InputLabel>Gender</InputLabel>
+                        <Select label="" disableUnderline>
+                          <MenuItem>Ameerpet</MenuItem>
+                          <MenuItem>Gachibowli</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Typography>
+                  </Card>
+                </Grid>
+
+                <Grid item lg={1} xs={1} md={1}>
+                  <Card
+                    sx={{
+                      borderRadius: '25px 25px',
+                      padding: '4px',
+                      border: '0.6px solid rgb(190, 190, 190)',
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '10px' }}>
+                      <FormControl fullWidth variant="standard">
+                        <InputLabel>Amenities</InputLabel>
+                        <Select label="" disableUnderline>
+                          <MenuItem>Ameerpet</MenuItem>
+                          <MenuItem>Gachibowli</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Typography>
+                  </Card>
+                </Grid>
+
+                <Grid item lg={1.2} xs={1} md={1}>
+                  <Card
+                    sx={{
+                      borderRadius: '25px 25px',
+                      padding: '4px',
+                      border: '0.6px solid rgb(190, 190, 190)',
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '10px' }}>
+                      <FormControl fullWidth variant="standard">
+                        <InputLabel>My Wishlist</InputLabel>
+                        <Select label="" disableUnderline>
+                          <MenuItem>Ameerpet</MenuItem>
+                          <MenuItem>Gachibowli</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Typography>
+                  </Card>
+                </Grid>
+
+                <Grid item lg={1.2} xs={1} md={1}>
+                  <Card
+                    sx={{
+                      borderRadius: '25px 25px',
+                      padding: '4px',
+                      border: '0.6px solid rgb(190, 190, 190)',
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '10px' }}>
+                      <FormControl fullWidth variant="standard">
+                        <InputLabel> More Filters</InputLabel>
+                        <Select label="" disableUnderline>
+                          <MenuItem>Ameerpet</MenuItem>
+                          <MenuItem>Gachibowli</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Typography>
+                  </Card>
+                </Grid>
+
+                <Grid item lg={1.2} xs={1} md={1}>
+                  <Card
+                    sx={{
+                      borderRadius: '25px 25px',
+                      padding: '4px',
+                      border: '0.6px solid rgb(190, 190, 190)',
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '10px' }}>
+                      <FormControl fullWidth variant="standard">
+                        <InputLabel>Popularity</InputLabel>
+                        <Select label="" disableUnderline>
+                          <MenuItem>Price: low to High</MenuItem>
+                          <MenuItem>Price: High to low</MenuItem>
+                          <MenuItem> Popularity</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Typography>
+                  </Card>
+                </Grid>
+              </Grid>
+
+              {/* <h4 style={{marginTop: "2%", height: "100%"}}>&nbsp; | &nbsp;</h4> */}
+            </m.div>
+
+            <m.div>
+              <Typography sx={{ marginTop: '2%' }}>Coliving/PG in Hyderabad</Typography>
             </m.div>
             <m.div>
               <Grid container spacing={2}>
@@ -197,7 +444,7 @@ export default function ContactHero() {
                                         <Typography>Rs {loc.rentMonthly}/mo*</Typography>
                                       </Box>
                                     </Grid>
-                                    <Grid item xs={12} md={4}>
+                                    <Grid item xs={4} md={4}>
                                       <Box sx={{ mb: 4 }}>
                                         <Button
                                           variant="contained"
@@ -210,7 +457,7 @@ export default function ContactHero() {
                                         </Button>
                                       </Box>
                                     </Grid>
-                                    <Grid item xs={12} md={4}>
+                                    <Grid item xs={4} md={4}>
                                       <Box sx={{ mb: 4 }}>
                                         <Button
                                           variant="contained"
@@ -243,188 +490,6 @@ export default function ContactHero() {
                 </Grid>
               </Grid>
             </m.div>
-            {/* <Divider />  */}
-            {/* <TextAnimate text="Where" sx={{ color: 'primary.main' }} variants={varFade().inRight} />
-          <br />
-          <Box sx={{ display: 'inline-flex', color: 'common.white' }}>
-            <TextAnimate text="to" sx={{ mr: 2 }} />
-            <TextAnimate text="find" sx={{ mr: 2 }} />
-            <TextAnimate text="us?" />
-          </Box> */}
-            {/* <Grid container spacing={5} sx={{ mt: 5, color: 'common.white' }}>
-            {CONTACTS.map((contact) => (
-              <Grid key={contact.country} item xs={12} sm={6} md={3} lg={2} sx={{ pr: { md: 5 } }}>
-                <m.div variants={varFade().in}>
-                  <Typography variant="h6" paragraph>
-                    {contact.country}
-                  </Typography>
-                </m.div>
-                <m.div variants={varFade().inRight}>
-                  <Typography variant="body2">
-                    {contact.address}
-                    <br /> {contact.phoneNumber}
-                  </Typography>
-                </m.div>
-              </Grid>
-            ))}
-          </Grid> */}
-            {/* <Slider ref={carouselRef} {...settings}>
-        {list.map((app, index) => (
-          <CarouselItem key={app.id} item={app} isActive={index === currentIndex} index={index+1}/>
-        ))}
-      </Slider> */}
-
-            {/* <Typography> <AppFeatured list={_appFeatured}  /></Typography> */}
-
-            {/* <m.div>
-              <Grid container spacing={4}>
-                <Grid item md={8}>
-                  <Typography>Exeter House</Typography>
-                  <Typography>Exeter House, Unnamed Road, Gachibowli, Hyderabad, Telangana 500075, India</Typography>
-                  
-                  <img src="/images/search_property_1.jpg" alt="" />
-                  <Typography>Starts from</Typography>
-                  <Typography>₹8,499/mo*</Typography>
-                  <Typography>
-                    *Denotes starting price (exclusive of GST) for 7-9 months' stay. Prices may vary with tenure, room
-                    occupancy, and attributes.
-                  </Typography>
-
-                  <Grid container spacing={2}>
-                    <Grid item md={12}>
-                      <Typography>Available occupancies</Typography>
-                    </Grid>
-                    <Grid item md={4}>
-                      <Card
-                        sx={{
-                          borderRadius: '30px 30px',
-                          padding: '6px',
-                          border: '0.6px solid rgb(190, 190, 190)',
-                        }}
-                      >
-                        single
-                      </Card>
-                    </Grid>
-                    <Grid item md={4}>
-                      <Card
-                        sx={{
-                          borderRadius: '30px 30px',
-                          padding: '6px',
-                          border: '0.6px solid rgb(190, 190, 190)',
-                        }}
-                      >
-                        Double
-                      </Card>
-                    </Grid>
-                  </Grid>
-
-                  <Grid container spacing={2}>
-                    <Grid item md={12}>
-                      <Typography>Amenities</Typography>
-                    </Grid>
-                    <Grid item md={4}>
-                      <Card
-                        sx={{
-                          borderRadius: '30px 30px',
-                          padding: '6px',
-                          border: '0.6px solid rgb(190, 190, 190)',
-                        }}
-                      >
-                        Attached Washrooms
-                      </Card>
-                    </Grid>
-                    <Grid item md={4}>
-                      <Card
-                        sx={{
-                          borderRadius: '30px 30px',
-                          padding: '6px',
-                          border: '0.6px solid rgb(190, 190, 190)',
-                        }}
-                      >
-                        Attached Washrooms
-                      </Card>
-                    </Grid>
-                    <Grid item md={4}>
-                      <Card
-                        sx={{
-                          borderRadius: '30px 30px',
-                          padding: '6px',
-                          border: '0.6px solid rgb(190, 190, 190)',
-                        }}
-                      >
-                        Attached Washrooms
-                      </Card>
-                    </Grid>
-                  </Grid>
-
-                  <Grid container spacing={2}>
-                    <Grid item md={12}>
-                      <Typography>Services</Typography>
-                    </Grid>
-                    <Grid item md={4}>
-                      <Card
-                        sx={{
-                          borderRadius: '30px 30px',
-                          padding: '6px',
-                          border: '0.6px solid rgb(190, 190, 190)',
-                        }}
-                      >
-                        Delicious Meals
-                      </Card>
-                    </Grid>
-                    <Grid item md={4}>
-                      <Card
-                        sx={{
-                          borderRadius: '30px 30px',
-                          padding: '6px',
-                          border: '0.6px solid rgb(190, 190, 190)',
-                        }}
-                      >
-                        Workout Zone
-                      </Card>
-                    </Grid>
-                    <Grid item md={4}>
-                      <Card
-                        sx={{
-                          borderRadius: '30px 30px',
-                          padding: '6px',
-                          border: '0.6px solid rgb(190, 190, 190)',
-                        }}
-                      >
-                        Hot Water Supply
-                      </Card>
-                    </Grid>
-                  </Grid>
-
-                  <Grid container spacing={2}>
-                    <Grid item md={12}>
-                      <Typography>Food Menu</Typography>
-                    </Grid>
-
-                    <Grid item md={3}>
-                      <Typography>
-                        Days
-                        <br />
-                        Mon-Sun
-                      </Typography>
-                    </Grid>
-                    <Grid item md={3}>
-                      <Typography>Breakfast</Typography>
-                    </Grid>
-
-                    <Grid item md={3}>
-                      <Typography>Lunch</Typography>
-                    </Grid>
-                    <Grid item md={3}>
-                      <Typography>Dinner</Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
-                <Grid item md={4}>
-                  <Typography>Show on map</Typography>
-                </Grid>
-              </Grid>
-            </m.div> */}
           </ContentStyle>
         </Container>
       </RootStyle>

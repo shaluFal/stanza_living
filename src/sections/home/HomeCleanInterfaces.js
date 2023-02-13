@@ -68,13 +68,13 @@ export default function HomeCleanInterfaces() {
               Instead, bring along a big appetite for healthy, yummy meals. With flavours that have a local touch. And
               that, at the same time, take your taste buds on a journey back home.
             </Typography>
-            <Image alt="" src={`/images/pgfood_3.jpg`} sx={{ width: '95%', marginTop: '5%', marginLeft: '5%' }} />
+            <Image alt="" src={`images/pgfood_3.jpg`} sx={{ width: '95%', marginTop: '5%', marginLeft: '5%' }} />
           </m.div>
         </ContentStyle>
 
         <Box sx={{ position: 'relative', left: '55%' }}>
-          <Image alt="" src={`/images/pgfood_1.jpg`} sx={{ width: '25%' }} />
-          <Image alt="" src={`/images/pgfood_2.jpg`} sx={{ width: '35%', marginTop: '2%' }} />
+          <Image alt="" src={`images/pgfood_1.jpg`} sx={{ width: '25%' }} />
+          <Image alt="" src={`images/pgfood_2.jpg`} sx={{ width: '35%', marginTop: '2%' }} />
         </Box>
       </Container>
     </RootStyle>

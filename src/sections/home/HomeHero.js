@@ -1,13 +1,32 @@
+import { useEffect, useState } from 'react';
 import { m } from 'framer-motion';
-import { Link as RouterLink, Navigate } from 'react-router-dom';
+import { Link as RouterLink, Navigate, useNavigate } from 'react-router-dom';
 // @mui
 import { styled } from '@mui/material/styles';
-import { Button, Box, Link, Container, Typography, Stack, InputAdornment, Grid, Card, Divider, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import {
+  Button,
+  Box,
+  Link,
+  Container,
+  Typography,
+  Stack,
+  InputAdornment,
+  Grid,
+  Card,
+  Divider,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  TextField,
+} from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import BedIcon from '@mui/icons-material/Bed';
+import SearchIcon from '@mui/icons-material/Search';
 import { _appFeatured } from '../../_mock';
+import API from '../../Helper/api';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // components
@@ -76,28 +95,35 @@ const HeroOverlayStyle = styled(m.img)({
 // ----------------------------------------------------------------------
 
 export default function HomeHero() {
+  const [locations, setLocation] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
-  // const [locations, setLocation] = React.useState([]);
-
-  // React.useEffect(() => {
-  //   API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd').then(
-  //     (response) => {
-  //       setLocation(response.data?.listOfLocations);
-  //     }
-  //   );
-  // }, []);
+  useEffect(() => {
+    API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd').then(
+      (response) => {
+        setLocation(response.data?.listOfLocations);
+      }
+    );
+  }, []);
+  const handleModalClose = () => setShowModal(false);
+  const handleModalShow = () => {
+    setShowModal(true);
+  };
 
   return (
     <MotionContainer>
       <RootStyle>
-        <HeroOverlayStyle alt="" src="/assets/overlay.svg" variants={varFade().in} />
+        <HeroOverlayStyle alt="" src="assets/overlay.svg" variants={varFade().in} />
 
         <Container>
           <ContentStyle>
             <m.div>
               <Grid container spacing={2}>
                 <Grid item xs={12} md={8} lg={8}>
-                  <AppFeatured list={_appFeatured} sx={{ marginBottom: '2%' }} />
+                  <AppFeatured list={_appFeatured} sx={{ marginBottom: '2%', position: 'relative', top: 0 }} />
                 </Grid>
                 <Grid item xs={12} md={4} lg={4}>
                   <Grid container spacing={5}>
@@ -107,7 +133,7 @@ export default function HomeHero() {
                           Modern Student
                           <br /> Housing
                         </Typography>
-                        <img src="/images/modern_1.jpg" alt="" style={{ width: 'initial', height: '112%' }} />
+                        <img src="images/modern_1.jpg" alt="" style={{ width: 'initial', height: '112%' }} />
                         <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
                       </Card>
                     </Grid>
@@ -117,7 +143,7 @@ export default function HomeHero() {
                         <Typography sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700' }}>
                           Co-living <br /> Professionals
                         </Typography>
-                        <img src="/images/modern_2.jpg" alt="" style={{ width: 'initial', height: '112%' }} />
+                        <img src="images/modern_2.jpg" alt="" style={{ width: 'initial', height: '112%' }} />
                         <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
                       </Card>
                     </Grid>
@@ -127,7 +153,7 @@ export default function HomeHero() {
                         <Typography sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700' }}>
                           Managed <br /> Apartments
                         </Typography>
-                        <img src="/images/modern_3.jpg" alt="" style={{ width: 'initial', height: '114%' }} />
+                        <img src="images/modern_3.jpg" alt="" style={{ width: 'initial', height: '114%' }} />
                         <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
                       </Card>
                     </Grid>
@@ -137,43 +163,43 @@ export default function HomeHero() {
             </m.div>
 
             <m.div variants={varFade().inUp}>
-              <InputStyle
-                stretchStart={400}
-                placeholder="Search for your second home..."
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Iconify icon={'eva:search-fill'} sx={{ color: 'text.disabled', width: 30, height: 20 }} />
-                    </InputAdornment>
-                  ),
-                }}
-                sx={{
-                  position: 'absolute',
-                  top: {lg: '60%', md: '20%', xs: '20%'},
-                  right: {xs: '0', md: '0', lg: '60%'},
-                  marginLeft: '2%',
-                  borderRadius: '20px 20px 20px 20px',
-                  backgroundColor: 'white',
-                   display: "inline"
-                }}
-              />
-
-              {/* <FormControl fullWidth >
-                <InputLabel id="demo-simple-select-label">Choose Property Type</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  label="choose property type"
-                  onChange={(e) => {
-                    handleModalClose();
-                    Navigate(`/contact-us/${e.target.value}/`);
-                  }}
-                >
-                  {locations.map((lt) => {
-                    return <MenuItem value={lt.id}>{lt.value}</MenuItem>;
-                  })}
-                </Select>
-              </FormControl> */}
+              <Grid
+                container
+                sx={{ position: 'absolute', top: { lg: '60%', xs: '15%', md: '40%' }, paddingLeft: '2%' }}
+              >
+                <Grid item lg={3} xs={2}>
+                  <FormControl fullWidth>
+                    <InputLabel>Choose property type</InputLabel>
+                    <Select
+                      id="demo-simple-select"
+                      label="choose property type"
+                      onChange={(e) => {
+                        handleModalClose();
+                        navigate(`/contact-us/${e.target.value}/`);
+                      }}
+                      sx={{ background: 'white' }}
+                    >
+                      {locations.map((lt) => {
+                        return <MenuItem value={lt.id}>{lt.value}</MenuItem>;
+                      })}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item lg={2} xs={1} md={1}>
+                  <TextField
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          Find in and around.. &nbsp;
+                          <SearchIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                    variant="outlined"
+                    sx={{ background: 'white', borderRadius: '10px 10px' }}
+                  />
+                </Grid>
+              </Grid>
             </m.div>
 
             <m.div>

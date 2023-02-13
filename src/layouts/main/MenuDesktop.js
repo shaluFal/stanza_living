@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Modal from '@mui/material/Modal';
 import { m } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
-import { NavLink as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, NavLink as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 
 // @mui
 import { styled } from '@mui/material/styles';
@@ -23,7 +23,11 @@ import {
   Select,
   MenuItem,
   Typography,
+  Card,
+  InputAdornment,
+  TextField,
 } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import API from '../../Helper/api';
 // components
@@ -307,7 +311,7 @@ function MenuDesktopItem({
         {title}
       </LinkStyle>
 
-      <Popover
+      {/* <Popover
         open={showModal}
         anchorReference="anchorPosition"
         anchorPosition={{ top: 70, left: 0 }}
@@ -344,7 +348,84 @@ function MenuDesktopItem({
             })}
           </Select>
         </FormControl>
-      </Popover>
+      </Popover> */}
+
+      <Modal
+        open={showModal}
+        onClose={handleModalClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Card sx={{ width: '30%', height: '25%', marginTop: '2%', marginLeft: '40%', padding: '1%' }}>
+          <Grid container>
+            <Grid item lg={6} md={2} xs={2}>
+              <FormControl fullWidth>
+                <InputLabel>Choose property type</InputLabel>
+                <Select
+                  id="demo-simple-select"
+                  label="choose property type"
+                  onChange={(e) => {
+                    handleModalClose();
+                    navigate(`/contact-us/${e.target.value}/`);
+                  }}
+                  sx={{ background: 'white' }}
+                >
+                  {locations.map((lt) => {
+                    return <MenuItem value={lt.id}>{lt.value}</MenuItem>;
+                  })}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item lg={6} md={1} xs={1}>
+              <TextField
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      Find in and around.. &nbsp;
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                }}
+                variant="outlined"
+              />
+            </Grid>
+          </Grid>
+          <h5 style={{ marginTop: '4%' }}>Popular Cities</h5>
+
+          <Grid container sx={{ marginTop: '3%' }}>
+            {locations.map((lt) => {
+              return (
+                <>
+                  <Grid item xs={3} md={3} lg={3} sx={{display:"flex", flexDirection:"column", alignItems:"center", cursor:"pointer"}} onClick={()=>{
+                    handleModalClose();
+                    navigate(`/contact-us/${lt.id}/`);
+                  }}>
+                    <LocationCityIcon sx={{ fontSize: '3rem', marginLeft: '8%' }} />
+                    <Typography>{lt.value}</Typography>
+                  </Grid>
+                </>
+              );
+            })}
+
+            {/* <Grid item xs={3} md={3} lg={3}>
+              <LocationCityIcon sx={{ fontSize: '3rem', marginLeft: "8%" }} />
+              <Typography>Ameerpet</Typography>
+            </Grid>
+            <Grid item xs={3} md={3} lg={3}>
+              <LocationCityIcon sx={{ fontSize: '3rem', marginLeft: "8%" }} />
+              <Typography>Dilshuknagar</Typography>
+            </Grid>
+            <Grid item xs={3} md={3} lg={3}>
+              <LocationCityIcon sx={{ fontSize: '3rem', marginLeft: "8%" }} />
+              <Typography>Hitech City</Typography>
+            </Grid>
+            <Grid item xs={3} md={3} lg={3}>
+              <LocationCityIcon sx={{ fontSize: '3rem', marginLeft: "8%" }} />
+              <Typography>Madhapur</Typography>
+            </Grid> */}
+          </Grid>
+        </Card>
+      </Modal>
     </>
   );
 }
