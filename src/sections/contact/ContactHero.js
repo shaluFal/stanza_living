@@ -18,6 +18,7 @@ import {
   FormControlLabel,
   FormGroup,
   Checkbox,
+  FormHelperText,
 } from '@mui/material';
 import axios from 'axios';
 import GoogleMapReact from 'google-map-react';
@@ -42,7 +43,7 @@ const RootStyle = styled('div')(({ theme }) => ({
     height: 560,
     padding: 0,
   },
-  // overflowY: 'scroll',
+  overflowY: 'scroll',
 }));
 
 const ContentStyle = styled('div')(({ theme }) => ({
@@ -122,70 +123,56 @@ export default function ContactHero() {
 
   return (
     <>
-      <RootStyle>
-        <Container component={MotionContainer}>
-          <ContentStyle>
-            {/* <m.div variants={varFade().inUp}>
-              <InputStyle
-                stretchStart={280}
-                placeholder="Search for your second home..."
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Iconify icon={'eva:search-fill'} sx={{ color: 'text.disabled' }} />
-                    </InputAdornment>
-                  ),
-                }}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    color: 'common.white',
-                  },
-                }}
-              />
-            </m.div> */}
-            <m.div variants={varFade().inUp}>
-              <Grid container sx={{ position: 'absolute', top: '-1%', left: '12%' }}>
-                <Grid item lg={3} md={2} xs={2}>
-                  <FormControl fullWidth>
-                    <InputLabel>Choose property type</InputLabel>
-                    <Select
-                      id="demo-simple-select"
-                      label="choose property type"
-                      onChange={(e) => {
-                        handleModalClose();
-                        navigate(`/contact-us/${e.target.value}/`);
-                      }}
-                      sx={{ background: 'white' }}
-                    >
-                      {locations.map((lt) => {
-                        return <MenuItem value={lt.id}>{lt.value}</MenuItem>;
-                      })}
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item lg={2} md={1} xs={1}>
-                  <TextField
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          Find in and around.. &nbsp;
-                          <SearchIcon />
-                        </InputAdornment>
-                      ),
+      <Grid
+        container
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <Grid item md={8}>
+          <m.div variants={varFade().inUp}>
+            <Grid container sx={{ marginTop: '10px' }}>
+              <Grid item lg={3} md={2} xs={2}>
+                <FormControl fullWidth>
+                  <InputLabel>Choose property type</InputLabel>
+                  <Select
+                    id="demo-simple-select"
+                    label="choose property type"
+                    onChange={(e) => {
+                      handleModalClose();
+                      navigate(`/contact-us/${e.target.value}/`);
                     }}
-                    variant="outlined"
-                  />
-                </Grid>
+                    sx={{ background: 'white' }}
+                  >
+                    {locations.map((lt) => {
+                      return <MenuItem value={lt.id}>{lt.value}</MenuItem>;
+                    })}
+                  </Select>
+                </FormControl>
               </Grid>
-            </m.div>
-            <m.div>
-              <Typography sx={{ marginTop: '2%' }}>Stanza Living/PG in Hyderabad</Typography>
-
-              <Grid container sx={{ marginTop: '5px' }} spacing={2}>
-                <Grid item lg={1} xs={1} md={1}>
-                  <Card
+              <Grid item lg={2} md={1} xs={1}>
+                <TextField
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        Find in and around.. &nbsp;
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                  variant="outlined"
+                />
+              </Grid>
+            </Grid>
+          </m.div>
+          <m.div>
+            <Typography sx={{ marginTop: '2%' }}>Stanza Living/PG in Hyderabad</Typography>
+            <Grid container sx={{ marginTop: '5px' }} spacing={2} gap={'40px'}>
+              <Grid item lg={1} xs={1} md={1}>
+                {/* <Card
                     sx={{
-                      borderRadius: '25px 25px',
+                      // borderRadius: '25px 25px',
                       padding: '4px',
                       border: '0.6px solid rgb(190, 190, 190)',
                     }}
@@ -199,10 +186,24 @@ export default function ContactHero() {
                         </Select>
                       </FormControl>
                     </Typography>
-                  </Card>
-                </Grid>
-                <Grid item lg={1} xs={1} md={1}>
-                  <Card
+                  </Card> */}
+                <FormControl sx={{ m: 1, minWidth: 120 }}>
+                  <Select
+                    value={''}
+                    // onChange={handleChange}
+                    displayEmpty
+                    inputProps={{ 'aria-label': 'Without label' }}
+                  >
+                    <MenuItem value="">
+                      <em>Locality</em>
+                    </MenuItem>
+                    <MenuItem>Ameerpet</MenuItem>
+                    <MenuItem>Gachibowli</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item lg={1} xs={1} md={1}>
+                {/* <Card
                     sx={{
                       borderRadius: '25px 25px',
                       padding: '4px',
@@ -218,10 +219,24 @@ export default function ContactHero() {
                         </Select>
                       </FormControl>
                     </Typography>
-                  </Card>
-                </Grid>
-                <Grid item lg={1.2} xs={1} md={1}>
-                  <Card
+                  </Card> */}
+                <FormControl sx={{ m: 1, minWidth: 120 }}>
+                  <Select
+                    value={''}
+                    // onChange={handleChange}
+                    displayEmpty
+                    inputProps={{ 'aria-label': 'Without label' }}
+                  >
+                    <MenuItem value="">
+                      <em>Budget</em>
+                    </MenuItem>
+                    <MenuItem>Ameerpet</MenuItem>
+                    <MenuItem>Gachibowli</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item lg={1} xs={1} md={1}>
+                {/* <Card
                     sx={{
                       borderRadius: '25px 25px',
                       padding: '4px',
@@ -237,11 +252,25 @@ export default function ContactHero() {
                         </Select>
                       </FormControl>
                     </Typography>
-                  </Card>
-                </Grid>
+                  </Card> */}
+                <FormControl sx={{ m: 1, minWidth: 120 }}>
+                  <Select
+                    value={''}
+                    // onChange={handleChange}
+                    displayEmpty
+                    inputProps={{ 'aria-label': 'Without label' }}
+                  >
+                    <MenuItem value="">
+                      <em>Occupancy</em>
+                    </MenuItem>
+                    <MenuItem>Ameerpet</MenuItem>
+                    <MenuItem>Gachibowli</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
 
-                <Grid item lg={1} xs={1} md={1}>
-                  <Card
+              <Grid item lg={1} xs={1} md={1}>
+                {/* <Card
                     sx={{
                       borderRadius: '25px 25px',
                       padding: '4px',
@@ -257,11 +286,25 @@ export default function ContactHero() {
                         </Select>
                       </FormControl>
                     </Typography>
-                  </Card>
-                </Grid>
+                  </Card> */}
+                <FormControl sx={{ m: 1, minWidth: 120 }}>
+                  <Select
+                    value={''}
+                    // onChange={handleChange}
+                    displayEmpty
+                    inputProps={{ 'aria-label': 'Without label' }}
+                  >
+                    <MenuItem value="">
+                      <em>Gender</em>
+                    </MenuItem>
+                    <MenuItem>Ameerpet</MenuItem>
+                    <MenuItem>Gachibowli</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
 
-                <Grid item lg={1} xs={1} md={1}>
-                  <Card
+              <Grid item lg={1} xs={1} md={1}>
+                {/* <Card
                     sx={{
                       borderRadius: '25px 25px',
                       padding: '4px',
@@ -277,11 +320,26 @@ export default function ContactHero() {
                         </Select>
                       </FormControl>
                     </Typography>
-                  </Card>
-                </Grid>
+                  </Card> */}
 
-                <Grid item lg={1.2} xs={1} md={1}>
-                  <Card
+                <FormControl sx={{ m: 1, minWidth: 120 }}>
+                  <Select
+                    value={''}
+                    // onChange={handleChange}
+                    displayEmpty
+                    inputProps={{ 'aria-label': 'Without label' }}
+                  >
+                    <MenuItem value="">
+                      <em>Amenities</em>
+                    </MenuItem>
+                    <MenuItem>Ameerpet</MenuItem>
+                    <MenuItem>Gachibowli</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+
+              <Grid item lg={1} xs={1} md={1}>
+                {/* <Card
                     sx={{
                       borderRadius: '25px 25px',
                       padding: '4px',
@@ -297,11 +355,26 @@ export default function ContactHero() {
                         </Select>
                       </FormControl>
                     </Typography>
-                  </Card>
-                </Grid>
+                  </Card> */}
 
-                <Grid item lg={1.2} xs={1} md={1}>
-                  <Card
+                <FormControl sx={{ m: 1, minWidth: 120 }}>
+                  <Select
+                    value={''}
+                    // onChange={handleChange}
+                    displayEmpty
+                    inputProps={{ 'aria-label': 'Without label' }}
+                  >
+                    <MenuItem value="">
+                      <em>My Wishlist</em>
+                    </MenuItem>
+                    <MenuItem>Ameerpet</MenuItem>
+                    <MenuItem>Gachibowli</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+
+              <Grid item lg={1} xs={1} md={1}>
+                {/* <Card
                     sx={{
                       borderRadius: '25px 25px',
                       padding: '4px',
@@ -317,11 +390,26 @@ export default function ContactHero() {
                         </Select>
                       </FormControl>
                     </Typography>
-                  </Card>
-                </Grid>
+                  </Card> */}
 
-                <Grid item lg={1.2} xs={1} md={1}>
-                  <Card
+                <FormControl sx={{ m: 1, minWidth: 120 }}>
+                  <Select
+                    value={''}
+                    // onChange={handleChange}
+                    displayEmpty
+                    inputProps={{ 'aria-label': 'Without label' }}
+                  >
+                    <MenuItem value="">
+                      <em>More Filters</em>
+                    </MenuItem>
+                    <MenuItem>Ameerpet</MenuItem>
+                    <MenuItem>Gachibowli</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+
+              <Grid item lg={1} xs={1} md={1}>
+                {/* <Card
                     sx={{
                       borderRadius: '25px 25px',
                       padding: '4px',
@@ -338,31 +426,46 @@ export default function ContactHero() {
                         </Select>
                       </FormControl>
                     </Typography>
-                  </Card>
-                </Grid>
+                  </Card> */}
+
+                <FormControl sx={{ m: 1, minWidth: 120 }}>
+                  <Select
+                    value={''}
+                    // onChange={handleChange}
+                    displayEmpty
+                    inputProps={{ 'aria-label': 'Without label' }}
+                  >
+                    <MenuItem value="">
+                      <em>Popularity</em>
+                    </MenuItem>
+                    <MenuItem>Ameerpet</MenuItem>
+                    <MenuItem>Gachibowli</MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
+            </Grid>
 
-              {/* <h4 style={{marginTop: "2%", height: "100%"}}>&nbsp; | &nbsp;</h4> */}
-            </m.div>
+            {/* <h4 style={{marginTop: "2%", height: "100%"}}>&nbsp; | &nbsp;</h4> */}
+          </m.div>
 
-            <m.div>
-              <Typography sx={{ marginTop: '2%' }}>Coliving/PG in Hyderabad</Typography>
-            </m.div>
-            <m.div>
-              <Grid container spacing={2}>
-                <Grid item md={8}>
-                  <Typography sx={{ marginTop: '2%', fontWeight: '700', marginBottom: '5%' }}>
-                    143 PGs waiting to be yours in Hyderabad
-                  </Typography>
+          <m.div>
+            <Typography sx={{ marginTop: '2%' }}>Coliving/PG in Hyderabad</Typography>
+          </m.div>
+          <m.div>
+            <Grid container spacing={2}>
+              <Grid item md={8}>
+                <Typography sx={{ marginTop: '2%', fontWeight: '700', marginBottom: '5%' }}>
+                  143 PGs waiting to be yours in Hyderabad
+                </Typography>
 
-                  {location &&
-                    location.map((loc) => {
-                      return (
-                        <div key={loc.facilityCode}>
-                          <Card sx={{ padding: '3%', marginBottom: '4%', textDecoration: 'none' }}>
-                            <Grid container spacing={2}>
-                              <Grid item xs={12} md={4}>
-                                {/* {loc.listOfFacilityImages &&
+                {location &&
+                  location.map((loc) => {
+                    return (
+                      <div key={loc.facilityCode}>
+                        <Card sx={{ padding: '3%', marginBottom: '4%', textDecoration: 'none' }}>
+                          <Grid container spacing={2}>
+                            <Grid item xs={12} md={4}>
+                              {/* {loc.listOfFacilityImages &&
                                   loc.listOfFacilityImages.map((fc, index) => {
                                     return (
                                       <div key={index}>
@@ -370,129 +473,128 @@ export default function ContactHero() {
                                       </div>
                                     );
                                   })} */}
-                                {loc.listOfFacilityImages?.length > 0 ? (
-                                  <img
-                                    src={loc.listOfFacilityImages[0]?.photoURL}
-                                    alt=""
-                                    style={{ width: '120%', height: '100%' }}
-                                  />
-                                ) : (
-                                  <img src={''} alt="" style={{ width: '120%', height: '100%' }} />
-                                )}
-                              </Grid>
-                              <Grid item xs={12} md={8}>
-                                <Box>
-                                  <Typography variant="subtitle1">
-                                    <Link
-                                      to={`/search-property-detail/${loc.facilityCode}`}
-                                      style={{ textDecoration: 'none', color: '#000' }}
-                                    >
-                                      {console.log(loc.facility)}
-                                      {loc.facilityName}
-                                    </Link>
-                                  </Typography>
-                                  <Typography>
-                                    {/* {location.listOfLocations &&
+                              {loc.listOfFacilityImages?.length > 0 ? (
+                                <img
+                                  src={loc.listOfFacilityImages[0]?.photoURL}
+                                  alt=""
+                                  style={{ width: '120%', height: '100%' }}
+                                />
+                              ) : (
+                                <img src={''} alt="" style={{ width: '120%', height: '100%' }} />
+                              )}
+                            </Grid>
+                            <Grid item xs={12} md={8}>
+                              <Box>
+                                <Typography variant="subtitle1">
+                                  <Link
+                                    to={`/search-property-detail/${loc.facilityCode}`}
+                                    style={{ textDecoration: 'none', color: '#000' }}
+                                  >
+                                    {console.log(loc.facility)}
+                                    {loc.facilityName}
+                                  </Link>
+                                </Typography>
+                                <Typography>
+                                  {/* {location.listOfLocations &&
                                           location.listOfLocations.map((loc) => {
                                             return <div key={loc.id}>{loc.value}</div>;
                                           })} */}
-                                    {/* {loc.value} */}
-                                  </Typography>
+                                  {/* {loc.value} */}
+                                </Typography>
 
-                                  <Grid container sx={{ marginTop: '2%' }}>
-                                    <Grid item xs={12} md={8}>
-                                      {/* Unisex | Double, Triple */}
-                                      {loc.listOfUnitTypes &&
-                                        loc.listOfUnitTypes.map((typ) => {
-                                          return <div key={typ.facilityCode}>{typ.unitType} &nbsp;</div>;
-                                        })}
-                                    </Grid>
-                                    <Grid item xs={12} md={4}>
-                                      <Typography>View Directions</Typography>
-                                    </Grid>
-                                  </Grid>
-
-                                  <Grid container sx={{ marginTop: '2%' }} spacing={1}>
-                                    <Grid item md={12}>
-                                      <Typography>Amenities</Typography>
-                                    </Grid>
-
-                                    {loc.facilityAmenities?.length > 0 &&
-                                      loc.facilityAmenities[0].amenityNames?.split(',').map((amn) => {
-                                        return (
-                                          <div key={amn.facilityCode}>
-                                            <Grid item>
-                                              <Card
-                                                sx={{
-                                                  borderRadius: '30px 30px',
-                                                  padding: '6px',
-                                                  border: '0.6px solid rgb(190, 190, 190)',
-                                                }}
-                                              >
-                                                <Typography sx={{ fontSize: '12px' }}>{amn}</Typography>
-                                              </Card>
-                                            </Grid>
-                                          </div>
-                                        );
+                                <Grid container sx={{ marginTop: '2%' }}>
+                                  <Grid item xs={12} md={8}>
+                                    {/* Unisex | Double, Triple */}
+                                    {loc.listOfUnitTypes &&
+                                      loc.listOfUnitTypes.map((typ) => {
+                                        return <div key={typ.facilityCode}>{typ.unitType} &nbsp;</div>;
                                       })}
                                   </Grid>
-
-                                  <Grid container spacing={1} sx={{ marginTop: '4%' }}>
-                                    <Grid item xs={12} md={4}>
-                                      <Box sx={{ mb: 5 }}>
-                                        <Typography variant="subtitle1">Starts from</Typography>
-                                        <Typography>Rs {loc.rentMonthly}/mo*</Typography>
-                                      </Box>
-                                    </Grid>
-                                    <Grid item xs={4} md={4}>
-                                      <Box sx={{ mb: 4 }}>
-                                        <Button
-                                          variant="contained"
-                                          target="_blank"
-                                          rel="noopener"
-                                          href=""
-                                          style={{ fontSize: '12px', padding: '10px' }}
-                                        >
-                                          Schedule a visit
-                                        </Button>
-                                      </Box>
-                                    </Grid>
-                                    <Grid item xs={4} md={4}>
-                                      <Box sx={{ mb: 4 }}>
-                                        <Button
-                                          variant="contained"
-                                          target="_blank"
-                                          rel="noopener"
-                                          href=""
-                                          style={{ fontSize: '12px', padding: '10px' }}
-                                        >
-                                          Unlock discount
-                                        </Button>
-                                      </Box>
-                                    </Grid>
+                                  <Grid item xs={12} md={4}>
+                                    <Typography>View Directions</Typography>
                                   </Grid>
-                                </Box>
-                              </Grid>
+                                </Grid>
+
+                                <Grid container sx={{ marginTop: '2%' }} spacing={1}>
+                                  <Grid item md={12}>
+                                    <Typography>Amenities</Typography>
+                                  </Grid>
+
+                                  {loc.facilityAmenities?.length > 0 &&
+                                    loc.facilityAmenities[0].amenityNames?.split(',').map((amn) => {
+                                      return (
+                                        <div key={amn.facilityCode}>
+                                          <Grid item>
+                                            <Card
+                                              sx={{
+                                                borderRadius: '30px 30px',
+                                                padding: '6px',
+                                                border: '0.6px solid rgb(190, 190, 190)',
+                                              }}
+                                            >
+                                              <Typography sx={{ fontSize: '12px' }}>{amn}</Typography>
+                                            </Card>
+                                          </Grid>
+                                        </div>
+                                      );
+                                    })}
+                                </Grid>
+
+                                <Grid container spacing={1} sx={{ marginTop: '4%' }}>
+                                  <Grid item xs={12} md={4}>
+                                    <Box sx={{ mb: 5 }}>
+                                      <Typography variant="subtitle1">Starts from</Typography>
+                                      <Typography>Rs {loc.rentMonthly}/mo*</Typography>
+                                    </Box>
+                                  </Grid>
+                                  <Grid item xs={4} md={4}>
+                                    <Box sx={{ mb: 4 }}>
+                                      <Button
+                                        variant="contained"
+                                        target="_blank"
+                                        rel="noopener"
+                                        href=""
+                                        style={{ fontSize: '12px', padding: '10px' }}
+                                      >
+                                        Schedule a visit
+                                      </Button>
+                                    </Box>
+                                  </Grid>
+                                  <Grid item xs={4} md={4}>
+                                    <Box sx={{ mb: 4 }}>
+                                      <Button
+                                        variant="contained"
+                                        target="_blank"
+                                        rel="noopener"
+                                        href=""
+                                        style={{ fontSize: '12px', padding: '10px' }}
+                                      >
+                                        Unlock discount
+                                      </Button>
+                                    </Box>
+                                  </Grid>
+                                </Grid>
+                              </Box>
                             </Grid>
-                          </Card>
-                        </div>
-                      );
-                    })}
-                </Grid>
-                <Grid item md={4} style={{ height: '100vh', width: '100%', marginTop: '6.5%' }}>
-                  <GoogleMapReact
-                    bootstrapURLKeys={{ key: '' }}
-                    defaultCenter={defaultProps.center}
-                    defaultZoom={defaultProps.zoom}
-                  >
-                    <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" />
-                  </GoogleMapReact>
-                </Grid>
+                          </Grid>
+                        </Card>
+                      </div>
+                    );
+                  })}
               </Grid>
-            </m.div>
-          </ContentStyle>
-        </Container>
-      </RootStyle>
+              <Grid item md={4} style={{ height: '100vh', width: '100%', marginTop: '6.5%' }}>
+                <GoogleMapReact
+                  bootstrapURLKeys={{ key: '' }}
+                  defaultCenter={defaultProps.center}
+                  defaultZoom={defaultProps.zoom}
+                >
+                  <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" />
+                </GoogleMapReact>
+              </Grid>
+            </Grid>
+          </m.div>
+        </Grid>
+      </Grid>
     </>
   );
 }
