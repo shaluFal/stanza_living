@@ -14,7 +14,7 @@ export const _carouselsMembers = [...Array(5)].map((_, index) => ({
   id: _mock.id(index),
   name: _mock.name.fullName(index),
   role: _mock.role(index),
-  avatar: `/images/spotlight_${index + 1}.jpg`,
+  avatar: `images/spotlight_${index + 1}.jpg`,
 }));
 
 // ----------------------------------------------------------------------

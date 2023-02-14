@@ -116,7 +116,7 @@ export default function HomeHero() {
   return (
     <MotionContainer>
       <RootStyle>
-        <HeroOverlayStyle alt="" src="assets/overlay.svg" variants={varFade().in} />
+        <HeroOverlayStyle alt="" src="/stanza/assets/overlay.svg" variants={varFade().in} />
 
         <Container>
           <ContentStyle>
