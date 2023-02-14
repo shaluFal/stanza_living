@@ -128,14 +128,14 @@ function CarouselItem({ item, isActive,index }) {
 
         <m.div variants={varFade().inRight}>
           <Link color="inherit" underline="none">
-            <Typography  gutterBottom noWrap sx={{fontWeight: '900', fontSize: "26px"}}>
-              {title}
+            <Typography gutterBottom noWrap sx={{fontWeight: '900', fontSize: {lg: "26px", xs: "12px", md: "26px"}, marginTop: {xs: "10px"}, right: {xs: '5px'}}}>
+              {title} 
             </Typography>
           </Link>
         </m.div>
 
         <m.div variants={varFade().inRight}>
-          <Typography variant="body2" noWrap sx={{fontSize: "14px"}}>
+          <Typography variant="body2" noWrap sx={{fontSize: {lg: "14px", xs: "9px", md: "14px"}}}>
             {description}
           </Typography>
         </m.div>
@@ -143,7 +143,7 @@ function CarouselItem({ item, isActive,index }) {
 
       <OverlayStyle />
 
-      <Image alt={title} src={`images/feed_${index}.jpg`} sx={{ height: { xs: 300, md: 500, lg: 550 }, width: {xs: 300, md: 500, lg: 550}, textAlign: 'left' }} />
+      <Image alt={title} src={`images/feed_${index}.jpg`} sx={{ height: { xs: 300, md: 480, lg: 600 }, width: {xs: 300, md: 500, lg: 600}, textAlign: 'left' }} />
     </Box>
   );
 }

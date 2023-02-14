@@ -98,7 +98,7 @@ export default function MainHeader() {
             </Button>
           )}
 
-          {!isDesktop && <MenuMobile isOffset={isOffset} isHome={isHome} navConfig={navConfig} />}
+          {/* {!isDesktop && <MenuMobile isOffset={isOffset} isHome={isHome} navConfig={navConfig} />} */}
         </Container>
       </ToolbarStyle>
 

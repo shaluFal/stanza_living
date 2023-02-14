@@ -356,19 +356,30 @@ function MenuDesktopItem({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Card sx={{ width: '30%', height: '25%', marginTop: '2%', marginLeft: '40%', padding: '1%' }}>
-          <Grid container>
-            <Grid item lg={6} md={2} xs={2}>
+        <Card
+          sx={{ width: '30%', height: { lg: '25%', xs: '20%' }, marginTop: '2%', marginLeft: '40%', padding: '1%' }}
+        >
+          <Grid
+            container
+            sx={{
+              borderRadius: '10px 0px 0px 10px',
+            }}
+          >
+            <Grid item lg={6} xs={4}>
               <FormControl fullWidth>
-                <InputLabel>Choose property type</InputLabel>
+                <InputLabel style={{ borderRadius: '10px 0px 0px 10px' }}>Choose property type</InputLabel>
                 <Select
                   id="demo-simple-select"
                   label="choose property type"
+                  // inputProps={{
+                  //   borderRadius: "10px 0px 0px 10px"
+                  // }}
+
                   onChange={(e) => {
                     handleModalClose();
                     navigate(`/contact-us/${e.target.value}/`);
                   }}
-                  sx={{ background: 'white' }}
+                  sx={{ background: 'white', borderRadius: '10px 0px 0px 10px' }}
                 >
                   {locations.map((lt) => {
                     return <MenuItem value={lt.id}>{lt.value}</MenuItem>;
@@ -376,53 +387,43 @@ function MenuDesktopItem({
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item lg={6} md={1} xs={1}>
+            <Grid item lg={6} xs={1} md={4} sx={{ borderRadius: '0px 10px 10px 0px' }}>
               <TextField
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      Find in and around.. &nbsp;
-                      <SearchIcon />
-                    </InputAdornment>
-                  ),
-                }}
+                inputProps={{ 'aria-label': 'Without label' }}
                 variant="outlined"
+                placeholder="Find in and around."
+                sx={{
+                  background: 'white',
+                  borderRadius: '0px 10px 10px 0px',
+                  width: { xs: '155px', lg: '200px', md: '200px' },
+                }}
               />
             </Grid>
           </Grid>
+
           <h5 style={{ marginTop: '4%' }}>Popular Cities</h5>
 
           <Grid container sx={{ marginTop: '3%' }}>
             {locations.map((lt) => {
               return (
                 <>
-                  <Grid item xs={3} md={3} lg={3} sx={{display:"flex", flexDirection:"column", alignItems:"center", cursor:"pointer"}} onClick={()=>{
-                    handleModalClose();
-                    navigate(`/contact-us/${lt.id}/`);
-                  }}>
+                  <Grid
+                    item
+                    xs={3}
+                    md={3}
+                    lg={3}
+                    sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}
+                    onClick={() => {
+                      handleModalClose();
+                      navigate(`/contact-us/${lt.id}/`);
+                    }}
+                  >
                     <LocationCityIcon sx={{ fontSize: '3rem', marginLeft: '8%' }} />
                     <Typography>{lt.value}</Typography>
                   </Grid>
                 </>
               );
             })}
-
-            {/* <Grid item xs={3} md={3} lg={3}>
-              <LocationCityIcon sx={{ fontSize: '3rem', marginLeft: "8%" }} />
-              <Typography>Ameerpet</Typography>
-            </Grid>
-            <Grid item xs={3} md={3} lg={3}>
-              <LocationCityIcon sx={{ fontSize: '3rem', marginLeft: "8%" }} />
-              <Typography>Dilshuknagar</Typography>
-            </Grid>
-            <Grid item xs={3} md={3} lg={3}>
-              <LocationCityIcon sx={{ fontSize: '3rem', marginLeft: "8%" }} />
-              <Typography>Hitech City</Typography>
-            </Grid>
-            <Grid item xs={3} md={3} lg={3}>
-              <LocationCityIcon sx={{ fontSize: '3rem', marginLeft: "8%" }} />
-              <Typography>Madhapur</Typography>
-            </Grid> */}
           </Grid>
         </Card>
       </Modal>

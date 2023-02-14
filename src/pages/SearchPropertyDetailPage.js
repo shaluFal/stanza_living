@@ -103,35 +103,35 @@ const SearchPropertyDetailPage = () => {
                 })}
             </Grid>
             <Grid container spacing={2}>
-            <Grid item md={12}>
-              <Typography sx={{ marginTop: '5%', fontWeight: '600' }}>Services</Typography>
+              <Grid item md={12}>
+                <Typography sx={{ marginTop: '5%', fontWeight: '600' }}>Services</Typography>
+              </Grid>
+
+              {property.facilityServices?.length > 0 &&
+                property.facilityServices[0].serviceNames?.split(',').map((loc) => {
+                  return (
+                    <div key={loc.facilityCode} style={{ margin: '5px' }}>
+                      <Grid item>
+                        <Card
+                          sx={{
+                            borderRadius: '30px 30px',
+                            padding: '6px',
+                            border: '0.6px solid rgb(190, 190, 190)',
+                          }}
+                        >
+                          {loc}
+                        </Card>
+                      </Grid>
+                    </div>
+                  );
+                })}
             </Grid>
 
-            {property.facilityServices?.length > 0 &&
-              property.facilityServices[0].serviceNames?.split(',').map((loc) => {
-                return (
-                  <div key={loc.facilityCode} style={{ margin: '5px' }}>
-                    <Grid item>
-                      <Card
-                        sx={{
-                          borderRadius: '30px 30px',
-                          padding: '6px',
-                          border: '0.6px solid rgb(190, 190, 190)',
-                        }}
-                      >
-                        {loc}
-                      </Card>
-                    </Grid>
-                  </div>
-                );
-              })}
-          </Grid>
-
-          <Grid container spacing={2}>
-            <Grid item md={12}>
-              <Typography sx={{ marginTop: '5%', fontWeight: '600' }}>Food Menu</Typography>
-            </Grid>
-            {/* 
+            <Grid container spacing={2}>
+              <Grid item md={12}>
+                <Typography sx={{ marginTop: '5%', fontWeight: '600' }}>Food Menu</Typography>
+              </Grid>
+              {/* 
             <Grid item md={3}>
               <Typography>
                 Days
@@ -149,33 +149,30 @@ const SearchPropertyDetailPage = () => {
               <Typography>Dinner</Typography>
             </Grid> */}
 
-            {property.listOfFoodItems &&
-              property.listOfFoodItems.map((loc, index) => {
-                return (
-                  <Grid container key={loc.facilityCode}>
-                    <Grid item md={12}>
-                      <Card
-                        sx={{
-                          borderRadius: '30px 30px',
-                          padding: '10px 6px 10px 15px',
-                          border: '0.6px solid rgb(190, 190, 190)',
-                          margin: '5px',
-                            
-                        }}
-                      >
-                        <p style={{ fontWeight: 'bold' }}>{loc.day}</p>
-                        <p>Breakfast : {loc.breakfast}</p>
-                        <p>Lunch: {loc.lunch} </p>
-                        <p>Dinner : {loc.dinner}</p>
-                      </Card>
+              {property.listOfFoodItems &&
+                property.listOfFoodItems.map((loc, index) => {
+                  return (
+                    <Grid container key={loc.facilityCode}>
+                      <Grid item md={12}>
+                        <Card
+                          sx={{
+                            borderRadius: '30px 30px',
+                            padding: '10px 6px 10px 15px',
+                            border: '0.6px solid rgb(190, 190, 190)',
+                            margin: '5px',
+                          }}
+                        >
+                          <p style={{ fontWeight: 'bold' }}>{loc.day}</p>
+                          <p>Breakfast : {loc.breakfast}</p>
+                          <p>Lunch: {loc.lunch} </p>
+                          <p>Dinner : {loc.dinner}</p>
+                        </Card>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                );
-              })}
+                  );
+                })}
+            </Grid>
           </Grid>
-          </Grid>
-
-         
         </Grid>
       </div>
     </div>

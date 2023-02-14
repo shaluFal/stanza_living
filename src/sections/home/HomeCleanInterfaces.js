@@ -72,9 +72,9 @@ export default function HomeCleanInterfaces() {
           </m.div>
         </ContentStyle>
 
-        <Box sx={{ position: 'relative', left: '55%' }}>
-          <Image alt="" src={`images/pgfood_1.jpg`} sx={{ width: '25%' }} />
-          <Image alt="" src={`images/pgfood_2.jpg`} sx={{ width: '35%', marginTop: '2%' }} />
+        <Box sx={{ position: 'relative', left: {lg: '55%', xs: '14%'} }}>
+          <Image alt="" src={`images/pgfood_1.jpg`} sx={{ width: {lg: '25%', xs: "75%"} }} />
+          <Image alt="" src={`images/pgfood_2.jpg`} sx={{ width: {lg: '35%', xs: '75%'}, marginTop: '2%' }} />
         </Box>
       </Container>
     </RootStyle>

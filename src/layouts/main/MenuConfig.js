@@ -17,8 +17,8 @@ const menuConfig = [
     title: 'Explore Residences',
     icon: <Iconify icon={'eva:home-fill'} {...ICON_SIZE} />,
     path: '/',
-    
   },
+  
   // {
   //   title: 'Know More',
   //   path: '/pages',
@@ -65,5 +65,9 @@ const menuConfig = [
   //   path: PATH_DOCS,
   // },
 ];
+
+
+
+
 
 export default menuConfig;

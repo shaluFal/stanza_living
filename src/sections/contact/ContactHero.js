@@ -25,6 +25,7 @@ import GoogleMapReact from 'google-map-react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import TuneIcon from '@mui/icons-material/Tune';
+import useResponsive from '../../hooks/useResponsive';
 import { _appFeatured } from '../../_mock';
 import { TextAnimate, MotionContainer, varFade } from '../../components/animate';
 import InputStyle from '../../components/InputStyle';
@@ -73,6 +74,7 @@ export default function ContactHero() {
   const [openModal, setOpenModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [open, setOpen] = useState(false);
+  const isDesktop = useResponsive('up', 'lg');
   const handleModalClose = () => setShowModal(false);
   const handleModalShow = () => {
     setShowModal(true);
@@ -131,303 +133,172 @@ export default function ContactHero() {
         }}
       >
         <Grid item md={8}>
-          <m.div variants={varFade().inUp}>
-            <Grid container sx={{ marginTop: '10px' }}>
-              <Grid item lg={3} md={2} xs={2}>
-                <FormControl fullWidth>
-                  <InputLabel>Choose property type</InputLabel>
-                  <Select
-                    id="demo-simple-select"
-                    label="choose property type"
-                    onChange={(e) => {
-                      handleModalClose();
-                      navigate(`/contact-us/${e.target.value}/`);
+          <m.div variants={varFade().inUp} sx={{ borderRadius: '10px 0px 0px 10px' }}>
+            {isDesktop && (
+              <Grid
+                container
+                sx={{
+                  borderRadius: '10px 0px 0px 10px',
+                  paddingLeft: '2%',
+                }}
+              >
+                <Grid item lg={2} xs={4}>
+                  <FormControl fullWidth>
+                    <InputLabel style={{ borderRadius: '10px 0px 0px 10px' }}>Choose property type</InputLabel>
+                    <Select
+                      id="demo-simple-select"
+                      label="choose property type"
+                      onChange={(e) => {
+                        handleModalClose();
+                        navigate(`/contact-us/${e.target.value}/`);
+                      }}
+                      sx={{ background: 'white', borderRadius: '10px 0px 0px 10px' }}
+                    >
+                      {locations.map((lt) => {
+                        return <MenuItem value={lt.id}>{lt.value}</MenuItem>;
+                      })}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item lg={2} xs={1} md={4} sx={{ borderRadius: '0px 10px 10px 0px' }}>
+                  <TextField
+                    variant="outlined"
+                    placeholder="Find in and around."
+                    inputProps={{ 'aria-label': 'Without label' }}
+                    sx={{
+                      background: 'white',
+                      borderRadius: '0px 10px 10px 0px',
+                      width: { xs: '155px', lg: '200px', md: '200px' },
                     }}
-                    sx={{ background: 'white' }}
-                  >
-                    {locations.map((lt) => {
-                      return <MenuItem value={lt.id}>{lt.value}</MenuItem>;
-                    })}
-                  </Select>
-                </FormControl>
+                  />
+                </Grid>
               </Grid>
-              <Grid item lg={2} md={1} xs={1}>
-                <TextField
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        Find in and around.. &nbsp;
-                        <SearchIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                  variant="outlined"
-                />
-              </Grid>
-            </Grid>
+            )}
           </m.div>
-          <m.div>
-            <Typography sx={{ marginTop: '2%' }}>Stanza Living/PG in Hyderabad</Typography>
-            <Grid container sx={{ marginTop: '5px' }} spacing={2} gap={'40px'}>
-              <Grid item lg={1} xs={1} md={1}>
-                {/* <Card
-                    sx={{
-                      // borderRadius: '25px 25px',
-                      padding: '4px',
-                      border: '0.6px solid rgb(190, 190, 190)',
-                    }}
-                  >
-                    <Typography sx={{ fontSize: '10px' }}>
-                      <FormControl fullWidth variant="standard">
-                        <InputLabel>Locality</InputLabel>
-                        <Select label="" disableUnderline>
-                          <MenuItem>Ameerpet</MenuItem>
-                          <MenuItem>Gachibowli</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </Typography>
-                  </Card> */}
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
-                  <Select
-                    value={''}
-                    // onChange={handleChange}
-                    displayEmpty
-                    inputProps={{ 'aria-label': 'Without label' }}
-                  >
-                    <MenuItem value="">
-                      <em>Locality</em>
-                    </MenuItem>
-                    <MenuItem>Ameerpet</MenuItem>
-                    <MenuItem>Gachibowli</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item lg={1} xs={1} md={1}>
-                {/* <Card
-                    sx={{
-                      borderRadius: '25px 25px',
-                      padding: '4px',
-                      border: '0.6px solid rgb(190, 190, 190)',
-                    }}
-                  >
-                    <Typography sx={{ fontSize: '10px' }}>
-                      <FormControl fullWidth variant="standard">
-                        <InputLabel>Budget</InputLabel>
-                        <Select label="" disableUnderline>
-                          <MenuItem>Ameerpet</MenuItem>
-                          <MenuItem>Gachibowli</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </Typography>
-                  </Card> */}
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
-                  <Select
-                    value={''}
-                    // onChange={handleChange}
-                    displayEmpty
-                    inputProps={{ 'aria-label': 'Without label' }}
-                  >
-                    <MenuItem value="">
-                      <em>Budget</em>
-                    </MenuItem>
-                    <MenuItem>Ameerpet</MenuItem>
-                    <MenuItem>Gachibowli</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item lg={1} xs={1} md={1}>
-                {/* <Card
-                    sx={{
-                      borderRadius: '25px 25px',
-                      padding: '4px',
-                      border: '0.6px solid rgb(190, 190, 190)',
-                    }}
-                  >
-                    <Typography sx={{ fontSize: '10px' }}>
-                      <FormControl fullWidth variant="standard">
-                        <InputLabel>Occupancy</InputLabel>
-                        <Select label="" disableUnderline>
-                          <MenuItem>Ameerpet</MenuItem>
-                          <MenuItem>Gachibowli</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </Typography>
-                  </Card> */}
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
-                  <Select
-                    value={''}
-                    // onChange={handleChange}
-                    displayEmpty
-                    inputProps={{ 'aria-label': 'Without label' }}
-                  >
-                    <MenuItem value="">
-                      <em>Occupancy</em>
-                    </MenuItem>
-                    <MenuItem>Ameerpet</MenuItem>
-                    <MenuItem>Gachibowli</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
 
-              <Grid item lg={1} xs={1} md={1}>
-                {/* <Card
-                    sx={{
-                      borderRadius: '25px 25px',
-                      padding: '4px',
-                      border: '0.6px solid rgb(190, 190, 190)',
-                    }}
-                  >
-                    <Typography sx={{ fontSize: '10px' }}>
-                      <FormControl fullWidth variant="standard">
-                        <InputLabel>Gender</InputLabel>
-                        <Select label="" disableUnderline>
-                          <MenuItem>Ameerpet</MenuItem>
-                          <MenuItem>Gachibowli</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </Typography>
-                  </Card> */}
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
-                  <Select
-                    value={''}
-                    // onChange={handleChange}
-                    displayEmpty
-                    inputProps={{ 'aria-label': 'Without label' }}
-                  >
-                    <MenuItem value="">
-                      <em>Gender</em>
-                    </MenuItem>
-                    <MenuItem>Ameerpet</MenuItem>
-                    <MenuItem>Gachibowli</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
+          <m.div sx={{ paddingLeft: '2%' }}>
+            <Typography sx={{ marginTop: '2%', paddingLeft: '2%' }}>Stanza Living/PG in Hyderabad</Typography>
 
-              <Grid item lg={1} xs={1} md={1}>
-                {/* <Card
-                    sx={{
-                      borderRadius: '25px 25px',
-                      padding: '4px',
-                      border: '0.6px solid rgb(190, 190, 190)',
-                    }}
-                  >
-                    <Typography sx={{ fontSize: '10px' }}>
-                      <FormControl fullWidth variant="standard">
-                        <InputLabel>Amenities</InputLabel>
-                        <Select label="" disableUnderline>
-                          <MenuItem>Ameerpet</MenuItem>
-                          <MenuItem>Gachibowli</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </Typography>
-                  </Card> */}
+            {isDesktop ? (
+              <Grid container sx={{ paddingLeft: '2%' }}>
+                <Grid item>
+                  <FormControl sx={{ m: 1, minWidth: 120 }}>
+                    <Select
+                      value={''}
+                      // onChange={handleChange}
+                      displayEmpty
+                      inputProps={{ 'aria-label': 'Without label' }}
+                    >
+                      <MenuItem value="">
+                        <em>Locality</em>
+                      </MenuItem>
+                      <MenuItem>Ameerpet</MenuItem>
+                      <MenuItem>Gachibowli</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item>
+                  <FormControl sx={{ m: 1, minWidth: 120 }}>
+                    <Select
+                      value={''}
+                      // onChange={handleChange}
+                      displayEmpty
+                      inputProps={{ 'aria-label': 'Without label' }}
+                    >
+                      <MenuItem value="">
+                        <em>Budget</em>
+                      </MenuItem>
+                      <MenuItem>Ameerpet</MenuItem>
+                      <MenuItem>Gachibowli</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item>
+                  <FormControl sx={{ m: 1, minWidth: 120 }}>
+                    <Select
+                      value={''}
+                      // onChange={handleChange}
+                      displayEmpty
+                      inputProps={{ 'aria-label': 'Without label' }}
+                    >
+                      <MenuItem value="">
+                        <em>Occupancy</em>
+                      </MenuItem>
+                      <MenuItem>Ameerpet</MenuItem>
+                      <MenuItem>Gachibowli</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
 
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
-                  <Select
-                    value={''}
-                    // onChange={handleChange}
-                    displayEmpty
-                    inputProps={{ 'aria-label': 'Without label' }}
-                  >
-                    <MenuItem value="">
-                      <em>Amenities</em>
-                    </MenuItem>
-                    <MenuItem>Ameerpet</MenuItem>
-                    <MenuItem>Gachibowli</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
+                <Grid item>
+                  <FormControl sx={{ m: 1, minWidth: 120 }}>
+                    <Select
+                      value={''}
+                      // onChange={handleChange}
+                      displayEmpty
+                      inputProps={{ 'aria-label': 'Without label' }}
+                    >
+                      <MenuItem value="">
+                        <em>Gender</em>
+                      </MenuItem>
+                      <MenuItem>Ameerpet</MenuItem>
+                      <MenuItem>Gachibowli</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
 
-              <Grid item lg={1} xs={1} md={1}>
-                {/* <Card
-                    sx={{
-                      borderRadius: '25px 25px',
-                      padding: '4px',
-                      border: '0.6px solid rgb(190, 190, 190)',
-                    }}
-                  >
-                    <Typography sx={{ fontSize: '10px' }}>
-                      <FormControl fullWidth variant="standard">
-                        <InputLabel>My Wishlist</InputLabel>
-                        <Select label="" disableUnderline>
-                          <MenuItem>Ameerpet</MenuItem>
-                          <MenuItem>Gachibowli</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </Typography>
-                  </Card> */}
+                <Grid item>
+                  <FormControl sx={{ m: 1, minWidth: 120 }}>
+                    <Select
+                      value={''}
+                      // onChange={handleChange}
+                      displayEmpty
+                      inputProps={{ 'aria-label': 'Without label' }}
+                    >
+                      <MenuItem value="">
+                        <em>Amenities</em>
+                      </MenuItem>
+                      <MenuItem>Ameerpet</MenuItem>
+                      <MenuItem>Gachibowli</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
 
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
-                  <Select
-                    value={''}
-                    // onChange={handleChange}
-                    displayEmpty
-                    inputProps={{ 'aria-label': 'Without label' }}
-                  >
-                    <MenuItem value="">
-                      <em>My Wishlist</em>
-                    </MenuItem>
-                    <MenuItem>Ameerpet</MenuItem>
-                    <MenuItem>Gachibowli</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
+                <Grid item>
+                  <FormControl sx={{ m: 1, minWidth: 120 }}>
+                    <Select
+                      value={''}
+                      // onChange={handleChange}
+                      displayEmpty
+                      inputProps={{ 'aria-label': 'Without label' }}
+                    >
+                      <MenuItem value="">
+                        <em>My Wishlist</em>
+                      </MenuItem>
+                      <MenuItem>Ameerpet</MenuItem>
+                      <MenuItem>Gachibowli</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
 
-              <Grid item lg={1} xs={1} md={1}>
-                {/* <Card
-                    sx={{
-                      borderRadius: '25px 25px',
-                      padding: '4px',
-                      border: '0.6px solid rgb(190, 190, 190)',
-                    }}
-                  >
-                    <Typography sx={{ fontSize: '10px' }}>
-                      <FormControl fullWidth variant="standard">
-                        <InputLabel> More Filters</InputLabel>
-                        <Select label="" disableUnderline>
-                          <MenuItem>Ameerpet</MenuItem>
-                          <MenuItem>Gachibowli</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </Typography>
-                  </Card> */}
+                <Grid item>
+                  <FormControl sx={{ m: 1, minWidth: 120 }}>
+                    <Select
+                      value={''}
+                      // onChange={handleChange}
+                      displayEmpty
+                      inputProps={{ 'aria-label': 'Without label' }}
+                    >
+                      <MenuItem value="">
+                        <em>More Filters</em>
+                      </MenuItem>
+                      <MenuItem>Ameerpet</MenuItem>
+                      <MenuItem>Gachibowli</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
 
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
-                  <Select
-                    value={''}
-                    // onChange={handleChange}
-                    displayEmpty
-                    inputProps={{ 'aria-label': 'Without label' }}
-                  >
-                    <MenuItem value="">
-                      <em>More Filters</em>
-                    </MenuItem>
-                    <MenuItem>Ameerpet</MenuItem>
-                    <MenuItem>Gachibowli</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-
-              <Grid item lg={1} xs={1} md={1}>
-                {/* <Card
-                    sx={{
-                      borderRadius: '25px 25px',
-                      padding: '4px',
-                      border: '0.6px solid rgb(190, 190, 190)',
-                    }}
-                  >
-                    <Typography sx={{ fontSize: '10px' }}>
-                      <FormControl fullWidth variant="standard">
-                        <InputLabel>Popularity</InputLabel>
-                        <Select label="" disableUnderline>
-                          <MenuItem>Price: low to High</MenuItem>
-                          <MenuItem>Price: High to low</MenuItem>
-                          <MenuItem> Popularity</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </Typography>
-                  </Card> */}
-
+                {/* <Grid item>
                 <FormControl sx={{ m: 1, minWidth: 120 }}>
                   <Select
                     value={''}
@@ -442,19 +313,56 @@ export default function ContactHero() {
                     <MenuItem>Gachibowli</MenuItem>
                   </Select>
                 </FormControl>
+              </Grid> */}
               </Grid>
-            </Grid>
+            ) : (
+              <Grid container sx={{ paddingLeft: '2%' }}>
+                <Grid item>
+                  <FormControl sx={{ m: 1, minWidth: 120 }}>
+                    <Select
+                      value={''}
+                      // onChange={handleChange}
+                      displayEmpty
+                      inputProps={{ 'aria-label': 'Without label' }}
+                    >
+                      <MenuItem value="">
+                        <em>My Wishlist</em>
+                      </MenuItem>
+                      <MenuItem>Ameerpet</MenuItem>
+                      <MenuItem>Gachibowli</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item>
+                  <FormControl sx={{ m: 1, minWidth: 120 }}>
+                    <Select
+                      value={''}
+                      // onChange={handleChange}
+                      displayEmpty
+                      inputProps={{ 'aria-label': 'Without label' }}
+                    >
+                      <MenuItem value="">
+                        <em>More Filters</em>
+                      </MenuItem>
+                      <MenuItem>Ameerpet</MenuItem>
+                      <MenuItem>Gachibowli</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+              </Grid>
+            )}
 
             {/* <h4 style={{marginTop: "2%", height: "100%"}}>&nbsp; | &nbsp;</h4> */}
           </m.div>
 
           <m.div>
-            <Typography sx={{ marginTop: '2%' }}>Coliving/PG in Hyderabad</Typography>
+            <Typography sx={{ marginTop: '2%', paddingLeft: '2%' }}>Coliving/PG in Hyderabad</Typography>
           </m.div>
           <m.div>
             <Grid container spacing={2}>
               <Grid item md={8}>
-                <Typography sx={{ marginTop: '2%', fontWeight: '700', marginBottom: '5%' }}>
+                <Typography sx={{ marginTop: '2%', fontWeight: '700', marginBottom: '5%', paddingLeft: '2%' }}>
                   143 PGs waiting to be yours in Hyderabad
                 </Typography>
 
@@ -516,8 +424,8 @@ export default function ContactHero() {
                                 </Grid>
 
                                 <Grid container sx={{ marginTop: '2%' }} spacing={1}>
-                                  <Grid item md={12}>
-                                    <Typography>Amenities</Typography>
+                                  <Grid item xs={12}>
+                                    <Typography>Amenities: &nbsp; </Typography>
                                   </Grid>
 
                                   {loc.facilityAmenities?.length > 0 &&
@@ -541,14 +449,14 @@ export default function ContactHero() {
                                 </Grid>
 
                                 <Grid container spacing={1} sx={{ marginTop: '4%' }}>
-                                  <Grid item xs={12} md={4}>
+                                  <Grid item xs={12} lg={4} md={12}>
                                     <Box sx={{ mb: 5 }}>
                                       <Typography variant="subtitle1">Starts from</Typography>
                                       <Typography>Rs {loc.rentMonthly}/mo*</Typography>
                                     </Box>
                                   </Grid>
-                                  <Grid item xs={4} md={4}>
-                                    <Box sx={{ mb: 4 }}>
+                                  <Grid item xs={6} lg={4} md={6}>
+                                    <Box>
                                       <Button
                                         variant="contained"
                                         target="_blank"
@@ -560,8 +468,8 @@ export default function ContactHero() {
                                       </Button>
                                     </Box>
                                   </Grid>
-                                  <Grid item xs={4} md={4}>
-                                    <Box sx={{ mb: 4 }}>
+                                  <Grid item xs={6} lg={4} md={6}>
+                                    <Box>
                                       <Button
                                         variant="contained"
                                         target="_blank"
