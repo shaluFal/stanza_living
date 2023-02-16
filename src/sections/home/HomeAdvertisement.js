@@ -1,86 +1,72 @@
+import { capitalCase } from 'change-case';
 import { m } from 'framer-motion';
 // @mui
-import { styled } from '@mui/material/styles';
-import { Button, Box, Container, Typography } from '@mui/material';
+import { styled, alpha } from '@mui/material/styles';
+import {
+  Box,
+  Stack,
+  Radio,
+  Tooltip,
+  Container,
+  Typography,
+  RadioGroup,
+  CardActionArea,
+  FormControlLabel,
+  Grid,
+} from '@mui/material';
+// hooks
+import useSettings from '../../hooks/useSettings';
 // components
 import Image from '../../components/Image';
 import { MotionViewport, varFade } from '../../components/animate';
 
 // ----------------------------------------------------------------------
 
-const ContentStyle = styled('div')(({ theme }) => ({
-  maxWidth: 456,
-  margin: 'auto',
-  overflow: 'hidden',
-  paddingBottom: theme.spacing(10),
-  borderRadius: Number(theme.shape.borderRadius) * 2,
-  backgroundImage: `linear-gradient(135deg,
-    ${theme.palette.primary.main} 0%,
-    ${theme.palette.primary.dark} 100%)`,
-  [theme.breakpoints.up('md')]: {
-    display: 'flex',
-    maxWidth: '100%',
-    paddingBottom: 0,
-    alignItems: 'center',
-  },
+const RootStyle = styled('div')(({ theme }) => ({
+  padding: theme.spacing(15, 0),
 }));
 
 // ----------------------------------------------------------------------
 
 export default function HomeAdvertisement() {
-  return (
-    <Container component={MotionViewport}>
-      <ContentStyle>
-        <Box
-          component={m.div}
-          variants={varFade().inUp}
-          sx={{
-            mb: { xs: 3, md: 0 },
-          }}
-        >
-          <m.div animate={{ y: [-20, 0, -20] }} transition={{ duration: 4, repeat: Infinity }}>
-            <Image
-              visibleByDefault
-              alt="rocket"
-              src="https://minimal-assets-api-dev.vercel.app/assets/images/home/rocket.png"
-              disabledEffect
-              sx={{ maxWidth: 460 }}
-            />
-          </m.div>
-        </Box>
+  const { themeColorPresets, onChangeColor, colorOption } = useSettings();
 
-        <Box
-          sx={{
-            pl: { md: 10 },
-            textAlign: { xs: 'center', md: 'left' },
-          }}
-        >
-          <Box component={m.div} variants={varFade().inDown} sx={{ color: 'common.white', mb: 5 }}>
-            <Typography variant="h2">
-              Get started with
-              <br /> minimal kit today
+  return (
+    <RootStyle>
+      <Container component={MotionViewport} sx={{ position: 'relative', textAlign: 'center' }}>
+        <Grid container spacing={5} sx={{ paddingTop: '150px' }}>
+          <Grid item xs={6} sx={{ textAlign: 'left', marginTop: '100px', maxWidth: '475px' }}>
+            <Typography sx={{ fontSize: '3rem', lineHeight: '44px', fontWeight: '500' }}>
+              Chill in a<span style={{ color: 'rgb(96 195 173)', textAlign: 'left' }}> common area </span>
+              that's anything but common
             </Typography>
-          </Box>
-          <m.div variants={varFade().inDown}>
-            <Button
-              size="large"
-              variant="contained"
-              target="_blank"
-              rel="noopener"
-              href="https://material-ui.com/store/items/minimal-dashboard/"
-              sx={{
-                whiteSpace: 'nowrap',
-                boxShadow: (theme) => theme.customShadows.z8,
-                color: (theme) => theme.palette.getContrastText(theme.palette.common.white),
-                bgcolor: 'common.white',
-                '&:hover': { bgcolor: 'grey.300' },
-              }}
-            >
-              Purchase Now
-            </Button>
-          </m.div>
-        </Box>
-      </ContentStyle>
-    </Container>
+            <Typography sx={{ fontSize: '1rem', lineHeight: '26px', marginTop: '16px' }}>
+              Nope, we don't try to pass off a few plastic chairs and a TV as a common area. We've replaced them with
+              sofas, bean bags and large-screen TVs. And we've also added gaming zones, fitness centres and chillout
+              corners as a bonus.
+            </Typography>
+          </Grid>
+
+          <Grid item xs={6}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={4} lg={6}>
+                <Grid container spacing={2}>
+                  <Grid item>
+                    <Image alt="" src={`images/chill_1.jpg`} style={{ borderRadius: '10px 10px' }} />
+                  </Grid>
+
+                  <Grid item>
+                    <Image alt="" src={`images/chill_2.jpg`} style={{ borderRadius: '10px 10px' }} />
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item xs={12} md={8} lg={6}>
+                <Image alt="" src={`images/chill_3.jpg`} style={{ width: '94%' }} />
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Container>
+    </RootStyle>
   );
 }

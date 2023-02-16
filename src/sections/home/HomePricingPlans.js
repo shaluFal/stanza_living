@@ -13,8 +13,8 @@ import { varFade, MotionViewport } from '../../components/animate';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled('div')(({ theme }) => ({
-  padding: theme.spacing(10, 0),
-  backgroundColor: theme.palette.background.neutral,
+  padding: theme.spacing(14, 0),
+  backgroundColor: 'rgb(225, 240, 239)',
   [theme.breakpoints.up('md')]: {
     padding: theme.spacing(15, 0),
   },
@@ -30,169 +30,36 @@ export default function HomePricingPlans() {
   return (
     <RootStyle>
       <Container component={MotionViewport}>
-        <Box sx={{ mb: 10, textAlign: 'center', marginTop: "5%" }}>
-          {/* <m.div variants={varFade().inUp}>
-            <Typography component="div" variant="overline" sx={{ mb: 2, color: 'text.disabled' }}>
-              pricing plans
-            </Typography>
-          </m.div> */}
-          <m.div variants={varFade().inDown}>
-            <Typography variant="h2" sx={{ mb: 3 }}>
-              Always have us at your fingertips
-            </Typography>
-          </m.div>
-          <m.div variants={varFade().inDown}>
-            <Typography
-              sx={{
-                color: isLight ? 'text.secondary' : 'text.primary',
-              }}
-            >
-              Tell us what you crave. Not only are our meals deliciously homely, they are also customisable. Pick and
-              choose from our varied menu on the app and we'll serve it up, piping hot.
-            </Typography>
+        <Box sx={{ mb: 10, textAlign: 'center', marginTop: '5%' }}>
+          <m.div>
+            <Grid container spacing={4}>
+              <Grid item xs={8}>
+                <Typography sx={{ mb: 3, fontSize: '4em', lineHeight: '1em' }}>Always have us</Typography>
+                <Typography sx={{ color: 'rgb(96 195 173)', fontSize: '4em', lineHeight: '0.5em' }}>
+                  at your fingertips
+                </Typography>
+
+                {/* <Typography>Tell us what you crave</Typography>
+                <Typography>Not only are our meals deliciously homely, they are also customisable. Pick and choose from our varied 
+                  menu on the app and we'll serve it up, piping hot.</Typography>
+
+                  <Typography>All payments and dues, in one place</Typography>
+                  <Typography>No running around here and there paying all your bills. While paying, tracking and managing your rent 
+                    and other expenses on your app, the only thing that'll move would be your fingertips.</Typography>
+
+                    <Typography>Be heard. Without saying a word</Typography>
+                    <Typography>If you need help with anything, wish to register a complaint, or if you think we can do something better, 
+                      do tell us through the support and real-time feedback feature on the app.</Typography> */}
+              </Grid>
+              <Grid item xs={4}>
+                {/* <div style={{ backgroundColor: '#8bca84', width: '100%', height: '100%', borderRadius: '100%' }}> */}
+                  <Image alt="" src={`images/phone.jpg`} />
+                {/* </div> */}
+              </Grid>
+            </Grid>
           </m.div>
         </Box>
-
-        <Grid container spacing={5}>
-          {_homePlans.map((plan) => (
-            <Grid key={plan.license} item xs={12} md={4}>
-              <m.div variants={plan.license === 'Standard Plus' ? varFade().inDown : varFade().inUp}>
-                <PlanCard plan={plan} />
-              </m.div>
-            </Grid>
-          ))}
-        </Grid>
-
-        <m.div variants={varFade().in}>
-          <Box sx={{ p: 5, mt: 10, textAlign: 'center' }}>
-            <m.div variants={varFade().inDown}>
-              <Typography variant="h3">Still have questions?</Typography>
-            </m.div>
-
-            <m.div variants={varFade().inDown}>
-              <Typography sx={{ mt: 3, mb: 5, color: 'text.secondary' }}>
-                Please describe your case to receive the most accurate advice.
-              </Typography>
-            </m.div>
-
-            <m.div variants={varFade().inUp}>
-              <Button
-                size="large"
-                variant="contained"
-                href="mailto:support@minimals.cc?subject=[Feedback] from Customer"
-              >
-                Contact us
-              </Button>
-            </m.div>
-          </Box>
-        </m.div>
       </Container>
     </RootStyle>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-PlanCard.propTypes = {
-  plan: PropTypes.shape({
-    license: PropTypes.string,
-    commons: PropTypes.arrayOf(PropTypes.string),
-    // icons: PropTypes.arrayOf(PropTypes.string),
-    // options: PropTypes.arrayOf(PropTypes.string),
-  }),
-};
-
-function PlanCard({ plan }) {
-  const { license, commons } = plan;
-
-  // const standard = license === 'Standard';
-  // const plus = license === 'Standard Plus';
-
-  return (
-    <Card
-      sx={{padding: '4%'}}
-    >
-      <Stack spacing={5}>
-        <div>
-          <Typography variant="h4">{license}</Typography>
-        </div>
-
-        {/* {standard ? (
-          <Image alt="package" src={icons[2]} sx={{ width: 40, height: 40 }} />
-        ) : (
-          <Stack direction="row" spacing={1}>
-            {icons.map((icon) => (
-              <Image key={icon} alt="package" src={icon} sx={{ width: 40, height: 40 }} />
-            ))}
-          </Stack>
-        )} */}
-
-        <Stack spacing={2.5}>
-          {commons.map((option) => (
-            <Stack key={option} spacing={1.5} direction="row" alignItems="center">
-              <Iconify icon={'eva:checkmark-fill'} sx={{ color: 'primary.main', width: 20, height: 20 }} />
-              <Typography variant="body2">{option}</Typography>
-            </Stack>
-          ))}
-
-          <Divider sx={{ borderStyle: 'dashed' }} />
-
-          {/* {options.map((option, optionIndex) => {
-            const disabledLine =
-              (standard && optionIndex === 1) ||
-              (standard && optionIndex === 2) ||
-              (standard && optionIndex === 3) ||
-              (plus && optionIndex === 3);
-
-            return (
-              <Stack
-                spacing={1.5}
-                direction="row"
-                alignItems="center"
-                sx={{
-                  ...(disabledLine && { color: 'text.disabled' }),
-                }}
-                key={option}
-              >
-                <Iconify
-                  icon={'eva:checkmark-fill'}
-                  sx={{
-                    width: 20,
-                    height: 20,
-                    color: 'primary.main',
-                    ...(disabledLine && { color: 'text.disabled' }),
-                  }}
-                />
-                <Typography variant="body2">{option}</Typography>
-              </Stack>
-            );
-          })} */}
-        </Stack>
-
-        {/* <Stack direction="row" justifyContent="flex-end">
-          <Link
-            color="text.secondary"
-            underline="always"
-            target="_blank"
-            rel="noopener"
-            href="https://material-ui.com/store/license/#i-standard-license"
-            sx={{ typography: 'body2', display: 'flex', alignItems: 'center' }}
-          >
-            Learn more <Iconify icon={'eva:chevron-right-fill'} width={20} height={20} />
-          </Link>
-        </Stack> */}
-
-        {/* <Button
-          size="large"
-          fullWidth
-          variant={plus ? 'contained' : 'outlined'}
-          target="_blank"
-          rel="noopener"
-          href="https://material-ui.com/store/items/minimal-dashboard/"
-        >
-          Choose Plan
-        </Button> */}
-      </Stack>
-    </Card>
   );
 }

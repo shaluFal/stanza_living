@@ -9,7 +9,7 @@ import { MotionViewport, varFade } from '../../components/animate';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled('div')(({ theme }) => ({
-  padding: theme.spacing(24, 0),
+  padding: theme.spacing(14, 0),
 }));
 
 const ContentStyle = styled('div')(({ theme }) => ({
@@ -22,24 +22,24 @@ const ContentStyle = styled('div')(({ theme }) => ({
   },
 }));
 
-const ScreenStyle = styled(m.div)(({ theme }) => ({
-  paddingRight: 2,
-  paddingBottom: 1,
-  maxWidth: 160,
-  borderRadius: 8,
-  backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 300 : 800],
-  [theme.breakpoints.up('sm')]: {
-    maxWidth: 320,
-    paddingRight: 4,
-    borderRadius: 12,
-  },
-  '& img': {
-    borderRadius: 8,
-    [theme.breakpoints.up('sm')]: {
-      borderRadius: 12,
-    },
-  },
-}));
+// const ScreenStyle = styled(m.div)(({ theme }) => ({
+//   paddingRight: 2,
+//   paddingBottom: 1,
+//   maxWidth: 160,
+//   borderRadius: 8,
+//   backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 300 : 800],
+//   [theme.breakpoints.up('sm')]: {
+//     maxWidth: 320,
+//     paddingRight: 4,
+//     borderRadius: 12,
+//   },
+//   '& img': {
+//     borderRadius: 8,
+//     [theme.breakpoints.up('sm')]: {
+//       borderRadius: 12,
+//     },
+//   },
+// }));
 
 const COMMON = {
   scaleX: 0.86,
@@ -85,109 +85,26 @@ export default function HomeHugePackElements() {
     <MotionViewport disableAnimatedMobile={false}>
       <RootStyle>
         <Container>
-          <Grid container spacing={5} justifyContent="center">
-            <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
-              <ContentStyle>
-                {/* <m.div variants={varFade().inUp}>
-                  <Typography component="div" variant="overline" sx={{ mb: 2, color: 'text.disabled' }}>
-                    Interface Starter Kit
-                  </Typography>
-                </m.div> */}
+          <Grid container spacing={5} sx={{ paddingTop: '150px' }}>
+            <Grid item xs={12} md={6} sx={{ position: 'relative' }}>
+              <m.div sx={{ width: '30%' }}>
+                <Image alt="light mode" src="images/chores_2.jpg" style={{ width: '60%', marginRight: '40%' }} />
+              </m.div>
 
-                <m.div variants={varFade().inUp}>
-                  <Typography variant="h2" sx={{ mb: 3 }}>
-                    Not just four walls and a roof
-                  </Typography>
-                </m.div>
-
-                <m.div variants={varFade().inUp}>
-                  <Typography
-                    sx={{
-                      mb: 5,
-                      color: isLight ? 'text.secondary' : 'common.white',
-                    }}
-                  >
-                    Come over and experience how a place to stay can be so much more.
-                  </Typography>
-                </m.div>
-
-                {/* <m.div variants={varFade().inUp}>
-                  <Button
-                    size="large"
-                    color="inherit"
-                    variant="outlined"
-                    target="_blank"
-                    rel="noopener"
-                    href="https://www.minimals.cc/components/"
-                  >
-                    View All Components
-                  </Button>
-                </m.div> */}
-              </ContentStyle>
+              <Box component={m.div} sx={{ top: '150px', left: '190px', width: '60%', position: 'absolute' }}>
+                <Image alt="dark mode" src="images/chores.jpg" />
+              </Box>
             </Grid>
 
-            {/* <Grid item xs={12} md={8} dir="ltr">
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  position: 'relative',
-                  justifyContent: 'center',
-                }}
-              >
-                {[...Array(3)].map((_, index) => (
-                  <ScreenStyle
-                    key={index}
-                    variants={{
-                      ...(index === 0 && screenLeftAnimate),
-                      ...(index === 1 && screenCenterAnimate),
-                      ...(index === 2 && screenRightAnimate),
-                    }}
-                    transition={{ duration: 0.72, ease: 'easeOut' }}
-                    sx={{
-                      boxShadow: `${isRTL ? -80 : 80}px -40px 80px ${alpha(
-                        isLight ? theme.palette.grey[600] : theme.palette.common.black,
-                        0.48
-                      )}`,
-                      ...(index === 0 && {
-                        zIndex: 3,
-                        position: 'absolute',
-                      }),
-                      ...(index === 1 && { zIndex: 2 }),
-                      ...(index === 2 && {
-                        zIndex: 1,
-                        position: 'absolute',
-                        boxShadow: 'none',
-                      }),
-                    }}
-                  >
-                    <Image
-                      disabledEffect
-                      alt={`screen ${index + 1}`}
-                      src={`/images/walls_${index + 1}.jpg`}
-                    />
-                  </ScreenStyle>
-                ))}
-              </Box>
-            </Grid> */}
-
-            <Grid item xs={12} md={8}>
-              <Grid container spacing={1}>
-                <Grid item xs={12} md={8} lg={6}>
-                  <Image alt="" src={`images/walls_1.jpg`}  style={{width: "100%"}}/>
-                </Grid>
-                <Grid item xs={12} md={4} lg={6}>
-                  <Grid container spacing={1}>
-                    <Grid item >
-                      <Image alt="" src={`images/walls_2.jpg`}   style={{borderRadius: "10px 10px"}}/>
-                    </Grid>
-
-                    <Grid item >
-                      <Image alt="" src={`images/walls_3.jpg`} style={{borderRadius: "10px 10px"}} />
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
+            <Grid item xs={12} md={6} sx={{ textAlign: 'left', marginTop: '100px', maxWidth: '475px' }}>
+              <Typography sx={{ fontSize: '3rem', lineHeight: '44px', fontWeight: '500' }}>
+                Take your daily list of chores. And
+                <br /> from <span style={{ color: 'rgb(96 195 173)', textAlign: 'left' }}>tear it up</span>
+              </Typography>
+              <Typography sx={{ fontSize: '1rem', lineHeight: '26px', marginTop: '16px' }}>
+                You have better things to do than wash your clothes, clean up your room and cook your meals. So our team
+                of pros will do them all for you.
+              </Typography>
             </Grid>
           </Grid>
         </Container>

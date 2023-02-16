@@ -34,23 +34,19 @@ export default function HomePage() {
       <HomeHero />
 
       <ContentStyle>
-     
-
-        <HomeHugePackElements />
-
-        <HomeDarkMode />
-
         <HomeColorPresets />
+        <HomeDarkMode />
+        <HomeHugePackElements />
+        <HomeAdvertisement />
 
         <HomeCleanInterfaces />
 
-        {/* <HomePricingPlans /> */}
-           <HomeMinimal />
+        <HomePricingPlans />
+        {/* <HomeMinimal /> */}
 
         {/* <HomeLookingFor /> */}
         <AboutTeam />
 
-        {/* <HomeAdvertisement /> */}
         <MainFooter />
       </ContentStyle>
     </Page>

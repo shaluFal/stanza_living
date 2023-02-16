@@ -1,7 +1,7 @@
 import { m } from 'framer-motion';
 // @mui
 import { alpha, styled } from '@mui/material/styles';
-import { Box, Container, Typography, useTheme } from '@mui/material';
+import { Box, Container, Grid, Typography, useTheme } from '@mui/material';
 // components
 import Image from '../../components/Image';
 import { MotionViewport, varFade } from '../../components/animate';
@@ -14,7 +14,7 @@ const IMG = [...Array(10)].map(
 
 const RootStyle = styled('div')(({ theme }) => ({
   paddingTop: theme.spacing(15),
-  paddingBottom: theme.spacing(10),
+  paddingBottom: theme.spacing(8),
 }));
 
 const ContentStyle = styled('div')(({ theme }) => ({
@@ -37,45 +37,46 @@ export default function HomeCleanInterfaces() {
 
   return (
     <RootStyle>
-      <Container component={MotionViewport} sx={{ marginTop: '20%', marginBottom: '10%' }}>
-        <ContentStyle>
-          {/* <m.div variants={varFade().inUp}>
+      <Container component={MotionViewport} sx={{ marginTop: '20%' }}>
+        {/* <ContentStyle> */}
+        {/* <m.div variants={varFade().inUp}>
             <Typography component="div" variant="overline" sx={{ mb: 2, color: 'text.disabled' }}>
               clean & clear
             </Typography>
           </m.div> */}
 
-          <m.div variants={varFade().inUp}>
-            <Typography
-              variant="h2"
-              paragraph
-              sx={{
-                ...(!isLight && {
-                  textShadow: (theme) => `4px 4px 16px ${alpha(theme.palette.grey[800], 0.48)}`,
-                }),
-              }}
-            >
-              Don't come expecting "hostel-PG food"
-            </Typography>
-          </m.div>
+        {/* </ContentStyle> */}
 
-          <m.div variants={varFade().inUp}>
-            <Typography
-              sx={{
-                color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'text.primary'),
-              }}
-            >
+        <Grid container spacing={5} sx={{ paddingTop: '150px' }}>
+          <Grid item xs={6}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={8} lg={6}>
+                <Image alt="" src={`images/pgfood_1.jpg`} style={{ width: '100%' }} />
+              </Grid>
+              <Grid item xs={12} md={4} lg={6}>
+                <Grid container spacing={2}>
+                  <Grid item>
+                    <Image alt="" src={`images/pgfood_2.jpg`} style={{ borderRadius: '10px 10px' }} />
+                  </Grid>
+
+                  <Grid item>
+                    <Image alt="" src={`images/pgfood_3.jpg`} style={{ borderRadius: '10px 10px' }} />
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={6} sx={{ textAlign: 'left', marginTop: '100px', maxWidth: '475px' }}>
+            <Typography sx={{ fontSize: '3rem', lineHeight: '50px', fontWeight: '500' }}>
+              Don't come expecting
+              <br /> from <span style={{ color: 'rgb(96 195 173)', textAlign: 'left' }}>"hostel-PG food"</span>
+            </Typography>
+            <Typography sx={{ fontSize: '1rem', lineHeight: '26px', marginTop: '16px' }}>
               Instead, bring along a big appetite for healthy, yummy meals. With flavours that have a local touch. And
               that, at the same time, take your taste buds on a journey back home.
             </Typography>
-            <Image alt="" src={`images/pgfood_3.jpg`} sx={{ width: '95%', marginTop: '5%', marginLeft: '5%' }} />
-          </m.div>
-        </ContentStyle>
-
-        <Box sx={{ position: 'relative', left: {lg: '55%', xs: '14%'} }}>
-          <Image alt="" src={`images/pgfood_1.jpg`} sx={{ width: {lg: '25%', xs: "75%"} }} />
-          <Image alt="" src={`images/pgfood_2.jpg`} sx={{ width: {lg: '35%', xs: '75%'}, marginTop: '2%' }} />
-        </Box>
+          </Grid>
+        </Grid>
       </Container>
     </RootStyle>
   );

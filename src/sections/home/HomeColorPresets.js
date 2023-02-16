@@ -12,6 +12,7 @@ import {
   RadioGroup,
   CardActionArea,
   FormControlLabel,
+  Grid,
 } from '@mui/material';
 // hooks
 import useSettings from '../../hooks/useSettings';
@@ -40,75 +41,58 @@ export default function HomeColorPresets() {
         </m.div> */}
 
         <m.div variants={varFade().inUp}>
-          <Typography variant="h2" sx={{ mb: 3 }}>
-            Take your daily list of chores. And tear it up
+          <Typography
+            variant="h1"
+            sx={{ mb: 3, fontSize: '4.2rem', lineHeight: '50px', paddingTop: '15px', paddingBottom: '15px' }}
+          >
+            <span style={{ color: 'rgb(96 195 173)' }}>Not just </span>four walls and a roof
           </Typography>
         </m.div>
 
         <m.div variants={varFade().inUp}>
           <Typography
             sx={{
-              color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'text.primary'),
+              lineHeight: '26px',
+              fontSize: '2rem',
+              color: 'rgb(78 82 83)',
             }}
           >
-            You have better things to do than wash your clothes, clean up your room and cook your meals. So our team of pros will do them all for you.
+            Come over and experience how a place to stay can be so much more
           </Typography>
         </m.div>
 
+       
 
-        <Box sx={{ position: 'relative', marginLeft: '20%', marginTop: '5%', marginBottom: '15%' }}>
-          {/* <Image
-            disabledEffect
-            alt="grid"
-            src="images/chores_2.jpg"
-          /> */}
+        <Grid container spacing={5} sx={{ paddingTop: '150px' }}>
+          <Grid item xs={6}>
+            <Grid container>
+              <Grid item xs={12} md={8} lg={6}>
+                <Image alt="" src={`images/walls_1.jpg`} style={{ width: '94%' }} />
+              </Grid>
+              <Grid item xs={12} md={4} lg={6}>
+                <Grid container spacing={2}>
+                  <Grid item>
+                    <Image alt="" src={`images/walls_2.jpg`} style={{ borderRadius: '10px 10px' }} />
+                  </Grid>
 
-          <Box sx={{ position: 'absolute', top: 0, width: '80%' }}>
-            <m.div variants={varFade().inUp}>
-              <Image
-                disabledEffect
-                alt="screen"
-                src={`images/chores.jpg`}
-              />
-            </m.div>
-          </Box>
-
-          <Box sx={{ position: 'absolute', top: 0, width: '30%' }}>
-            <m.div variants={varFade().inDown}>
-              <m.div animate={{ y: [0, -15, 0] }} transition={{ duration: 8, repeat: Infinity }}>
-                <Image
-                  disabledEffect
-                  alt="sidebar"
-                  src={`images/chores_2.jpg`}
-                />
-              </m.div>
-            </m.div>
-          </Box>
-
-          {/* <Box sx={{ position: 'absolute', top: 0 }}>
-            <m.div variants={varFade().inDown}>
-              <m.div animate={{ y: [-5, 10, -5] }} transition={{ duration: 8, repeat: Infinity }}>
-                <Image
-                  disabledEffect
-                  alt="sidebar"
-                  src={`https://minimal-assets-api-dev.vercel.app/assets/images/home/theme-color/block2-${themeColorPresets}.png`}
-                />
-              </m.div>
-            </m.div>
-          </Box> */}
-{/* 
-          <Box sx={{ position: 'absolute', top: 0 }}>
-            <m.div variants={varFade().inDown}>
-              <m.div animate={{ y: [-25, 5, -25] }} transition={{ duration: 10, repeat: Infinity }}>
-                <Image
-                  disabledEffect
-                  alt="sidebar"
-                  src={`images/chores.jpg`}
-                />
-              </m.div>
-            </m.div>
-          </Box> */}
-        </Box>
+                  <Grid item>
+                    <Image alt="" src={`images/walls_3.jpg`} style={{ borderRadius: '10px 10px' }} />
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={6} sx={{ textAlign: 'left', marginTop: '100px', maxWidth: '475px' }}>
+            <Typography sx={{ fontSize: '3rem', lineHeight: '44px', fontWeight: '500' }}>
+              Start living your best life
+              <br /> from <span style={{ color: 'rgb(96 195 173)', textAlign: 'left' }}>day one</span>
+            </Typography>
+            <Typography sx={{ fontSize: '1rem', lineHeight: '26px', marginTop: '16px' }}>
+              Bring a box full of hopes, dreams, ambitions… and of course, your personal belongings. Everything else -
+              furniture, appliances, food - has already been taken care of.
+            </Typography>
+          </Grid>
+        </Grid>
       </Container>
     </RootStyle>
   );

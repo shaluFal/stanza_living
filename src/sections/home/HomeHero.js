@@ -126,34 +126,34 @@ export default function HomeHero() {
                   <AppFeatured list={_appFeatured} sx={{ marginBottom: '2%', position: 'relative', top: 0 }} />
                 </Grid>
                 <Grid item xs={12} md={4} lg={4}>
-                  <Grid container spacing={7}>
+                  <Grid container spacing={6.5}>
                     <Grid item xs={12} md={12} lg={12}>
-                      <Card sx={{ width: '100%', height: '125%' }}>
+                      <Card sx={{ width: '100%', height: '130%' }}>
                         <Typography sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700' }}>
                           Modern Student
                           <br /> Housing
                         </Typography>
-                        <img src="images/modern_1.jpg" alt="" style={{ width: 'initial', height: '125%' }} />
+                        <img src="images/modern_1.jpg" alt="" style={{ width: 'initial', height: '130%' }} />
                         <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
                       </Card>
                     </Grid>
 
                     <Grid item xs={12} md={12} lg={12}>
-                      <Card sx={{ width: '100%', height: '120%' }}>
+                      <Card sx={{ width: '100%', height: '130%' }}>
                         <Typography sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700' }}>
                           Co-living <br /> Professionals
                         </Typography>
-                        <img src="images/modern_2.jpg" alt="" style={{ width: 'initial', height: '125%' }} />
+                        <img src="images/modern_2.jpg" alt="" style={{ width: 'initial', height: '130%' }} />
                         <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
                       </Card>
                     </Grid>
 
                     <Grid item xs={12} md={12} lg={12}>
-                      <Card sx={{ width: '100%', height: '125%' }}>
+                      <Card sx={{ width: '100%', height: '130%' }}>
                         <Typography sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700' }}>
                           Managed <br /> Apartments
                         </Typography>
-                        <img src="images/modern_3.jpg" alt="" style={{ width: 'initial', height: '125%' }} />
+                        <img src="images/modern_3.jpg" alt="" style={{ width: 'initial', height: '130%' }} />
                         <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
                       </Card>
                     </Grid>
