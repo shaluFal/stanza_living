@@ -23,7 +23,7 @@ import { MotionViewport, varFade } from '../../components/animate';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled('div')(({ theme }) => ({
-  padding: theme.spacing(15, 0),
+  padding: theme.spacing(10, 0)
 }));
 
 // ----------------------------------------------------------------------
@@ -32,12 +32,17 @@ export default function HomeAdvertisement() {
   const { themeColorPresets, onChangeColor, colorOption } = useSettings();
 
   return (
-    <RootStyle>
-      <Container component={MotionViewport} sx={{ position: 'relative', textAlign: 'center' }}>
+    <RootStyle 
+    sx={{
+      background: 'linear-gradient(rgb(226, 242, 240) 13.14%, rgba(226, 242, 240, 0) 100%)',
+      clipPath: {md: 'polygon(0px 1%, 100% 28%, 100% 100%, 0px 100%)', xs: 0},
+    }}
+    >
+      <Container component={MotionViewport} sx={{ position: 'relative', textAlign: 'center'}}>
         <Grid container spacing={5} sx={{ paddingTop: '150px' }}>
-          <Grid item xs={6} sx={{ textAlign: 'left', marginTop: '100px', maxWidth: '475px' }}>
-            <Typography sx={{ fontSize: '3rem', lineHeight: '44px', fontWeight: '500' }}>
-              Chill in a<span style={{ color: 'rgb(96 195 173)', textAlign: 'left' }}> common area </span>
+          <Grid item xs={12} md={6} sx={{ textAlign: 'left', marginTop: '100px', maxWidth: '475px' }}>
+            <Typography variant="h3" sx={{ fontSize: '2rem', lineHeight: '44px', fontWeight: '700' }}>
+              Chill in a<span style={{ color: 'rgb(96 195 173)', textAlign: 'left' }}> common area <br/> </span>
               that's anything but common
             </Typography>
             <Typography sx={{ fontSize: '1rem', lineHeight: '26px', marginTop: '16px' }}>
@@ -47,9 +52,9 @@ export default function HomeAdvertisement() {
             </Typography>
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <Grid container spacing={2}>
-              <Grid item xs={12} md={4} lg={6}>
+              <Grid item xs={6} >
                 <Grid container spacing={2}>
                   <Grid item>
                     <Image alt="" src={`images/chill_1.jpg`} style={{ borderRadius: '10px 10px' }} />
@@ -60,7 +65,7 @@ export default function HomeAdvertisement() {
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item xs={12} md={8} lg={6}>
+              <Grid item xs={6}>
                 <Image alt="" src={`images/chill_3.jpg`} style={{ width: '94%' }} />
               </Grid>
             </Grid>

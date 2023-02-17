@@ -37,7 +37,7 @@ export default function HomeCleanInterfaces() {
 
   return (
     <RootStyle>
-      <Container component={MotionViewport} sx={{ marginTop: '20%' }}>
+      <Container component={MotionViewport}>
         {/* <ContentStyle> */}
         {/* <m.div variants={varFade().inUp}>
             <Typography component="div" variant="overline" sx={{ mb: 2, color: 'text.disabled' }}>
@@ -47,13 +47,13 @@ export default function HomeCleanInterfaces() {
 
         {/* </ContentStyle> */}
 
-        <Grid container spacing={5} sx={{ paddingTop: '150px' }}>
-          <Grid item xs={6}>
+        <Grid container spacing={5}>
+          <Grid item xs={12} md={6}>
             <Grid container spacing={2}>
-              <Grid item xs={12} md={8} lg={6}>
+              <Grid item xs={6}>
                 <Image alt="" src={`images/pgfood_1.jpg`} style={{ width: '100%' }} />
               </Grid>
-              <Grid item xs={12} md={4} lg={6}>
+              <Grid item xs={6}>
                 <Grid container spacing={2}>
                   <Grid item>
                     <Image alt="" src={`images/pgfood_2.jpg`} style={{ borderRadius: '10px 10px' }} />
@@ -66,8 +66,8 @@ export default function HomeCleanInterfaces() {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={6} sx={{ textAlign: 'left', marginTop: '100px', maxWidth: '475px' }}>
-            <Typography sx={{ fontSize: '3rem', lineHeight: '50px', fontWeight: '500' }}>
+          <Grid item xs={12} md={6} sx={{ textAlign: 'left', marginTop: '100px', maxWidth: '475px' }}>
+            <Typography sx={{ fontSize: '2rem', lineHeight: '50px', fontWeight: '700' }}>
               Don't come expecting
               <br /> from <span style={{ color: 'rgb(96 195 173)', textAlign: 'left' }}>"hostel-PG food"</span>
             </Typography>

@@ -133,7 +133,7 @@ export default function ContactHero() {
         }}
       >
         <Grid item md={8}>
-          <m.div variants={varFade().inUp} sx={{ borderRadius: '10px 0px 0px 10px' }}>
+          <m.div  sx={{ borderRadius: '10px 0px 0px 10px' }}>
             {isDesktop && (
               <Grid
                 container

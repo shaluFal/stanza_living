@@ -143,7 +143,7 @@ function CarouselItem({ item, isActive,index }) {
 
       <OverlayStyle />
 
-      <Image alt={title} src={`images/feed_${index}.jpg`} sx={{ height: { xs: 300, md: 480, lg: 600 }, width: {xs: 440, md: 800, lg: 800}, textAlign: 'left' }} />
+      <Image alt={title} src={`images/feed_${index}.jpg`} sx={{ height: { xs: 300, md: 480, lg: 465 }, width: {xs: 300, md: 1200, lg: 800}, textAlign: 'left' }} />
     </Box>
   );
 }

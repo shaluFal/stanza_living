@@ -85,21 +85,21 @@ export default function HomeHugePackElements() {
     <MotionViewport disableAnimatedMobile={false}>
       <RootStyle>
         <Container>
-          <Grid container spacing={5} sx={{ paddingTop: '150px' }}>
+          <Grid container spacing={5} >
             <Grid item xs={12} md={6} sx={{ position: 'relative' }}>
               <m.div sx={{ width: '30%' }}>
                 <Image alt="light mode" src="images/chores_2.jpg" style={{ width: '60%', marginRight: '40%' }} />
               </m.div>
 
-              <Box component={m.div} sx={{ top: '150px', left: '190px', width: '60%', position: 'absolute' }}>
+              <Box component={m.div} sx={{ top: {md: '150px', xs: '80px'}, left: {md: '190px', xs: '140px'}, width: '60%', position: 'absolute' }}>
                 <Image alt="dark mode" src="images/chores.jpg" />
               </Box>
             </Grid>
 
             <Grid item xs={12} md={6} sx={{ textAlign: 'left', marginTop: '100px', maxWidth: '475px' }}>
-              <Typography sx={{ fontSize: '3rem', lineHeight: '44px', fontWeight: '500' }}>
-                Take your daily list of chores. And
-                <br /> from <span style={{ color: 'rgb(96 195 173)', textAlign: 'left' }}>tear it up</span>
+              <Typography variant='h3' sx={{ fontSize: '2rem', lineHeight: '44px', fontWeight: '700' }}>
+                Take your daily list of   <br />chores. And
+               from <span style={{ color: 'rgb(96 195 173)', textAlign: 'left' }}>tear it up</span>
               </Typography>
               <Typography sx={{ fontSize: '1rem', lineHeight: '26px', marginTop: '16px' }}>
                 You have better things to do than wash your clothes, clean up your room and cook your meals. So our team
