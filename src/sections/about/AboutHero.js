@@ -8,13 +8,9 @@ import { MotionContainer, TextAnimate, varFade } from '../../components/animate'
 // ----------------------------------------------------------------------
 
 const RootStyle = styled('div')(({ theme }) => ({
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  backgroundImage:
-    'url(/stanza/assets/overlay.svg), url(https://minimal-assets-api-dev.vercel.app/assets/images/about/hero.jpg)',
   padding: theme.spacing(10, 0),
   [theme.breakpoints.up('md')]: {
-    height: 560,
+    height: 100,
     padding: 0,
   },
 }));
@@ -23,7 +19,7 @@ const ContentStyle = styled('div')(({ theme }) => ({
   textAlign: 'center',
   [theme.breakpoints.up('md')]: {
     textAlign: 'left',
-    position: 'absolute',
+
     bottom: theme.spacing(10),
   },
 }));
@@ -32,31 +28,23 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 export default function AboutHero() {
   return (
-    <RootStyle>
-      <Container component={MotionContainer} sx={{ position: 'relative', height: '100%' }}>
-        <ContentStyle>
-          <TextAnimate text="Who" sx={{ color: 'primary.main' }} variants={varFade().inRight} />
+    // <RootStyle>
+    <Container>
+      <ContentStyle>
+        {/* <TextAnimate text="Who" sx={{ color: 'primary.main' }} variants={varFade().inRight} />
           <br />
           <Box sx={{ display: 'inline-flex', color: 'common.white' }}>
             <TextAnimate text="we" sx={{ mr: 2 }} />
             <TextAnimate text="are?" />
-          </Box>
+          </Box> */}
 
-          <m.div variants={varFade().inRight}>
-            <Typography
-              variant="h4"
-              sx={{
-                mt: 5,
-                color: 'common.white',
-                fontWeight: 'fontWeightMedium',
-              }}
-            >
-              Let's work together and
-              <br /> make awesome site easily
-            </Typography>
-          </m.div>
-        </ContentStyle>
-      </Container>
-    </RootStyle>
+        <m.div>
+          <Typography variant="h2" sx={{ textAlign: 'center', marginTop: '30px' }}>
+            About <span style={{ color: 'rgb(96 195 173)' }}>Us</span>
+          </Typography>
+        </m.div>
+      </ContentStyle>
+    </Container>
+    // </RootStyle>
   );
 }

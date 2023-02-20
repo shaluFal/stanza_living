@@ -27,7 +27,7 @@ const menuConfig = [
       {
         items: [
           { title: 'About us', path: PATH_PAGE.about },
-          { title: 'About Team', path: PATH_PAGE.contact },
+          { title: 'Our Team', path: PATH_PAGE.contact },
           { title: 'Partner With Us', path: PATH_PAGE.faqs },
         ],
       },

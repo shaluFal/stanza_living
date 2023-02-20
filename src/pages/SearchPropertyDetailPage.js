@@ -1,6 +1,9 @@
 import React from 'react';
 import { Box, Container, Typography, Grid, InputAdornment, Card, Button, Divider } from '@mui/material';
+import { flexibleCompare } from '@fullcalendar/react';
+import { _appFeatured } from '../_mock';
 import API from '../Helper/api';
+import { AppFeatured } from '../sections/@dashboard/general/app';
 
 const SearchPropertyDetailPage = () => {
   const [property, setProperty] = React.useState([]);
@@ -36,13 +39,15 @@ const SearchPropertyDetailPage = () => {
             Exeter House, Unnamed Road, Gachibowli, Hyderabad, Telangana 500075, India
           </Typography>
 
+          {/* <AppFeatured list={_appFeatured} sx={{ marginBottom: '2%' }} /> */}
+
           {property.listOfFacilityImages?.length > 0 ? (
             <div>
               <img src={property.listOfFacilityImages[0]?.photoURL} alt="" style={{ width: '100%', height: '60%' }} />
             </div>
           ) : (
             <div>
-              <img src={''} alt="" style={{ width: '120%', height: '100%' }} />
+              <img src={''} alt="" style={{ width: '100%', height: '60%' }} />
             </div>
           )}
 

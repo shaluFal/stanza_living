@@ -18,7 +18,7 @@ import { MotionViewport, varFade } from '../../components/animate';
 
 const RootStyle = styled('div')(({ theme }) => ({
   textAlign: 'center',
-  paddingTop: theme.spacing(20),
+  paddingTop: theme.spacing(8),
   paddingBottom: theme.spacing(10),
   [theme.breakpoints.up('md')]: {
     textAlign: 'left',
@@ -39,41 +39,11 @@ export default function AboutWhat() {
   return (
     <RootStyle>
       <Container component={MotionViewport}>
-        <Grid container spacing={3}>
-          {isDesktop && (
-            <Grid item xs={12} md={6} lg={7} sx={{ pr: { md: 7 } }}>
-              <Grid container spacing={3} alignItems="flex-end">
-                <Grid item xs={6}>
-                  <m.div variants={varFade().inUp}>
-                    <Image
-                      alt="our office 1"
-                      src="https://minimal-assets-api-dev.vercel.app/assets/images/about/what-1.jpg"
-                      ratio="3/4"
-                      sx={{
-                        borderRadius: 2,
-                        boxShadow: shadow,
-                      }}
-                    />
-                  </m.div>
-                </Grid>
-                <Grid item xs={6}>
-                  <m.div variants={varFade().inUp}>
-                    <Image
-                      alt="our office 2"
-                      src="https://minimal-assets-api-dev.vercel.app/assets/images/about/what-2.jpg"
-                      ratio="1/1"
-                      sx={{ borderRadius: 2 }}
-                    />
-                  </m.div>
-                </Grid>
-              </Grid>
-            </Grid>
-          )}
-
-          <Grid item xs={12} md={6} lg={5}>
+        <Grid container spacing={6} sx={{ marginBottom: '10%' }}>
+          <Grid item xs={12} md={6}>
             <m.div variants={varFade().inRight}>
-              <Typography variant="h2" sx={{ mb: 3 }}>
-                What is minimal?
+              <Typography variant="h3" sx={{ mb: 3, marginTop: '40px' }}>
+                We didn't find it for us, <span style={{ color: 'rgb(96 195 173)' }}>so we created it for you</span>
               </Typography>
             </m.div>
 
@@ -83,66 +53,175 @@ export default function AboutWhat() {
                   color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'common.white'),
                 }}
               >
-                Our theme is the most advanced and user-friendly theme you will find on the market, we have
-                documentation and video to help set your site really easily, pre-installed demos you can import in one
-                click and everything from the theme options to page content can be edited from the front-end. This is
-                the theme you are looking for.
+                That's essentially our story in one sentence. Crammed up hostels or cooped up PGs - not much of a
+                choice, is it? Thats why we created Stanza Living - a place designed by people who've been in your
+                shoes. Understand you. And are inspired by you.
+              </Typography>
+            </m.div>
+          </Grid>
+
+          <Grid item xs={12} md={6} sx={{ pr: { md: 7 } }}>
+            <m.div variants={varFade().inUp}>
+              <Image
+                alt="our office 1"
+                src="images/about_1.jpg"
+                sx={{
+                  borderRadius: 2,
+                  // boxShadow: shadow,
+                  width: { xs: '100%', md: '100%' },
+                }}
+              />
+            </m.div>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={6} sx={{ marginBottom: '10%' }}>
+          <Grid item xs={12} md={6} sx={{ pr: { md: 7 } }}>
+            <m.div variants={varFade().inUp}>
+              <Image
+                alt="our office 1"
+                src="images/about.jpg"
+                sx={{
+                  borderRadius: 2,
+                  // boxShadow: shadow,
+                  width: '100%',
+                }}
+              />
+            </m.div>
+          </Grid>
+
+          <Grid item xs={12} md={6}>
+            <m.div variants={varFade().inRight}>
+              <Typography variant="h3" sx={{ mb: 3, marginTop: '40px' }}>
+                You needed a place like home, <span style={{ color: 'rgb(96 195 173)' }}>so we moved back home</span>
               </Typography>
             </m.div>
 
-            <Box sx={{ my: 5 }}>
-              {_skills.map((progress) => (
-                <m.div key={progress.label} variants={varFade().inRight}>
-                  <ProgressItem progress={progress} />
-                </m.div>
-              ))}
-            </Box>
+            <m.div variants={varFade().inRight}>
+              <Typography
+                sx={{
+                  color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'common.white'),
+                }}
+              >
+                It was 2015. Two erstwhile IIM-A hostel roomies, Anindya and Sandeep, met again. Reminiscing about the
+                'good old hostel days', they realised a lot of that 'good' could've been better. So to give youngsters
+                that 'better', in 2017, they set up a base in New Delhi, and the rest, as we say, is the present.
+              </Typography>
+            </m.div>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={6} sx={{ marginBottom: '10%' }}>
+          <Grid item xs={12} md={6}>
+            <m.div variants={varFade().inRight}>
+              <Typography variant="h3" sx={{ mb: 3, marginTop: '40px' }}>
+                We designed the backdrop of <span style={{ color: 'rgb(96 195 173)' }}>your life</span>
+              </Typography>
+            </m.div>
 
             <m.div variants={varFade().inRight}>
-              <Button
-                variant="outlined"
-                color="inherit"
-                size="large"
-                endIcon={<Iconify icon={'ic:round-arrow-right-alt'} width={24} height={24} />}
+              <Typography
+                sx={{
+                  color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'common.white'),
+                }}
               >
-                Check out our work
-              </Button>
+                The sofa in the lounge will make you see your bestie and you arguing about whose day was more hectic.
+                The bed in your room will give you a picture of where you'll be scrolling through insta stories. The
+                microwave in the pantry will make you imagine slurping on a piping hot bowl of noodles in the middle of
+                the night. Simply put, you'll see a bit of your life in every spot of the residence. And a place that
+                does that is home
+              </Typography>
+            </m.div>
+          </Grid>
+
+          <Grid item xs={12} md={6} sx={{ pr: { md: 7 } }}>
+            <m.div variants={varFade().inUp}>
+              <Image
+                alt="our office 1"
+                src="images/about_2.jpg"
+                sx={{
+                  borderRadius: 2,
+                  // boxShadow: shadow,
+                  width: { xs: '100%', md: '100%' },
+                }}
+              />
+            </m.div>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={6} sx={{ marginBottom: '10%' }}>
+          <Grid item xs={12} md={6} sx={{ pr: { md: 7 } }}>
+            <m.div variants={varFade().inUp}>
+              <Image
+                alt="our office 1"
+                src="images/about_3.jpg"
+                sx={{
+                  borderRadius: 2,
+                  // boxShadow: shadow,
+                  width: '100%',
+                }}
+              />
+            </m.div>
+          </Grid>
+
+          <Grid item xs={12} md={6}>
+            <m.div variants={varFade().inRight}>
+              <Typography variant="h3" sx={{ mb: 3, marginTop: '40px' }}>
+                The inspiration behind it? <span style={{ color: 'rgb(96 195 173)' }}>You.</span>
+              </Typography>
+            </m.div>
+
+            <m.div variants={varFade().inRight}>
+              <Typography
+                sx={{
+                  color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'common.white'),
+                }}
+              >
+                From something as apparent as the number of drawers in your wardrobe, to something as neglected as the
+                perfect illumination of the lights in the corridors, every aspect of our residence design is detailed to
+                add comfort and convenience to your everyday life. That's the kind of thought you deserve, and we put it
+                into it
+              </Typography>
+            </m.div>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={6}>
+          <Grid item xs={12} md={6}>
+            <m.div variants={varFade().inRight}>
+              <Typography variant="h3" sx={{ mb: 3, marginTop: '40px' }}>
+                There’s <span style={{ color: 'rgb(96 195 173)' }}>more room</span> in your room
+              </Typography>
+            </m.div>
+
+            <m.div variants={varFade().inRight}>
+              <Typography
+                sx={{
+                  color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'common.white'),
+                }}
+              >
+                Good news! Your belongings will no longer wrestle for the same space. They can happily coexist in your
+                spacious, fully-furnished room. And when you venture out of your room, the resting area, gaming and
+                entertainment zone and dining area will further add a lot of life to your daily life.
+              </Typography>
+            </m.div>
+          </Grid>
+
+          <Grid item xs={12} md={6} sx={{ pr: { md: 7 } }}>
+            <m.div variants={varFade().inUp}>
+              <Image
+                alt="our office 1"
+                src="images/about_4.jpg"
+                sx={{
+                  borderRadius: 2,
+                  // boxShadow: shadow,
+                  width: { xs: '100%', md: '100%' },
+                }}
+              />
             </m.div>
           </Grid>
         </Grid>
       </Container>
     </RootStyle>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-ProgressItem.propTypes = {
-  progress: PropTypes.shape({
-    label: PropTypes.string,
-    value: PropTypes.number,
-  }),
-};
-
-function ProgressItem({ progress }) {
-  const { label, value } = progress;
-
-  return (
-    <Box sx={{ mt: 3 }}>
-      <Box sx={{ mb: 1.5, display: 'flex', alignItems: 'center' }}>
-        <Typography variant="subtitle2">{label}&nbsp;-&nbsp;</Typography>
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {fPercent(value)}
-        </Typography>
-      </Box>
-      <LinearProgress
-        variant="determinate"
-        value={value}
-        sx={{
-          '& .MuiLinearProgress-bar': { bgcolor: 'grey.700' },
-          '&.MuiLinearProgress-determinate': { bgcolor: 'divider' },
-        }}
-      />
-    </Box>
   );
 }

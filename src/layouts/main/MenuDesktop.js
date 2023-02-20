@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import { m } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
 import { Navigate, NavLink as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+import Select from 'react-select';
 
 // @mui
 import { styled } from '@mui/material/styles';
@@ -20,7 +21,7 @@ import {
   CardActionArea,
   FormControl,
   InputLabel,
-  Select,
+  // Select,
   MenuItem,
   Typography,
   Card,
@@ -29,6 +30,7 @@ import {
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
+import InputStyle from '../../components/InputStyle';
 import API from '../../Helper/api';
 // components
 import Iconify from '../../components/Iconify';
@@ -89,10 +91,13 @@ export default function MenuDesktop({ isOffset, isHome, navConfig }) {
   const [openModal, setOpenModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [open, setOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
   const handleModalClose = () => setShowModal(false);
   const handleModalShow = () => {
     setShowModal(true);
   };
+
+ 
 
   useEffect(() => {
     if (open) {
@@ -125,6 +130,8 @@ export default function MenuDesktop({ isOffset, isHome, navConfig }) {
             handleModalClose={handleModalClose}
             showModal={showModal}
             locations={locations}
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
           />
         ))}
       </Stack>
@@ -158,12 +165,42 @@ function MenuDesktopItem({
   handleModalClose,
   showModal,
   locations,
+  selectedOption,
+  setSelectedOption,
 }) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { title, path, children } = item;
 
+  const groupStyles = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  };
+
+  // const groupBadgeStyles: CSSProperties = {
+  //   backgroundColor: '#EBECF0',
+  //   borderRadius: '2em',
+  //   color: '#172B4D',
+  //   display: 'inline-block',
+  //   fontSize: 12,
+  //   fontWeight: 'normal',
+  //   lineHeight: '1',
+  //   minWidth: 1,
+  //   padding: '0.16666666666667em 0.5em',
+  //   textAlign: 'center',
+  // };
+
+  // const formatGroupLabel = (data: GroupedOption) => (
+  //   <div style={groupStyles}>
+  //     <span>{data.label}</span>
+  //     <span style={groupBadgeStyles}>{data.options.length}</span>
+  //   </div>
+  // );
+
   const isActive = (path) => pathname === path;
+
+ 
 
   if (children) {
     return (
@@ -206,14 +243,14 @@ function MenuDesktopItem({
             },
           }}
         >
-          <Grid container spacing={3}>
+          <Grid container spacing={3} >
             {children.map((list) => {
               const { subheader, items } = list;
 
               return (
                 <Grid key={subheader} item xs={12} md={subheader === 'Dashboard' ? 6 : 2}>
                   <List disablePadding>
-                    <ListSubheader
+                    {/* <ListSubheader
                       disableSticky
                       disableGutters
                       sx={{
@@ -225,7 +262,7 @@ function MenuDesktopItem({
                       }}
                     >
                       <IconBullet type="subheader" /> {subheader}
-                    </ListSubheader>
+                    </ListSubheader> */}
 
                     {items.map((item) => (
                       <SubLinkStyle
@@ -365,7 +402,7 @@ function MenuDesktopItem({
               borderRadius: '10px 0px 0px 10px',
             }}
           >
-            <Grid item lg={6} xs={4}>
+            {/* <Grid item lg={6} xs={4}>
               <FormControl fullWidth>
                 <InputLabel style={{ borderRadius: '10px 0px 0px 10px' }}>Choose property type</InputLabel>
                 <Select
@@ -386,8 +423,8 @@ function MenuDesktopItem({
                   })}
                 </Select>
               </FormControl>
-            </Grid>
-            <Grid item lg={6} xs={1} md={4} sx={{ borderRadius: '0px 10px 10px 0px' }}>
+            </Grid> */}
+            {/* <Grid item lg={6} xs={1} md={4} sx={{ borderRadius: '0px 10px 10px 0px' }}>
               <TextField
                 inputProps={{ 'aria-label': 'Without label' }}
                 variant="outlined"
@@ -398,12 +435,27 @@ function MenuDesktopItem({
                   width: { xs: '155px', lg: '200px', md: '200px' },
                 }}
               />
+            </Grid> */}
+
+            <Grid item  sx={{ width: "100%", marginTop: "8px" }}>
+              <Select
+              placeholder={<div>Find in and around..</div>}
+                options={locations.map((lt) => {
+                  return {
+                    value: lt.id,
+                    label: lt.value,
+                  };
+                })}
+                onChange={(data) => {
+                  handleModalClose();
+                  navigate(`/contact-us/${data.value}/`);
+                }}
+                components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
+              />
             </Grid>
           </Grid>
 
-          <h5 style={{ marginTop: '4%' }}>Popular Cities</h5>
-
-          <Grid container sx={{ marginTop: '3%' }}>
+          {/* <Grid container sx={{ marginTop: '3%' }}>
             {locations.map((lt) => {
               return (
                 <>
@@ -424,6 +476,15 @@ function MenuDesktopItem({
                 </>
               );
             })}
+          </Grid> */}
+          <Grid container sx={{ marginTop: '3%' }}>
+            <Grid item xs={12}>
+              <h5 style={{ marginTop: '4%', marginBottom: '10px' }}>Popular Cities</h5>
+            </Grid>
+            <Grid item xs={12}>
+              <img src="images/hyd.jpg" alt="" style={{ width: '60px', height: '60px', marginLeft: "10px" }} />
+              <Typography sx={{marginTop: "10px"}}>Hyderabad</Typography>
+            </Grid>
           </Grid>
         </Card>
       </Modal>

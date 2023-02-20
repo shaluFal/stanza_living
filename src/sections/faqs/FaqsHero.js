@@ -1,18 +1,22 @@
 import { m } from 'framer-motion';
 // @mui
 import { styled } from '@mui/material/styles';
-import { Box, Container, Stack, InputAdornment } from '@mui/material';
+import { Box, Container, Stack, InputAdornment, Grid, Typography } from '@mui/material';
+import Card from '../../theme/overrides/Card';
+
 // components
 import Iconify from '../../components/Iconify';
 import InputStyle from '../../components/InputStyle';
 import { MotionContainer, TextAnimate, varFade } from '../../components/animate';
 
+import Image from '../../components/Image';
+
 // ----------------------------------------------------------------------
 
 const RootStyle = styled('div')(({ theme }) => ({
-  backgroundSize: 'cover',
-  backgroundImage:
-    'url(/assets/overlay.svg), url(https://minimal-assets-api-dev.vercel.app/assets/images/faqs/hero.jpg)',
+  // backgroundSize: 'cover',
+  // backgroundImage:
+  //   'url(/assets/overlay.svg), url(https://minimal-assets-api-dev.vercel.app/assets/images/faqs/hero.jpg)',
   padding: theme.spacing(10, 0),
   [theme.breakpoints.up('md')]: {
     height: 560,
@@ -33,40 +37,113 @@ const ContentStyle = styled(Stack)(({ theme }) => ({
 
 export default function FaqsHero() {
   return (
-    <RootStyle>
-      <Container component={MotionContainer} sx={{ position: 'relative', height: '100%' }}>
-        <ContentStyle spacing={5}>
-          <div>
-            <TextAnimate text="How" sx={{ color: 'primary.main' }} variants={varFade().inRight} />
-            <br />
-            <Box sx={{ display: 'inline-flex', color: 'common.white' }}>
-              <TextAnimate text="can" sx={{ mr: 2 }} />
-              <TextAnimate text="we" sx={{ mr: 2 }} />
-              <TextAnimate text="help" sx={{ mr: 2 }} />
-              <TextAnimate text="you?" />
-            </Box>
-          </div>
+    // <RootStyle>
+      <Container sx={{ textAlign: 'center', marginTop: '5%' }}>
+        {/* <ContentStyle> */}
 
-          <m.div variants={varFade().inUp}>
-            <InputStyle
-              stretchStart={280}
-              placeholder="Search support"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Iconify icon={'eva:search-fill'} sx={{ color: 'text.disabled', width: 20, height: 20 }} />
-                  </InputAdornment>
-                ),
-              }}
+        <h1>
+          The Stars of the <span style={{ color: 'rgb(96 195 173)' }}>“STANZAVERSE”</span>
+        </h1>
+        <p>
+          Our team's full of undiscovered Da Vincis, aspiring master chefs, budding triathlon finishers, IMDB top 250
+          encyclopedias, and more. But what they do in the office is even better. Thanks to them, as of today, we're one
+          of India's hottest startups.
+        </p>
+        {/* </ContentStyle> */}
+        <Grid container spacing={7} sx={{marginTop: "5%", marginBottom: "5%"}}>
+          <Grid item xs={4} md={3}>
+            <Image
+              alt="our office 1"
+              src="images/team.jpg"
               sx={{
-                '& .MuiOutlinedInput-root': {
-                  color: 'common.white',
-                },
+                borderRadius: 2,
+                // boxShadow: shadow,
+                width: { xs: '100%', md: '100%' },
               }}
             />
-          </m.div>
-        </ContentStyle>
+            <Typography variant='h5'>Nupur Chhibber</Typography>
+            <Typography>Vice President</Typography>
+          </Grid>
+          <Grid item xs={4} md={3}>
+            <Image
+              alt="our office 1"
+              src="images/team.jpg"
+              sx={{
+                borderRadius: 2,
+                // boxShadow: shadow,
+                width: { xs: '100%', md: '100%' },
+              }}
+            />
+            <Typography variant='h5'>Nupur Chhibber</Typography>
+            <Typography>Vice President</Typography>
+          </Grid>
+          <Grid item xs={4} md={3}>
+            <Image
+              alt="our office 1"
+              src="images/team.jpg"
+              sx={{
+                borderRadius: 2,
+                // boxShadow: shadow,
+                width: { xs: '100%', md: '100%' },
+              }}
+            />
+            <Typography variant='h5'>Nupur Chhibber</Typography>
+            <Typography>Vice President</Typography>
+          </Grid>
+          <Grid item xs={4} md={3}>
+            <Image
+              alt="our office 1"
+              src="images/team.jpg"
+              sx={{
+                borderRadius: 2,
+                // boxShadow: shadow,
+                width: { xs: '100%', md: '100%' },
+              }}
+            />
+            <Typography variant='h5'>Nupur Chhibber</Typography>
+            <Typography>Vice President</Typography>
+          </Grid>
+          <Grid item xs={4} md={3}>
+            <Image
+              alt="our office 1"
+              src="images/team.jpg"
+              sx={{
+                borderRadius: 2,
+                // boxShadow: shadow,
+                width: { xs: '100%', md: '100%' },
+              }}
+            />
+            <Typography variant='h5'>Nupur Chhibber</Typography>
+            <Typography>Vice President</Typography>
+          </Grid>
+          <Grid item xs={4} md={3}>
+            <Image
+              alt="our office 1"
+              src="images/team.jpg"
+              sx={{
+                borderRadius: 2,
+                // boxShadow: shadow,
+                width: { xs: '100%', md: '100%' },
+              }}
+            />
+            <Typography variant='h5'>Nupur Chhibber</Typography>
+            <Typography>Vice President</Typography>
+          </Grid>
+          <Grid item xs={4} md={3}>
+            <Image
+              alt="our office 1"
+              src="images/team.jpg"
+              sx={{
+                borderRadius: 2,
+                // boxShadow: shadow,
+                width: { xs: '100%', md: '100%' },
+              }}
+            />
+            <Typography variant='h5'>Nupur Chhibber</Typography>
+            <Typography>Vice President</Typography>
+          </Grid>
+        </Grid>
       </Container>
-    </RootStyle>
+    // </RootStyle>
   );
 }

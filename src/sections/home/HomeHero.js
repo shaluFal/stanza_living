@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { m } from 'framer-motion';
 import { Link as RouterLink, Navigate, useNavigate } from 'react-router-dom';
+import Select from 'react-select';
 // @mui
 import { styled } from '@mui/material/styles';
 import {
@@ -16,7 +17,7 @@ import {
   Divider,
   FormControl,
   InputLabel,
-  Select,
+  // Select,
   MenuItem,
   TextField,
 } from '@mui/material';
@@ -101,50 +102,57 @@ export default function HomeHero() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd').then(
-  //     (response) => {
-  //       setLocation(response.data?.listOfLocations);
-  //     }
-  //   );
-  // }, []);
-
-  const getAllLocations = useCallback(async () => {
-    const locationid = window.location.pathname.split('/')[3];
-
-    try {
-      await API.post('http://pmsapis.crisprsys.net/api/WebsiteAPI/GetListOfProperties', {
-        apiKey: 'eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=',
-        location: locationid,
-        amenities: '',
-        services: '',
-        amountStartRange: '0',
-        amountEndRange: '10000000',
-      })
-        .then((res) => {
-          setLocation(res.data.listOfProperties);
-        })
-        .catch((err) => console.log(err));
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
+  const [locationList, setLocationList] = useState([]);
 
   useEffect(() => {
-    getAllLocations();
-  }, [getAllLocations]);
+    API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd').then(
+      (response) => {
+        setLocationList(response.data?.listOfLocations);
+      }
+    );
+  }, []);
+
+  // const getAllLocations = useCallback(async () => {
+  //   const locationid = window.location.pathname.split('/')[3];
+
+  //   try {
+  //     await API.post('http://pmsapis.crisprsys.net/api/WebsiteAPI/GetListOfProperties', {
+  //       apiKey: 'eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=',
+  //       location: locationid,
+  //       amenities: '',
+  //       services: '',
+  //       amountStartRange: '0',
+  //       amountEndRange: '10000000',
+  //     })
+  //       .then((res) => {
+  //         setLocation(res.data.listOfProperties);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   getAllLocations();
+  // }, [getAllLocations]);
 
   const handleModalClose = () => setShowModal(false);
   const handleModalShow = () => {
     setShowModal(true);
   };
 
+  const options = [
+    { value: 'BoysHostel', label: 'Boys Hostel' },
+    { value: 'GirlsHostel', label: 'Girls Hostel' },
+  ];
+
   return (
     <>
       {/* <RootStyle> */}
       <Container sx={{ marginTop: '6%' }}>
         <m.div>
-          <Grid container spacing={1}>
+          <Grid container spacing={1}  sx={{marginTop: "45px"}}>
             <Grid item xs={12} md={8}>
               <AppFeatured list={_appFeatured} sx={{ marginBottom: '2%' }} />
             </Grid>
@@ -190,48 +198,47 @@ export default function HomeHero() {
             container
             sx={{
               position: 'absolute',
-              top: { md: '45%', xs: '15%' },
-              paddingLeft: '2%',
+              top: { md: '55%', xs: '25%', lg: '45%' },
+              padding: '2%',
               borderRadius: '10px 0px 0px 10px',
             }}
           >
-            <Grid item xs={2}>
-              <FormControl fullWidth>
-                {/* <InputLabel style={{ borderRadius: '10px 0px 0px 10px' }}>Choose property type</InputLabel> */}
-                <Select
-                  id="demo-simple-select"
-                  label="choose property type"
-                  // inputProps={{
-                  //   borderRadius: "10px 0px 0px 10px"
-                  // }}
-                  inputProps={{ 'aria-label': 'Without label' }}
-                  onChange={(e) => {
-                    handleModalClose();
-                    navigate(`/contact-us/${e.target.value}/`);
-                  }}
-                  value="choose"
-                  sx={{ background: 'white', borderRadius: '10px 0px 0px 10px' }}
-                >
-                  <MenuItem value={'choose'}>Choose Property type</MenuItem>
-                  <MenuItem value="boys-hostel">Boys Hostel</MenuItem>
-                  <MenuItem value="girls-hostel">Girls Hostel</MenuItem>
-                  {/* {locations.map((lt) => {
-                    return <MenuItem value={lt.id}>{lt.value}</MenuItem>;
-                  })} */}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={2} sx={{ borderRadius: '0px 10px 10px 0px' }}>
-              <TextField
-                id="Find in and around."
+            <Grid item xs={6} md={5} lg={2}>
+              <Select
+              styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  borderRadius: "10px 0px 0px 10px"
+                }),
+              }}
+                placeholder={<div>Choose Property Type</div>}
+                id="demo-simple-select"
+                label="choose property type"
                 inputProps={{ 'aria-label': 'Without label' }}
-                placeholder="Find in and around."
-                variant="outlined"
-                sx={{
-                  background: 'white',
-                  borderRadius: '0px 10px 10px 0px',
-                  width: { xs: '155px', lg: '200px', md: '200px' },
+                options={options}
+                sx={{ background: 'white', borderRadius: '10px 0px 0px 10px' }}
+              />
+            </Grid>
+            <Grid item xs={4} md={5} lg={2} sx={{ borderRadius: '0px 10px 10px 0px' }}>
+              <Select
+              styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  borderRadius: "0px 10px 10px 0px"
+                }),
+              }}
+                placeholder={<div>Find in and around..</div>}
+                options={locationList.map((lt) => {
+                  return {
+                    value: lt.id,
+                    label: lt.value,
+                  };
+                })}
+                onChange={(data) => {
+                  // handleModalClose();
+                  navigate(`/contact-us/${data.value}/`);
                 }}
+                components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
               />
             </Grid>
           </Grid>
@@ -256,7 +263,7 @@ export default function HomeHero() {
             </div>
             <div>
               <Typography variant="caption" component="div" sx={{ color: '#000' }}>
-                <BedIcon sx={{ fontSize: '1.6rem', color: 'rgb(0, 171, 85)' }} />
+                <BedIcon sx={{ fontSize: '1.5rem', color: 'rgb(0, 171, 85)' }} />
                 &nbsp;
                 <span style={{ verticalAlign: 'super', fontWeight: '600', fontSize: '14px' }}>70,000+ Beds</span>
               </Typography>

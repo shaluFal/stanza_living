@@ -14,6 +14,7 @@ import AuthGuard from '../guards/AuthGuard';
 import { PATH_AFTER_LOGIN } from '../config';
 // components
 import LoadingScreen from '../components/LoadingScreen';
+import Partner from '../pages/Partner';
 
 
 
@@ -166,7 +167,9 @@ export default function Router() {
         { element: <HomePage />, index: true },
         { path: 'about-us', element: <About /> },
         { path: 'contact-us/:id', element: <Contact /> },
-        { path: 'faqs', element: <Faqs /> },
+        
+        { path: 'team', element: <Faqs /> },
+        { path: 'partner', element: <Partner /> },
         {path: 'search-property-detail/:id', element: <SearchPropertyDetailPage />}
       ],
     },

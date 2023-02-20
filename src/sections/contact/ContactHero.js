@@ -1,6 +1,7 @@
 import { m } from 'framer-motion';
 import React, { useCallback, useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
+import Select from 'react-select';
 import {
   Box,
   Container,
@@ -12,7 +13,7 @@ import {
   Divider,
   MenuItem,
   TextField,
-  Select,
+  // Select,
   InputLabel,
   FormControl,
   FormControlLabel,
@@ -123,6 +124,16 @@ export default function ContactHero() {
     zoom: 11,
   };
 
+  const options = [
+    { value: 'BoysHostel', label: 'Boys Hostel' },
+    { value: 'GirlsHostel', label: 'Girls Hostel' },
+  ];
+
+  const localityOptions = [
+    { value: 'Ameerpet', label: 'Ameerpet' },
+    { value: 'Ameerpet', label: 'Ameerpet' },
+  ];
+
   return (
     <>
       <Grid
@@ -133,7 +144,7 @@ export default function ContactHero() {
         }}
       >
         <Grid item md={8}>
-          <m.div  sx={{ borderRadius: '10px 0px 0px 10px' }}>
+          <m.div >
             {isDesktop && (
               <Grid
                 container
@@ -142,34 +153,41 @@ export default function ContactHero() {
                   paddingLeft: '2%',
                 }}
               >
-                <Grid item lg={2} xs={4}>
-                  <FormControl fullWidth>
-                    <InputLabel style={{ borderRadius: '10px 0px 0px 10px' }}>Choose property type</InputLabel>
-                    <Select
-                      id="demo-simple-select"
-                      label="choose property type"
-                      onChange={(e) => {
-                        handleModalClose();
-                        navigate(`/contact-us/${e.target.value}/`);
-                      }}
-                      sx={{ background: 'white', borderRadius: '10px 0px 0px 10px' }}
-                    >
-                      {locations.map((lt) => {
-                        return <MenuItem value={lt.id}>{lt.value}</MenuItem>;
-                      })}
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item lg={2} xs={1} md={4} sx={{ borderRadius: '0px 10px 10px 0px' }}>
-                  <TextField
-                    variant="outlined"
-                    placeholder="Find in and around."
+                <Grid item xs={3} sx={{border: "none"}}>
+                  <Select
+                  styles={{
+                    control: (baseStyles, state) => ({
+                      ...baseStyles,
+                      borderRadius: "10px 0px 0px 10px"
+                    }),
+                  }}
+                    placeholder={<div>Choose Property Type</div>}
+                    id="demo-simple-select"
+                    label="choose property type"
                     inputProps={{ 'aria-label': 'Without label' }}
-                    sx={{
-                      background: 'white',
-                      borderRadius: '0px 10px 10px 0px',
-                      width: { xs: '155px', lg: '200px', md: '200px' },
+                    options={options}
+                  />
+                </Grid>
+                <Grid item xs={3} sx={{ borderRadius: '0px 10px 10px 0px' }}>
+                  <Select
+                  styles={{
+                    control: (baseStyles, state) => ({
+                      ...baseStyles,
+                      borderRadius: "0px 10px 10px 0px"
+                    }),
+                  }}
+                    placeholder={<div>Find in and around..</div>}
+                    options={locations.map((lt) => {
+                      return {
+                        value: lt.id,
+                        label: lt.value,
+                      };
+                    })}
+                    onChange={(data) => {
+                      // handleModalClose();
+                      navigate(`/contact-us/${data.value}/`);
                     }}
+                    components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
                   />
                 </Grid>
               </Grid>
@@ -177,12 +195,12 @@ export default function ContactHero() {
           </m.div>
 
           <m.div sx={{ paddingLeft: '2%' }}>
-            <Typography sx={{ marginTop: '2%', paddingLeft: '2%' }}>Stanza Living/PG in Hyderabad</Typography>
+            <Typography sx={{ marginTop: '2%', paddingLeft: '2%', marginBottom: "5px" }}>Stanza Living/PG in Hyderabad</Typography>
 
             {isDesktop ? (
-              <Grid container sx={{ paddingLeft: '2%' }}>
+              <Grid container spacing={2} sx={{ paddingLeft: '2%' }}>
                 <Grid item>
-                  <FormControl sx={{ m: 1, minWidth: 120 }}>
+                  {/* <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <Select
                       value={''}
                       // onChange={handleChange}
@@ -195,107 +213,72 @@ export default function ContactHero() {
                       <MenuItem>Ameerpet</MenuItem>
                       <MenuItem>Gachibowli</MenuItem>
                     </Select>
-                  </FormControl>
+                  </FormControl> */}
+                   <Select
+                    placeholder={<div>Locality</div>}
+                    id="demo-simple-select"
+                    label="choose property type"
+                    inputProps={{ 'aria-label': 'Without label' }}
+                    options={localityOptions}
+                  />
                 </Grid>
                 <Grid item>
-                  <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <Select
-                      value={''}
-                      // onChange={handleChange}
-                      displayEmpty
-                      inputProps={{ 'aria-label': 'Without label' }}
-                    >
-                      <MenuItem value="">
-                        <em>Budget</em>
-                      </MenuItem>
-                      <MenuItem>Ameerpet</MenuItem>
-                      <MenuItem>Gachibowli</MenuItem>
-                    </Select>
-                  </FormControl>
+                <Select
+                    placeholder={<div>Budget</div>}
+                    id="demo-simple-select"
+                    label="choose property type"
+                    inputProps={{ 'aria-label': 'Without label' }}
+                    options={localityOptions}
+                  />
                 </Grid>
                 <Grid item>
-                  <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <Select
-                      value={''}
-                      // onChange={handleChange}
-                      displayEmpty
-                      inputProps={{ 'aria-label': 'Without label' }}
-                    >
-                      <MenuItem value="">
-                        <em>Occupancy</em>
-                      </MenuItem>
-                      <MenuItem>Ameerpet</MenuItem>
-                      <MenuItem>Gachibowli</MenuItem>
-                    </Select>
-                  </FormControl>
+                <Select
+                    placeholder={<div>Occupancy</div>}
+                    id="demo-simple-select"
+                    label="choose property type"
+                    inputProps={{ 'aria-label': 'Without label' }}
+                    options={localityOptions}
+                  />
                 </Grid>
 
                 <Grid item>
-                  <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <Select
-                      value={''}
-                      // onChange={handleChange}
-                      displayEmpty
-                      inputProps={{ 'aria-label': 'Without label' }}
-                    >
-                      <MenuItem value="">
-                        <em>Gender</em>
-                      </MenuItem>
-                      <MenuItem>Ameerpet</MenuItem>
-                      <MenuItem>Gachibowli</MenuItem>
-                    </Select>
-                  </FormControl>
+                <Select
+                    placeholder={<div>Gender</div>}
+                    id="demo-simple-select"
+                    label="choose property type"
+                    inputProps={{ 'aria-label': 'Without label' }}
+                    options={localityOptions}
+                  />
                 </Grid>
 
                 <Grid item>
-                  <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <Select
-                      value={''}
-                      // onChange={handleChange}
-                      displayEmpty
-                      inputProps={{ 'aria-label': 'Without label' }}
-                    >
-                      <MenuItem value="">
-                        <em>Amenities</em>
-                      </MenuItem>
-                      <MenuItem>Ameerpet</MenuItem>
-                      <MenuItem>Gachibowli</MenuItem>
-                    </Select>
-                  </FormControl>
+                <Select
+                    placeholder={<div>Amenities</div>}
+                    id="demo-simple-select"
+                    label="choose property type"
+                    inputProps={{ 'aria-label': 'Without label' }}
+                    options={localityOptions}
+                  />
                 </Grid>
 
                 <Grid item>
-                  <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <Select
-                      value={''}
-                      // onChange={handleChange}
-                      displayEmpty
-                      inputProps={{ 'aria-label': 'Without label' }}
-                    >
-                      <MenuItem value="">
-                        <em>My Wishlist</em>
-                      </MenuItem>
-                      <MenuItem>Ameerpet</MenuItem>
-                      <MenuItem>Gachibowli</MenuItem>
-                    </Select>
-                  </FormControl>
+                <Select
+                    placeholder={<div>My Wishlist</div>}
+                    id="demo-simple-select"
+                    label="choose property type"
+                    inputProps={{ 'aria-label': 'Without label' }}
+                    options={localityOptions}
+                  />
                 </Grid>
 
                 <Grid item>
-                  <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <Select
-                      value={''}
-                      // onChange={handleChange}
-                      displayEmpty
-                      inputProps={{ 'aria-label': 'Without label' }}
-                    >
-                      <MenuItem value="">
-                        <em>More Filters</em>
-                      </MenuItem>
-                      <MenuItem>Ameerpet</MenuItem>
-                      <MenuItem>Gachibowli</MenuItem>
-                    </Select>
-                  </FormControl>
+                <Select
+                    placeholder={<div>More Filters</div>}
+                    id="demo-simple-select"
+                    label="choose property type"
+                    inputProps={{ 'aria-label': 'Without label' }}
+                    options={localityOptions}
+                  />
                 </Grid>
 
                 {/* <Grid item>
@@ -316,39 +299,25 @@ export default function ContactHero() {
               </Grid> */}
               </Grid>
             ) : (
-              <Grid container sx={{ paddingLeft: '2%' }}>
+              <Grid container spacing={2} sx={{ paddingLeft: '2%' }}>
                 <Grid item>
-                  <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <Select
-                      value={''}
-                      // onChange={handleChange}
-                      displayEmpty
-                      inputProps={{ 'aria-label': 'Without label' }}
-                    >
-                      <MenuItem value="">
-                        <em>My Wishlist</em>
-                      </MenuItem>
-                      <MenuItem>Ameerpet</MenuItem>
-                      <MenuItem>Gachibowli</MenuItem>
-                    </Select>
-                  </FormControl>
+                <Select
+                    placeholder={<div>My Wishlist</div>}
+                    id="demo-simple-select"
+                    label="choose property type"
+                    inputProps={{ 'aria-label': 'Without label' }}
+                    options={localityOptions}
+                  />
                 </Grid>
 
                 <Grid item>
-                  <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <Select
-                      value={''}
-                      // onChange={handleChange}
-                      displayEmpty
-                      inputProps={{ 'aria-label': 'Without label' }}
-                    >
-                      <MenuItem value="">
-                        <em>More Filters</em>
-                      </MenuItem>
-                      <MenuItem>Ameerpet</MenuItem>
-                      <MenuItem>Gachibowli</MenuItem>
-                    </Select>
-                  </FormControl>
+                <Select
+                    placeholder={<div>More Filters</div>}
+                    id="demo-simple-select"
+                    label="choose property type"
+                    inputProps={{ 'aria-label': 'Without label' }}
+                    options={localityOptions}
+                  />
                 </Grid>
               </Grid>
             )}
@@ -410,16 +379,16 @@ export default function ContactHero() {
                                   {/* {loc.value} */}
                                 </Typography>
 
-                                <Grid container sx={{ marginTop: '2%' }}>
-                                  <Grid item xs={12} md={8}>
+                                <Grid container sx={{ marginTop: '2%', fontSize: '12px' }}>
+                                  <Grid item xs={8} md={8} sx={{ display: 'flex' }}>
                                     {/* Unisex | Double, Triple */}
                                     {loc.listOfUnitTypes &&
                                       loc.listOfUnitTypes.map((typ) => {
                                         return <div key={typ.facilityCode}>{typ.unitType} &nbsp;</div>;
                                       })}
                                   </Grid>
-                                  <Grid item xs={12} md={4}>
-                                    <Typography>View Directions</Typography>
+                                  <Grid item xs={4} md={4}>
+                                    <Typography sx={{ fontSize: '12px' }}>View Directions</Typography>
                                   </Grid>
                                 </Grid>
 
@@ -440,7 +409,7 @@ export default function ContactHero() {
                                                 border: '0.6px solid rgb(190, 190, 190)',
                                               }}
                                             >
-                                              <Typography sx={{ fontSize: '12px' }}>{amn}</Typography>
+                                              <Typography sx={{ fontSize: '12px' }}>{amn} </Typography>
                                             </Card>
                                           </Grid>
                                         </div>
