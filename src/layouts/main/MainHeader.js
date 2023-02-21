@@ -1,8 +1,12 @@
-import { useLocation } from 'react-router-dom';
+import { m } from 'framer-motion';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useLocation, Navigate, useNavigate } from 'react-router-dom';
+import Select from 'react-select';
 // @mui
 import { styled, useTheme } from '@mui/material/styles';
-import { Box, Button, AppBar, Toolbar, Container, Link } from '@mui/material';
+import { Box, Button, AppBar, Toolbar, Container, Link, Grid, Typography } from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 // hooks
 import useOffSetTop from '../../hooks/useOffSetTop';
 import useResponsive from '../../hooks/useResponsive';
@@ -13,10 +17,13 @@ import { HEADER } from '../../config';
 // components
 import Logo from '../../components/Logo';
 import Label from '../../components/Label';
+
 //
 import MenuDesktop from './MenuDesktop';
 import MenuMobile from './MenuMobile';
 import navConfig from './MenuConfig';
+import API from '../../Helper/api';
+import Image from '../../components/Image';
 
 // ----------------------------------------------------------------------
 
@@ -57,6 +64,29 @@ export default function MainHeader() {
 
   const isHome = pathname === '/';
 
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [locations, setLocations] = React.useState([]);
+  const [isSelected, setIsSelected] = useState(false);
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd').then(
+      (response) => {
+        setLocations(response.data?.listOfLocations);
+      }
+    );
+  }, []);
+
+  const options = [
+    { value: 'BoysHostel', label: 'Boys Hostel' },
+    { value: 'GirlsHostel', label: 'Girls Hostel' },
+  ];
+
+  const localityOptions = [
+    { value: 'Ameerpet', label: 'Ameerpet' },
+    { value: 'Ameerpet', label: 'Ameerpet' },
+  ];
+
   return (
     <AppBar sx={{ boxShadow: 0, bgcolor: 'transparent' }}>
       <ToolbarStyle
@@ -84,6 +114,90 @@ export default function MainHeader() {
           </Link>
 
           <Box sx={{ flexGrow: 1 }} />
+
+          {/* <m.div> */}
+          {isDesktop && (
+            <Box sx={{ width: '40%', marginRight: '3%' }}>
+              <Grid
+                container
+                sx={{
+                  borderRadius: '10px 0px 0px 10px',
+                  // paddingLeft: '2%',
+                  // position: 'relative',
+                  // bottom: '65px',
+                  // left: '200px',
+                  // zIndex: '2000',
+                }}
+              >
+                <Grid item xs={6} sx={{ border: 'none' }}>
+                  <Select
+                    styles={{
+                      control: (baseStyles, state) => ({
+                        ...baseStyles,
+                        borderRadius: '10px 0px 0px 10px',
+                        padding: '10px',
+                        fontSize: '14px',
+                        fontWeight: '500',
+                        // color: isSelected ? "#000" : "#000",
+                      }),
+                    }}
+                    placeholder={<div style={{ color: 'rgb(41, 45, 50)' }}>Choose Property Type</div>}
+                    id="demo-simple-select"
+                    label="choose property type"
+                    inputProps={{ 'aria-label': 'Without label' }}
+                    options={options}
+                    sx={{ background: 'white', borderRadius: '10px 0px 0px 10px' }}
+                    components={{ DropdownIndicator: () => <ExpandMoreIcon />, IndicatorSeparator: () => null }}
+                  />
+                </Grid>
+                <Grid item xs={6} sx={{ borderRadius: '0px 10px 10px 0px' }}>
+                  <Select
+                    styles={{
+                      control: (baseStyles, state) => ({
+                        ...baseStyles,
+                        borderRadius: '0px 10px 10px 0px',
+                        padding: '10px',
+                        fontSize: '14px',
+                        fontWeight: '500',
+                      }),
+                    }}
+                    placeholder={
+                      <div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500' }}>Find in and around..</div>
+                    }
+                    options={locations.map((lt) => {
+                      return {
+                        value: lt.id,
+                        label: lt.value,
+                      };
+                    })}
+                    onChange={(data) => {
+                      // handleModalClose();
+                      navigate(`/contact-us/${data.value}/`);
+                    }}
+                    components={{
+                      DropdownIndicator: () => (
+                        <Image
+                          src="images/search-interface-symbol.png"
+                          alt=""
+                          style={{ width: '15px', marginRight: '10px' }}
+                        />
+                      ),
+                      IndicatorSeparator: () => null,
+                    }}
+                    onInputChange={(input) => {
+                      if (input) {
+                        setMenuIsOpen(true);
+                      } else {
+                        setMenuIsOpen(false);
+                      }
+                    }}
+                    menuIsOpen={menuIsOpen}
+                  />
+                </Grid>
+              </Grid>
+            </Box>
+          )}
+          {/* </m.div> */}
 
           {isDesktop && <MenuDesktop isOffset={isOffset} isHome={isHome} navConfig={navConfig} />}
 

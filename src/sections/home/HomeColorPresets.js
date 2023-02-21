@@ -45,10 +45,9 @@ export default function HomeColorPresets() {
             variant="h2"
             sx={{
               mb: 3,
-              fontSize: '1rem',
+              fontSize: '2rem',
               lineHeight: { lg: '40px', md: '30px' },
               paddingTop: '15px',
-              
             }}
           >
             <span style={{ color: 'rgb(96 195 173)' }}>Not just </span>four walls and a roof

@@ -1,6 +1,7 @@
 import { m } from 'framer-motion';
 import React, { useCallback, useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
+import Popover from '@mui/material/Popover';
 import Select from 'react-select';
 import {
   Box,
@@ -22,18 +23,20 @@ import {
   FormHelperText,
 } from '@mui/material';
 import axios from 'axios';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import GoogleMapReact from 'google-map-react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import TuneIcon from '@mui/icons-material/Tune';
-import useResponsive from '../../hooks/useResponsive';
 import { _appFeatured } from '../../_mock';
+import useResponsive from '../../hooks/useResponsive';
 import { TextAnimate, MotionContainer, varFade } from '../../components/animate';
 import InputStyle from '../../components/InputStyle';
 import Iconify from '../../components/Iconify';
 import API from '../../Helper/api';
 import { AppFeatured } from '../@dashboard/general/app';
 import SearchPropertyDetailPage from '../../pages/SearchPropertyDetailPage';
+import Image from '../../components/Image';
 
 // ----------------------------------------------------------------------
 
@@ -75,6 +78,7 @@ export default function ContactHero() {
   const [openModal, setOpenModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [open, setOpen] = useState(false);
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
   const isDesktop = useResponsive('up', 'lg');
   const handleModalClose = () => setShowModal(false);
   const handleModalShow = () => {
@@ -134,6 +138,19 @@ export default function ContactHero() {
     { value: 'Ameerpet', label: 'Ameerpet' },
   ];
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handlePopoverClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+
+  const openPopover = Boolean(anchorEl);
+  const id = openPopover ? 'simple-popover' : undefined;
+
   return (
     <>
       <Grid
@@ -144,39 +161,53 @@ export default function ContactHero() {
         }}
       >
         <Grid item md={8}>
-          <m.div >
+          {/* <m.div>
             {isDesktop && (
               <Grid
                 container
                 sx={{
                   borderRadius: '10px 0px 0px 10px',
                   paddingLeft: '2%',
+                  position: 'relative',
+                  bottom: '65px',
+                  left: '200px',
+                  zIndex: '2000',
                 }}
               >
-                <Grid item xs={3} sx={{border: "none"}}>
+                <Grid item xs={2} sx={{ border: 'none' }}>
                   <Select
-                  styles={{
-                    control: (baseStyles, state) => ({
-                      ...baseStyles,
-                      borderRadius: "10px 0px 0px 10px"
-                    }),
-                  }}
-                    placeholder={<div>Choose Property Type</div>}
+                    styles={{
+                      control: (baseStyles, state) => ({
+                        ...baseStyles,
+                        borderRadius: '10px 0px 0px 10px',
+                        padding: '7px',
+                        fontSize: '14px',
+                        fontWeight: '500',
+                      }),
+                    }}
+                    placeholder={<div style={{ color: 'rgb(41, 45, 50)' }}>Choose Property Type</div>}
                     id="demo-simple-select"
                     label="choose property type"
                     inputProps={{ 'aria-label': 'Without label' }}
                     options={options}
+                    sx={{ background: 'white', borderRadius: '10px 0px 0px 10px' }}
+                    components={{ DropdownIndicator: () => <ExpandMoreIcon />, IndicatorSeparator: () => null }}
                   />
                 </Grid>
-                <Grid item xs={3} sx={{ borderRadius: '0px 10px 10px 0px' }}>
+                <Grid item xs={2} sx={{ borderRadius: '0px 10px 10px 0px' }}>
                   <Select
-                  styles={{
-                    control: (baseStyles, state) => ({
-                      ...baseStyles,
-                      borderRadius: "0px 10px 10px 0px"
-                    }),
-                  }}
-                    placeholder={<div>Find in and around..</div>}
+                    styles={{
+                      control: (baseStyles, state) => ({
+                        ...baseStyles,
+                        borderRadius: '0px 10px 10px 0px',
+                        padding: '7px',
+                        fontSize: '14px',
+                        fontWeight: '500',
+                      }),
+                    }}
+                    placeholder={
+                      <div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500' }}>Find in and around..</div>
+                    }
                     options={locations.map((lt) => {
                       return {
                         value: lt.id,
@@ -187,15 +218,34 @@ export default function ContactHero() {
                       // handleModalClose();
                       navigate(`/contact-us/${data.value}/`);
                     }}
-                    components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
+                    components={{
+                      DropdownIndicator: () => (
+                        <Image
+                          src="images/search-interface-symbol.png"
+                          alt=""
+                          style={{ width: '15px', marginRight: '10px' }}
+                        />
+                      ),
+                      IndicatorSeparator: () => null,
+                    }}
+                    onInputChange={(input) => {
+                      if (input) {
+                        setMenuIsOpen(true);
+                      } else {
+                        setMenuIsOpen(false);
+                      }
+                    }}
+                    menuIsOpen={menuIsOpen}
                   />
                 </Grid>
               </Grid>
             )}
-          </m.div>
+          </m.div> */}
 
           <m.div sx={{ paddingLeft: '2%' }}>
-            <Typography sx={{ marginTop: '2%', paddingLeft: '2%', marginBottom: "5px" }}>Stanza Living/PG in Hyderabad</Typography>
+            <Typography sx={{ paddingLeft: '2%', marginBottom: '5px', fontWeight: '500' }}>
+              Stanza Living/PG in Hyderabad
+            </Typography>
 
             {isDesktop ? (
               <Grid container spacing={2} sx={{ paddingLeft: '2%' }}>
@@ -214,72 +264,202 @@ export default function ContactHero() {
                       <MenuItem>Gachibowli</MenuItem>
                     </Select>
                   </FormControl> */}
-                   <Select
+                  {/* <Select
                     placeholder={<div>Locality</div>}
                     id="demo-simple-select"
                     label="choose property type"
-                    inputProps={{ 'aria-label': 'Without label' }}
                     options={localityOptions}
-                  />
+                  /> */}
+
+                  <Button
+                    aria-describedby={id}
+                    variant="outlined"
+                    onClick={handlePopoverClick}
+                    sx={{ color: 'rgb(41, 45, 50)', fontWeight: '400', borderRadius: '20px 20px 20px 20px ' }}
+                  >
+                    Locality &nbsp;
+                    <ExpandMoreIcon />
+                  </Button>
+                  <Popover
+                    id={id}
+                    open={openPopover}
+                    anchorEl={anchorEl}
+                    onClose={handlePopoverClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                  >
+                    <Typography sx={{ p: 2 }}>Select Range: </Typography>
+                  </Popover>
                 </Grid>
-                <Grid item>
-                <Select
-                    placeholder={<div>Budget</div>}
-                    id="demo-simple-select"
-                    label="choose property type"
-                    inputProps={{ 'aria-label': 'Without label' }}
-                    options={localityOptions}
-                  />
-                </Grid>
-                <Grid item>
-                <Select
-                    placeholder={<div>Occupancy</div>}
-                    id="demo-simple-select"
-                    label="choose property type"
-                    inputProps={{ 'aria-label': 'Without label' }}
-                    options={localityOptions}
-                  />
+                {/* <Grid item>
+                  <Button
+                    aria-describedby={id}
+                    variant="outlined"
+                    onClick={handlePopoverClick}
+                    sx={{ color: 'rgb(41, 45, 50)', fontWeight: '400', borderRadius: '20px 20px 20px 20px ' }}
+                  >
+                    Budget &nbsp;
+                    <ExpandMoreIcon />
+                  </Button>
+                  <Popover
+                    id={id}
+                    open={openPopover}
+                    anchorEl={anchorEl}
+                    onClose={handlePopoverClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                  >
+                    <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+                  </Popover>
                 </Grid>
 
                 <Grid item>
-                <Select
-                    placeholder={<div>Gender</div>}
-                    id="demo-simple-select"
-                    label="choose property type"
-                    inputProps={{ 'aria-label': 'Without label' }}
-                    options={localityOptions}
-                  />
+                  <Button
+                    aria-describedby={id}
+                    variant="outlined"
+                    onClick={handlePopoverClick}
+                    sx={{ color: 'rgb(41, 45, 50)', fontWeight: '400', borderRadius: '20px 20px 20px 20px ' }}
+                  >
+                    Occupancy &nbsp;
+                    <ExpandMoreIcon />
+                  </Button>
+                  <Popover
+                    id={id}
+                    open={openPopover}
+                    anchorEl={anchorEl}
+                    onClose={handlePopoverClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                  >
+                    <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+                  </Popover>
                 </Grid>
 
                 <Grid item>
-                <Select
-                    placeholder={<div>Amenities</div>}
-                    id="demo-simple-select"
-                    label="choose property type"
-                    inputProps={{ 'aria-label': 'Without label' }}
-                    options={localityOptions}
-                  />
+                  <Button
+                    aria-describedby={id}
+                    variant="outlined"
+                    onClick={handlePopoverClick}
+                    sx={{ color: 'rgb(41, 45, 50)', fontWeight: '400', borderRadius: '20px 20px 20px 20px ' }}
+                  >
+                    Gender &nbsp;
+                    <ExpandMoreIcon />
+                  </Button>
+                  <Popover
+                    id={id}
+                    open={openPopover}
+                    anchorEl={anchorEl}
+                    onClose={handlePopoverClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                  >
+                    <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+                  </Popover>
                 </Grid>
 
                 <Grid item>
-                <Select
-                    placeholder={<div>My Wishlist</div>}
-                    id="demo-simple-select"
-                    label="choose property type"
-                    inputProps={{ 'aria-label': 'Without label' }}
-                    options={localityOptions}
-                  />
+                  <Button
+                    aria-describedby={id}
+                    variant="outlined"
+                    onClick={handlePopoverClick}
+                    sx={{ color: 'rgb(41, 45, 50)', fontWeight: '400', borderRadius: '20px 20px 20px 20px ' }}
+                  >
+                    Amenities &nbsp;
+                    <ExpandMoreIcon />
+                  </Button>
+                  <Popover
+                    id={id}
+                    open={openPopover}
+                    anchorEl={anchorEl}
+                    onClose={handlePopoverClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                  >
+                    <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+                  </Popover>
                 </Grid>
 
                 <Grid item>
-                <Select
-                    placeholder={<div>More Filters</div>}
-                    id="demo-simple-select"
-                    label="choose property type"
-                    inputProps={{ 'aria-label': 'Without label' }}
-                    options={localityOptions}
-                  />
+                  <Button
+                    aria-describedby={id}
+                    variant="outlined"
+                    onClick={handlePopoverClick}
+                    sx={{ color: 'rgb(41, 45, 50)', fontWeight: '400', borderRadius: '20px 20px 20px 20px ' }}
+                  >
+                    My Wishlist &nbsp;
+                    <ExpandMoreIcon />
+                  </Button>
+                  <Popover
+                    id={id}
+                    open={openPopover}
+                    anchorEl={anchorEl}
+                    onClose={handlePopoverClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                  >
+                    <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+                  </Popover>
                 </Grid>
+
+                <Grid item>
+                  <Button
+                    aria-describedby={id}
+                    variant="outlined"
+                    onClick={handlePopoverClick}
+                    sx={{ color: 'rgb(41, 45, 50)', fontWeight: '400', borderRadius: '20px 20px 20px 20px ' }}
+                  >
+                    More Filters &nbsp;
+                    <ExpandMoreIcon />
+                  </Button>
+                  <Popover
+                    id={id}
+                    open={openPopover}
+                    anchorEl={anchorEl}
+                    onClose={handlePopoverClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                  >
+                    <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+                  </Popover>
+                </Grid>
+
+                <Grid item>
+                  <Button
+                    aria-describedby={id}
+                    variant="outlined"
+                    onClick={handlePopoverClick}
+                    sx={{ color: 'rgb(41, 45, 50)', fontWeight: '400', borderRadius: '20px 20px 20px 20px ' }}
+                  >
+                    Sort By: &nbsp;
+                    <ExpandMoreIcon />
+                  </Button>
+                  <Popover
+                    id={id}
+                    open={openPopover}
+                    anchorEl={anchorEl}
+                    onClose={handlePopoverClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                  >
+                    <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+                  </Popover>
+                </Grid> */}
 
                 {/* <Grid item>
                 <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -300,25 +480,76 @@ export default function ContactHero() {
               </Grid>
             ) : (
               <Grid container spacing={2} sx={{ paddingLeft: '2%' }}>
-                <Grid item>
-                <Select
-                    placeholder={<div>My Wishlist</div>}
-                    id="demo-simple-select"
-                    label="choose property type"
-                    inputProps={{ 'aria-label': 'Without label' }}
-                    options={localityOptions}
-                  />
+                {/* <Grid item>
+                  <Button
+                    aria-describedby={id}
+                    variant="outlined"
+                    onClick={handlePopoverClick}
+                    sx={{ color: 'rgb(41, 45, 50)', fontWeight: '400', borderRadius: '20px 20px 20px 20px ' }}
+                  >
+                    My Wishlist &nbsp;
+                    <ExpandMoreIcon />
+                  </Button>
+                  <Popover
+                    id={id}
+                    open={openPopover}
+                    anchorEl={anchorEl}
+                    onClose={handlePopoverClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                  >
+                    <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+                  </Popover>
                 </Grid>
 
                 <Grid item>
-                <Select
-                    placeholder={<div>More Filters</div>}
-                    id="demo-simple-select"
-                    label="choose property type"
-                    inputProps={{ 'aria-label': 'Without label' }}
-                    options={localityOptions}
-                  />
+                  <Button
+                    aria-describedby={id}
+                    variant="outlined"
+                    onClick={handlePopoverClick}
+                    sx={{ color: 'rgb(41, 45, 50)', fontWeight: '400', borderRadius: '20px 20px 20px 20px ' }}
+                  >
+                    More Filters &nbsp;
+                    <ExpandMoreIcon />
+                  </Button>
+                  <Popover
+                    id={id}
+                    open={openPopover}
+                    anchorEl={anchorEl}
+                    onClose={handlePopoverClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                  >
+                    <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+                  </Popover>
                 </Grid>
+                <Grid item>
+                  <Button
+                    aria-describedby={id}
+                    variant="outlined"
+                    onClick={handlePopoverClick}
+                    sx={{ color: 'rgb(41, 45, 50)', fontWeight: '400', borderRadius: '20px 20px 20px 20px ' }}
+                  >
+                    Sort By: &nbsp;
+                    <ExpandMoreIcon />
+                  </Button>
+                  <Popover
+                    id={id}
+                    open={openPopover}
+                    anchorEl={anchorEl}
+                    onClose={handlePopoverClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                  >
+                    <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+                  </Popover>
+                </Grid> */}
               </Grid>
             )}
 
@@ -326,7 +557,9 @@ export default function ContactHero() {
           </m.div>
 
           <m.div>
-            <Typography sx={{ marginTop: '2%', paddingLeft: '2%' }}>Coliving/PG in Hyderabad</Typography>
+            <Typography sx={{ marginTop: '2%', paddingLeft: '2%', fontWeight: '500' }}>
+              Coliving/PG in Hyderabad
+            </Typography>
           </m.div>
           <m.div>
             <Grid container spacing={2}>
@@ -401,7 +634,7 @@ export default function ContactHero() {
                                     loc.facilityAmenities[0].amenityNames?.split(',').map((amn) => {
                                       return (
                                         <div key={amn.facilityCode}>
-                                          <Grid item>
+                                          <Grid item sx={{ marginRight: '10px', marginTop: '5px' }}>
                                             <Card
                                               sx={{
                                                 borderRadius: '30px 30px',

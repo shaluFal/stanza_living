@@ -34,6 +34,8 @@ import InputStyle from '../../components/InputStyle';
 import API from '../../Helper/api';
 // components
 import Iconify from '../../components/Iconify';
+import Image from '../../components/Image';
+
 
 // ----------------------------------------------------------------------
 
@@ -91,13 +93,12 @@ export default function MenuDesktop({ isOffset, isHome, navConfig }) {
   const [openModal, setOpenModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [open, setOpen] = useState(false);
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const handleModalClose = () => setShowModal(false);
   const handleModalShow = () => {
     setShowModal(true);
   };
-
- 
 
   useEffect(() => {
     if (open) {
@@ -132,6 +133,8 @@ export default function MenuDesktop({ isOffset, isHome, navConfig }) {
             locations={locations}
             selectedOption={selectedOption}
             setSelectedOption={setSelectedOption}
+            menuIsOpen={menuIsOpen}
+            setMenuIsOpen={setMenuIsOpen}
           />
         ))}
       </Stack>
@@ -167,6 +170,8 @@ function MenuDesktopItem({
   locations,
   selectedOption,
   setSelectedOption,
+  menuIsOpen,
+  setMenuIsOpen,
 }) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -199,8 +204,6 @@ function MenuDesktopItem({
   // );
 
   const isActive = (path) => pathname === path;
-
- 
 
   if (children) {
     return (
@@ -243,7 +246,7 @@ function MenuDesktopItem({
             },
           }}
         >
-          <Grid container spacing={3} >
+          <Grid container spacing={3}>
             {children.map((list) => {
               const { subheader, items } = list;
 
@@ -437,9 +440,9 @@ function MenuDesktopItem({
               />
             </Grid> */}
 
-            <Grid item  sx={{ width: "100%", marginTop: "8px" }}>
-              <Select
-              placeholder={<div>Find in and around..</div>}
+            <Grid item sx={{ width: '100%', marginTop: '8px' }}>
+              {/* <Select
+                placeholder={<div>Find in and around..</div>}
                 options={locations.map((lt) => {
                   return {
                     value: lt.id,
@@ -450,8 +453,66 @@ function MenuDesktopItem({
                   handleModalClose();
                   navigate(`/contact-us/${data.value}/`);
                 }}
-                components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
-              />
+                // components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
+                components={{
+                  DropdownIndicator: () => (
+                    <Image
+                      src="images/search-interface-symbol.png"
+                      alt=""
+                      style={{ width: '15px', marginRight: '10px'}}
+                    />
+                  ),
+                  IndicatorSeparator: () => null,
+                }}
+                onInputChange={(input) => {
+                  if (input) {
+                    setMenuIsOpen(true);
+                  } else {
+                    setMenuIsOpen(false);
+                  }
+                }}
+                menuIsOpen={menuIsOpen}
+              /> */}
+              <Select
+                  styles={{
+                    control: (baseStyles, state) => ({
+                      ...baseStyles,
+                      borderRadius: '0px 10px 10px 0px',
+                      padding: '7px',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                    }),
+                  }}
+                  placeholder={<div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500', }}>Find in and around..</div>}
+                  options={locations.map((lt) => {
+                    return {
+                      value: lt.id,
+                      label: lt.value,
+                    };
+                  })}
+                  onChange={(data) => {
+                    handleModalClose();
+                    navigate(`/contact-us/${data.value}/`);
+                  }}
+                  components={{
+                    DropdownIndicator: () => (
+                      <Image
+                        src="images/search-interface-symbol.png"
+                        alt=""
+                        style={{ width: '15px', marginRight: '10px'}}
+                      />
+                    ),
+                    IndicatorSeparator: () => null,
+                  }}
+                  onInputChange={(input) => {
+                    if (input) {
+                      setMenuIsOpen(true);
+                    } else {
+                      setMenuIsOpen(false);
+                    }
+                  }}
+                  menuIsOpen={menuIsOpen}
+                />
             </Grid>
           </Grid>
 
@@ -479,11 +540,11 @@ function MenuDesktopItem({
           </Grid> */}
           <Grid container sx={{ marginTop: '3%' }}>
             <Grid item xs={12}>
-              <h5 style={{ marginTop: '4%', marginBottom: '10px' }}>Popular Cities</h5>
+              <h5 style={{ marginTop: '4%', marginBottom: '6px' }}>Popular Cities</h5>
             </Grid>
             <Grid item xs={12}>
-              <img src="images/hyd.jpg" alt="" style={{ width: '60px', height: '60px', marginLeft: "10px" }} />
-              <Typography sx={{marginTop: "10px"}}>Hyderabad</Typography>
+              <img src="images/hyd.jpg" alt="" style={{ width: '60px', height: '60px', marginLeft: '10px' }} />
+              <Typography sx={{ marginTop: '10px' }}>Hyderabad</Typography>
             </Grid>
           </Grid>
         </Card>
