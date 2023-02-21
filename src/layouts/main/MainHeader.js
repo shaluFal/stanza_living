@@ -116,7 +116,7 @@ export default function MainHeader() {
           <Box sx={{ flexGrow: 1 }} />
 
           {/* <m.div> */}
-          {isDesktop && (
+          {!isHome ? (
             <Box sx={{ width: '40%', marginRight: '3%' }}>
               <Grid
                 container
@@ -196,7 +196,7 @@ export default function MainHeader() {
                 </Grid>
               </Grid>
             </Box>
-          )}
+          ) : null}
           {/* </m.div> */}
 
           {isDesktop && <MenuDesktop isOffset={isOffset} isHome={isHome} navConfig={navConfig} />}

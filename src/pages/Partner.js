@@ -88,6 +88,27 @@ export default function Partner() {
                 property mint money for you but also turn it into a local landmark. Partner with us and turn your asset
                 into a growing business
               </Typography>
+
+              <Typography sx={{ marginTop: '2%' }}>Read more about the plan:</Typography>
+
+              <Typography sx={{ marginTop: '2%' }}>
+                For your building plot:{' '}
+                <Button variant="outlined" style={{ marginLeft: '5%' }}>
+                  Download Brochure
+                </Button>
+              </Typography>
+              <Typography sx={{ marginTop: '2%' }}>
+                For your building apartment:{' '}
+                <Button variant="outlined" style={{ marginLeft: '5%' }}>
+                  Download Brochure
+                </Button>
+              </Typography>
+              <Typography sx={{ marginTop: '4%' }}>
+                Leave your details here for us to contact you :{' '}
+                <Button variant="contained" style={{ marginLeft: '5%' }}>
+                  Contact Us
+                </Button>
+              </Typography>
             </m.div>
           </Grid>
 
@@ -138,6 +159,26 @@ export default function Partner() {
                 nothing. And for this to happen, all you have to do is to partner with us (and your people will thank
                 you for it).
               </Typography>
+              <Typography sx={{ marginTop: '2%' }}>Read more about the plan:</Typography>
+
+              <Typography sx={{ marginTop: '2%' }}>
+                For your building plot:{' '}
+                <Button variant="outlined" style={{ marginLeft: '5%' }}>
+                  Download Brochure
+                </Button>
+              </Typography>
+              <Typography sx={{ marginTop: '2%' }}>
+                For your building apartment:{' '}
+                <Button variant="outlined" style={{ marginLeft: '5%' }}>
+                  Download Brochure
+                </Button>
+              </Typography>
+              <Typography sx={{ marginTop: '4%' }}>
+                Leave your details here for us to contact you :{' '}
+                <Button variant="contained" style={{ marginLeft: '5%' }}>
+                  Contact Us
+                </Button>
+              </Typography>
             </m.div>
           </Grid>
         </Grid>
@@ -160,6 +201,26 @@ export default function Partner() {
                 and yearly supply needs. From pulses for our kitchens to printers for our office, If you think you have
                 something we might need, we're all ears. Contact us and see your business have a pan India presence in
                 no time.
+              </Typography>
+              <Typography sx={{ marginTop: '2%' }}>Read more about the plan:</Typography>
+
+              <Typography sx={{ marginTop: '2%' }}>
+                For your building plot:{' '}
+                <Button variant="outlined" style={{ marginLeft: '5%' }}>
+                  Download Brochure
+                </Button>
+              </Typography>
+              <Typography sx={{ marginTop: '2%' }}>
+                For your building apartment:{' '}
+                <Button variant="outlined" style={{ marginLeft: '5%' }}>
+                  Download Brochure
+                </Button>
+              </Typography>
+              <Typography sx={{ marginTop: '4%' }}>
+                Leave your details here for us to contact you :{' '}
+                <Button variant="contained" style={{ marginLeft: '5%' }}>
+                  Contact Us
+                </Button>
               </Typography>
             </m.div>
           </Grid>

@@ -45,8 +45,8 @@ export default function FaqsHero() {
           The Stars of the <span style={{ color: 'rgb(96 195 173)' }}>“STANZAVERSE”</span>
         </h1>
         <p>
-          Our team's full of undiscovered Da Vincis, aspiring master chefs, budding triathlon finishers, IMDB top 250
-          encyclopedias, and more. But what they do in the office is even better. Thanks to them, as of today, we're one
+          Our team's full of undiscovered Da Vincis, aspiring master chefs, budding triathlon finishers, IMDB top<br/> 250
+          encyclopedias, and more. But what they do in the office is even better. Thanks to them, as of today,<br/> we're one
           of India's hottest startups.
         </p>
         {/* </ContentStyle> */}
