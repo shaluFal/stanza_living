@@ -1,6 +1,6 @@
 import { m } from 'framer-motion';
 import React, { useCallback, useEffect, useState } from 'react';
-import { styled } from '@mui/material/styles';
+import { styled, emphasize } from '@mui/material/styles';
 import Popover from '@mui/material/Popover';
 import Select from 'react-select';
 import {
@@ -13,6 +13,7 @@ import {
   Button,
   Divider,
   MenuItem,
+  Breadcrumbs,
   TextField,
   // Select,
   InputLabel,
@@ -21,9 +22,20 @@ import {
   FormGroup,
   Checkbox,
   FormHelperText,
+  Chip,
+  Slider,
+  TuneRounded,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from '@mui/material';
 import axios from 'axios';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 import GoogleMapReact from 'google-map-react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
@@ -37,7 +49,6 @@ import API from '../../Helper/api';
 import { AppFeatured } from '../@dashboard/general/app';
 import SearchPropertyDetailPage from '../../pages/SearchPropertyDetailPage';
 import Image from '../../components/Image';
-
 // ----------------------------------------------------------------------
 
 const RootStyle = styled('div')(({ theme }) => ({
@@ -60,13 +71,73 @@ const ContentStyle = styled('div')(({ theme }) => ({
   },
 }));
 
+const PrettoSlider = styled(Slider)({
+  color: '#52af77',
+  height: 8,
+  '& .MuiSlider-track': {
+    border: 'none',
+  },
+  '& .MuiSlider-thumb': {
+    height: 24,
+    width: 24,
+    backgroundColor: '#fff',
+    border: '5px solid currentColor',
+    '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
+      boxShadow: 'inherit',
+    },
+    '&:before': {
+      display: 'none',
+    },
+  },
+  '& .MuiSlider-valueLabel': {
+    lineHeight: 1.2,
+    fontSize: 12,
+    background: 'unset',
+    padding: 0,
+    width: 32,
+    height: 32,
+    borderRadius: '50% 50% 50% 0',
+    backgroundColor: '#52af77',
+    transformOrigin: 'bottom left',
+    transform: 'translate(50%, -100%) rotate(-45deg) scale(0)',
+    '&:before': { display: 'none' },
+    '&.MuiSlider-valueLabelOpen': {
+      transform: 'translate(50%, -100%) rotate(-45deg) scale(1)',
+    },
+    '& > *': {
+      transform: 'rotate(45deg)',
+    },
+  },
+});
+
+const filterStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  '& .MuiDialogContent-root': {
+    padding: theme.spacing(2),
+  },
+  '& .MuiDialogActions-root': {
+    padding: theme.spacing(1),
+  },
+}));
+
 // ----------------------------------------------------------------------
 
 export default function ContactHero() {
   const [location, setLocation] = React.useState([]);
   const [locations, setLocations] = React.useState([]);
   const navigate = useNavigate();
-
+  console.log('locations', locations);
   React.useEffect(() => {
     API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd').then(
       (response) => {
@@ -74,6 +145,18 @@ export default function ContactHero() {
       }
     );
   }, []);
+
+  // -----
+
+  const [budgetValue, setBudgetValue] = React.useState([0, 100]);
+  const [budgetpopover, setBudgetpopover] = React.useState(null);
+  const [occupancypopover, setOccupancypopover] = React.useState(null);
+  const [genderpopover, setGenderpopover] = React.useState(null);
+  const [amenitiespopover, setAmenitiespopover] = React.useState(null);
+  const [popularitypopover, setPopularitypopover] = React.useState(null);
+
+  const [openFilter, setOpenFilter] = React.useState(false);
+  // -----
 
   const [openModal, setOpenModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -92,6 +175,55 @@ export default function ContactHero() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const filterHandleOpen = () => setOpen(true);
+  const filterHandleClose = () => setOpen(false);
+
+  const handleChange = (event, newValue) => {
+    setBudgetValue(newValue);
+  };
+
+  const handleBudgetClick = (event) => {
+    setBudgetpopover(event.currentTarget);
+  };
+
+  const handleBudgetClose = () => {
+    setBudgetpopover(null);
+  };
+
+  const occupancyHandleClick = (event) => {
+    setOccupancypopover(event.currentTarget);
+  };
+
+  const occupancyHandleClose = () => {
+    setOccupancypopover(null);
+  };
+
+  const genderHandleClick = (event) => {
+    setGenderpopover(event.currentTarget);
+  };
+
+  const genderHandleClose = () => {
+    setGenderpopover(null);
+  };
+
+  const handleClickAmenities = (event) => {
+    setAmenitiespopover(event.currentTarget);
+  };
+
+  const handleCloseAmenities = () => {
+    setAmenitiespopover(null);
+  };
+
+  const PopularityHandleClick = (event) => {
+    setPopularitypopover(event.currentTarget);
+  };
+
+  const PopularityHandleClose = () => {
+    setPopularitypopover(null);
+  };
+
+  const checkboxLabel = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
   const getAllLocations = useCallback(async () => {
     const locationid = window.location.pathname.split('/')[3];
@@ -149,7 +281,64 @@ export default function ContactHero() {
   };
 
   const openPopover = Boolean(anchorEl);
+  const openBudgetPopover = Boolean(anchorEl);
   const id = openPopover ? 'simple-popover' : undefined;
+
+  const openBudget = Boolean(budgetpopover);
+  const budgetId = openBudget ? 'simple-popover' : undefined;
+
+  const openOccupancy = Boolean(occupancypopover);
+  const occupancyId = openOccupancy ? 'simple-popover' : undefined;
+
+  const openGender = Boolean(genderpopover);
+  const genderId = openGender ? 'simple-popover' : undefined;
+
+  const openAmenities = Boolean(amenitiespopover);
+  const amenitiesId = openAmenities ? 'simple-popover' : undefined;
+
+  const openPopularity = Boolean(popularitypopover);
+  const popularityId = openPopularity ? 'simple-popover' : undefined;
+
+  const StyledBreadcrumb = styled(Chip)(({ theme }) => {
+    const backgroundColor = theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[800];
+    return {
+      backgroundColor,
+      height: theme.spacing(3),
+      color: theme.palette.text.primary,
+      fontWeight: theme.typography.fontWeightRegular,
+      '&:hover, &:focus': {
+        backgroundColor: emphasize(backgroundColor, 0.06),
+      },
+      '&:active': {
+        boxShadow: theme.shadows[1],
+        backgroundColor: emphasize(backgroundColor, 0.12),
+      },
+    };
+  });
+
+  function BootstrapDialogTitle(props) {
+    const { children, onClose, ...other } = props;
+
+    return (
+      <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+        {children}
+        {onClose ? (
+          <IconButton
+            aria-label="close"
+            onClick={onClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        ) : null}
+      </DialogTitle>
+    );
+  }
 
   return (
     <>
@@ -249,49 +438,507 @@ export default function ContactHero() {
 
             {isDesktop ? (
               <Grid container spacing={2} sx={{ paddingLeft: '2%' }}>
-                <Grid item>
-                  {/* <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <Select
-                      value={''}
-                      // onChange={handleChange}
-                      displayEmpty
-                      inputProps={{ 'aria-label': 'Without label' }}
-                    >
-                      <MenuItem value="">
-                        <em>Locality</em>
-                      </MenuItem>
-                      <MenuItem>Ameerpet</MenuItem>
-                      <MenuItem>Gachibowli</MenuItem>
-                    </Select>
-                  </FormControl> */}
-                  {/* <Select
-                    placeholder={<div>Locality</div>}
-                    id="demo-simple-select"
-                    label="choose property type"
-                    options={localityOptions}
-                  /> */}
+                <Grid item style={{}}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                    <div>
+                      <Button
+                        aria-describedby={id}
+                        variant="outlined"
+                        onClick={handlePopoverClick}
+                        sx={{
+                          color: 'rgb(41, 45, 50)',
+                          fontWeight: '400',
+                          borderRadius: '40px',
+                          padding: '15px 30px',
+                          margin: '5px',
+                          border: '1px solid rgb(232, 232, 232)',
+                        }}
+                      >
+                        Locality1 &nbsp;
+                        {id !== 'simple-popover' ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+                      </Button>
+                      <Popover
+                        id={id}
+                        open={openPopover}
+                        anchorEl={anchorEl}
+                        onClose={handlePopoverClose}
+                        anchorOrigin={{
+                          vertical: 'bottom',
+                          horizontal: 'left',
+                        }}
+                      >
+                        <div style={{ maxHeight: '400px', maxWidth: '498px' }}>
+                          <div style={{ padding: '20px' }}>
+                            <p>Search bar</p>
+                          </div>
+                          <Typography sx={{ p: 2 }}>Select Range: </Typography>
+                          {locations.map((item) => (
+                            <StyledBreadcrumb
+                              style={{ border: '1px solid grey', padding: '15px', margin: '10px' }}
+                              component="a"
+                              href="#"
+                              label={item.value}
+                            />
+                          ))}
+                          <hr />
+                          <div
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'end',
+                              alignItems: 'center',
+                              padding: '17px',
+                            }}
+                          >
+                            <Button
+                              style={{
+                                textDecoration: 'underline',
+                                fontWeight: '100',
+                                color: 'black',
+                                padding: '0px 40px',
+                              }}
+                            >
+                              Clear
+                            </Button>
+                            <Button style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}>
+                              Save
+                            </Button>
+                          </div>
+                        </div>
+                      </Popover>
+                    </div>
+                    {/* ------------------------------------------------------------------------ */}
+                    <div>
+                      {' '}
+                      <Button
+                        aria-describedby={id}
+                        variant="outlined"
+                        onClick={handleBudgetClick}
+                        sx={{
+                          color: 'rgb(41, 45, 50)',
+                          fontWeight: '400',
+                          borderRadius: '40px',
+                          padding: '15px 30px',
+                          margin: '5px',
+                          border: '1px solid rgb(232, 232, 232)',
+                        }}
+                      >
+                        Budget &nbsp;
+                        <ExpandMoreIcon />
+                      </Button>
+                      <Popover
+                        open={openBudget}
+                        anchorEl={budgetpopover}
+                        onClose={handleBudgetClose}
+                        anchorOrigin={{
+                          vertical: 'bottom',
+                          horizontal: 'left',
+                        }}
+                      >
+                        <div style={{ maxHeight: '400px', maxWidth: '400px', padding: '10px 20px' }}>
+                          <Typography sx={{ p: 2 }}>Select Range: </Typography>
+                          <PrettoSlider
+                            value={budgetValue}
+                            onChange={handleChange}
+                            valueLabelDisplay="auto"
+                            aria-label="pretto slider"
+                          />
+                          <div style={{ padding: '20px', display: 'flex', justifyContent: 'spaceBetween' }}>
+                            <TextField
+                              id="outlined-basic"
+                              label="min price"
+                              variant="outlined"
+                              style={{ marginRight: '10px', maxWidth: '140px' }}
+                            />
+                            <span style={{ paddingTop: '15px' }}>-</span>
+                            <TextField
+                              id="outlined-basic"
+                              label="max price"
+                              variant="outlined"
+                              style={{ marginLeft: '10px', maxWidth: '140px' }}
+                            />
+                          </div>
+                          <hr />
+                          <div
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'end',
+                              alignItems: 'center',
+                              padding: '17px',
+                            }}
+                          >
+                            <Button
+                              style={{
+                                textDecoration: 'underline',
+                                fontWeight: '100',
+                                color: 'black',
+                                padding: '0px 40px',
+                              }}
+                            >
+                              Clear
+                            </Button>
+                            <Button style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}>
+                              Save
+                            </Button>
+                          </div>
+                        </div>
+                      </Popover>
+                    </div>
+                    {/* ------------------------------------------------------------------ */}
+                    <div>
+                      <Button
+                        aria-describedby={occupancyId}
+                        variant="outlined"
+                        onClick={occupancyHandleClick}
+                        sx={{
+                          color: 'rgb(41, 45, 50)',
+                          fontWeight: '400',
+                          borderRadius: '40px',
+                          padding: '15px 30px',
+                          margin: '5px',
+                          border: '1px solid rgb(232, 232, 232)',
+                        }}
+                      >
+                        Occupancy &nbsp;
+                        <ExpandMoreIcon />
+                      </Button>
+                      <Popover
+                        id={id}
+                        open={openOccupancy}
+                        anchorEl={occupancypopover}
+                        onClose={occupancyHandleClose}
+                        anchorOrigin={{
+                          vertical: 'bottom',
+                          horizontal: 'left',
+                        }}
+                      >
+                        <div style={{ maxHeight: '400px', maxWidth: '3  00px' }}>
+                          <Typography sx={{ p: 2 }}>Select Range: </Typography>
+                          {locations.map((item) => (
+                            <StyledBreadcrumb
+                              style={{ border: '1px solid grey', padding: '15px', margin: '10px' }}
+                              component="a"
+                              href="#"
+                              label={item.value}
+                            />
+                          ))}
+                          <hr />
+                          <div
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'end',
+                              alignItems: 'center',
+                              padding: '17px',
+                            }}
+                          >
+                            <Button
+                              style={{
+                                textDecoration: 'underline',
+                                fontWeight: '100',
+                                color: 'black',
+                                padding: '0px 40px',
+                              }}
+                            >
+                              Clear
+                            </Button>
+                            <Button style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}>
+                              Save
+                            </Button>
+                          </div>
+                        </div>
+                      </Popover>
+                    </div>
 
-                  <Button
-                    aria-describedby={id}
-                    variant="outlined"
-                    onClick={handlePopoverClick}
-                    sx={{ color: 'rgb(41, 45, 50)', fontWeight: '400', borderRadius: '20px 20px 20px 20px ' }}
-                  >
-                    Locality &nbsp;
-                    <ExpandMoreIcon />
-                  </Button>
-                  <Popover
-                    id={id}
-                    open={openPopover}
-                    anchorEl={anchorEl}
-                    onClose={handlePopoverClose}
-                    anchorOrigin={{
-                      vertical: 'bottom',
-                      horizontal: 'left',
-                    }}
-                  >
-                    <Typography sx={{ p: 2 }}>Select Range: </Typography>
-                  </Popover>
+                    {/* --------------------------------------------- */}
+
+                    <div>
+                      <Button
+                        aria-describedby={genderId}
+                        variant="outlined"
+                        onClick={genderHandleClick}
+                        sx={{
+                          color: 'rgb(41, 45, 50)',
+                          fontWeight: '400',
+                          borderRadius: '40px',
+                          padding: '15px 30px',
+                          margin: '5px',
+                          border: '1px solid rgb(232, 232, 232)',
+                        }}
+                      >
+                        Gender &nbsp;
+                        <ExpandMoreIcon />
+                      </Button>
+                      <Popover
+                        id={id}
+                        open={openGender}
+                        anchorEl={genderpopover}
+                        onClose={genderHandleClose}
+                        anchorOrigin={{
+                          vertical: 'bottom',
+                          horizontal: 'left',
+                        }}
+                      >
+                        <div style={{ maxHeight: '400px', maxWidth: '300px', padding: '10px 20px' }}>
+                          <div style={{ marginBottom: '15px' }}>
+                            <Checkbox {...checkboxLabel} />
+                            Male
+                            <Checkbox {...checkboxLabel} />
+                            Female
+                            <Checkbox {...checkboxLabel} />
+                            unisex
+                          </div>
+                          <hr />
+                          <div
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'end',
+                              alignItems: 'center',
+                              padding: '15px 10px',
+                            }}
+                          >
+                            <Button
+                              style={{
+                                textDecoration: 'underline',
+                                fontWeight: '100',
+                                color: 'black',
+                                padding: '0px 40px',
+                              }}
+                            >
+                              Clear
+                            </Button>
+                            <Button style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}>
+                              Save
+                            </Button>
+                          </div>
+                        </div>
+                      </Popover>
+                    </div>
+
+                    {/* -------------------------------------- */}
+
+                    <div>
+                      <Button
+                        aria-describedby={amenitiesId}
+                        variant="outlined"
+                        onClick={handleClickAmenities}
+                        sx={{
+                          color: 'rgb(41, 45, 50)',
+                          fontWeight: '400',
+                          borderRadius: '40px',
+                          padding: '15px 30px',
+                          margin: '5px',
+                          border: '1px solid rgb(232, 232, 232)',
+                        }}
+                      >
+                        Amenities &nbsp;
+                        <ExpandMoreIcon />
+                      </Button>
+                      <Popover
+                        id={id}
+                        open={openAmenities}
+                        anchorEl={amenitiespopover}
+                        onClose={handleCloseAmenities}
+                        anchorOrigin={{
+                          vertical: 'bottom',
+                          horizontal: 'left',
+                        }}
+                      >
+                        <div
+                          style={{
+                            maxHeight: '400px',
+                            maxWidth: '500px',
+                            padding: '10px 20px',
+                          }}
+                        >
+                          <div style={{ marginBottom: '15px' }}>
+                            <Checkbox {...checkboxLabel} />
+                            Attatched Balcony
+                            <Checkbox {...checkboxLabel} />
+                            Air Conditioning
+                            <Checkbox {...checkboxLabel} />
+                            Attached Washroom
+                            <Checkbox {...checkboxLabel} />
+                            Spacious Cupboard
+                            <Checkbox {...checkboxLabel} />
+                            Storage Shelf
+                            <Checkbox {...checkboxLabel} />
+                            desert Cooler
+                            <Checkbox {...checkboxLabel} />
+                            Shared Washroom
+                            <Checkbox {...checkboxLabel} />
+                            Window
+                          </div>
+                          <hr />
+                          <div
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'end',
+                              alignItems: 'center',
+                              padding: '15px 10px',
+                            }}
+                          >
+                            <Button
+                              style={{
+                                textDecoration: 'underline',
+                                fontWeight: '100',
+                                color: 'black',
+                                padding: '0px 40px',
+                              }}
+                            >
+                              Clear
+                            </Button>
+                            <Button style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}>
+                              Save
+                            </Button>
+                          </div>
+                        </div>
+                      </Popover>
+                    </div>
+
+                    <span style={{ margin: '20px' }}> | </span>
+                    <div>
+                      <Button
+                        variant="outlined"
+                        sx={{
+                          color: 'rgb(41, 45, 50)',
+                          fontWeight: '400',
+                          borderRadius: '40px',
+                          padding: '15px 30px',
+                          margin: '5px',
+                          border: '1px solid rgb(232, 232, 232)',
+                        }}
+                        // onClick={filterHandleOpen}
+                      >
+                        My Wishlist
+                      </Button>
+                    </div>
+
+                    <div>
+                      <Button
+                        variant="outlined"
+                        sx={{
+                          color: 'rgb(41, 45, 50)',
+                          fontWeight: '400',
+                          borderRadius: '40px',
+                          padding: '15px 30px',
+                          margin: '5px',
+                          border: '1px solid rgb(232, 232, 232)',
+                        }}
+                        onClick={filterHandleOpen}
+                      >
+                        <TuneRoundedIcon />
+                        &nbsp; More Filters
+                      </Button>
+                      <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+                        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+                          Filters
+                        </BootstrapDialogTitle>
+                        <hr />
+                        <DialogContent dividers>
+                          <Typography sx={{ p: 2 }}>Select Range: </Typography>
+                          {locations.map((item) => (
+                            <StyledBreadcrumb
+                              style={{ border: '1px solid grey', padding: '15px', margin: '10px' }}
+                              component="a"
+                              href="#"
+                              label={item.value}
+                            />
+                          ))}
+                        </DialogContent>
+                        <hr />
+                        <DialogActions>
+                          <Button
+                            style={{
+                              textDecoration: 'underline',
+                              fontWeight: '100',
+                              color: 'black',
+                              padding: '0px 20px',
+                            }}
+                            autoFocus
+                            onClick={handleClose}
+                          >
+                            Clear
+                          </Button>
+                          <Button
+                            autoFocus
+                            onClick={handleClose}
+                            style={{ background: '#00AB55', color: 'white', padding: '15px' }}
+                          >
+                            Save
+                          </Button>
+                        </DialogActions>
+                      </BootstrapDialog>
+                    </div>
+
+                    {/* ----------------------------------------------- */}
+
+                    <div>
+                      <Button
+                        aria-describedby={popularityId}
+                        variant="outlined"
+                        onClick={PopularityHandleClick}
+                        sx={{
+                          fontWeight: '400',
+                          borderRadius: '40px',
+                          padding: '15px 30px',
+                          margin: '5px',
+                          border: '1px solid rgb(232, 232, 232)',
+                          background: 'rgb(249, 249, 249)',
+                          color: ' rgb(125, 125, 125)',
+                        }}
+                      >
+                        Sort By <span style={{ color: '#00AB55', fontWeight: 'bold' }}> &nbsp; &nbsp;Popularity</span>{' '}
+                        &nbsp;
+                        <ExpandMoreIcon />
+                      </Button>
+                      <Popover
+                        id={id}
+                        open={openPopularity}
+                        anchorEl={popularitypopover}
+                        onClose={PopularityHandleClose}
+                        anchorOrigin={{
+                          vertical: 'bottom',
+                          horizontal: 'left',
+                        }}
+                      >
+                        <div
+                          style={{
+                            maxHeight: '400px',
+                            maxWidth: '300px',
+                            padding: '10px 20px',
+                          }}
+                        >
+                          <div style={{ marginBottom: '15px', display: 'grid' }}>
+                            <Button>Price: Low to High</Button>
+                            <Button>Price: High to Low</Button>
+                            <Button>Sort By: Popularity</Button>
+                          </div>
+                          <hr />
+                          <div
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'end',
+                              alignItems: 'center',
+                              padding: '15px 10px',
+                            }}
+                          >
+                            <Button
+                              style={{
+                                textDecoration: 'underline',
+                                fontWeight: '100',
+                                color: 'black',
+                                padding: '0px 40px',
+                              }}
+                            >
+                              Clear
+                            </Button>
+                            <Button style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}>
+                              Save
+                            </Button>
+                          </div>
+                        </div>
+                      </Popover>
+                    </div>
+                  </div>
                 </Grid>
                 {/* <Grid item>
                   <Button
