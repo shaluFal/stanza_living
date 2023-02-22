@@ -60,7 +60,7 @@ export default function Partner() {
           <Typography variant="h2" sx={{ marginTop: '30px' }}>
             'You've come to the <br /> <span style={{ color: 'rgb(96 195 173)' }}>right place</span>, partner
           </Typography>
-          <Typography sx={{ width: { md: '50%', xs: '40%' }, marginLeft: { md: '25%', xs: '0' } }}>
+          <Typography sx={{ width: { md: '50%', xs: '40%' }, marginLeft: { md: '25%', xs: '0' }, marginTop: "5px" }}>
             Whatever we've achieved in the past few years has been made possible due to the mutual support and
             cooperation of the people we proudly call our partners. If you too wish to make your property earn to the
             best of its ability, find captive mainspace for your products or services, and/or provide the best living
@@ -68,11 +68,13 @@ export default function Partner() {
           </Typography>
         </m.div>
       </ContentStyle>
+
+      
       <Container component={MotionViewport}>
         <Grid container spacing={6} sx={{ marginBottom: '10%' }}>
           <Grid item xs={12} md={6}>
             <m.div variants={varFade().inRight}>
-              <Typography variant="h3" sx={{ mb: 3, marginTop: '100px' }}>
+              <Typography variant="h3" sx={{ mb: 3, marginTop: '65px' }}>
                 Your property in the <span style={{ color: 'rgb(96 195 173)' }}>right hands</span>
               </Typography>
             </m.div>
@@ -143,7 +145,7 @@ export default function Partner() {
           </Grid>
           <Grid item xs={12} md={6}>
             <m.div variants={varFade().inRight}>
-              <Typography variant="h3" sx={{ mb: 3, marginTop: '100px' }}>
+              <Typography variant="h3" sx={{ mb: 3, marginTop: '65px' }}>
                 Your people in the <span style={{ color: 'rgb(96 195 173)' }}>right care</span>
               </Typography>
             </m.div>
@@ -186,7 +188,7 @@ export default function Partner() {
         <Grid container spacing={6}>
           <Grid item xs={12} md={6}>
             <m.div variants={varFade().inRight}>
-              <Typography variant="h3" sx={{ mb: 3, marginTop: '100px' }}>
+              <Typography variant="h3" sx={{ mb: 3, marginTop: '45px' }}>
                 Your product with the <span style={{ color: 'rgb(96 195 173)' }}>right consumer</span>
               </Typography>
             </m.div>
