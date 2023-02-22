@@ -119,7 +119,7 @@ export default function MainHeader() {
           {/* {isDesktop && (
             
           )} */}
-          {!isHome  && (
+          {!isHome && isDesktop  && (
             <Box sx={{ width: '40%', marginRight: '3%' }}>
               <Grid
                 container
