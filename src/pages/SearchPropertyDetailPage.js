@@ -19,10 +19,11 @@ import {
 } from '@mui/material';
 import { flexibleCompare } from '@fullcalendar/react';
 import { FormLabel } from 'react-bootstrap';
-
+import AppCarousel from '../sections/@dashboard/general/app/AppCarousel';
 import { _appFeatured } from '../_mock';
 import API from '../Helper/api';
 import { AppFeatured } from '../sections/@dashboard/general/app';
+
 
 const SearchPropertyDetailPage = () => {
   const [property, setProperty] = React.useState([]);
@@ -58,9 +59,9 @@ const SearchPropertyDetailPage = () => {
             Exeter House, Unnamed Road, Gachibowli, Hyderabad, Telangana 500075, India
           </Typography>
 
-          {/* <AppFeatured list={_appFeatured} sx={{ marginBottom: '2%' }} /> */}
+          <AppCarousel list={property.listOfFacilityImages} sx={{ marginBottom: '2%' }}/>
 
-          {property.listOfFacilityImages?.length > 0 ? (
+          {/* {property.listOfFacilityImages?.length > 0 ? (
             <div>
               <img src={property.listOfFacilityImages[0]?.photoURL} alt="" style={{ width: '90%' }} />
             </div>
@@ -68,7 +69,7 @@ const SearchPropertyDetailPage = () => {
             <div>
               <img src={''} alt="" style={{ width: '100%', height: '60%' }} />
             </div>
-          )}
+          )} */}
 
           <Typography sx={{ marginTop: '20px' }}>Starts from</Typography>
           <Typography sx={{ fontWeight: '900', fontSize: '20px' }}>₹{property.rentMonthly}/mo*</Typography>

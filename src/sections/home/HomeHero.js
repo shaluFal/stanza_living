@@ -114,31 +114,6 @@ export default function HomeHero() {
     );
   }, []);
 
-  // const getAllLocations = useCallback(async () => {
-  //   const locationid = window.location.pathname.split('/')[3];
-
-  //   try {
-  //     await API.post('http://pmsapis.crisprsys.net/api/WebsiteAPI/GetListOfProperties', {
-  //       apiKey: 'eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=',
-  //       location: locationid,
-  //       amenities: '',
-  //       services: '',
-  //       amountStartRange: '0',
-  //       amountEndRange: '10000000',
-  //     })
-  //       .then((res) => {
-  //         setLocation(res.data.listOfProperties);
-  //       })
-  //       .catch((err) => console.log(err));
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   getAllLocations();
-  // }, [getAllLocations]);
-
   const handleModalClose = () => setShowModal(false);
   const handleModalShow = () => {
     setShowModal(true);
@@ -243,7 +218,7 @@ export default function HomeHero() {
                       fontWeight: '500',
                     }),
                   }}
-                  placeholder={<div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500', }}>Find in and around..</div>}
+                  placeholder={<div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500' }}>Find in and around..</div>}
                   options={locationList.map((lt) => {
                     return {
                       value: lt.id,

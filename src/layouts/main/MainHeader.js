@@ -107,7 +107,7 @@ export default function MainHeader() {
         >
           <Logo />
 
-          <Link href="https://docs-minimals.vercel.app/changelog" target="_blank" rel="noopener" underline="none">
+          <Link href="" target="_blank" rel="noopener" underline="none">
             <Label color="info" sx={{ ml: 1 }}>
               Coliving
             </Label>
@@ -117,9 +117,9 @@ export default function MainHeader() {
 
           {/* <m.div> */}
           {/* {isDesktop && (
-            
+
           )} */}
-          {!isHome && isDesktop  && (
+          {!isHome && isDesktop && (
             <Box sx={{ width: '40%', marginRight: '3%' }}>
               <Grid
                 container
@@ -199,7 +199,7 @@ export default function MainHeader() {
                 </Grid>
               </Grid>
             </Box>
-          ) }
+          )}
           {/* </m.div> */}
 
           {isDesktop && <MenuDesktop isOffset={isOffset} isHome={isHome} navConfig={navConfig} />}
@@ -209,7 +209,7 @@ export default function MainHeader() {
               variant="contained"
               target="_blank"
               rel="noopener"
-              href="https://material-ui.com/store/items/minimal-dashboard/"
+              href=""
             >
               <PhoneIcon /> &nbsp; Request A Callback
             </Button>

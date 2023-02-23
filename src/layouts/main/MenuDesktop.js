@@ -36,7 +36,6 @@ import API from '../../Helper/api';
 import Iconify from '../../components/Iconify';
 import Image from '../../components/Image';
 
-
 // ----------------------------------------------------------------------
 
 const LinkStyle = styled(Link)(({ theme }) => ({
@@ -351,45 +350,6 @@ function MenuDesktopItem({
         {title}
       </LinkStyle>
 
-      {/* <Popover
-        open={showModal}
-        anchorReference="anchorPosition"
-        anchorPosition={{ top: 70, left: 0 }}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
-        onClose={handleModalClose}
-        PaperProps={{
-          sx: {
-            px: 3,
-            pt: 2,
-            pb: 2,
-            right: -390,
-            m: 'auto',
-            borderRadius: 2,
-            maxWidth: (theme) => theme.breakpoints.values.lg,
-            boxShadow: (theme) => theme.customShadows.z24,
-            width: '15%',
-          },
-        }}
-      >
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Choose Property Type</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            label="choose property type"
-            onChange={(e) => {
-              handleModalClose();
-              navigate(`/contact-us/${e.target.value}/`);
-            }}
-          >
-            {locations.map((lt) => {
-              return <MenuItem value={lt.id}>{lt.value}</MenuItem>;
-            })}
-          </Select>
-        </FormControl>
-      </Popover> */}
-
       <Modal
         open={showModal}
         onClose={handleModalClose}
@@ -405,44 +365,18 @@ function MenuDesktopItem({
               borderRadius: '10px 0px 0px 10px',
             }}
           >
-            {/* <Grid item lg={6} xs={4}>
-              <FormControl fullWidth>
-                <InputLabel style={{ borderRadius: '10px 0px 0px 10px' }}>Choose property type</InputLabel>
-                <Select
-                  id="demo-simple-select"
-                  label="choose property type"
-                  // inputProps={{
-                  //   borderRadius: "10px 0px 0px 10px"
-                  // }}
-
-                  onChange={(e) => {
-                    handleModalClose();
-                    navigate(`/contact-us/${e.target.value}/`);
-                  }}
-                  sx={{ background: 'white', borderRadius: '10px 0px 0px 10px' }}
-                >
-                  {locations.map((lt) => {
-                    return <MenuItem value={lt.id}>{lt.value}</MenuItem>;
-                  })}
-                </Select>
-              </FormControl>
-            </Grid> */}
-            {/* <Grid item lg={6} xs={1} md={4} sx={{ borderRadius: '0px 10px 10px 0px' }}>
-              <TextField
-                inputProps={{ 'aria-label': 'Without label' }}
-                variant="outlined"
-                placeholder="Find in and around."
-                sx={{
-                  background: 'white',
-                  borderRadius: '0px 10px 10px 0px',
-                  width: { xs: '155px', lg: '200px', md: '200px' },
-                }}
-              />
-            </Grid> */}
-
             <Grid item sx={{ width: '100%', marginTop: '8px' }}>
-              {/* <Select
-                placeholder={<div>Find in and around..</div>}
+              <Select
+                styles={{
+                  control: (baseStyles, state) => ({
+                    ...baseStyles,
+                    borderRadius: '0px 10px 10px 0px',
+                    padding: '7px',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                  }),
+                }}
+                placeholder={<div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500' }}>Find in and around..</div>}
                 options={locations.map((lt) => {
                   return {
                     value: lt.id,
@@ -453,13 +387,12 @@ function MenuDesktopItem({
                   handleModalClose();
                   navigate(`/contact-us/${data.value}/`);
                 }}
-                // components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
                 components={{
                   DropdownIndicator: () => (
                     <Image
                       src="images/search-interface-symbol.png"
                       alt=""
-                      style={{ width: '15px', marginRight: '10px'}}
+                      style={{ width: '15px', marginRight: '10px' }}
                     />
                   ),
                   IndicatorSeparator: () => null,
@@ -472,72 +405,10 @@ function MenuDesktopItem({
                   }
                 }}
                 menuIsOpen={menuIsOpen}
-              /> */}
-              <Select
-                  styles={{
-                    control: (baseStyles, state) => ({
-                      ...baseStyles,
-                      borderRadius: '0px 10px 10px 0px',
-                      padding: '7px',
-                      fontSize: '14px',
-                      fontWeight: '500',
-                    }),
-                  }}
-                  placeholder={<div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500', }}>Find in and around..</div>}
-                  options={locations.map((lt) => {
-                    return {
-                      value: lt.id,
-                      label: lt.value,
-                    };
-                  })}
-                  onChange={(data) => {
-                    handleModalClose();
-                    navigate(`/contact-us/${data.value}/`);
-                  }}
-                  components={{
-                    DropdownIndicator: () => (
-                      <Image
-                        src="images/search-interface-symbol.png"
-                        alt=""
-                        style={{ width: '15px', marginRight: '10px'}}
-                      />
-                    ),
-                    IndicatorSeparator: () => null,
-                  }}
-                  onInputChange={(input) => {
-                    if (input) {
-                      setMenuIsOpen(true);
-                    } else {
-                      setMenuIsOpen(false);
-                    }
-                  }}
-                  menuIsOpen={menuIsOpen}
-                />
+              />
             </Grid>
           </Grid>
 
-          {/* <Grid container sx={{ marginTop: '3%' }}>
-            {locations.map((lt) => {
-              return (
-                <>
-                  <Grid
-                    item
-                    xs={3}
-                    md={3}
-                    lg={3}
-                    sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}
-                    onClick={() => {
-                      handleModalClose();
-                      navigate(`/contact-us/${lt.id}/`);
-                    }}
-                  >
-                    <LocationCityIcon sx={{ fontSize: '3rem', marginLeft: '8%' }} />
-                    <Typography>{lt.value}</Typography>
-                  </Grid>
-                </>
-              );
-            })}
-          </Grid> */}
           <Grid container sx={{ marginTop: '3%' }}>
             <Grid item xs={12}>
               <h5 style={{ marginTop: '4%', marginBottom: '6px' }}>Popular Cities</h5>

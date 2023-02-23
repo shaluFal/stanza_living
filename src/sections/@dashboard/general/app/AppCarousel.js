@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import { m } from 'framer-motion';
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 // @mui
 import { alpha, useTheme, styled } from '@mui/material/styles';
 import { CardContent, Box, Card, Typography, Link } from '@mui/material';
 // components
 import Image from '../../../../components/Image';
+import API from '../../../../Helper/api';
 import { MotionContainer, varFade } from '../../../../components/animate';
 import { CarouselDots, CarouselArrows } from '../../../../components/carousel';
 
@@ -24,16 +25,27 @@ const OverlayStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-AppFeatured.propTypes = {
+AppCarousel.propTypes = {
   list: PropTypes.array.isRequired,
 };
 
-export default function AppFeatured({ list, ...other }) {
+export default function AppCarousel({ list, ...other }) {
   const theme = useTheme();
 
   const carouselRef = useRef(null);
 
   const [currentIndex, setCurrentIndex] = useState(theme.direction === 'rtl' ? list.length - 1 : 0);
+  const [property, setProperty] = React.useState([]);
+
+  React.useEffect(() => {
+    const facilityCode = window.location.pathname.split('/')[3];
+    API.get(
+      `/api/WebsiteAPI/GetPropertyData?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&FacilityCode=${facilityCode}`
+    ).then((response) => {
+      console.log(response.data);
+      setProperty(response.data.propertyObject ? response.data.propertyObject : {});
+    });
+  }, []);
 
   const settings = {
     speed: 800,
@@ -64,7 +76,7 @@ export default function AppFeatured({ list, ...other }) {
     <Card {...other}>
       <Slider ref={carouselRef} {...settings}>
         {list.map((app, index) => (
-          <CarouselItem key={app.id} item={app} isActive={index === currentIndex} index={index+1}/>
+          <CarouselItem key={app.id} item={app} isActive={index === currentIndex} index={index + 1} />
         ))}
       </Slider>
 
@@ -94,15 +106,14 @@ export default function AppFeatured({ list, ...other }) {
 
 CarouselItem.propTypes = {
   isActive: PropTypes.bool,
+  property: PropTypes.string,
   item: PropTypes.shape({
-    description: PropTypes.string,
     image: PropTypes.string,
-    title: PropTypes.string,
   }),
 };
 
-function CarouselItem({ item, isActive,index }) {
-  const { image, title, description } = item;
+function CarouselItem({ item, isActive, index, property }) {
+  const { photoURL } = item;
 
   return (
     <Box sx={{ position: 'relative', width: '300%' }}>
@@ -117,7 +128,7 @@ function CarouselItem({ item, isActive,index }) {
           textAlign: 'left',
           position: 'absolute',
           color: 'common.white',
-          top: '10%'
+          top: '10%',
         }}
       >
         {/* <m.div variants={varFade().inRight}>
@@ -126,24 +137,41 @@ function CarouselItem({ item, isActive,index }) {
           </Typography>
         </m.div> */}
 
-        <m.div variants={varFade().inRight}>
+        {/* <m.div variants={varFade().inRight}>
           <Link color="inherit" underline="none">
-            <Typography gutterBottom noWrap sx={{fontWeight: '900', fontSize: {lg: "32px", xs: "14px", md: "26px"}, marginTop: {xs: "10px"}, right: {xs: '5px'}}}>
-              {title} 
+            <Typography
+              gutterBottom
+              noWrap
+              sx={{
+                fontWeight: '900',
+                fontSize: { lg: '32px', xs: '14px', md: '26px' },
+                marginTop: { xs: '10px' },
+                right: { xs: '5px' },
+              }}
+            >
+              {title}
             </Typography>
           </Link>
         </m.div>
 
         <m.div variants={varFade().inRight}>
-          <Typography variant="body2" noWrap sx={{fontSize: {lg: "20px", xs: "11px", md: "14px"}}}>
+          <Typography variant="body2" noWrap sx={{ fontSize: { lg: '20px', xs: '11px', md: '14px' } }}>
             {description}
           </Typography>
-        </m.div>
+        </m.div> */}
       </CardContent>
 
       <OverlayStyle />
 
-      <Image alt={title} src={`images/feed_${index}.jpg`} sx={{ height: { xs: 300, md: 260, lg: 512 }, width: {xs: 320, md: 1200, lg: 850}, textAlign: 'left' }} />
+      <Image alt="" src={photoURL} />
+
+      {/* {property.listOfFacilityImages?.length > 0 ? (
+        <div>
+          <img alt={title} src={property.listOfFacilityImages[0]?.photoURL} />
+        </div>
+      ) : (
+        <img src={''} alt="" />
+      )} */}
     </Box>
   );
 }
