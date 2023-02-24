@@ -4,7 +4,7 @@ import { m } from 'framer-motion';
 import React, { useState, useRef } from 'react';
 // @mui
 import { alpha, useTheme, styled } from '@mui/material/styles';
-import { CardContent, Box, Card, Typography, Link } from '@mui/material';
+import { CardContent, Box, Card, Typography, Link, Grid } from '@mui/material';
 // components
 import Image from '../../../../components/Image';
 import API from '../../../../Helper/api';
@@ -62,14 +62,16 @@ export default function AppCarousel({ list, ...other }) {
   };
 
   return (
-    <Card {...other}>
-      <Slider ref={carouselRef} {...settings}>
-        {list.map((app, index) => (
-          <CarouselItem key={app.id} item={app} isActive={index === currentIndex} index={index + 1} />
-        //  <p>{ app.photoURL}</p>
-        ))}
-      </Slider>
-    </Card>
+    <>
+      <Card {...other}>
+        <Slider ref={carouselRef} {...settings}>
+          {list.map((app, index) => (
+            <CarouselItem key={app.id} item={app} isActive={index === currentIndex} index={index + 1} />
+            //  <p>{ app.photoURL}</p>
+          ))}
+        </Slider>
+      </Card>
+    </>
   );
 }
 
@@ -87,11 +89,13 @@ function CarouselItem({ item, isActive, index }) {
 
   return (
     <Box sx={{ position: 'relative', width: '50%' }}>
-      { console.log("rrrrrrrrrrrrrrrrr", photoURL)}
+      {/* <OverlayStyle /> */}
 
-      <OverlayStyle />
-
-      <Image alt="" src={photoURL} style={{ height: "90%", width: "90%" }}/>
+      <Image
+        alt=""
+        src={photoURL}
+        sx={{ height: { xs: 300, md: 260, lg: 512 }, width: { xs: 320, md: 1200, lg: 900 }, textAlign: 'left' }}
+      />
     </Box>
   );
 }

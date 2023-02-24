@@ -1,4 +1,5 @@
 import React from 'react';
+import { m } from 'framer-motion';
 import {
   Box,
   Container,
@@ -23,6 +24,8 @@ import AppCarousel from '../sections/@dashboard/general/app/AppCarousel';
 import { _appFeatured } from '../_mock';
 import API from '../Helper/api';
 import { AppFeatured } from '../sections/@dashboard/general/app';
+import Page from '../components/Page';
+
 
 const SearchPropertyDetailPage = () => {
   const [property, setProperty] = React.useState([]);
@@ -38,33 +41,36 @@ const SearchPropertyDetailPage = () => {
   }, []);
 
   return (
-    <div
-      style={{
-        marginTop: '5%',
-        marginBottom: '5%',
-        display: 'flex',
-        justifyContent: 'center',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        paddingRight: '30px',
-        paddingLeft: 0,
-      }}
-    >
-      <Grid container spacing={4} sx={{ display: 'flex', justifyContent: 'center', margin: 'auto' }}>
-        <Grid item md={10}>
-          <h1>{property.facilityName}</h1>
+    <Page title="Coliving">
+      <Grid
+        container
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginTop: '4%',
+        }}
+      >
+        <Grid item xs={12} md={10}>
+          <m.div>
+            <Grid container spacing={4} sx={{ display: 'flex', justifyContent: 'center', margin: 'auto' }}>
+              <Grid item xs={12} md={10}>
+                <h1>{property.facilityName}</h1>
 
-          <Typography sx={{ marginTop: '15px', marginBottom: '10px' }}>
-            Exeter House, Unnamed Road, Gachibowli, Hyderabad, Telangana 500075, India
-          </Typography>
+                <Typography sx={{ marginTop: '15px', marginBottom: '10px' }}>
+                  Exeter House, Unnamed Road, Gachibowli, Hyderabad, Telangana 500075, India
+                </Typography>
 
-          <Grid container sx={{ marginTop: '45px' }}>
-            <Grid item xs={12} md={8}>
-              {property.listOfFacilityImages?.length > 0 ? <AppCarousel list={property.listOfFacilityImages} sx={{width: "50%", height: "50%"}}/> : <></>}
-            </Grid>
-          </Grid>
+                <Grid container sx={{ marginTop: '45px' }}>
+                  <Grid item xs={10} md={8}>
+                    {property.listOfFacilityImages?.length > 0 ? (
+                      <AppCarousel list={property.listOfFacilityImages} />
+                    ) : (
+                      <></>
+                    )}
+                  </Grid>
+                </Grid>
 
-          {/* {property.listOfFacilityImages?.length > 0 ? (
+                {/* {property.listOfFacilityImages?.length > 0 ? (
             <div>
               <img src={property.listOfFacilityImages[0]?.photoURL} alt="" style={{ width: '90%' }} />
             </div>
@@ -74,125 +80,129 @@ const SearchPropertyDetailPage = () => {
             </div>
           )} */}
 
-          <Typography sx={{ marginTop: '20px' }}>Starts from</Typography>
-          <Typography sx={{ fontWeight: '900', fontSize: '20px' }}>₹{property.rentMonthly}/mo*</Typography>
-          <Typography>
-            *Denotes starting price (exclusive of GST) for 7-9 months' stay. Prices may vary with tenure, room
-            occupancy, and attributes.
-          </Typography>
+                <Typography sx={{ marginTop: '20px' }}>Starts from</Typography>
+                <Typography sx={{ fontWeight: '900', fontSize: '20px' }}>₹{property.rentMonthly}/mo*</Typography>
+                <Typography>
+                  *Denotes starting price (exclusive of GST) for 7-9 months' stay. Prices may vary with tenure, room
+                  occupancy, and attributes.
+                </Typography>
 
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Typography sx={{ marginTop: '18px', fontWeight: '600', color: 'rgb(96 195 173)' }}>
-                Available occupancies :
-              </Typography>
-            </Grid>
-            {property.listOfUnitTypes?.map((lt) => {
-              return (
-                <div style={{ margin: '5px', paddingLeft: '16px' }}>
-                  <Card
-                    sx={{
-                      borderRadius: '30px 30px',
-                      padding: '9px',
-                      border: '0.6px solid rgb(190, 190, 190)',
-                      fontSize: '14px',
-                    }}
-                  >
-                    {lt.unitType}
-                  </Card>
-                </div>
-              );
-            })}
-          </Grid>
-
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Typography sx={{ marginTop: '15px', fontWeight: '600', color: 'rgb(96 195 173)' }}>
-                Amenities :
-              </Typography>
-            </Grid>
-
-            {property.facilityAmenities?.length > 0 &&
-              property.facilityAmenities[0].amenityNames?.split(',').map((loc) => {
-                return (
-                  <div key={loc.facilityCode} style={{ margin: '5px', paddingLeft: '16px' }}>
-                    <Card
-                      sx={{
-                        borderRadius: '30px 30px',
-                        padding: '9px',
-                        border: '0.6px solid rgb(190, 190, 190)',
-                        fontSize: '14px',
-                      }}
-                    >
-                      {loc}
-                    </Card>
-                  </div>
-                );
-              })}
-          </Grid>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Typography sx={{ marginTop: '15px', fontWeight: '600', color: 'rgb(96 195 173)' }}>
-                Services :
-              </Typography>
-            </Grid>
-
-            {property.facilityServices?.length > 0 &&
-              property.facilityServices[0].serviceNames?.split(',').map((loc) => {
-                return (
-                  <div key={loc.facilityCode} style={{ margin: '5px', paddingLeft: '16px' }}>
-                    <Card
-                      sx={{
-                        borderRadius: '30px 30px',
-                        padding: '9px',
-                        border: '0.6px solid rgb(190, 190, 190)',
-                        fontSize: '14px',
-                      }}
-                    >
-                      {loc}
-                    </Card>
-                  </div>
-                );
-              })}
-          </Grid>
-
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Typography sx={{ marginTop: '15px', fontWeight: '600', marginBottom: '2%' }}>Food Menu:</Typography>
-            </Grid>
-            <Card sx={{ padding: '4%', width: "100%", background: '#60c3ad1f' }}>
-              {property.listOfFoodItems &&
-                property.listOfFoodItems.map((loc, index) => {
-                  return (
-                    <Grid container key={loc.facilityCode} sx={{ paddingLeft: '16px' }}>
-                      <Grid item xs={12}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Typography sx={{ marginTop: '18px', fontWeight: '600', color: 'rgb(96 195 173)' }}>
+                      Available occupancies :
+                    </Typography>
+                  </Grid>
+                  {property.listOfUnitTypes?.map((lt) => {
+                    return (
+                      <div style={{ margin: '5px', paddingLeft: '16px' }}>
                         <Card
                           sx={{
                             borderRadius: '30px 30px',
-                            padding: '10px 6px 10px 15px',
+                            padding: '9px',
                             border: '0.6px solid rgb(190, 190, 190)',
-                            // margin: '5px',
+                            fontSize: '14px',
                           }}
                         >
-                          <p style={{ fontWeight: '700', marginBottom: '1%', color: 'rgb(96 195 173)' }}>{loc.day} -</p>
-                          <p>
-                            <span style={{ fontWeight: '600', color: 'rgb(96 195 173)' }}>Breakfast :</span>{' '}
-                            {loc.breakfast}
-                          </p>
-                          <p>
-                            <span style={{ fontWeight: '600', color: 'rgb(96 195 173)' }}>Lunch : </span>
-                            {loc.lunch}{' '}
-                          </p>
-                          <p>
-                            <span style={{ fontWeight: '600', color: 'rgb(96 195 173)' }}>Dinner : </span>
-                            {loc.dinner}
-                          </p>
+                          {lt.unitType}
                         </Card>
-                      </Grid>
-                    </Grid>
-                  );
-                })}
-              {/* <Grid container spacing={7}>
+                      </div>
+                    );
+                  })}
+                </Grid>
+
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Typography sx={{ marginTop: '15px', fontWeight: '600', color: 'rgb(96 195 173)' }}>
+                      Amenities :
+                    </Typography>
+                  </Grid>
+
+                  {property.facilityAmenities?.length > 0 &&
+                    property.facilityAmenities[0].amenityNames?.split(',').map((loc) => {
+                      return (
+                        <div key={loc.facilityCode} style={{ margin: '5px', paddingLeft: '16px' }}>
+                          <Card
+                            sx={{
+                              borderRadius: '30px 30px',
+                              padding: '9px',
+                              border: '0.6px solid rgb(190, 190, 190)',
+                              fontSize: '14px',
+                            }}
+                          >
+                            {loc}
+                          </Card>
+                        </div>
+                      );
+                    })}
+                </Grid>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Typography sx={{ marginTop: '15px', fontWeight: '600', color: 'rgb(96 195 173)' }}>
+                      Services :
+                    </Typography>
+                  </Grid>
+
+                  {property.facilityServices?.length > 0 &&
+                    property.facilityServices[0].serviceNames?.split(',').map((loc) => {
+                      return (
+                        <div key={loc.facilityCode} style={{ margin: '5px', paddingLeft: '16px' }}>
+                          <Card
+                            sx={{
+                              borderRadius: '30px 30px',
+                              padding: '9px',
+                              border: '0.6px solid rgb(190, 190, 190)',
+                              fontSize: '14px',
+                            }}
+                          >
+                            {loc}
+                          </Card>
+                        </div>
+                      );
+                    })}
+                </Grid>
+
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Typography sx={{ marginTop: '15px', fontWeight: '600', marginBottom: '2%' }}>
+                      Food Menu:
+                    </Typography>
+                  </Grid>
+                  <Card sx={{ padding: '4%', width: '100%', background: '#60c3ad1f' }}>
+                    {property.listOfFoodItems &&
+                      property.listOfFoodItems.map((loc, index) => {
+                        return (
+                          <Grid container key={loc.facilityCode} sx={{ paddingLeft: '16px', marginBottom:"10px" }}>
+                            <Grid item xs={12}>
+                              <Card
+                                sx={{
+                                  borderRadius: '30px 30px',
+                                  padding: '10px 6px 10px 15px',
+                                  border: '0.6px solid rgb(190, 190, 190)',
+                                  // margin: '5px',
+                                }}
+                              >
+                                <p style={{ fontWeight: '700', marginBottom: '1%', color: 'rgb(96 195 173)' }}>
+                                  {loc.day} -
+                                </p>
+                                <p>
+                                  <span style={{ fontWeight: '600', color: 'rgb(96 195 173)' }}>Breakfast :</span>{' '}
+                                  {loc.breakfast}
+                                </p>
+                                <p>
+                                  <span style={{ fontWeight: '600', color: 'rgb(96 195 173)' }}>Lunch : </span>
+                                  {loc.lunch}{' '}
+                                </p>
+                                <p>
+                                  <span style={{ fontWeight: '600', color: 'rgb(96 195 173)' }}>Dinner : </span>
+                                  {loc.dinner}
+                                </p>
+                              </Card>
+                            </Grid>
+                          </Grid>
+                        );
+                      })}
+                    {/* <Grid container spacing={7}>
                 <Grid item>
                   <Typography>Days</Typography>
                   <Typography>Mon-Sun</Typography>
@@ -222,10 +232,10 @@ const SearchPropertyDetailPage = () => {
                     })}
                 </Grid>
               </Grid> */}
-            </Card>
-          </Grid>
-        </Grid>
-        {/* <Grid item md={4}>
+                  </Card>
+                </Grid>
+              </Grid>
+              {/* <Grid item md={4}>
           <Typography> Schedule a Visit</Typography>
           <Card
             style={{
@@ -280,8 +290,11 @@ const SearchPropertyDetailPage = () => {
             </Grid>
           </Card>
         </Grid> */}
+            </Grid>
+          </m.div>
+        </Grid>
       </Grid>
-    </div>
+    </Page>
   );
 };
 
