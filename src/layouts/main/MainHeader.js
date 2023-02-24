@@ -82,11 +82,6 @@ export default function MainHeader() {
     { value: 'GirlsHostel', label: 'Girls Hostel' },
   ];
 
-  const localityOptions = [
-    { value: 'Ameerpet', label: 'Ameerpet' },
-    { value: 'Ameerpet', label: 'Ameerpet' },
-  ];
-
   return (
     <AppBar sx={{ boxShadow: 0, bgcolor: 'transparent' }}>
       <ToolbarStyle
@@ -141,15 +136,20 @@ export default function MainHeader() {
                         padding: '10px',
                         fontSize: '14px',
                         fontWeight: '500',
+                        color: "#000 !important"
                         // color: isSelected ? "#000" : "#000",
                       }),
+                      option: (provided, state) => ({
+                        ...provided,
+                        color: "#000"
+                      })
                     }}
-                    placeholder={<div style={{ color: 'rgb(41, 45, 50)' }}>Choose Property Type</div>}
+                    placeholder={<div style={{ color: 'rgb(41, 45, 50)' }}>Choose Property </div>}
                     id="demo-simple-select"
                     label="choose property type"
                     inputProps={{ 'aria-label': 'Without label' }}
                     options={options}
-                    sx={{ background: 'white', borderRadius: '10px 0px 0px 10px' }}
+                    sx={{borderRadius: '10px 0px 0px 10px', color: "#000"}}
                     components={{ DropdownIndicator: () => <ExpandMoreIcon />, IndicatorSeparator: () => null }}
                   />
                 </Grid>
@@ -163,9 +163,13 @@ export default function MainHeader() {
                         fontSize: '14px',
                         fontWeight: '500',
                       }),
+                      option: (provided, state) => ({
+                        ...provided,
+                        color: "#000"
+                      })
                     }}
                     placeholder={
-                      <div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500' }}>Find in and around..</div>
+                      <div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500' }}>Find in..</div>
                     }
                     options={locations.map((lt) => {
                       return {
@@ -182,7 +186,7 @@ export default function MainHeader() {
                         <Image
                           src="images/search-interface-symbol.png"
                           alt=""
-                          style={{ width: '15px', marginRight: '10px' }}
+                          style={{ width: '15px', marginRight: '10px', color: "#000"}}
                         />
                       ),
                       IndicatorSeparator: () => null,

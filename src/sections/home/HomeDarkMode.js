@@ -9,13 +9,13 @@ import { MotionViewport, varFade } from '../../components/animate';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled('div')(({ theme }) => ({
-  padding: theme.spacing(10, 0),
+  padding: theme.spacing(5, 0),
 }));
 
 const ContentStyle = styled('div')(({ theme }) => ({
   textAlign: 'center',
   position: 'relative',
-  marginBottom: theme.spacing(10),
+  marginBottom: theme.spacing(5),
   [theme.breakpoints.up('md')]: {
     height: '100%',
     marginBottom: 0,
@@ -39,7 +39,7 @@ export default function HomeDarkMode() {
       }}
     >
       <Container sx={{ position: 'relative', transform: 'matrix(1, 0, 0, -1, 0, 0) rotate(0deg)' }}>
-        <Grid container spacing={5} direction="row-reverse" justifyContent="space-between" sx={{paddingBottom: "150px"}}>
+        <Grid container spacing={5} direction="row-reverse" justifyContent="space-between" sx={{paddingBottom: "165px"}}>
           <Grid item xs={12} md={6} sx={{ position: 'relative' }}>
             <m.div sx={{ width: '30%' }}>
               <Image alt="light mode" src="images/room_2.jpg" style={{ width: '50%', marginLeft: '40%' }} />

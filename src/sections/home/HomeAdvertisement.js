@@ -23,7 +23,7 @@ import { MotionViewport, varFade } from '../../components/animate';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled('div')(({ theme }) => ({
-  padding: theme.spacing(10, 0)
+  padding: theme.spacing(5, 0)
 }));
 
 // ----------------------------------------------------------------------
@@ -39,7 +39,7 @@ export default function HomeAdvertisement() {
     }}
     >
       <Container component={MotionViewport} sx={{ position: 'relative', textAlign: 'center'}}>
-        <Grid container spacing={5} sx={{ paddingTop: '150px' }}>
+        <Grid container spacing={5} sx={{ paddingTop: '110px' }}>
           <Grid item xs={12} md={6} sx={{ textAlign: 'left', marginTop: '100px', maxWidth: '475px' }}>
             <Typography variant="h3" sx={{ fontSize: '2rem', lineHeight: '44px', fontWeight: '700' }}>
               Chill in a<span style={{ color: 'rgb(96 195 173)', textAlign: 'left' }}> common area <br/> </span>

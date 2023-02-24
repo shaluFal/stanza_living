@@ -19,7 +19,7 @@ const OverlayStyle = styled('div')(({ theme }) => ({
   bottom: 0,
   zIndex: 4,
   position: 'absolute',
-  backgroundColor: alpha(theme.palette.grey[900], 0.2),
+  // backgroundColor: "#fff",
 }));
 
 // ----------------------------------------------------------------------
@@ -105,7 +105,7 @@ function CarouselItem({ item, isActive,index }) {
   const { image, title, description } = item;
 
   return (
-    <Box sx={{ position: 'relative', width: '300%' }}>
+    <Box sx={{ position: 'relative', width: '100%' }}>
       <CardContent
         component={MotionContainer}
         animate={isActive}
@@ -116,26 +116,20 @@ function CarouselItem({ item, isActive,index }) {
           zIndex: 9,
           textAlign: 'left',
           position: 'absolute',
-          color: 'common.white',
+          color: 'rgb(35 39 40/var(--tw-text-opacity))',
           top: '10%'
         }}
       >
-        {/* <m.div variants={varFade().inRight}>
-          <Typography variant="overline" component="div" sx={{ mb: 1, opacity: 0.48 }}>
-            Featured App
-          </Typography>
-        </m.div> */}
-
         <m.div variants={varFade().inRight}>
           <Link color="inherit" underline="none">
-            <Typography gutterBottom noWrap sx={{fontWeight: '900', fontSize: {lg: "32px", xs: "14px", md: "26px"}, marginTop: {xs: "10px"}, right: {xs: '5px'}}}>
-              {title} 
+            <Typography variant='h3' gutterBottom noWrap sx={{fontWeight: '900', marginTop: {xs: "10px"}, right: {xs: '5px'}, fontSize: {xs: "14px", lg: '34px', md: "26px"}}}>
+              {title}
             </Typography>
           </Link>
         </m.div>
 
         <m.div variants={varFade().inRight}>
-          <Typography variant="body2" noWrap sx={{fontSize: {lg: "20px", xs: "11px", md: "14px"}}}>
+          <Typography variant="p" noWrap sx={{fontSize: {lg: "20px", xs: "11px", md: "14px"}}}>
             {description}
           </Typography>
         </m.div>
@@ -143,7 +137,8 @@ function CarouselItem({ item, isActive,index }) {
 
       <OverlayStyle />
 
-      <Image alt={title} src={`images/feed_${index}.jpg`} sx={{ height: { xs: 300, md: 260, lg: 512 }, width: {xs: 320, md: 1200, lg: 850}, textAlign: 'left' }} />
+      <Image alt={title} src={`images/feed_${index}.jpg`} style={{width: "19%", borderRadius: "20px 20px 20px 20px", backgroundColor: "white", marginLeft: "14.2%"}} />
+      {/* sx={{ height: { xs: 300, md: 260, lg: 512 }, width: {xs: 320, md: 1200, lg: 850}, textAlign: 'left' }} */}
     </Box>
   );
 }

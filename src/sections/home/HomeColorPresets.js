@@ -47,7 +47,7 @@ export default function HomeColorPresets() {
               mb: 3,
               fontSize: '2rem',
               lineHeight: { lg: '40px', md: '30px' },
-              paddingTop: '15px',
+              paddingTop: '6px',
             }}
           >
             <span style={{ color: 'rgb(96 195 173)' }}>Not just </span>four walls and a roof
@@ -56,8 +56,9 @@ export default function HomeColorPresets() {
 
         <m.div>
           <Typography
+          variant='h5'
             sx={{
-              lineHeight: '35px',
+              lineHeight: '30px',
               fontSize: '1.5rem',
               color: 'rgb(78 82 83)',
             }}
@@ -66,7 +67,7 @@ export default function HomeColorPresets() {
           </Typography>
         </m.div>
 
-        <Grid container spacing={5} sx={{ paddingTop: '140px' }}>
+        <Grid container spacing={5} sx={{ paddingTop: '100px' }}>
           <Grid item xs={12} md={6}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
@@ -90,7 +91,7 @@ export default function HomeColorPresets() {
               Start living your best life
               <br /> from <span style={{ color: 'rgb(96 195 173)', textAlign: 'left' }}>day one</span>
             </Typography>
-            <Typography sx={{ fontSize: '1rem', lineHeight: '26px', marginTop: '16px' }}>
+            <Typography variant="p" sx={{ fontSize: '1rem', lineHeight: '26px', marginTop: '10px' }}>
               Bring a box full of hopes, dreams, ambitions… and of course, your personal belongings. Everything else -
               furniture, appliances, food - has already been taken care of.
             </Typography>

@@ -45,9 +45,4 @@ export const _appFeatured = [...Array(4)].map((_, index) => ({
   image: _mock.image.feed(index),
 }));
 
-export const _appCarousel = [...Array(2)].map((_, index) => ({
-  id: _mock.id(index),
-  image: _mock.imageCarousel.feed(index),
-}));
-
 

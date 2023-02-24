@@ -265,11 +265,6 @@ export default function ContactHero() {
     { value: 'GirlsHostel', label: 'Girls Hostel' },
   ];
 
-  const localityOptions = [
-    { value: 'Ameerpet', label: 'Ameerpet' },
-    { value: 'Ameerpet', label: 'Ameerpet' },
-  ];
-
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handlePopoverClick = (event: React.MouseEvent<HTMLButtonElement>) => {

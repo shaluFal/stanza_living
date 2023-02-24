@@ -182,12 +182,12 @@ export default function HomeHero() {
               container
               sx={{
                 position: 'absolute',
-                top: { md: '55%', xs: '30%', lg: '40%' },
+                top: { md: '25%', xs: '25%', lg: '38%' },
                 padding: '2%',
                 borderRadius: '10px 0px 0px 10px',
               }}
             >
-              <Grid item xs={6} md={6} lg={2}>
+              <Grid item xs={6} md={3} lg={2}>
                 <Select
                   styles={{
                     control: (baseStyles, state) => ({
@@ -198,7 +198,7 @@ export default function HomeHero() {
                       fontWeight: '500',
                     }),
                   }}
-                  placeholder={<div style={{ color: 'rgb(41, 45, 50)' }}>Choose Property Type</div>}
+                  placeholder={<div style={{ color: 'rgb(41, 45, 50)' }}>Choose Property</div>}
                   id="demo-simple-select"
                   label="choose property type"
                   inputProps={{ 'aria-label': 'Without label' }}
@@ -207,7 +207,7 @@ export default function HomeHero() {
                   components={{ DropdownIndicator: () => <ExpandMoreIcon/>, IndicatorSeparator: () => null }}
                 />
               </Grid>
-              <Grid item xs={6} md={6} lg={2} sx={{ borderRadius: '0px 10px 10px 0px' }}>
+              <Grid item xs={6} md={2} lg={2} sx={{ borderRadius: '0px 10px 10px 0px' }}>
                 <Select
                   styles={{
                     control: (baseStyles, state) => ({
@@ -218,7 +218,7 @@ export default function HomeHero() {
                       fontWeight: '500',
                     }),
                   }}
-                  placeholder={<div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500' }}>Find in and around..</div>}
+                  placeholder={<div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500' }}>Find in..</div>}
                   options={locationList.map((lt) => {
                     return {
                       value: lt.id,
@@ -255,7 +255,7 @@ export default function HomeHero() {
           <m.div>
             <Divider sx={{paddingTop: "10px"}} />
             {/* <Box sx={{ py: 2, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', textAlign: 'center' }}> */}
-            <Grid container sx={{ textAlign: 'center', paddingBottom: '10px' }}>
+            <Grid container sx={{ textAlign: 'center', paddingBottom: '6px' }}>
               <Grid item xs={12} md={4}>
                 <Typography>
                   <span style={{ fontSize: '1.2rem', fontWeight: '600' }}>

@@ -167,7 +167,6 @@ export default function Router() {
         { element: <HomePage />, index: true },
         { path: 'about-us', element: <About /> },
         { path: 'contact-us/:id', element: <Contact /> },
-        
         { path: 'team', element: <Faqs /> },
         { path: 'partner', element: <Partner /> },
         {path: 'search-property-detail/:id', element: <SearchPropertyDetailPage />}

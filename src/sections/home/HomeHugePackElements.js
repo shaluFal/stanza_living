@@ -9,7 +9,7 @@ import { MotionViewport, varFade } from '../../components/animate';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled('div')(({ theme }) => ({
-  padding: theme.spacing(14, 0),
+  padding: theme.spacing(5, 0),
 }));
 
 const ContentStyle = styled('div')(({ theme }) => ({
@@ -88,10 +88,10 @@ export default function HomeHugePackElements() {
           <Grid container spacing={5} >
             <Grid item xs={12} md={6} sx={{ position: 'relative' }}>
               <m.div sx={{ width: '30%' }}>
-                <Image alt="light mode" src="images/chores_2.jpg" style={{ width: '60%', marginRight: '40%' }} />
+                <Image alt="light mode" src="images/chores_2.jpg" style={{ width: '50%', marginRight: '40%' }} />
               </m.div>
 
-              <Box component={m.div} sx={{ top: {md: '150px', xs: '80px'}, left: {md: '190px', xs: '140px'}, width: '60%', position: 'absolute' }}>
+              <Box component={m.div} sx={{ top: {md: '150px', xs: '80px'}, left: {md: '190px', xs: '140px'}, width: '50%', position: 'absolute' }}>
                 <Image alt="dark mode" src="images/chores.jpg" />
               </Box>
             </Grid>
