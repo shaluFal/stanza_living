@@ -49,7 +49,6 @@ import API from '../../Helper/api';
 import { AppFeatured } from '../@dashboard/general/app';
 import SearchPropertyDetailPage from '../../pages/SearchPropertyDetailPage';
 import Image from '../../components/Image';
-// ----------------------------------------------------------------------
 
 const RootStyle = styled('div')(({ theme }) => ({
   backgroundSize: 'cover',
@@ -131,13 +130,15 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-// ----------------------------------------------------------------------
+// ------------------------------------------------------------------
 
 export default function ContactHero() {
   const [location, setLocation] = React.useState([]);
   const [locations, setLocations] = React.useState([]);
-  const navigate = useNavigate();
   console.log('locations', locations);
+  console.log('location', location);
+  const navigate = useNavigate();
+
   React.useEffect(() => {
     API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd').then(
       (response) => {
@@ -147,15 +148,17 @@ export default function ContactHero() {
   }, []);
 
   // -----
-
-  const [budgetValue, setBudgetValue] = React.useState([0, 100]);
+  const [showClearIcon, setShowClearIcon] = useState('none');
+  const [budgetValue, setBudgetValue] = React.useState([5000, 12000]);
   const [budgetpopover, setBudgetpopover] = React.useState(null);
   const [occupancypopover, setOccupancypopover] = React.useState(null);
   const [genderpopover, setGenderpopover] = React.useState(null);
   const [amenitiespopover, setAmenitiespopover] = React.useState(null);
   const [popularitypopover, setPopularitypopover] = React.useState(null);
-
+  const [selectedPrice, setSelectedPrice] = useState();
   const [openFilter, setOpenFilter] = React.useState(false);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [locationid, setLocationId] = useState();
   // -----
 
   const [openModal, setOpenModal] = useState(false);
@@ -179,10 +182,17 @@ export default function ContactHero() {
   const filterHandleOpen = () => setOpen(true);
   const filterHandleClose = () => setOpen(false);
 
-  const handleChange = (event, newValue) => {
+  const priceHandleChange = (event, newValue) => {
     setBudgetValue(newValue);
   };
 
+  const getPriceValues = () => {
+    console.log(budgetValue, 'budgetValue');
+    setBudgetpopover(null);
+
+    const filteredPrice = location?.filter((item) => item.rentMonthly <= budgetValue[1]);
+    console.log('sss', filteredPrice);
+  };
   const handleBudgetClick = (event) => {
     setBudgetpopover(event.currentTarget);
   };
@@ -199,8 +209,15 @@ export default function ContactHero() {
     setOccupancypopover(null);
   };
 
+  const getSelectedOccupancy = () => {
+    setOccupancypopover(null);
+  };
+
   const genderHandleClick = (event) => {
     setGenderpopover(event.currentTarget);
+  };
+  const getSelectedGender = () => {
+    setGenderpopover(null);
   };
 
   const genderHandleClose = () => {
@@ -215,12 +232,25 @@ export default function ContactHero() {
     setAmenitiespopover(null);
   };
 
+  const getSelectedAmenities = () => {
+    setAmenitiespopover(null);
+  };
+
   const PopularityHandleClick = (event) => {
     setPopularitypopover(event.currentTarget);
   };
 
   const PopularityHandleClose = () => {
     setPopularitypopover(null);
+  };
+
+  const handleSearchChange = (event) => {
+    setShowClearIcon(event.target.value === '' ? 'none' : 'flex');
+  };
+
+  const handleSearchClick = () => {
+    // TODO: Clear the search input
+    console.log('clicked the clear icon...');
   };
 
   const checkboxLabel = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -246,9 +276,34 @@ export default function ContactHero() {
     }
   }, []);
 
+  const getNewLocations = useCallback(async (locationid) => {
+    const newLocationid = window.location.pathname.split('/')[3];
+
+    try {
+      await API.post('http://pmsapis.crisprsys.net/api/WebsiteAPI/GetListOfProperties', {
+        apiKey: 'eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=',
+        location: newLocationid,
+        amenities: '',
+        services: '',
+        amountStartRange: '0',
+        amountEndRange: '10000000',
+      })
+        .then((res) => {
+          setLocation(res.data.listOfProperties);
+        })
+        .catch((err) => console.log(err));
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
   useEffect(() => {
     getAllLocations();
   }, [getAllLocations]);
+
+  useEffect(() => {
+    getNewLocations();
+  }, [locationid]);
 
   const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -269,6 +324,10 @@ export default function ContactHero() {
 
   const handlePopoverClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const getSelectedLoctions = () => {
+    setAnchorEl(null);
   };
 
   const handlePopoverClose = () => {
@@ -335,6 +394,13 @@ export default function ContactHero() {
     );
   }
 
+  const handleLocations = (item) => {
+    setLocationId(item.id);
+    console.log('handleLocations', item.id);
+    navigate(`/contact-us/${item.id}/`);
+    // setAnchorEl(null);
+  };
+
   return (
     <>
       <Grid
@@ -369,7 +435,7 @@ export default function ContactHero() {
                           fontSize: "13px"
                         }}
                       >
-                        Locality1 &nbsp;
+                        Locality &nbsp;
                         {id !== 'simple-popover' ? <ExpandMoreIcon /> : <ExpandLessIcon />}
                       </Button>
                       <Popover
@@ -384,15 +450,45 @@ export default function ContactHero() {
                       >
                         <div style={{ maxHeight: '400px', maxWidth: '498px' }}>
                           <div style={{ padding: '20px' }}>
-                            <p>Search bar</p>
+                            <FormControl
+                              style={{
+                                width: '100%',
+                                height: '50px',
+                                background: 'rgb(255, 255, 255)',
+                                borderRadius: '10px',
+                                appearance: 'none',
+                                outline: 'none',
+                                fontFamily: 'Font-Light',
+                                fontSize: '14px',
+                              }}
+                            >
+                              <TextField
+                                size="small"
+                                variant="outlined"
+                                onChange={handleSearchChange}
+                                placeholder="Search for your second home"
+                                InputProps={{
+                                  startAdornment: (
+                                    <InputAdornment position="start">
+                                      <SearchIcon />
+                                    </InputAdornment>
+                                  ),
+                                }}
+                              />
+                            </FormControl>
                           </div>
-                          <Typography sx={{ p: 2 }}>Select Range: </Typography>
                           {locations.map((item) => (
                             <StyledBreadcrumb
-                              style={{ border: '1px solid grey', padding: '15px', margin: '10px' }}
+                              style={{
+                                border: '1px solid grey',
+                                padding: '15px',
+                                margin: '10px',
+                                background: item.id === locationid ? 'red' : 'white',
+                              }}
                               component="a"
                               href="#"
                               label={item.value}
+                              onClick={() => handleLocations(item)}
                             />
                           ))}
                           <hr />
@@ -414,7 +510,10 @@ export default function ContactHero() {
                             >
                               Clear
                             </Button>
-                            <Button style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}>
+                            <Button
+                              style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}
+                              onClick={() => getSelectedLoctions()}
+                            >
                               Save
                             </Button>
                           </div>
@@ -454,21 +553,24 @@ export default function ContactHero() {
                           <Typography sx={{ p: 2 }}>Select Range: </Typography>
                           <PrettoSlider
                             value={budgetValue}
-                            onChange={handleChange}
-                            valueLabelDisplay="auto"
+                            onChange={priceHandleChange}
                             aria-label="pretto slider"
+                            min={5000}
+                            max={12000}
                           />
                           <div style={{ padding: '20px', display: 'flex', justifyContent: 'spaceBetween' }}>
                             <TextField
                               id="outlined-basic"
                               label="min price"
                               variant="outlined"
+                              value={budgetValue[0]}
                               style={{ marginRight: '10px', maxWidth: '140px' }}
                             />
                             <span style={{ paddingTop: '15px' }}>-</span>
                             <TextField
                               id="outlined-basic"
                               label="max price"
+                              value={budgetValue[1]}
                               variant="outlined"
                               style={{ marginLeft: '10px', maxWidth: '140px' }}
                             />
@@ -492,7 +594,10 @@ export default function ContactHero() {
                             >
                               Clear
                             </Button>
-                            <Button style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}>
+                            <Button
+                              style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}
+                              onClick={() => getPriceValues()}
+                            >
                               Save
                             </Button>
                           </div>
@@ -528,8 +633,7 @@ export default function ContactHero() {
                           horizontal: 'left',
                         }}
                       >
-                        <div style={{ maxHeight: '400px', maxWidth: '3  00px' }}>
-                          <Typography sx={{ p: 2 }}>Select Range: </Typography>
+                        <div style={{ maxHeight: '400px', maxWidth: '300px' }}>
                           {locations.map((item) => (
                             <StyledBreadcrumb
                               style={{ border: '1px solid grey', padding: '15px', margin: '10px' }}
@@ -557,7 +661,10 @@ export default function ContactHero() {
                             >
                               Clear
                             </Button>
-                            <Button style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}>
+                            <Button
+                              style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}
+                              onClick={() => getSelectedOccupancy()}
+                            >
                               Save
                             </Button>
                           </div>
@@ -597,6 +704,9 @@ export default function ContactHero() {
                       >
                         <div style={{ maxHeight: '400px', maxWidth: '300px', padding: '10px 20px' }}>
                           <div style={{ marginBottom: '15px' }}>
+                            {/* {location.map((item) => (
+                              <Checkbox {...checkboxLabel}>{item.gender}</Checkbox>
+                            ))} */}
                             <Checkbox {...checkboxLabel} />
                             Male
                             <Checkbox {...checkboxLabel} />
@@ -623,16 +733,17 @@ export default function ContactHero() {
                             >
                               Clear
                             </Button>
-                            <Button style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}>
+                            <Button
+                              style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}
+                              onClick={() => getSelectedGender()}
+                            >
                               Save
                             </Button>
                           </div>
                         </div>
                       </Popover>
                     </div>
-
                     {/* -------------------------------------- */}
-
                     <div>
                       <Button
                         aria-describedby={amenitiesId}
@@ -669,6 +780,9 @@ export default function ContactHero() {
                           }}
                         >
                           <div style={{ marginBottom: '15px' }}>
+                            {/* {locations.map((item) => (
+                              <Checkbox {...checkboxLabel}>{item.amenities}</Checkbox>
+                            ))} */}
                             <Checkbox {...checkboxLabel} />
                             Attatched Balcony
                             <Checkbox {...checkboxLabel} />
@@ -705,7 +819,10 @@ export default function ContactHero() {
                             >
                               Clear
                             </Button>
-                            <Button style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}>
+                            <Button
+                              style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}
+                              onClick={() => getSelectedAmenities()}
+                            >
                               Save
                             </Button>
                           </div>
@@ -731,7 +848,6 @@ export default function ContactHero() {
                         My Wishlist
                       </Button>
                     </div>
-
                     <div>
                       <Button
                         variant="outlined"
@@ -802,7 +918,7 @@ export default function ContactHero() {
                           borderRadius: '40px',
                           padding: '10px 20px',
                           margin: '5px',
-                          border: '1px solid rgb(232, 232, 232)',
+                          border: '0px',
                           background: 'rgb(249, 249, 249)',
                           color: ' rgb(125, 125, 125)',
                           fontSize: "13px"
@@ -853,7 +969,10 @@ export default function ContactHero() {
                             >
                               Clear
                             </Button>
-                            <Button style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}>
+                            <Button
+                              style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}
+                              onClick={PopularityHandleClose}
+                            >
                               Save
                             </Button>
                           </div>
