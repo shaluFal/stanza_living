@@ -107,11 +107,13 @@ export default function HomeHero() {
   const [locationList, setLocationList] = useState([]);
 
   useEffect(() => {
-    API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd').then(
-      (response) => {
+    API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd')
+      .then((response) => {
         setLocationList(response.data?.listOfLocations);
-      }
-    );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const handleModalClose = () => setShowModal(false);
@@ -144,7 +146,9 @@ export default function HomeHero() {
                 <Grid container spacing={1}>
                   <Grid item>
                     <Card>
-                      <Typography sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700', fontSize: "18px" }}>
+                      <Typography
+                        sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700', fontSize: '18px' }}
+                      >
                         Modern Student
                         <br /> Housing
                       </Typography>
@@ -155,7 +159,9 @@ export default function HomeHero() {
 
                   <Grid item>
                     <Card>
-                      <Typography sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700', fontSize: "18px"  }}>
+                      <Typography
+                        sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700', fontSize: '18px' }}
+                      >
                         Co-living <br /> Professionals
                       </Typography>
                       <img src="images/modern_2.jpg" alt="" />
@@ -165,7 +171,9 @@ export default function HomeHero() {
 
                   <Grid item>
                     <Card>
-                      <Typography sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700', fontSize: "18px"  }}>
+                      <Typography
+                        sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700', fontSize: '18px' }}
+                      >
                         Managed <br /> Apartments
                       </Typography>
                       <img src="images/modern_3.jpg" alt="" />
@@ -204,7 +212,7 @@ export default function HomeHero() {
                   inputProps={{ 'aria-label': 'Without label' }}
                   options={options}
                   sx={{ background: 'white', borderRadius: '10px 0px 0px 10px' }}
-                  components={{ DropdownIndicator: () => <ExpandMoreIcon/>, IndicatorSeparator: () => null }}
+                  components={{ DropdownIndicator: () => <ExpandMoreIcon />, IndicatorSeparator: () => null }}
                 />
               </Grid>
               <Grid item xs={6} md={2} lg={2} sx={{ borderRadius: '0px 10px 10px 0px' }}>
@@ -234,7 +242,7 @@ export default function HomeHero() {
                       <Image
                         src="images/search-interface-symbol.png"
                         alt=""
-                        style={{ width: '15px', marginRight: '10px'}}
+                        style={{ width: '15px', marginRight: '10px' }}
                       />
                     ),
                     IndicatorSeparator: () => null,
@@ -253,14 +261,20 @@ export default function HomeHero() {
           </m.div>
 
           <m.div>
-            <Divider sx={{paddingTop: "10px"}} />
+            <Divider sx={{ paddingTop: '10px' }} />
             {/* <Box sx={{ py: 2, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', textAlign: 'center' }}> */}
             <Grid container sx={{ textAlign: 'center', paddingBottom: '6px' }}>
               <Grid item xs={12} md={4}>
                 <Typography>
                   <span style={{ fontSize: '1.2rem', fontWeight: '600' }}>
                     <LocationCityIcon
-                      style={{ position: 'relative', top: '10px', fontSize: '2.5rem', color: 'rgb(0, 171, 85)', marginRight: '1%' }}
+                      style={{
+                        position: 'relative',
+                        top: '10px',
+                        fontSize: '2.5rem',
+                        color: 'rgb(0, 171, 85)',
+                        marginRight: '1%',
+                      }}
                     />
                     24+{' '}
                   </span>
@@ -271,7 +285,13 @@ export default function HomeHero() {
                 <Typography>
                   <span style={{ fontSize: '1.2rem', fontWeight: '600' }}>
                     <ApartmentIcon
-                      style={{ position: 'relative', top: '10px', fontSize: '2.5rem', color: 'rgb(0, 171, 85)', marginRight: '1%'  }}
+                      style={{
+                        position: 'relative',
+                        top: '10px',
+                        fontSize: '2.5rem',
+                        color: 'rgb(0, 171, 85)',
+                        marginRight: '1%',
+                      }}
                     />
                     450+{' '}
                   </span>
@@ -282,7 +302,13 @@ export default function HomeHero() {
                 <Typography>
                   <span style={{ fontSize: '1.2rem', fontWeight: '600' }}>
                     <BedIcon
-                      style={{ position: 'relative', top: '12px', fontSize: '2.6rem', color: 'rgb(0, 171, 85)', marginRight: '1%'  }}
+                      style={{
+                        position: 'relative',
+                        top: '12px',
+                        fontSize: '2.6rem',
+                        color: 'rgb(0, 171, 85)',
+                        marginRight: '1%',
+                      }}
                     />
                     70,000+{' '}
                   </span>

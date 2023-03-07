@@ -77,16 +77,16 @@ MenuDesktop.propTypes = {
   navConfig: PropTypes.array,
 };
 
-export default function MenuDesktop({ isOffset, isHome, navConfig }) {
-  const [locations, setLocation] = React.useState([]);
+export default function MenuDesktop({ isOffset, locations, isHome, navConfig }) {
+  // const [locations, setLocation] = React.useState([]);
 
-  React.useEffect(() => {
-    API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd').then(
-      (response) => {
-        setLocation(response.data?.listOfLocations);
-      }
-    );
-  }, []);
+  // React.useEffect(() => {
+  //   API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd').then(
+  //     (response) => {
+  //       setLocation(response.data?.listOfLocations);
+  //     }
+  //   );
+  // }, []);
 
   const { pathname } = useLocation();
   const [openModal, setOpenModal] = useState(false);
@@ -377,7 +377,7 @@ function MenuDesktopItem({
                   }),
                 }}
                 placeholder={<div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500' }}>Find in and around..</div>}
-                options={locations.map((lt) => {
+                options={locations?.map((lt) => {
                   return {
                     value: lt.id,
                     label: lt.value,

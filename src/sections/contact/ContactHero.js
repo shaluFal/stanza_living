@@ -15,7 +15,6 @@ import {
   MenuItem,
   Breadcrumbs,
   TextField,
-  // Select,
   InputLabel,
   FormControl,
   FormControlLabel,
@@ -40,6 +39,7 @@ import GoogleMapReact from 'google-map-react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import TuneIcon from '@mui/icons-material/Tune';
+import _ from 'lodash';
 import { _appFeatured } from '../../_mock';
 import useResponsive from '../../hooks/useResponsive';
 import { TextAnimate, MotionContainer, varFade } from '../../components/animate';
@@ -49,6 +49,7 @@ import API from '../../Helper/api';
 import { AppFeatured } from '../@dashboard/general/app';
 import SearchPropertyDetailPage from '../../pages/SearchPropertyDetailPage';
 import Image from '../../components/Image';
+import { lcsData, pcsData } from './data';
 
 const RootStyle = styled('div')(({ theme }) => ({
   backgroundSize: 'cover',
@@ -135,131 +136,43 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 export default function ContactHero() {
   const [location, setLocation] = React.useState([]);
   const [locations, setLocations] = React.useState([]);
-  console.log('locations', locations);
-  console.log('location', location);
+  const [propertyData, setPropertyData] = React.useState([]);
+  const [allData, setAllData] = React.useState([]);
+  const [filter, setFilter] = React.useState({});
+  const [filterTypes, setFilterTypes] = React.useState([]);
+
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd').then(
-      (response) => {
+    API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd')
+      .then((response) => {
         setLocations(response.data?.listOfLocations);
-      }
-    );
+        setLocation(response.data?.listOfLocations);
+        // setLocations(lcsData);
+        // setLocation(lcsData);
+        // setPropertyData(pcsData);
+        // setAllData(pcsData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
-  // -----
-  const [showClearIcon, setShowClearIcon] = useState('none');
-  const [budgetValue, setBudgetValue] = React.useState([5000, 12000]);
-  const [budgetpopover, setBudgetpopover] = React.useState(null);
-  const [occupancypopover, setOccupancypopover] = React.useState(null);
-  const [genderpopover, setGenderpopover] = React.useState(null);
-  const [amenitiespopover, setAmenitiespopover] = React.useState(null);
-  const [popularitypopover, setPopularitypopover] = React.useState(null);
-  const [selectedPrice, setSelectedPrice] = useState();
-  const [openFilter, setOpenFilter] = React.useState(false);
-  const [selectedLocation, setSelectedLocation] = useState(null);
   const [locationid, setLocationId] = useState();
-  // -----
-
   const [openModal, setOpenModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [open, setOpen] = useState(false);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const isDesktop = useResponsive('up', 'lg');
-  const handleModalClose = () => setShowModal(false);
-  const handleModalShow = () => {
-    setShowModal(true);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const filterHandleOpen = () => setOpen(true);
-  const filterHandleClose = () => setOpen(false);
-
-  const priceHandleChange = (event, newValue) => {
-    setBudgetValue(newValue);
-  };
-
-  const getPriceValues = () => {
-    console.log(budgetValue, 'budgetValue');
-    setBudgetpopover(null);
-
-    const filteredPrice = location?.filter((item) => item.rentMonthly <= budgetValue[1]);
-    console.log('sss', filteredPrice);
-  };
-  const handleBudgetClick = (event) => {
-    setBudgetpopover(event.currentTarget);
-  };
-
-  const handleBudgetClose = () => {
-    setBudgetpopover(null);
-  };
-
-  const occupancyHandleClick = (event) => {
-    setOccupancypopover(event.currentTarget);
-  };
-
-  const occupancyHandleClose = () => {
-    setOccupancypopover(null);
-  };
-
-  const getSelectedOccupancy = () => {
-    setOccupancypopover(null);
-  };
-
-  const genderHandleClick = (event) => {
-    setGenderpopover(event.currentTarget);
-  };
-  const getSelectedGender = () => {
-    setGenderpopover(null);
-  };
-
-  const genderHandleClose = () => {
-    setGenderpopover(null);
-  };
-
-  const handleClickAmenities = (event) => {
-    setAmenitiespopover(event.currentTarget);
-  };
-
-  const handleCloseAmenities = () => {
-    setAmenitiespopover(null);
-  };
-
-  const getSelectedAmenities = () => {
-    setAmenitiespopover(null);
-  };
-
-  const PopularityHandleClick = (event) => {
-    setPopularitypopover(event.currentTarget);
-  };
-
-  const PopularityHandleClose = () => {
-    setPopularitypopover(null);
-  };
-
-  const handleSearchChange = (event) => {
-    setShowClearIcon(event.target.value === '' ? 'none' : 'flex');
-  };
-
-  const handleSearchClick = () => {
-    // TODO: Clear the search input
-    console.log('clicked the clear icon...');
-  };
-
   const checkboxLabel = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
+  const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
   const getAllLocations = useCallback(async () => {
     const locationid = window.location.pathname.split('/')[3];
 
     try {
-      await API.post('http://pmsapis.crisprsys.net/api/WebsiteAPI/GetListOfProperties', {
+      await API.post('/api/WebsiteAPI/GetListOfProperties', {
         apiKey: 'eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=',
         location: locationid,
         amenities: '',
@@ -268,7 +181,8 @@ export default function ContactHero() {
         amountEndRange: '10000000',
       })
         .then((res) => {
-          setLocation(res.data.listOfProperties);
+          setPropertyData(res.data.listOfProperties);
+          setAllData(res.data.listOfProperties);
         })
         .catch((err) => console.log(err));
     } catch (error) {
@@ -276,36 +190,9 @@ export default function ContactHero() {
     }
   }, []);
 
-  const getNewLocations = useCallback(async (locationid) => {
-    const newLocationid = window.location.pathname.split('/')[3];
-
-    try {
-      await API.post('http://pmsapis.crisprsys.net/api/WebsiteAPI/GetListOfProperties', {
-        apiKey: 'eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=',
-        location: newLocationid,
-        amenities: '',
-        services: '',
-        amountStartRange: '0',
-        amountEndRange: '10000000',
-      })
-        .then((res) => {
-          setLocation(res.data.listOfProperties);
-        })
-        .catch((err) => console.log(err));
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
-  useEffect(() => {
-    getAllLocations();
-  }, [getAllLocations]);
-
-  useEffect(() => {
-    getNewLocations();
-  }, [locationid]);
-
-  const AnyReactComponent = ({ text }) => <div>{text}</div>;
+  // useEffect(() => {
+  //   getAllLocations();
+  // }, [getAllLocations]);
 
   const defaultProps = {
     center: {
@@ -321,37 +208,8 @@ export default function ContactHero() {
   ];
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handlePopoverClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const getSelectedLoctions = () => {
-    setAnchorEl(null);
-  };
-
-  const handlePopoverClose = () => {
-    setAnchorEl(null);
-  };
-
   const openPopover = Boolean(anchorEl);
-  const openBudgetPopover = Boolean(anchorEl);
   const id = openPopover ? 'simple-popover' : undefined;
-
-  const openBudget = Boolean(budgetpopover);
-  const budgetId = openBudget ? 'simple-popover' : undefined;
-
-  const openOccupancy = Boolean(occupancypopover);
-  const occupancyId = openOccupancy ? 'simple-popover' : undefined;
-
-  const openGender = Boolean(genderpopover);
-  const genderId = openGender ? 'simple-popover' : undefined;
-
-  const openAmenities = Boolean(amenitiespopover);
-  const amenitiesId = openAmenities ? 'simple-popover' : undefined;
-
-  const openPopularity = Boolean(popularitypopover);
-  const popularityId = openPopularity ? 'simple-popover' : undefined;
 
   const StyledBreadcrumb = styled(Chip)(({ theme }) => {
     const backgroundColor = theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[800];
@@ -394,11 +252,186 @@ export default function ContactHero() {
     );
   }
 
-  const handleLocations = (item) => {
-    setLocationId(item.id);
-    console.log('handleLocations', item.id);
-    navigate(`/contact-us/${item.id}/`);
-    // setAnchorEl(null);
+  const handleFilterTypes = (event, type) => {
+    if (filterTypes?.includes(type)) {
+      const fts = filterTypes.filter((vt) => vt !== type);
+      setFilterTypes(fts);
+      setAnchorEl(null);
+    } else {
+      setAnchorEl(event.currentTarget);
+      setFilterTypes([...filterTypes, type]);
+    }
+  };
+
+  const handleFilter = (type, value) => {
+    const currentFilter = { ...filter };
+    switch (type) {
+      case 'Locality': {
+        if (!currentFilter[type])
+          currentFilter[type] = {
+            locations: [],
+            values: [],
+          };
+
+        let locations_ = currentFilter[type].locations;
+        let values_ = currentFilter[type].values;
+
+        if (values_?.includes(value?.id)) {
+          values_ = values_.filter((vt) => vt !== value?.id);
+          locations_ = locations_.filter((vt) => vt !== value?.value);
+        } else {
+          values_ = [...values_, value.id];
+          locations_ = [...locations_, value.value];
+        }
+
+        currentFilter[type].locations = locations_;
+        currentFilter[type].values = values_;
+
+        setFilter(currentFilter);
+
+        break;
+      }
+
+      case 'Budget': {
+        if (!currentFilter[type]) currentFilter[type] = [5000, 12000];
+
+        currentFilter[type] = value;
+        setFilter(currentFilter);
+        break;
+      }
+
+      case 'Occupancy': {
+        if (!currentFilter[type]) currentFilter[type] = 'Single Occupancy';
+
+        currentFilter[type] = value;
+        setFilter(currentFilter);
+        break;
+      }
+
+      case 'Gender': {
+        if (!currentFilter[type]) currentFilter[type] = 'Male';
+
+        currentFilter[type] = value;
+        setFilter(currentFilter);
+        break;
+      }
+
+      case 'Amenities': {
+        if (!currentFilter[type]) currentFilter[type] = [];
+
+        if (currentFilter[type]?.includes(value))
+          currentFilter[type] = currentFilter[type].filter((vt) => vt !== value);
+        else currentFilter[type] = [...currentFilter[type], value];
+
+        setFilter(currentFilter);
+        break;
+      }
+
+      default:
+        break;
+    }
+  };
+
+  const handleClearFilter = (e, type) => {
+    setAnchorEl(null);
+    const currentFilter = { ...filter };
+    currentFilter[type] = null;
+    setFilter(currentFilter);
+    handleFilterTypes(e, type);
+    handleFilterData(currentFilter, e, type);
+  };
+
+  const handleFilterData = (ff, e, type) => {
+    let data = [...allData];
+
+    let filterOpt = { ...filter };
+
+    if (ff) filterOpt = { ...ff };
+
+    Object.keys(filterOpt).forEach((key) => {
+      if (filterOpt[key]) {
+        switch (key) {
+          case 'Locality': {
+            const values = filterOpt[key].values;
+
+            if (values.length > 0) {
+              data = [];
+              values.forEach(async (tid) => {
+                await API.post('/api/WebsiteAPI/GetListOfProperties', {
+                  apiKey: 'eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=',
+                  location: tid,
+                  amenities: '',
+                  services: '',
+                  amountStartRange: '0',
+                  amountEndRange: '10000000',
+                })
+                  .then((res) => {
+                    data = [...data, ...res.data.listOfProperties];
+                  })
+                  .catch((err) => console.log(err));
+              });
+            }
+            break;
+          }
+
+          case 'Budget': {
+            if (filterOpt[key]) {
+              data = data.filter((dt) => dt.rentMonthly >= filterOpt[key][0] && dt.rentMonthly <= filterOpt[key][1]);
+            }
+            break;
+          }
+
+          case 'Occupancy': {
+            if (filterOpt[key]) {
+              data = data.filter((dt) => {
+                if (dt.listOfUnitTypes?.length <= 0) return true;
+
+                const units = dt.listOfUnitTypes.map((ut) => ut.unitType);
+
+                if (units.includes(filterOpt[key])) return true;
+
+                return false;
+              });
+            }
+            break;
+          }
+
+          case 'Gender': {
+            if (filterOpt[key]) {
+              data = data.filter((dt) => dt.gender === filterOpt[key]);
+            }
+            break;
+          }
+
+          case 'Amenities': {
+            if (filterOpt[key]) {
+              data = data.filter((dt) => {
+                if (dt.facilityAmenities?.length <= 0) return true;
+
+                const names = dt.facilityAmenities[0]?.amenityNames?.split(',');
+
+                console.log('rrrrrrrrrrrrrrrr', names, filterOpt[key]);
+                let flag = false;
+
+                filterOpt[key].forEach((ft) => {
+                  if (names.includes(ft)) flag = true;
+                });
+
+                return flag;
+              });
+            }
+            break;
+          }
+
+          default:
+            break;
+        }
+      }
+    });
+
+    setPropertyData(data);
+    setAnchorEl(null);
+    handleFilterTypes(e, type);
   };
 
   return (
@@ -424,7 +457,7 @@ export default function ContactHero() {
                       <Button
                         aria-describedby={id}
                         variant="outlined"
-                        onClick={handlePopoverClick}
+                        onClick={(e) => handleFilterTypes(e, 'Locality')}
                         sx={{
                           color: 'rgb(41, 45, 50)',
                           fontWeight: '400',
@@ -432,17 +465,17 @@ export default function ContactHero() {
                           padding: '10px 20px',
                           margin: '5px',
                           border: '1px solid rgb(232, 232, 232)',
-                          fontSize: "13px"
+                          fontSize: '13px',
                         }}
                       >
                         Locality &nbsp;
-                        {id !== 'simple-popover' ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+                        {!filterTypes?.includes('Locality') ? <ExpandMoreIcon /> : <ExpandLessIcon />}
                       </Button>
                       <Popover
                         id={id}
-                        open={openPopover}
+                        open={filterTypes?.includes('Locality')}
                         anchorEl={anchorEl}
-                        onClose={handlePopoverClose}
+                        onClose={(e) => handleFilterTypes(e, 'Locality')}
                         anchorOrigin={{
                           vertical: 'bottom',
                           horizontal: 'left',
@@ -465,7 +498,7 @@ export default function ContactHero() {
                               <TextField
                                 size="small"
                                 variant="outlined"
-                                onChange={handleSearchChange}
+                                onChange={(e) => {}}
                                 placeholder="Search for your second home"
                                 InputProps={{
                                   startAdornment: (
@@ -477,18 +510,18 @@ export default function ContactHero() {
                               />
                             </FormControl>
                           </div>
-                          {locations.map((item) => (
+                          {locations?.map((item) => (
                             <StyledBreadcrumb
                               style={{
                                 border: '1px solid grey',
                                 padding: '15px',
                                 margin: '10px',
-                                background: item.id === locationid ? 'red' : 'white',
+                                background: filter?.Locality?.values?.includes(item.id) ? 'red' : 'white',
                               }}
                               component="a"
                               href="#"
                               label={item.value}
-                              onClick={() => handleLocations(item)}
+                              onClick={() => handleFilter('Locality', item)}
                             />
                           ))}
                           <hr />
@@ -507,12 +540,13 @@ export default function ContactHero() {
                                 color: 'black',
                                 padding: '0px 40px',
                               }}
+                              onClick={(e) => handleClearFilter(e, 'Locality')}
                             >
                               Clear
                             </Button>
                             <Button
                               style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}
-                              onClick={() => getSelectedLoctions()}
+                              onClick={(e) => handleFilterData(null, e, 'Locality')}
                             >
                               Save
                             </Button>
@@ -520,13 +554,13 @@ export default function ContactHero() {
                         </div>
                       </Popover>
                     </div>
-                    {/* ------------------------------------------------------------------------ */}
+                    {/* -------------------------------Budget Filter----------------------------------------- */}
                     <div>
                       {' '}
                       <Button
                         aria-describedby={id}
                         variant="outlined"
-                        onClick={handleBudgetClick}
+                        onClick={(e) => handleFilterTypes(e, 'Budget')}
                         sx={{
                           color: 'rgb(41, 45, 50)',
                           fontWeight: '400',
@@ -534,16 +568,16 @@ export default function ContactHero() {
                           padding: '10px 20px',
                           margin: '5px',
                           border: '1px solid rgb(232, 232, 232)',
-                          fontSize: "13px"
+                          fontSize: '13px',
                         }}
                       >
                         Budget &nbsp;
                         <ExpandMoreIcon />
                       </Button>
                       <Popover
-                        open={openBudget}
-                        anchorEl={budgetpopover}
-                        onClose={handleBudgetClose}
+                        open={filterTypes?.includes('Budget')}
+                        anchorEl={anchorEl}
+                        onClose={(e) => handleFilterTypes(e, 'Budget')}
                         anchorOrigin={{
                           vertical: 'bottom',
                           horizontal: 'left',
@@ -552,8 +586,8 @@ export default function ContactHero() {
                         <div style={{ maxHeight: '400px', maxWidth: '400px', padding: '10px 20px' }}>
                           <Typography sx={{ p: 2 }}>Select Range: </Typography>
                           <PrettoSlider
-                            value={budgetValue}
-                            onChange={priceHandleChange}
+                            value={filter?.Budget || [5000, 12000]}
+                            onChange={(e, value) => handleFilter('Budget', value)}
                             aria-label="pretto slider"
                             min={5000}
                             max={12000}
@@ -563,14 +597,14 @@ export default function ContactHero() {
                               id="outlined-basic"
                               label="min price"
                               variant="outlined"
-                              value={budgetValue[0]}
+                              value={filter?.Budget ? filter?.Budget[0] : 5000}
                               style={{ marginRight: '10px', maxWidth: '140px' }}
                             />
                             <span style={{ paddingTop: '15px' }}>-</span>
                             <TextField
                               id="outlined-basic"
                               label="max price"
-                              value={budgetValue[1]}
+                              value={filter?.Budget ? filter?.Budget[1] : 12000}
                               variant="outlined"
                               style={{ marginLeft: '10px', maxWidth: '140px' }}
                             />
@@ -591,12 +625,13 @@ export default function ContactHero() {
                                 color: 'black',
                                 padding: '0px 40px',
                               }}
+                              onClick={(e) => handleClearFilter(e, 'Budget')}
                             >
                               Clear
                             </Button>
                             <Button
                               style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}
-                              onClick={() => getPriceValues()}
+                              onClick={(e) => handleFilterData(null, e, 'Budget')}
                             >
                               Save
                             </Button>
@@ -604,12 +639,12 @@ export default function ContactHero() {
                         </div>
                       </Popover>
                     </div>
-                    {/* ------------------------------------------------------------------ */}
+                    {/* --------------------------------Occupancy Filter---------------------------------- */}
                     <div>
                       <Button
-                        aria-describedby={occupancyId}
+                        aria-describedby={id}
                         variant="outlined"
-                        onClick={occupancyHandleClick}
+                        onClick={(e) => handleFilterTypes(e, 'Occupancy')}
                         sx={{
                           color: 'rgb(41, 45, 50)',
                           fontWeight: '400',
@@ -617,7 +652,7 @@ export default function ContactHero() {
                           padding: '10px 20px',
                           margin: '5px',
                           border: '1px solid rgb(232, 232, 232)',
-                          fontSize: "13px"
+                          fontSize: '13px',
                         }}
                       >
                         Occupancy &nbsp;
@@ -625,21 +660,36 @@ export default function ContactHero() {
                       </Button>
                       <Popover
                         id={id}
-                        open={openOccupancy}
-                        anchorEl={occupancypopover}
-                        onClose={occupancyHandleClose}
+                        open={filterTypes?.includes('Occupancy')}
+                        anchorEl={anchorEl}
+                        onClose={(e) => handleFilterTypes(e, 'Occupancy')}
                         anchorOrigin={{
                           vertical: 'bottom',
                           horizontal: 'left',
                         }}
                       >
                         <div style={{ maxHeight: '400px', maxWidth: '300px' }}>
-                          {locations.map((item) => (
+                          {[
+                            {
+                              label: 'Single Occupancy',
+                              value: 'Single Occupancy',
+                            },
+                            {
+                              label: 'Double Occupancy',
+                              value: 'Double Occupancy',
+                            },
+                          ]?.map((item) => (
                             <StyledBreadcrumb
-                              style={{ border: '1px solid grey', padding: '15px', margin: '10px' }}
+                              style={{
+                                border: '1px solid grey',
+                                padding: '15px',
+                                margin: '10px',
+                                background: filter?.Occupancy === item.label ? 'red' : 'white',
+                              }}
                               component="a"
                               href="#"
                               label={item.value}
+                              onClick={() => handleFilter('Occupancy', item.label)}
                             />
                           ))}
                           <hr />
@@ -658,12 +708,13 @@ export default function ContactHero() {
                                 color: 'black',
                                 padding: '0px 40px',
                               }}
+                              onClick={(e) => handleClearFilter(e, 'Occupancy')}
                             >
                               Clear
                             </Button>
                             <Button
                               style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}
-                              onClick={() => getSelectedOccupancy()}
+                              onClick={(e) => handleFilterData(null, e, 'Occupancy')}
                             >
                               Save
                             </Button>
@@ -676,9 +727,9 @@ export default function ContactHero() {
 
                     <div>
                       <Button
-                        aria-describedby={genderId}
+                        aria-describedby={id}
                         variant="outlined"
-                        onClick={genderHandleClick}
+                        onClick={(e) => handleFilterTypes(e, 'Gender')}
                         sx={{
                           color: 'rgb(41, 45, 50)',
                           fontWeight: '400',
@@ -686,7 +737,7 @@ export default function ContactHero() {
                           padding: '10px 20px',
                           margin: '5px',
                           border: '1px solid rgb(232, 232, 232)',
-                          fontSize: "13px"
+                          fontSize: '13px',
                         }}
                       >
                         Gender &nbsp;
@@ -694,9 +745,9 @@ export default function ContactHero() {
                       </Button>
                       <Popover
                         id={id}
-                        open={openGender}
-                        anchorEl={genderpopover}
-                        onClose={genderHandleClose}
+                        open={filterTypes?.includes('Gender')}
+                        anchorEl={anchorEl}
+                        onClose={(e) => handleFilterTypes(e, 'Gender')}
                         anchorOrigin={{
                           vertical: 'bottom',
                           horizontal: 'left',
@@ -704,15 +755,30 @@ export default function ContactHero() {
                       >
                         <div style={{ maxHeight: '400px', maxWidth: '300px', padding: '10px 20px' }}>
                           <div style={{ marginBottom: '15px' }}>
-                            {/* {location.map((item) => (
-                              <Checkbox {...checkboxLabel}>{item.gender}</Checkbox>
-                            ))} */}
-                            <Checkbox {...checkboxLabel} />
-                            Male
-                            <Checkbox {...checkboxLabel} />
-                            Female
-                            <Checkbox {...checkboxLabel} />
-                            unisex
+                            <div>
+                              <Checkbox
+                                checked={filter.Gender === 'Male'}
+                                onClick={(e) => handleFilter('Gender', 'Male')}
+                                {...checkboxLabel}
+                              />
+                              Male
+                            </div>
+                            <div>
+                              <Checkbox
+                                checked={filter.Gender === 'Female'}
+                                onClick={(e) => handleFilter('Gender', 'Female')}
+                                {...checkboxLabel}
+                              />
+                              Female
+                            </div>
+                            <div>
+                              <Checkbox
+                                checked={filter.Gender === 'Unisex'}
+                                onClick={(e) => handleFilter('Gender', 'Unisex')}
+                                {...checkboxLabel}
+                              />
+                              Unisex
+                            </div>
                           </div>
                           <hr />
                           <div
@@ -730,12 +796,13 @@ export default function ContactHero() {
                                 color: 'black',
                                 padding: '0px 40px',
                               }}
+                              onClick={(e) => handleClearFilter(e, 'Gender')}
                             >
                               Clear
                             </Button>
                             <Button
                               style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}
-                              onClick={() => getSelectedGender()}
+                              onClick={(e) => handleFilterData(null, e, 'Gender')}
                             >
                               Save
                             </Button>
@@ -743,12 +810,12 @@ export default function ContactHero() {
                         </div>
                       </Popover>
                     </div>
-                    {/* -------------------------------------- */}
+
                     <div>
                       <Button
-                        aria-describedby={amenitiesId}
+                        aria-describedby={id}
                         variant="outlined"
-                        onClick={handleClickAmenities}
+                        onClick={(e) => handleFilterTypes(e, 'Amenities')}
                         sx={{
                           color: 'rgb(41, 45, 50)',
                           fontWeight: '400',
@@ -756,7 +823,7 @@ export default function ContactHero() {
                           padding: '10px 20px',
                           margin: '5px',
                           border: '1px solid rgb(232, 232, 232)',
-                          fontSize: "13px"
+                          fontSize: '13px',
                         }}
                       >
                         Amenities &nbsp;
@@ -764,9 +831,9 @@ export default function ContactHero() {
                       </Button>
                       <Popover
                         id={id}
-                        open={openAmenities}
-                        anchorEl={amenitiespopover}
-                        onClose={handleCloseAmenities}
+                        open={filterTypes?.includes('Amenities')}
+                        anchorEl={anchorEl}
+                        onClose={(e) => handleFilterTypes(e, 'Amenities')}
                         anchorOrigin={{
                           vertical: 'bottom',
                           horizontal: 'left',
@@ -780,24 +847,53 @@ export default function ContactHero() {
                           }}
                         >
                           <div style={{ marginBottom: '15px' }}>
-                            {/* {locations.map((item) => (
-                              <Checkbox {...checkboxLabel}>{item.amenities}</Checkbox>
-                            ))} */}
-                            <Checkbox {...checkboxLabel} />
+                            <Checkbox
+                              checked={filter.Amenities?.includes('Attatched Balcony')}
+                              onClick={(e) => handleFilter('Amenities', 'Attatched Balcony')}
+                              {...checkboxLabel}
+                            />
                             Attatched Balcony
-                            <Checkbox {...checkboxLabel} />
+                            <Checkbox
+                              checked={filter.Amenities?.includes('Air Conditioning')}
+                              onClick={(e) => handleFilter('Amenities', 'Air Conditioning')}
+                              {...checkboxLabel}
+                            />
                             Air Conditioning
-                            <Checkbox {...checkboxLabel} />
+                            <Checkbox
+                              checked={filter.Amenities?.includes('Attached Washroom')}
+                              onClick={(e) => handleFilter('Amenities', 'Attached Washroom')}
+                              {...checkboxLabel}
+                            />
                             Attached Washroom
-                            <Checkbox {...checkboxLabel} />
+                            <Checkbox
+                              checked={filter.Amenities?.includes('Spacious Cupboard')}
+                              onClick={(e) => handleFilter('Amenities', 'Spacious Cupboard')}
+                              {...checkboxLabel}
+                            />
                             Spacious Cupboard
-                            <Checkbox {...checkboxLabel} />
+                            <Checkbox
+                              checked={filter.Amenities?.includes('Storage Shelf')}
+                              onClick={(e) => handleFilter('Amenities', 'Storage Shelf')}
+                              {...checkboxLabel}
+                            />
                             Storage Shelf
-                            <Checkbox {...checkboxLabel} />
-                            desert Cooler
-                            <Checkbox {...checkboxLabel} />
+                            <Checkbox
+                              checked={filter.Amenities?.includes('Desert Cooler')}
+                              onClick={(e) => handleFilter('Amenities', 'Desert Cooler')}
+                              {...checkboxLabel}
+                            />
+                            Desert Cooler
+                            <Checkbox
+                              checked={filter.Amenities?.includes('Shared Washroom')}
+                              onClick={(e) => handleFilter('Amenities', 'Shared Washroom')}
+                              {...checkboxLabel}
+                            />
                             Shared Washroom
-                            <Checkbox {...checkboxLabel} />
+                            <Checkbox
+                              checked={filter.Amenities?.includes('Window')}
+                              onClick={(e) => handleFilter('Amenities', 'Window')}
+                              {...checkboxLabel}
+                            />
                             Window
                           </div>
                           <hr />
@@ -816,12 +912,13 @@ export default function ContactHero() {
                                 color: 'black',
                                 padding: '0px 40px',
                               }}
+                              onClick={(e) => handleClearFilter(e, 'Amenities')}
                             >
                               Clear
                             </Button>
                             <Button
                               style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}
-                              onClick={() => getSelectedAmenities()}
+                              onClick={(e) => handleFilterData(null, e, 'Amenities')}
                             >
                               Save
                             </Button>
@@ -831,7 +928,7 @@ export default function ContactHero() {
                     </div>
 
                     <span style={{ margin: '18px' }}> | </span>
-                    <div>
+                    {/* <div>
                       <Button
                         variant="outlined"
                         sx={{
@@ -841,7 +938,7 @@ export default function ContactHero() {
                           padding: '10px 20px',
                           margin: '5px',
                           border: '1px solid rgb(232, 232, 232)',
-                          fontSize: "13px"
+                          fontSize: '13px',
                         }}
                         // onClick={filterHandleOpen}
                       >
@@ -858,7 +955,7 @@ export default function ContactHero() {
                           padding: '10px 20px',
                           margin: '5px',
                           border: '1px solid rgb(232, 232, 232)',
-                          fontSize: "13px"
+                          fontSize: '13px',
                         }}
                         onClick={filterHandleOpen}
                       >
@@ -872,7 +969,7 @@ export default function ContactHero() {
                         <hr />
                         <DialogContent dividers>
                           <Typography sx={{ p: 2 }}>Select Range: </Typography>
-                          {locations.map((item) => (
+                          {locations?.map((item) => (
                             <StyledBreadcrumb
                               style={{ border: '1px solid grey', padding: '15px', margin: '10px' }}
                               component="a"
@@ -904,15 +1001,13 @@ export default function ContactHero() {
                           </Button>
                         </DialogActions>
                       </BootstrapDialog>
-                    </div>
-
-                    {/* ----------------------------------------------- */}
+                    </div> */}
 
                     <div>
                       <Button
-                        aria-describedby={popularityId}
+                        aria-describedby={id}
                         variant="outlined"
-                        onClick={PopularityHandleClick}
+                        onClick={(e) => handleFilterTypes(e, 'Popularity')}
                         sx={{
                           fontWeight: '400',
                           borderRadius: '40px',
@@ -921,18 +1016,19 @@ export default function ContactHero() {
                           border: '0px',
                           background: 'rgb(249, 249, 249)',
                           color: ' rgb(125, 125, 125)',
-                          fontSize: "13px"
+                          fontSize: '13px',
                         }}
                       >
-                        Sort By <span style={{ color: '#00AB55', fontWeight: 'bold' }}> &nbsp; &nbsp;Popularity</span>{' '}
+                        Sort By
+                        {/* <span style={{ color: '#00AB55', fontWeight: 'bold' }}> &nbsp; &nbsp;Popularity</span>{' '} */}
                         &nbsp;
                         <ExpandMoreIcon />
                       </Button>
                       <Popover
                         id={id}
-                        open={openPopularity}
-                        anchorEl={popularitypopover}
-                        onClose={PopularityHandleClose}
+                        open={filterTypes?.includes('Popularity')}
+                        anchorEl={anchorEl}
+                        onClose={(e) => handleFilterTypes(e, 'Popularity')}
                         anchorOrigin={{
                           vertical: 'bottom',
                           horizontal: 'left',
@@ -946,11 +1042,28 @@ export default function ContactHero() {
                           }}
                         >
                           <div style={{ marginBottom: '15px', display: 'grid' }}>
-                            <Button>Price: Low to High</Button>
-                            <Button>Price: High to Low</Button>
-                            <Button>Sort By: Popularity</Button>
+                            <Button
+                              onClick={() => {
+                                let dd = [...propertyData];
+                                dd = _.sortBy(dd, 'rentMonthly');
+
+                                setPropertyData(dd);
+                              }}
+                            >
+                              Price: Low to High
+                            </Button>
+                            <Button
+                              onClick={() => {
+                                let dd = [...propertyData];
+                                dd = _.sortBy(dd, 'rentMonthly').reverse();
+                                setPropertyData(dd);
+                              }}
+                            >
+                              Price: High to Low
+                            </Button>
+                            {/* <Button>Sort By: Popularity</Button> */}
                           </div>
-                          <hr />
+                          {/* <hr />
                           <div
                             style={{
                               display: 'flex',
@@ -971,11 +1084,11 @@ export default function ContactHero() {
                             </Button>
                             <Button
                               style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}
-                              onClick={PopularityHandleClose}
+                              onClick={(e) => handleFilterTypes(e, 'Popularity')}
                             >
                               Save
                             </Button>
-                          </div>
+                          </div> */}
                         </div>
                       </Popover>
                     </div>
@@ -984,154 +1097,129 @@ export default function ContactHero() {
               </Grid>
             ) : (
               <Grid container>
-                <Grid item xs={3}>
-                <div>
-                      <Button
-                        variant="outlined"
-                        sx={{
-                          color: 'rgb(41, 45, 50)',
-                          fontWeight: '400',
-                          borderRadius: '40px',
-                          padding: '7px 12px',
-                          margin: '5px',
-                          border: '1px solid rgb(232, 232, 232)',
-                          fontSize: "11px"
-                        }}
-                        // onClick={filterHandleOpen}
-                      >
-                        My Wishlist
-                      </Button>
-                    </div>
+                {/* <Grid item xs={3}>
+                  <div>
+                    <Button
+                      variant="outlined"
+                      sx={{
+                        color: 'rgb(41, 45, 50)',
+                        fontWeight: '400',
+                        borderRadius: '40px',
+                        padding: '7px 12px',
+                        margin: '5px',
+                        border: '1px solid rgb(232, 232, 232)',
+                        fontSize: '11px',
+                      }}
+                      // onClick={filterHandleOpen}
+                    >
+                      My Wishlist
+                    </Button>
+                  </div>
                 </Grid>
 
                 <Grid item xs={4}>
-                <div>
-                      <Button
-                        variant="outlined"
-                        sx={{
-                          color: 'rgb(41, 45, 50)',
-                          fontWeight: '400',
-                          borderRadius: '40px',
-                          padding: '5px 10px',
-                          margin: '5px',
-                          border: '1px solid rgb(232, 232, 232)',
-                          fontSize: "10px"
+                  <div>
+                    <Button
+                      variant="outlined"
+                      sx={{
+                        color: 'rgb(41, 45, 50)',
+                        fontWeight: '400',
+                        borderRadius: '40px',
+                        padding: '5px 10px',
+                        margin: '5px',
+                        border: '1px solid rgb(232, 232, 232)',
+                        fontSize: '10px',
+                      }}
+                      onClick={(e) => handleFilterTypes(e, 'Popularity')}
+                    >
+                      <TuneRoundedIcon />
+                      &nbsp; More Filters
+                    </Button>
+                  </div>
+                </Grid> */}
+                <Grid item xs={5}>
+                  <div>
+                    <Button
+                      aria-describedby={id}
+                      variant="outlined"
+                      onClick={(e) => handleFilterTypes(e, 'Popularity')}
+                      sx={{
+                        fontWeight: '400',
+                        borderRadius: '40px',
+                        padding: '5px 10px',
+                        margin: '5px',
+                        border: '1px solid rgb(232, 232, 232)',
+                        background: 'rgb(249, 249, 249)',
+                        color: ' rgb(125, 125, 125)',
+                        fontSize: '10px',
+                      }}
+                    >
+                      Sort By
+                      <ExpandMoreIcon />
+                    </Button>
+                    <Popover
+                      id={id}
+                      open={filterTypes.includes('Popularity')}
+                      anchorEl={anchorEl}
+                      onClose={(e) => handleFilterTypes(e, 'Popularity')}
+                      anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                      }}
+                    >
+                      <div
+                        style={{
+                          maxHeight: '400px',
+                          maxWidth: '300px',
+                          padding: '10px 20px',
                         }}
-                        onClick={filterHandleOpen}
                       >
-                        <TuneRoundedIcon />
-                        &nbsp; More Filters
-                      </Button>
-                      <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-                        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-                          Filters
-                        </BootstrapDialogTitle>
-                        <hr />
-                        <DialogContent dividers>
-                          <Typography sx={{ p: 2 }}>Select Range: </Typography>
-                          {locations.map((item) => (
-                            <StyledBreadcrumb
-                              style={{ border: '1px solid grey', padding: '15px', margin: '10px' }}
-                              component="a"
-                              href="#"
-                              label={item.value}
-                            />
-                          ))}
-                        </DialogContent>
-                        <hr />
-                        <DialogActions>
+                        <div style={{ marginBottom: '15px', display: 'grid' }}>
+                          <Button
+                            onClick={() => {
+                              let dd = [...propertyData];
+                              dd = _.sortBy(dd, 'rentMonthly');
+
+                              setPropertyData(dd);
+                            }}
+                          >
+                            Price: Low to High
+                          </Button>
+                          <Button
+                            onClick={() => {
+                              let dd = [...propertyData];
+                              dd = _.sortBy(dd, 'rentMonthly').reverse();
+                              setPropertyData(dd);
+                            }}
+                          >
+                            Price: High to Low
+                          </Button>
+                          {/* <Button>Sort By: Popularity</Button> */}
+                        </div>
+                        {/* <hr />
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'end',
+                            alignItems: 'center',
+                            padding: '15px 10px',
+                          }}
+                        >
                           <Button
                             style={{
                               textDecoration: 'underline',
                               fontWeight: '100',
                               color: 'black',
-                              padding: '0px 20px',
+                              padding: '0px 40px',
                             }}
-                            autoFocus
-                            onClick={handleClose}
                           >
                             Clear
                           </Button>
-                          <Button
-                            autoFocus
-                            onClick={handleClose}
-                            style={{ background: '#00AB55', color: 'white', padding: '15px' }}
-                          >
-                            Save
-                          </Button>
-                        </DialogActions>
-                      </BootstrapDialog>
-                    </div>
-                </Grid>
-                <Grid item xs={5}> 
-                <div>
-                      <Button
-                        aria-describedby={popularityId}
-                        variant="outlined"
-                        onClick={PopularityHandleClick}
-                        sx={{
-                          fontWeight: '400',
-                          borderRadius: '40px',
-                          padding: '5px 10px',
-                          margin: '5px',
-                          border: '1px solid rgb(232, 232, 232)',
-                          background: 'rgb(249, 249, 249)',
-                          color: ' rgb(125, 125, 125)',
-                          fontSize: "10px"
-                        }}
-                      >
-                        Sort By Popularity
-                      
-                        <ExpandMoreIcon />
-                      </Button>
-                      <Popover
-                        id={id}
-                        open={openPopularity}
-                        anchorEl={popularitypopover}
-                        onClose={PopularityHandleClose}
-                        anchorOrigin={{
-                          vertical: 'bottom',
-                          horizontal: 'left',
-                        }}
-                      >
-                        <div
-                          style={{
-                            maxHeight: '400px',
-                            maxWidth: '300px',
-                            padding: '10px 20px',
-                          }}
-                        >
-                          <div style={{ marginBottom: '15px', display: 'grid' }}>
-                            <Button>Price: Low to High</Button>
-                            <Button>Price: High to Low</Button>
-                            <Button>Sort By: Popularity</Button>
-                          </div>
-                          <hr />
-                          <div
-                            style={{
-                              display: 'flex',
-                              justifyContent: 'end',
-                              alignItems: 'center',
-                              padding: '15px 10px',
-                            }}
-                          >
-                            <Button
-                              style={{
-                                textDecoration: 'underline',
-                                fontWeight: '100',
-                                color: 'black',
-                                padding: '0px 40px',
-                              }}
-                            >
-                              Clear
-                            </Button>
-                            <Button style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}>
-                              Save
-                            </Button>
-                          </div>
-                        </div>
-                      </Popover>
-                    </div>
+                          <Button style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}>Save</Button>
+                        </div> */}
+                      </div>
+                    </Popover>
+                  </div>
                 </Grid>
               </Grid>
             )}
@@ -1151,21 +1239,14 @@ export default function ContactHero() {
                   143 PGs waiting to be yours in Hyderabad
                 </Typography>
 
-                {location &&
-                  location.map((loc) => {
+                {propertyData &&
+                  propertyData?.length > 0 &&
+                  propertyData.map((loc) => {
                     return (
                       <div key={loc.facilityCode}>
                         <Card sx={{ padding: '3%', marginBottom: '4%', textDecoration: 'none' }}>
                           <Grid container spacing={2}>
                             <Grid item xs={12} md={4}>
-                              {/* {loc.listOfFacilityImages &&
-                                  loc.listOfFacilityImages.map((fc, index) => {
-                                    return (
-                                      <div key={index}>
-                                        <img src={fc.photoURL} alt="" style={{ width: '120%', height: '100%' }} />
-                                      </div>
-                                    );
-                                  })} */}
                               {loc.listOfFacilityImages?.length > 0 ? (
                                 <img
                                   src={loc.listOfFacilityImages[0]?.photoURL}
@@ -1187,17 +1268,9 @@ export default function ContactHero() {
                                     {loc.facilityName}
                                   </Link>
                                 </Typography>
-                                <Typography>
-                                  {/* {location.listOfLocations &&
-                                          location.listOfLocations.map((loc) => {
-                                            return <div key={loc.id}>{loc.value}</div>;
-                                          })} */}
-                                  {/* {loc.value} */}
-                                </Typography>
 
                                 <Grid container sx={{ marginTop: '2%', fontSize: '12px' }}>
                                   <Grid item xs={8} md={8} sx={{ display: 'flex' }}>
-                                    {/* Unisex | Double, Triple */}
                                     {loc.listOfUnitTypes &&
                                       loc.listOfUnitTypes.map((typ) => {
                                         return <div key={typ.facilityCode}>{typ.unitType} &nbsp;</div>;

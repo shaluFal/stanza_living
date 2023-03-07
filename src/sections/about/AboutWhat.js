@@ -14,7 +14,7 @@ import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
-import 'react-tabs/style/react-tabs.css';
+// import 'react-tabs/style/react-tabs.css';
 // hooks
 import useResponsive from '../../hooks/useResponsive';
 // utils

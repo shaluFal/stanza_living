@@ -70,11 +70,13 @@ export default function MainHeader() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd').then(
-      (response) => {
+    API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd')
+      .then((response) => {
         setLocations(response.data?.listOfLocations);
-      }
-    );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const options = [
@@ -136,20 +138,20 @@ export default function MainHeader() {
                         padding: '10px',
                         fontSize: '14px',
                         fontWeight: '500',
-                        color: "#000 !important"
+                        color: '#000 !important',
                         // color: isSelected ? "#000" : "#000",
                       }),
                       option: (provided, state) => ({
                         ...provided,
-                        color: "#000"
-                      })
+                        color: '#000',
+                      }),
                     }}
                     placeholder={<div style={{ color: 'rgb(41, 45, 50)' }}>Choose Property </div>}
                     id="demo-simple-select"
                     label="choose property type"
                     inputProps={{ 'aria-label': 'Without label' }}
                     options={options}
-                    sx={{borderRadius: '10px 0px 0px 10px', color: "#000"}}
+                    sx={{ borderRadius: '10px 0px 0px 10px', color: '#000' }}
                     components={{ DropdownIndicator: () => <ExpandMoreIcon />, IndicatorSeparator: () => null }}
                   />
                 </Grid>
@@ -165,13 +167,11 @@ export default function MainHeader() {
                       }),
                       option: (provided, state) => ({
                         ...provided,
-                        color: "#000"
-                      })
+                        color: '#000',
+                      }),
                     }}
-                    placeholder={
-                      <div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500' }}>Find in..</div>
-                    }
-                    options={locations.map((lt) => {
+                    placeholder={<div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500' }}>Find in..</div>}
+                    options={locations?.map((lt) => {
                       return {
                         value: lt.id,
                         label: lt.value,
@@ -186,7 +186,7 @@ export default function MainHeader() {
                         <Image
                           src="images/search-interface-symbol.png"
                           alt=""
-                          style={{ width: '15px', marginRight: '10px', color: "#000"}}
+                          style={{ width: '15px', marginRight: '10px', color: '#000' }}
                         />
                       ),
                       IndicatorSeparator: () => null,
@@ -206,15 +206,10 @@ export default function MainHeader() {
           )}
           {/* </m.div> */}
 
-          {isDesktop && <MenuDesktop isOffset={isOffset} isHome={isHome} navConfig={navConfig} />}
+          {isDesktop && <MenuDesktop isOffset={isOffset} isHome={isHome} navConfig={navConfig} locations={locations} />}
 
           {isDesktop && (
-            <Button
-              variant="contained"
-              target="_blank"
-              rel="noopener"
-              href=""
-            >
+            <Button variant="contained" target="_blank" rel="noopener" href="">
               <PhoneIcon /> &nbsp; Request A Callback
             </Button>
           )}
