@@ -109,7 +109,7 @@ export default function HomeHero() {
   useEffect(() => {
     API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd')
       .then((response) => {
-        setLocationList(response.data?.listOfLocations);
+        if (response.data?.listOfLocations) setLocationList(response.data?.listOfLocations);
       })
       .catch((err) => {
         console.log(err);
