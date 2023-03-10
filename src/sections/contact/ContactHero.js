@@ -190,9 +190,9 @@ export default function ContactHero() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   getAllLocations();
-  // }, [getAllLocations]);
+  useEffect(() => {
+    getAllLocations();
+  }, [getAllLocations]);
 
   const defaultProps = {
     center: {
