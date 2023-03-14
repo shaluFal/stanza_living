@@ -136,7 +136,7 @@ export default function HomeHero() {
           marginTop: '2%',
         }}
       >
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={10}>
           <m.div>
             <Grid container spacing={1} sx={{ marginTop: '45px' }}>
               <Grid item xs={12} md={8}>

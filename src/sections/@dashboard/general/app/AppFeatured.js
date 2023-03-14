@@ -137,7 +137,7 @@ function CarouselItem({ item, isActive,index }) {
 
       <OverlayStyle />
 
-      <Image alt={title} src={`images/feed_${index}.jpg`} style={{width: "58%", borderRadius: "20px 20px 20px 20px", backgroundColor: "white", marginLeft: "50%"}} />
+      <Image alt={title} src={`images/feed_${index}.jpg`} style={{width: "57%", borderRadius: "20px 20px 20px 20px", backgroundColor: "white", marginLeft: "50%"}} />
       {/* sx={{ height: { xs: 300, md: 260, lg: 512 }, width: {xs: 320, md: 1200, lg: 850}, textAlign: 'left' }} */}
     </Box>
   );

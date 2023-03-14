@@ -415,7 +415,7 @@ function MenuDesktopItem({
             </Grid>
             <Grid item xs={12}>
               <img src="images/hyd.jpg" alt="" style={{ width: '60px', height: '60px', marginLeft: '10px' }} />
-              <Typography sx={{ marginTop: '10px' }}>Hyderabad</Typography>
+              <Typography sx={{ marginTop: '10px'}}>Hyderabad</Typography>
             </Grid>
           </Grid>
         </Card>

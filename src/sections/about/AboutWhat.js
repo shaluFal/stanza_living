@@ -98,7 +98,7 @@ export default function AboutWhat() {
           justifyContent: 'center',
         }}
       >
-        <Grid item md={8}>
+        <Grid item md={11}>
           <Box>
             <Box sx={{ borderColor: 'divider', marginLeft: { md: '28%' } }}>
               <Card sx={{ width: { md: '60%', xs: '100%' }, marginTop: '3%', padding: '2px' }}>

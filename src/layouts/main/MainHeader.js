@@ -33,7 +33,7 @@ const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
     easing: theme.transitions.easing.easeInOut,
     duration: theme.transitions.duration.shorter,
   }),
-  [theme.breakpoints.up('md')]: {
+  [theme.breakpoints.up('xl')]: {
     height: HEADER.MAIN_DESKTOP_HEIGHT,
   },
 }));
@@ -47,7 +47,7 @@ const ToolbarShadowStyle = styled('div')(({ theme }) => ({
   margin: 'auto',
   borderRadius: '50%',
   position: 'absolute',
-  width: `calc(100% - 48px)`,
+
   boxShadow: theme.customShadows.z8,
 }));
 
@@ -60,7 +60,7 @@ export default function MainHeader() {
 
   const { pathname } = useLocation();
 
-  const isDesktop = useResponsive('up', 'md');
+  const isDesktop = useResponsive('up', 'xl');
 
   const isHome = pathname === '/';
 
@@ -91,7 +91,7 @@ export default function MainHeader() {
         sx={{
           ...(isOffset && {
             ...cssStyles(theme).bgBlur(),
-            height: { md: HEADER.MAIN_DESKTOP_HEIGHT - 16 },
+            height: { xl: HEADER.MAIN_DESKTOP_HEIGHT - 16 },
           }),
         }}
       >
@@ -100,6 +100,7 @@ export default function MainHeader() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
+            width: "xl"
           }}
         >
           <Logo />
@@ -117,7 +118,7 @@ export default function MainHeader() {
 
           )} */}
           {!isHome && isDesktop && (
-            <Box sx={{ width: '40%', marginRight: '3%' }}>
+            <Box sx={{ marginRight: '10%' }}>
               <Grid
                 container
                 sx={{
@@ -129,7 +130,7 @@ export default function MainHeader() {
                   // zIndex: '2000',
                 }}
               >
-                <Grid item xs={6} sx={{ border: 'none' }}>
+                <Grid item sx={{ border: 'none' }}>
                   <Select
                     styles={{
                       control: (baseStyles, state) => ({
@@ -146,7 +147,7 @@ export default function MainHeader() {
                         color: '#000',
                       }),
                     }}
-                    placeholder={<div style={{ color: 'rgb(41, 45, 50)' }}>Choose Property </div>}
+                    placeholder={<div style={{ color: 'rgb(41, 45, 50)' }}>Choose Property Type</div> }
                     id="demo-simple-select"
                     label="choose property type"
                     inputProps={{ 'aria-label': 'Without label' }}
@@ -155,7 +156,7 @@ export default function MainHeader() {
                     components={{ DropdownIndicator: () => <ExpandMoreIcon />, IndicatorSeparator: () => null }}
                   />
                 </Grid>
-                <Grid item xs={6} sx={{ borderRadius: '0px 10px 10px 0px' }}>
+                <Grid item sx={{ borderRadius: '0px 10px 10px 0px' }}>
                   <Select
                     styles={{
                       control: (baseStyles, state) => ({
@@ -170,7 +171,7 @@ export default function MainHeader() {
                         color: '#000',
                       }),
                     }}
-                    placeholder={<div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500' }}>Find in..</div>}
+                    placeholder={<div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500' }}>Find in and around..</div>}
                     options={locations?.map((lt) => {
                       return {
                         value: lt.id,

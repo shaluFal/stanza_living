@@ -468,7 +468,7 @@ export default function ContactHero() {
           justifyContent: 'center',
         }}
       >
-        <Grid item md={8}>
+        <Grid item md={11}>
           <m.div sx={{ paddingLeft: '2%' }}>
             <Typography sx={{ paddingLeft: '2%', marginBottom: '5px', fontWeight: '500' }}>
               Stanza Living/PG in Hyderabad

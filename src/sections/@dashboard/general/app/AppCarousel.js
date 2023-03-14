@@ -88,7 +88,7 @@ function CarouselItem({ item, isActive, index }) {
   const { photoURL } = item;
 
   return (
-    <Box sx={{ position: 'relative', width: '50%' }}>
+    <Box sx={{ position: 'relative' }}>
       {/* <OverlayStyle /> */}
 
       <Image
