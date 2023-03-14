@@ -140,6 +140,7 @@ export default function ContactHero() {
   const [allData, setAllData] = React.useState([]);
   const [filter, setFilter] = React.useState({});
   const [filterTypes, setFilterTypes] = React.useState([]);
+  const [srcLoc, setSrcLoc] = React.useState('');
 
   const navigate = useNavigate();
 
@@ -192,7 +193,9 @@ export default function ContactHero() {
 
   useEffect(() => {
     getAllLocations();
-  }, [getAllLocations]);
+    const locationid = window.location.pathname.split('/')[3];
+    console.log('rrrrrrrrrr', locationid);
+  }, [getAllLocations, locationid]);
 
   const defaultProps = {
     center: {
@@ -263,7 +266,7 @@ export default function ContactHero() {
     }
   };
 
-  const handleFilter = (type, value) => {
+  const handleFilter = (type, value, event) => {
     const currentFilter = { ...filter };
     switch (type) {
       case 'Locality': {
@@ -284,10 +287,14 @@ export default function ContactHero() {
           locations_ = [...locations_, value.value];
         }
 
-        currentFilter[type].locations = locations_;
-        currentFilter[type].values = values_;
+        if (values_ && values_?.length > 0) {
+          currentFilter[type].locations = locations_;
+          currentFilter[type].values = values_;
+        }
 
         setFilter(currentFilter);
+
+        // if (values_?.length <= 0) handleClearFilter(event, type);
 
         break;
       }
@@ -324,6 +331,9 @@ export default function ContactHero() {
         else currentFilter[type] = [...currentFilter[type], value];
 
         setFilter(currentFilter);
+
+        // if (currentFilter[type]?.length <= 0) handleClearFilter(event, type);
+
         break;
       }
 
@@ -339,10 +349,12 @@ export default function ContactHero() {
     setFilter(currentFilter);
     handleFilterTypes(e, type);
     handleFilterData(currentFilter, e, type);
+
+    if (type === 'Locality') setPropertyData([...allData]);
   };
 
   const handleFilterData = (ff, e, type) => {
-    let data = [...allData];
+    let data = [...propertyData];
 
     let filterOpt = { ...filter };
 
@@ -356,7 +368,8 @@ export default function ContactHero() {
 
             if (values.length > 0) {
               data = [];
-              values.forEach(async (tid) => {
+              let dd = 0;
+              values.forEach(async (tid, index) => {
                 await API.post('/api/WebsiteAPI/GetListOfProperties', {
                   apiKey: 'eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=',
                   location: tid,
@@ -367,10 +380,21 @@ export default function ContactHero() {
                 })
                   .then((res) => {
                     data = [...data, ...res.data.listOfProperties];
+                    dd += 1;
+
+                    if (dd === values.length) setPropertyData(data);
                   })
-                  .catch((err) => console.log(err));
+                  .catch((err) => {
+                    dd += 1;
+                    console.log(err);
+                  });
               });
+            } else {
+              // setPropertyData([]);
+              // // setPropertyData([...allData]);
+              handleClearFilter(e, type);
             }
+
             break;
           }
 
@@ -404,22 +428,23 @@ export default function ContactHero() {
           }
 
           case 'Amenities': {
-            if (filterOpt[key]) {
+            if (filterOpt[key]?.length > 0) {
               data = data.filter((dt) => {
                 if (dt.facilityAmenities?.length <= 0) return true;
 
                 const names = dt.facilityAmenities[0]?.amenityNames?.split(',');
 
-                console.log('rrrrrrrrrrrrrrrr', names, filterOpt[key]);
-                let flag = false;
+                // console.log('rrrrrrrrrrrrrrrr', names, filterOpt[key]);
+                let flag = true;
 
                 filterOpt[key].forEach((ft) => {
-                  if (names.includes(ft)) flag = true;
+                  if (!names.includes(ft)) flag = false;
                 });
 
                 return flag;
               });
-            }
+            } else handleClearFilter(e, type);
+
             break;
           }
 
@@ -498,7 +523,10 @@ export default function ContactHero() {
                               <TextField
                                 size="small"
                                 variant="outlined"
-                                onChange={(e) => {}}
+                                value={srcLoc}
+                                onChange={(e) => {
+                                  setSrcLoc(e.target.value ? e.target.value : '');
+                                }}
                                 placeholder="Search for your second home"
                                 InputProps={{
                                   startAdornment: (
@@ -510,20 +538,22 @@ export default function ContactHero() {
                               />
                             </FormControl>
                           </div>
-                          {locations?.map((item) => (
-                            <StyledBreadcrumb
-                              style={{
-                                border: '1px solid grey',
-                                padding: '15px',
-                                margin: '10px',
-                                background: filter?.Locality?.values?.includes(item.id) ? 'red' : 'white',
-                              }}
-                              component="a"
-                              href="#"
-                              label={item.value}
-                              onClick={() => handleFilter('Locality', item)}
-                            />
-                          ))}
+                          {locations
+                            ?.filter((ft) => String(ft.value).toLowerCase()?.includes(String(srcLoc).toLowerCase()))
+                            .map((item) => (
+                              <StyledBreadcrumb
+                                style={{
+                                  border: '1px solid grey',
+                                  padding: '15px',
+                                  margin: '10px',
+                                  background: filter?.Locality?.values?.includes(item.id) ? 'red' : 'white',
+                                }}
+                                component="a"
+                                href="#"
+                                label={item.value}
+                                onClick={() => handleFilter('Locality', item)}
+                              />
+                            ))}
                           <hr />
                           <div
                             style={{
@@ -586,18 +616,21 @@ export default function ContactHero() {
                         <div style={{ maxHeight: '400px', maxWidth: '400px', padding: '10px 20px' }}>
                           <Typography sx={{ p: 2 }}>Select Range: </Typography>
                           <PrettoSlider
-                            value={filter?.Budget || [5000, 12000]}
-                            onChange={(e, value) => handleFilter('Budget', value)}
+                            value={filter?.Budget || [0, 12000]}
+                            onChange={(e, value) => handleFilter('Budget', value, e)}
                             aria-label="pretto slider"
-                            min={5000}
-                            max={12000}
+                            min={0}
+                            max={filter?.Budget ? filter?.Budget[1] : 12000}
                           />
                           <div style={{ padding: '20px', display: 'flex', justifyContent: 'spaceBetween' }}>
                             <TextField
                               id="outlined-basic"
                               label="min price"
                               variant="outlined"
-                              value={filter?.Budget ? filter?.Budget[0] : 5000}
+                              value={filter?.Budget ? filter?.Budget[0] : 0}
+                              onChange={(e) =>
+                                handleFilter('Budget', [e.target.value, filter?.Budget ? filter?.Budget[1] : 12000], e)
+                              }
                               style={{ marginRight: '10px', maxWidth: '140px' }}
                             />
                             <span style={{ paddingTop: '15px' }}>-</span>
@@ -605,6 +638,9 @@ export default function ContactHero() {
                               id="outlined-basic"
                               label="max price"
                               value={filter?.Budget ? filter?.Budget[1] : 12000}
+                              onChange={(e) =>
+                                handleFilter('Budget', [filter?.Budget ? filter?.Budget[0] : 0, e.target.value], e)
+                              }
                               variant="outlined"
                               style={{ marginLeft: '10px', maxWidth: '140px' }}
                             />
@@ -848,53 +884,65 @@ export default function ContactHero() {
                         >
                           <div style={{ marginBottom: '15px' }}>
                             <Checkbox
-                              checked={filter.Amenities?.includes('Attatched Balcony')}
-                              onClick={(e) => handleFilter('Amenities', 'Attatched Balcony')}
+                              checked={filter.Amenities?.includes('Attached Balcony')}
+                              onClick={(e) => handleFilter('Amenities', 'Attached Balcony', e)}
                               {...checkboxLabel}
                             />
-                            Attatched Balcony
+                            Attached Balcony
                             <Checkbox
                               checked={filter.Amenities?.includes('Air Conditioning')}
-                              onClick={(e) => handleFilter('Amenities', 'Air Conditioning')}
+                              onClick={(e) => handleFilter('Amenities', 'Air Conditioning', e)}
                               {...checkboxLabel}
                             />
                             Air Conditioning
                             <Checkbox
                               checked={filter.Amenities?.includes('Attached Washroom')}
-                              onClick={(e) => handleFilter('Amenities', 'Attached Washroom')}
+                              onClick={(e) => handleFilter('Amenities', 'Attached Washroom', e)}
                               {...checkboxLabel}
                             />
                             Attached Washroom
                             <Checkbox
                               checked={filter.Amenities?.includes('Spacious Cupboard')}
-                              onClick={(e) => handleFilter('Amenities', 'Spacious Cupboard')}
+                              onClick={(e) => handleFilter('Amenities', 'Spacious Cupboard', e)}
                               {...checkboxLabel}
                             />
                             Spacious Cupboard
                             <Checkbox
                               checked={filter.Amenities?.includes('Storage Shelf')}
-                              onClick={(e) => handleFilter('Amenities', 'Storage Shelf')}
+                              onClick={(e) => handleFilter('Amenities', 'Storage Shelf', e)}
                               {...checkboxLabel}
                             />
                             Storage Shelf
                             <Checkbox
                               checked={filter.Amenities?.includes('Desert Cooler')}
-                              onClick={(e) => handleFilter('Amenities', 'Desert Cooler')}
+                              onClick={(e) => handleFilter('Amenities', 'Desert Cooler', e)}
                               {...checkboxLabel}
                             />
                             Desert Cooler
                             <Checkbox
                               checked={filter.Amenities?.includes('Shared Washroom')}
-                              onClick={(e) => handleFilter('Amenities', 'Shared Washroom')}
+                              onClick={(e) => handleFilter('Amenities', 'Shared Washroom', e)}
                               {...checkboxLabel}
                             />
                             Shared Washroom
                             <Checkbox
                               checked={filter.Amenities?.includes('Window')}
-                              onClick={(e) => handleFilter('Amenities', 'Window')}
+                              onClick={(e) => handleFilter('Amenities', 'Window', e)}
                               {...checkboxLabel}
                             />
                             Window
+                            <Checkbox
+                              checked={filter.Amenities?.includes('Lift Facility')}
+                              onClick={(e) => handleFilter('Amenities', 'Lift Facility', e)}
+                              {...checkboxLabel}
+                            />
+                            Lift Facility
+                            <Checkbox
+                              checked={filter.Amenities?.includes('Parking')}
+                              onClick={(e) => handleFilter('Amenities', 'Parking', e)}
+                              {...checkboxLabel}
+                            />
+                            Parking
                           </div>
                           <hr />
                           <div
@@ -1236,7 +1284,7 @@ export default function ContactHero() {
             <Grid container spacing={2}>
               <Grid item md={8}>
                 <Typography sx={{ marginTop: '2%', fontWeight: '700', marginBottom: '5%', paddingLeft: '2%' }}>
-                  143 PGs waiting to be yours in Hyderabad
+                  {propertyData?.length} PGs waiting to be yours in Hyderabad
                 </Typography>
 
                 {propertyData &&

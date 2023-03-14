@@ -1,6 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { Navigate, useRoutes, useLocation } from 'react-router-dom';
-import SearchPropertyDetailPage from '../pages/SearchPropertyDetailPage'
+import SearchPropertyDetailPage from '../pages/SearchPropertyDetailPage';
 // import PgCard from '../pages/dashboard/PgCard';
 // layouts
 import MainLayout from '../layouts/main';
@@ -15,9 +15,6 @@ import { PATH_AFTER_LOGIN } from '../config';
 // components
 import LoadingScreen from '../components/LoadingScreen';
 import Partner from '../pages/Partner';
-
-
-
 
 // ----------------------------------------------------------------------
 
@@ -141,7 +138,7 @@ export default function Router() {
         },
         { path: 'calendar', element: <Calendar /> },
         { path: 'kanban', element: <Kanban /> },
-        { path: 'permission-denied', element: <PermissionDenied /> }
+        { path: 'permission-denied', element: <PermissionDenied /> },
       ],
     },
 
@@ -166,10 +163,10 @@ export default function Router() {
       children: [
         { element: <HomePage />, index: true },
         { path: 'about-us', element: <About /> },
-        { path: 'contact-us/:id', element: <Contact /> },
+        { path: 'contact-us/:id', element: <Contact key={Math.random()} /> },
         { path: 'team', element: <Faqs /> },
         { path: 'partner', element: <Partner /> },
-        {path: 'search-property-detail/:id', element: <SearchPropertyDetailPage />}
+        { path: 'search-property-detail/:id', element: <SearchPropertyDetailPage /> },
       ],
     },
     { path: '*', element: <Navigate to="/404" replace /> },
@@ -217,7 +214,6 @@ const UserCards = Loadable(lazy(() => import('../pages/dashboard/UserCards')));
 const UserList = Loadable(lazy(() => import('../pages/dashboard/UserList')));
 const UserAccount = Loadable(lazy(() => import('../pages/dashboard/UserAccount')));
 const UserCreate = Loadable(lazy(() => import('../pages/dashboard/UserCreate')));
-
 
 // APP
 const Chat = Loadable(lazy(() => import('../pages/dashboard/Chat')));
