@@ -33,7 +33,7 @@ const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
     easing: theme.transitions.easing.easeInOut,
     duration: theme.transitions.duration.shorter,
   }),
-  [theme.breakpoints.up('xl')]: {
+  [theme.breakpoints.up('md')]: {
     height: HEADER.MAIN_DESKTOP_HEIGHT,
   },
 }));
@@ -60,7 +60,7 @@ export default function MainHeader() {
 
   const { pathname } = useLocation();
 
-  const isDesktop = useResponsive('up', 'xl');
+  const isDesktop = useResponsive('up', 'md');
 
   const isHome = pathname === '/';
 
@@ -91,7 +91,7 @@ export default function MainHeader() {
         sx={{
           ...(isOffset && {
             ...cssStyles(theme).bgBlur(),
-            height: { xl: HEADER.MAIN_DESKTOP_HEIGHT - 16 },
+            height: { md: HEADER.MAIN_DESKTOP_HEIGHT - 16 },
           }),
         }}
       >
