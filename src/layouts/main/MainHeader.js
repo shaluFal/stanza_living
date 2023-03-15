@@ -93,14 +93,26 @@ export default function MainHeader() {
             ...cssStyles(theme).bgBlur(),
             height: { md: HEADER.MAIN_DESKTOP_HEIGHT - 16 },
           }),
+
+          display: 'flex',
+          justifyContent: 'center',
         }}
       >
-        <Container
+        {/* <Container
           sx={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            width: "xl"
+            width: 'xl',
+          }}
+        ></Container> */}
+
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            width: '90%',
           }}
         >
           <Logo />
@@ -116,9 +128,9 @@ export default function MainHeader() {
           {/* <m.div> */}
           {/* {isDesktop && (
 
-          )} */}
+)} */}
           {!isHome && isDesktop && (
-            <Box sx={{width: "55%",paddingRight: "5%" }}>
+            <Box sx={{ width: '40%', paddingRight: '5%', marginLeft: '10px' }}>
               <Grid
                 container
                 sx={{
@@ -147,7 +159,7 @@ export default function MainHeader() {
                         color: '#000',
                       }),
                     }}
-                    placeholder={<div style={{ color: 'rgb(41, 45, 50)' }}>Choose Property Type</div> }
+                    placeholder={<div style={{ color: 'rgb(41, 45, 50)', overflow:"hidden" }}>Choose Property Type</div>}
                     id="demo-simple-select"
                     label="choose property type"
                     inputProps={{ 'aria-label': 'Without label' }}
@@ -156,7 +168,7 @@ export default function MainHeader() {
                     components={{ DropdownIndicator: () => <ExpandMoreIcon />, IndicatorSeparator: () => null }}
                   />
                 </Grid>
-                <Grid item xs={6}  sx={{ borderRadius: '0px 10px 10px 0px' }}>
+                <Grid item xs={6} sx={{ borderRadius: '0px 10px 10px 0px' }}>
                   <Select
                     styles={{
                       control: (baseStyles, state) => ({
@@ -171,7 +183,9 @@ export default function MainHeader() {
                         color: '#000',
                       }),
                     }}
-                    placeholder={<div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500' }}>Find in and around...</div>}
+                    placeholder={
+                      <div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500' }}>Find in and around...</div>
+                    }
                     options={locations?.map((lt) => {
                       return {
                         value: lt.id,
@@ -216,7 +230,7 @@ export default function MainHeader() {
           )}
 
           {/* {!isDesktop && <MenuMobile isOffset={isOffset} isHome={isHome} navConfig={navConfig} />} */}
-        </Container>
+        </Box>
       </ToolbarStyle>
 
       {isOffset && <ToolbarShadowStyle />}

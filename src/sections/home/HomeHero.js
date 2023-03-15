@@ -190,7 +190,7 @@ export default function HomeHero() {
               container
               sx={{
                 position: 'absolute',
-                top: { md: '25%', xs: '25%', lg: '40%' },
+                top: { md: '40%', xs: '25%', lg: '40%' },
                 padding: '2%',
                 borderRadius: '10px 0px 0px 10px',
               }}

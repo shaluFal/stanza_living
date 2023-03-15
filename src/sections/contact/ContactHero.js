@@ -165,7 +165,7 @@ export default function ContactHero() {
   const [showModal, setShowModal] = useState(false);
   const [open, setOpen] = useState(false);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-  const isDesktop = useResponsive('up', 'lg');
+  const isDesktop = useResponsive('up', 'md');
   const checkboxLabel = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
   const AnyReactComponent = ({ text }) => <div>{text}</div>;
@@ -195,7 +195,7 @@ export default function ContactHero() {
   useEffect(() => {
     getAllLocations();
     const locationid = window.location.pathname.split('/')[3];
-    console.log('rrrrrrrrrr', locationid);
+    // console.log('rrrrrrrrrr', locationid);
   }, [getAllLocations, locationid]);
 
   const defaultProps = {
