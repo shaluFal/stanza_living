@@ -355,7 +355,7 @@ export default function ContactHero() {
   };
 
   const handleFilterData = (ff, e, type) => {
-    let data = [...propertyData];
+    let data = [...allData];
 
     let filterOpt = { ...filter };
 
@@ -401,7 +401,7 @@ export default function ContactHero() {
 
           case 'Budget': {
             if (filterOpt[key]) {
-              data = data.filter((dt) => dt.rentMonthly >= filterOpt[key][0] && dt.rentMonthly <= filterOpt[key][1]);
+              data = data.filter((dt) => Number(dt.rentMonthly) >= Number(filterOpt[key][0]) && Number(dt.rentMonthly) <= Number(filterOpt[key][1]));
             }
             break;
           }
