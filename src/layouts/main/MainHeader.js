@@ -118,7 +118,7 @@ export default function MainHeader() {
 
           )} */}
           {!isHome && isDesktop && (
-            <Box sx={{ marginRight: '10%' }}>
+            <Box sx={{ marginRight: '14%' }}>
               <Grid
                 container
                 sx={{
@@ -136,7 +136,7 @@ export default function MainHeader() {
                       control: (baseStyles, state) => ({
                         ...baseStyles,
                         borderRadius: '10px 0px 0px 10px',
-                        padding: '10px',
+                        padding: '14px',
                         fontSize: '14px',
                         fontWeight: '500',
                         color: '#000 !important',
@@ -156,13 +156,13 @@ export default function MainHeader() {
                     components={{ DropdownIndicator: () => <ExpandMoreIcon />, IndicatorSeparator: () => null }}
                   />
                 </Grid>
-                <Grid item sx={{ borderRadius: '0px 10px 10px 0px' }}>
+                <Grid item  sx={{ borderRadius: '0px 10px 10px 0px' }}>
                   <Select
                     styles={{
                       control: (baseStyles, state) => ({
                         ...baseStyles,
                         borderRadius: '0px 10px 10px 0px',
-                        padding: '10px',
+                        padding: '14px',
                         fontSize: '14px',
                         fontWeight: '500',
                       }),

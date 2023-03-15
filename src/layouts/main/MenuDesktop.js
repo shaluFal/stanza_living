@@ -357,7 +357,7 @@ function MenuDesktopItem({
         aria-describedby="modal-modal-description"
       >
         <Card
-          sx={{ width: '30%', height: { lg: '25%', xs: '20%' }, marginTop: '2%', marginLeft: '40%', padding: '1%' }}
+          sx={{ width: '30%', height: "32%", marginTop: '2%', marginLeft: '40%', padding: '1%' }}
         >
           <Grid
             container
@@ -370,7 +370,7 @@ function MenuDesktopItem({
                 styles={{
                   control: (baseStyles, state) => ({
                     ...baseStyles,
-                    borderRadius: '0px 10px 10px 0px',
+                    borderRadius: '10px 10px 10px 10px',
                     padding: '7px',
                     fontSize: '14px',
                     fontWeight: '500',

@@ -98,7 +98,7 @@ export default function AboutWhat() {
           justifyContent: 'center',
         }}
       >
-        <Grid item md={11}>
+        <Grid item md={10}>
           <Box>
             <Box sx={{ borderColor: 'divider', marginLeft: { md: '28%' } }}>
               <Card sx={{ width: { md: '60%', xs: '100%' }, marginTop: '3%', padding: '2px' }}>
@@ -113,6 +113,7 @@ export default function AboutWhat() {
                     gap: '80px',
                     color: 'rgb(125, 125, 125)',
                     fontWeight: '700',
+                    fontSize: "14px"
                   }}
                 >
                   <Tab
@@ -235,7 +236,7 @@ export default function AboutWhat() {
                   soon be ready to welcome you in many more.
                 </Typography>
 
-                <Grid container spacing={5} sx={{ marginLeft: '18%', marginTop: '1%', marginBottom: '4%' }}>
+                <Grid container spacing={5} sx={{ marginLeft: '28%', marginTop: '1%', marginBottom: '4%' }}>
                   <Grid item>
                     <Card sx={{ padding: '12%' }}>
                       <Typography sx={{ textAlign: 'center' }}>
@@ -284,10 +285,10 @@ export default function AboutWhat() {
                 container
                 spacing={6}
                 sx={{
-                  marginTop: '2%',
+                 
                   background: 'linear-gradient(rgb(226, 242, 240) 13.14%, rgba(226, 242, 240, 0) 100%)',
                   clipPath: 'polygon(0px 1%, 100% 28%, 100% 100%, 0px 100%)',
-                  padding: '12em 0px 10em',
+                  padding: '15em 0px 10em',
                 }}
               >
                 <Grid item xs={12} md={6}>
@@ -328,7 +329,7 @@ export default function AboutWhat() {
                       sx={{
                         borderRadius: 2,
                         // boxShadow: shadow,
-                        width: { xs: '100%', md: '100%' },
+                        width: "100%",
                       }}
                     />
                   </m.div>
@@ -447,7 +448,7 @@ export default function AboutWhat() {
 
             <TabPanel value={value} index={1}>
               <Typography
-                sx={{ marginBottom: '5%', textAlign: 'center', marginTop: '4%', fontWeight: '500', fontSize: '1rem' }}
+                sx={{ marginBottom: '5%', textAlign: 'center', marginTop: '4%', fontWeight: '500', fontSize: '1.2rem' }}
               >
                 A place that feels like 'home' as soon as you enter it. A place where we steal away your chores and{' '}
                 <br />
@@ -460,11 +461,11 @@ export default function AboutWhat() {
                 <Grid item>
                   <Card
                     sx={{
-                      padding: '4%',
+                      padding: '8%',
                       justifyContent: 'center',
                       textAlign: 'center',
-                      width: { md: '70%', xs: '100%' },
-                      marginLeft: { md: '15%' },
+                      width: "100%",
+                      // marginLeft: { md: '15%' },
                     }}
                   >
                     <Grid container spacing={2} sx={{ paddingBottom: '8%' }}>
@@ -481,7 +482,7 @@ export default function AboutWhat() {
                         </Grid>
                       </Grid>
                       <Grid item xs={12}>
-                        <Typography sx={{ fontWeight: '500', fontSize: '1rem' }}>
+                        <Typography sx={{ fontWeight: '500', fontSize: '1.2rem', marginTop: "2%" }}>
                           The cushioning of the bed's mattress to the colour of the walls in the hallway and the
                           availability of <br />
                           charging points at an arm's length - every nook and corner of a Stanza Living residence has
@@ -505,7 +506,7 @@ export default function AboutWhat() {
                         </Grid>
                       </Grid>
                       <Grid item xs={12}>
-                        <Typography sx={{ fontWeight: '500', fontSize: '1rem' }}>
+                        <Typography sx={{ fontWeight: '500', fontSize: '1.2rem' , marginTop: "2%"}}>
                           We know you can't even differentiate between Toor and Chana Dal; forget about learning how to
                           cook.
                           <br /> That you're not quite sure where the detergent goes in the washing machine. That the
@@ -531,7 +532,7 @@ export default function AboutWhat() {
                         </Grid>
                       </Grid>
                       <Grid item xs={12}>
-                        <Typography sx={{ fontWeight: '500', fontSize: '1rem' }}>
+                        <Typography sx={{ fontWeight: '500', fontSize: '1.2rem', marginTop: "2%" }}>
                           We want your stay with us to stay with you forever. We want you to find your new best friend,
                           your
                           <br /> future business partner, your band or anyone else who can help you grow. That's why we
@@ -557,7 +558,7 @@ export default function AboutWhat() {
                         </Grid>
                       </Grid>
                       <Grid item xs={12}>
-                        <Typography sx={{ fontWeight: '500', fontSize: '1rem' }}>
+                        <Typography sx={{ fontWeight: '500', fontSize: '1.2rem', marginTop: "2%" }}>
                           In an age where you carry your world around a tiny device, your life shouldn't be stuck in the
                           1990s. Or
                           <br /> even the 2000s. That's why placing service requests, keeping up to date with the latest
@@ -631,7 +632,7 @@ export default function AboutWhat() {
                       </Grid>
                       <Grid item md={6} xs={12}>
                         <Typography
-                          sx={{ color: '#fff', justifyContent: 'center', paddingTop: '10%', fontSize: '1rem' }}
+                          sx={{ color: '#fff', justifyContent: 'center', paddingTop: '10%', fontSize: '1.2rem' }}
                         >
                           The buildings that become our residences come in different shapes and sizes. And aren't we
                           glad about that? That way, we can retain their distinct architecture while infusing them with
@@ -693,7 +694,7 @@ export default function AboutWhat() {
                   <Card sx={{ padding: '5%', marginBottom: '6%', background: 'rgb(96, 195, 173)' }}>
                     <Grid container sx={{ background: 'rgb(96, 195, 173)' }} spacing={4}>
                       <Grid item md={6} xs={12}>
-                        <Typography sx={{ color: '#fff', paddingTop: '9%', fontSize: '1rem' }}>
+                        <Typography sx={{ color: '#fff', paddingTop: '9%', fontSize: '1.2rem' }}>
                           The buildings that become our residences come in different shapes and sizes. And aren't we
                           glad about that? That way, we can retain their distinct architecture while infusing them with
                           our design philosophy. So that every Stanza Living residence stays unique and yet is uniquely
@@ -772,7 +773,7 @@ export default function AboutWhat() {
                         </Typography>
                       </Grid>
                       <Grid item md={6} xs={12}>
-                        <Typography sx={{ color: '#fff', paddingTop: '9%' }}>
+                        <Typography sx={{ color: '#fff', paddingTop: '9%', fontSize: "1.2rem" }}>
                           Take it for granted that the lighting fixtures won't fail when you're tiptoeing to the dining
                           area for a midnight snack. And we test our furniture for sturdiness, anticipating you slumping
                           into it on certain days. But don't just go by our assurance. See and experience it for

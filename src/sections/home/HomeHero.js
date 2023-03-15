@@ -136,7 +136,7 @@ export default function HomeHero() {
           marginTop: '2%',
         }}
       >
-        <Grid item xs={12} md={10}>
+        <Grid item xs={12} md={11}>
           <m.div>
             <Grid container spacing={1} sx={{ marginTop: '45px' }}>
               <Grid item xs={12} md={8}>
@@ -190,18 +190,18 @@ export default function HomeHero() {
               container
               sx={{
                 position: 'absolute',
-                top: { md: '25%', xs: '25%', lg: '38%' },
+                top: { md: '25%', xs: '25%', lg: '40%' },
                 padding: '2%',
                 borderRadius: '10px 0px 0px 10px',
               }}
             >
-              <Grid item xs={6} md={3} lg={2}>
+              <Grid item xs={7} md={3} lg={2}>
                 <Select
                   styles={{
                     control: (baseStyles, state) => ({
                       ...baseStyles,
                       borderRadius: '10px 0px 0px 10px',
-                      padding: '7px',
+                      padding: '12px',
                       fontSize: '14px',
                       fontWeight: '500',
                     }),
@@ -215,13 +215,13 @@ export default function HomeHero() {
                   components={{ DropdownIndicator: () => <ExpandMoreIcon />, IndicatorSeparator: () => null }}
                 />
               </Grid>
-              <Grid item xs={6} md={2} lg={2} sx={{ borderRadius: '0px 10px 10px 0px' }}>
+              <Grid item xs={5} md={2} lg={2} sx={{ borderRadius: '0px 10px 10px 0px' }}>
                 <Select
                   styles={{
                     control: (baseStyles, state) => ({
                       ...baseStyles,
                       borderRadius: '0px 10px 10px 0px',
-                      padding: '7px',
+                      padding: '12px',
                       fontSize: '14px',
                       fontWeight: '500',
                     }),

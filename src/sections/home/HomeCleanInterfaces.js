@@ -55,11 +55,11 @@ export default function HomeCleanInterfaces() {
               </Grid>
               <Grid item xs={6}>
                 <Grid container spacing={2}>
-                  <Grid item>
+                  <Grid item xs={12}>
                     <Image alt="" src={`images/pgfood_2.jpg`} style={{ borderRadius: '10px 10px' }} />
                   </Grid>
 
-                  <Grid item>
+                  <Grid item xs={12}>
                     <Image alt="" src={`images/pgfood_3.jpg`} style={{ borderRadius: '10px 10px' }} />
                   </Grid>
                 </Grid>

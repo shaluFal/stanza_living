@@ -74,7 +74,7 @@ export default function Partner() {
         <Grid container spacing={6} sx={{ marginBottom: '10%' }}>
           <Grid item xs={12} md={6}>
             <m.div variants={varFade().inRight}>
-              <Typography variant="h3" sx={{ mb: 3, marginTop: '65px' }}>
+              <Typography variant="h3" sx={{ mb: 3, marginTop: '22%' }}>
                 Your property in the <span style={{ color: 'rgb(96 195 173)' }}>right hands</span>
               </Typography>
             </m.div>
@@ -145,7 +145,7 @@ export default function Partner() {
           </Grid>
           <Grid item xs={12} md={6}>
             <m.div variants={varFade().inRight}>
-              <Typography variant="h3" sx={{ mb: 3, marginTop: '65px' }}>
+              <Typography variant="h3" sx={{ mb: 3, marginTop: '22%' }}>
                 Your people in the <span style={{ color: 'rgb(96 195 173)' }}>right care</span>
               </Typography>
             </m.div>
@@ -188,7 +188,7 @@ export default function Partner() {
         <Grid container spacing={6}>
           <Grid item xs={12} md={6}>
             <m.div variants={varFade().inRight}>
-              <Typography variant="h3" sx={{ mb: 3, marginTop: '45px' }}>
+              <Typography variant="h3" sx={{ mb: 3, marginTop: '20%' }}>
                 Your product with the <span style={{ color: 'rgb(96 195 173)' }}>right consumer</span>
               </Typography>
             </m.div>

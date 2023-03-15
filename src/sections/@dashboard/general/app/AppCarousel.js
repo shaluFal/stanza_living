@@ -94,7 +94,8 @@ function CarouselItem({ item, isActive, index }) {
       <Image
         alt=""
         src={photoURL}
-        sx={{ height: { xs: 300, md: 260, lg: 512 }, width: { xs: 320, md: 1200, lg: 900 }, textAlign: 'left' }}
+        // sx={{ height: { xs: 300, md: 260, lg: 512 }, width: { xs: 320, md: 1200, lg: 900 }, textAlign: 'left' }}
+        sx={{maxHeight: "100%", maxWidth: "100%", textAlign: 'left' }}
       />
     </Box>
   );

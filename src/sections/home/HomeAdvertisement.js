@@ -39,7 +39,7 @@ export default function HomeAdvertisement() {
     }}
     >
       <Container component={MotionViewport} sx={{ position: 'relative', textAlign: 'center'}}>
-        <Grid container spacing={5} sx={{ paddingTop: '110px' }}>
+        <Grid container spacing={6} sx={{ paddingTop: '150px' }}>
           <Grid item xs={12} md={6} sx={{ textAlign: 'left', marginTop: '100px', maxWidth: '475px' }}>
             <Typography variant="h3" sx={{ fontSize: '2rem', lineHeight: '44px', fontWeight: '700' }}>
               Chill in a<span style={{ color: 'rgb(96 195 173)', textAlign: 'left' }}> common area <br/> </span>
@@ -53,14 +53,14 @@ export default function HomeAdvertisement() {
           </Grid>
 
           <Grid item xs={12} md={6}>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} >
               <Grid item xs={6} >
                 <Grid container spacing={2}>
-                  <Grid item>
+                  <Grid item xs={12}>
                     <Image alt="" src={`images/chill_1.jpg`} style={{ borderRadius: '10px 10px' }} />
                   </Grid>
 
-                  <Grid item>
+                  <Grid item xs={12}>
                     <Image alt="" src={`images/chill_2.jpg`} style={{ borderRadius: '10px 10px' }} />
                   </Grid>
                 </Grid>

@@ -23,7 +23,7 @@ import { MotionViewport, varFade } from '../../components/animate';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled('div')(({ theme }) => ({
-  padding: theme.spacing(15, 0),
+  padding: theme.spacing(14, 0),
 }));
 
 // ----------------------------------------------------------------------

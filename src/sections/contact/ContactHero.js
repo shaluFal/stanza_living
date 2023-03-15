@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { styled, emphasize } from '@mui/material/styles';
 import Popover from '@mui/material/Popover';
 import Select from 'react-select';
+import "./custom.css"
 import {
   Box,
   Container,
@@ -466,17 +467,18 @@ export default function ContactHero() {
         sx={{
           display: 'flex',
           justifyContent: 'center',
+          paddingTop: "10px"
         }}
       >
         <Grid item md={11}>
           <m.div sx={{ paddingLeft: '2%' }}>
             <Typography sx={{ paddingLeft: '2%', marginBottom: '5px', fontWeight: '500' }}>
-              Stanza Living/PG in Hyderabad
+              Coliving/PG in Hyderabad
             </Typography>
 
             {isDesktop ? (
               <Grid container spacing={2} sx={{ paddingLeft: '2%' }}>
-                <Grid item style={{}}>
+                <Grid item>
                   <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                     <div>
                       <Button
@@ -487,10 +489,10 @@ export default function ContactHero() {
                           color: 'rgb(41, 45, 50)',
                           fontWeight: '400',
                           borderRadius: '40px',
-                          padding: '10px 20px',
+                          padding: '14px 30px',
                           margin: '5px',
                           border: '1px solid rgb(232, 232, 232)',
-                          fontSize: '13px',
+                          fontSize: '14px',
                         }}
                       >
                         Locality &nbsp;
@@ -595,10 +597,10 @@ export default function ContactHero() {
                           color: 'rgb(41, 45, 50)',
                           fontWeight: '400',
                           borderRadius: '40px',
-                          padding: '10px 20px',
+                          padding: '14px 30px',
                           margin: '5px',
                           border: '1px solid rgb(232, 232, 232)',
-                          fontSize: '13px',
+                          fontSize: '14px',
                         }}
                       >
                         Budget &nbsp;
@@ -685,10 +687,10 @@ export default function ContactHero() {
                           color: 'rgb(41, 45, 50)',
                           fontWeight: '400',
                           borderRadius: '40px',
-                          padding: '10px 20px',
+                          padding: '14px 30px',
                           margin: '5px',
                           border: '1px solid rgb(232, 232, 232)',
-                          fontSize: '13px',
+                          fontSize: '14px',
                         }}
                       >
                         Occupancy &nbsp;
@@ -770,10 +772,10 @@ export default function ContactHero() {
                           color: 'rgb(41, 45, 50)',
                           fontWeight: '400',
                           borderRadius: '40px',
-                          padding: '10px 20px',
+                          padding: '14px 30px',
                           margin: '5px',
                           border: '1px solid rgb(232, 232, 232)',
-                          fontSize: '13px',
+                          fontSize: '14px',
                         }}
                       >
                         Gender &nbsp;
@@ -856,10 +858,10 @@ export default function ContactHero() {
                           color: 'rgb(41, 45, 50)',
                           fontWeight: '400',
                           borderRadius: '40px',
-                          padding: '10px 20px',
+                          padding: '14px 30px',
                           margin: '5px',
                           border: '1px solid rgb(232, 232, 232)',
-                          fontSize: '13px',
+                          fontSize: '14px',
                         }}
                       >
                         Amenities &nbsp;
@@ -975,7 +977,7 @@ export default function ContactHero() {
                       </Popover>
                     </div>
 
-                    <span style={{ margin: '18px' }}> | </span>
+                    <span style={{ margin: '20px' }}> | </span>
                     {/* <div>
                       <Button
                         variant="outlined"
@@ -1059,12 +1061,12 @@ export default function ContactHero() {
                         sx={{
                           fontWeight: '400',
                           borderRadius: '40px',
-                          padding: '10px 20px',
+                          padding: '14px 30px',
                           margin: '5px',
                           border: '0px',
                           background: 'rgb(249, 249, 249)',
                           color: ' rgb(125, 125, 125)',
-                          fontSize: '13px',
+                          fontSize: '14px',
                         }}
                       >
                         Sort By
@@ -1294,15 +1296,20 @@ export default function ContactHero() {
                       <div key={loc.facilityCode}>
                         <Card sx={{ padding: '3%', marginBottom: '4%', textDecoration: 'none' }}>
                           <Grid container spacing={2}>
-                            <Grid item xs={12} md={4}>
+                            <Grid item xs={12} md={4} style={{
+                              overflow:"hidden"
+                            }}>
                               {loc.listOfFacilityImages?.length > 0 ? (
                                 <img
                                   src={loc.listOfFacilityImages[0]?.photoURL}
                                   alt=""
-                                  style={{ width: '120%', height: '100%' }}
+                                  className='cardimgzoom'
+                                  style={{ width: '120%', height: '100%', borderRadius: "20px 20px", transition: "0.5s all ease-in-out" }}
                                 />
                               ) : (
-                                <img src={''} alt="" style={{ width: '120%', height: '100%' }} />
+                                <img 
+                                className='cardimgzoom'
+                                src={''} alt="" style={{ width: '120%', height: '100%', borderRadius: "20px 20px", transition: "0.5s all ease-in-out" }} />
                               )}
                             </Grid>
                             <Grid item xs={12} md={8}>
@@ -1310,28 +1317,27 @@ export default function ContactHero() {
                                 <Typography variant="subtitle1">
                                   <Link
                                     to={`/search-property-detail/${loc.facilityCode}`}
-                                    style={{ textDecoration: 'none', color: '#000' }}
+                                    style={{ textDecoration: 'none', color: '#000', fontWeight: "700", fontSize: "18px" }}
                                   >
-                                    {console.log(loc.facility)}
                                     {loc.facilityName}
                                   </Link>
                                 </Typography>
 
-                                <Grid container sx={{ marginTop: '2%', fontSize: '12px' }}>
+                                <Grid container sx={{ marginTop: '2%'}}>
                                   <Grid item xs={8} md={8} sx={{ display: 'flex' }}>
                                     {loc.listOfUnitTypes &&
                                       loc.listOfUnitTypes.map((typ) => {
-                                        return <div key={typ.facilityCode}>{typ.unitType} &nbsp;</div>;
+                                        return <div key={typ.facilityCode} style={{ fontSize: '15px', fontWeight: "500"}}>{typ.unitType} &nbsp;</div>;
                                       })}
                                   </Grid>
                                   <Grid item xs={4} md={4}>
-                                    <Typography sx={{ fontSize: '12px' }}>View Directions</Typography>
+                                    <Typography sx={{ fontSize: '15px', fontWeight: "500"}}>View Directions</Typography>
                                   </Grid>
                                 </Grid>
 
                                 <Grid container sx={{ marginTop: '2%' }} spacing={1}>
                                   <Grid item xs={12}>
-                                    <Typography>Amenities: &nbsp; </Typography>
+                                    <Typography sx={{color: "rgb(125, 125, 125)", fontWeight: "400"}}>Amenities: &nbsp; </Typography>
                                   </Grid>
 
                                   {loc.facilityAmenities?.length > 0 &&
@@ -1342,11 +1348,11 @@ export default function ContactHero() {
                                             <Card
                                               sx={{
                                                 borderRadius: '30px 30px',
-                                                padding: '6px',
+                                                padding: '10px',
                                                 border: '0.6px solid rgb(190, 190, 190)',
                                               }}
                                             >
-                                              <Typography sx={{ fontSize: '12px' }}>{amn} </Typography>
+                                              <Typography sx={{ fontSize: '14px' }}>{amn} </Typography>
                                             </Card>
                                           </Grid>
                                         </div>
@@ -1354,36 +1360,36 @@ export default function ContactHero() {
                                     })}
                                 </Grid>
 
-                                <Grid container spacing={1} sx={{ marginTop: '4%' }}>
+                                <Grid container spacing={2} sx={{ marginTop: '4%' }}>
                                   <Grid item xs={12} lg={4} md={12}>
                                     <Box sx={{ mb: 5 }}>
-                                      <Typography variant="subtitle1">Starts from</Typography>
-                                      <Typography>Rs {loc.rentMonthly}/mo*</Typography>
+                                      <Typography variant="subtitle1" sx={{color: "rgb(125, 125, 125)", fontWeight: "400"}}>Starts from</Typography>
+                                      <Typography sx={{color: "#000", fontWeight: "800"}}>Rs {loc.rentMonthly}/mo*</Typography>
                                     </Box>
                                   </Grid>
-                                  <Grid item xs={6} lg={4} md={6}>
+                                  <Grid item>
                                     <Box>
                                       <Button
                                         variant="contained"
                                         target="_blank"
                                         rel="noopener"
                                         href=""
-                                        style={{ fontSize: '12px', padding: '10px' }}
+                                        style={{ fontSize: '14px', padding: '14px', fontWeight: "600" }}
                                       >
-                                        Schedule a visit
+                                        SCHEDULE A VISIT
                                       </Button>
                                     </Box>
                                   </Grid>
-                                  <Grid item xs={6} lg={4} md={6}>
+                                  <Grid item>
                                     <Box>
                                       <Button
-                                        variant="contained"
+                                        variant="outlined"
                                         target="_blank"
                                         rel="noopener"
                                         href=""
-                                        style={{ fontSize: '12px', padding: '10px' }}
+                                        style={{ fontSize: '14px', padding: '14px', fontWeight: "600" }}
                                       >
-                                        Unlock discount
+                                        UNLOCK DISCOUNT
                                       </Button>
                                     </Box>
                                   </Grid>
