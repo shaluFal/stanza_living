@@ -49,7 +49,7 @@ export default function HomeDarkMode() {
               component={m.div}
               sx={{
                 top: { md: '150px', xs: '100px' },
-                right: { md: '220px', xs: '100px' },
+                right: { md: '350px', xs: '100px' },
                 width: '45%',
                 position: 'absolute',
               }}

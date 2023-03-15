@@ -91,7 +91,7 @@ export default function HomeHugePackElements() {
                 <Image alt="light mode" src="images/chores_2.jpg" style={{ width: '50%', marginRight: '40%' }} />
               </m.div>
 
-              <Box component={m.div} sx={{ top: {md: '150px', xs: '80px'}, left: {md: '190px', xs: '140px'}, width: '50%', position: 'absolute' }}>
+              <Box component={m.div} sx={{ top: {md: '150px', xs: '80px'}, left: {md: '300px', xs: '140px'}, width: '50%', position: 'absolute' }}>
                 <Image alt="dark mode" src="images/chores.jpg" />
               </Box>
             </Grid>
