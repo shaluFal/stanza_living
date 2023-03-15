@@ -47,7 +47,7 @@ const SearchPropertyDetailPage = () => {
         sx={{
           display: 'flex',
           justifyContent: 'center',
-          marginTop: {xs: "10%", md: "4%"},
+          marginTop: { xs: '10%', md: '4%' },
         }}
       >
         <Grid item xs={12} md={10}>
@@ -167,7 +167,7 @@ const SearchPropertyDetailPage = () => {
                       Food Menu:
                     </Typography>
                   </Grid>
-                  <Card sx={{ padding: '4%', width: '100%', background: '#60c3ad1f' }}>
+                  <Card sx={{ padding: '4%', width: '100%', background: '#60c3ad1f', marginBottom: '2%' }}>
                     {property.listOfFoodItems &&
                       property.listOfFoodItems.map((loc, index) => {
                         return (
@@ -235,7 +235,9 @@ const SearchPropertyDetailPage = () => {
                 </Grid>
               </Grid>
               <Grid item md={4} xs={12}>
-                <Typography sx={{marginBottom: "4%", fontWeight: "500", fontSize: "18px", marginTop: "6%"}}>Schedule a Visit</Typography>
+                <Typography sx={{ marginBottom: '4%', fontWeight: '500', fontSize: '18px', marginTop: '6%' }}>
+                  Schedule a Visit
+                </Typography>
                 <Card
                   style={{
                     padding: '4%',
@@ -250,14 +252,25 @@ const SearchPropertyDetailPage = () => {
                         id="filled-basic"
                         label="First Name"
                         variant="filled"
-                        sx={{ input: { background: '#fff' }, borderRadius: '20px 20px' }} 
+                        sx={{ input: { background: '#fff' }, borderRadius: '20px 20px' }}
                       />
                     </Grid>
                     <Grid item xs={6}>
-                      <TextField id="filled-basic" label="Last Name" variant="filled" sx={{ input: { background: '#fff' }, borderRadius: '20px 20px' }}  />
+                      <TextField
+                        id="filled-basic"
+                        label="Last Name"
+                        variant="filled"
+                        sx={{ input: { background: '#fff' }, borderRadius: '20px 20px' }}
+                      />
                     </Grid>
                     <Grid item xs={10}>
-                      <TextField fullWidth label="Mobile Number" id="fullWidth" variant="filled" sx={{ input: { background: '#fff' }, borderRadius: '20px 20px' }}  />
+                      <TextField
+                        fullWidth
+                        label="Mobile Number"
+                        id="fullWidth"
+                        variant="filled"
+                        sx={{ input: { background: '#fff' }, borderRadius: '20px 20px' }}
+                      />
                     </Grid>
                     <Grid item>
                       <FormControl>
@@ -278,14 +291,14 @@ const SearchPropertyDetailPage = () => {
                       </FormControl>
                     </Grid>
                     <Grid item xs={10}>
-                      <FormControl variant="filled" fullWidth >
-                        <InputLabel id="demo-simple-select-filled-label" >Duration of your stay</InputLabel>
+                      <FormControl variant="filled" fullWidth>
+                        <InputLabel id="demo-simple-select-filled-label">Duration of your stay</InputLabel>
                         <Select
                           labelId="demo-simple-select-filled-label"
                           id="demo-simple-select-filled"
                           // value={age}
                           // onChange={handleChange}
-                          sx={{background: "#fff"}}
+                          sx={{ background: '#fff' }}
                         >
                           <MenuItem value="lessThan3Months">Less than 3 months</MenuItem>
                           <MenuItem value="3-6Months">3-6 months</MenuItem>
@@ -338,9 +351,10 @@ const SearchPropertyDetailPage = () => {
                     </Grid>
                   </Grid>
                 </Card>
-                <Button variant="contained" sx={{width: "100%", marginTop: "6%", padding: "2%"}}>Schedule a Visit</Button>
+                <Button variant="contained" sx={{ width: '100%', marginTop: '6%', padding: '2%' }}>
+                  Schedule a Visit
+                </Button>
               </Grid>
-              
             </Grid>
           </m.div>
         </Grid>
