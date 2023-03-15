@@ -118,7 +118,7 @@ export default function MainHeader() {
 
           )} */}
           {!isHome && isDesktop && (
-            <Box sx={{ marginRight: '14%' }}>
+            <Box sx={{width: "55%",paddingRight: "5%" }}>
               <Grid
                 container
                 sx={{
@@ -130,13 +130,13 @@ export default function MainHeader() {
                   // zIndex: '2000',
                 }}
               >
-                <Grid item sx={{ border: 'none' }}>
+                <Grid item xs={6} sx={{ border: 'none' }}>
                   <Select
                     styles={{
                       control: (baseStyles, state) => ({
                         ...baseStyles,
                         borderRadius: '10px 0px 0px 10px',
-                        padding: '14px',
+                        padding: '10px',
                         fontSize: '14px',
                         fontWeight: '500',
                         color: '#000 !important',
@@ -156,13 +156,13 @@ export default function MainHeader() {
                     components={{ DropdownIndicator: () => <ExpandMoreIcon />, IndicatorSeparator: () => null }}
                   />
                 </Grid>
-                <Grid item  sx={{ borderRadius: '0px 10px 10px 0px' }}>
+                <Grid item xs={6}  sx={{ borderRadius: '0px 10px 10px 0px' }}>
                   <Select
                     styles={{
                       control: (baseStyles, state) => ({
                         ...baseStyles,
                         borderRadius: '0px 10px 10px 0px',
-                        padding: '14px',
+                        padding: '10px',
                         fontSize: '14px',
                         fontWeight: '500',
                       }),
@@ -171,7 +171,7 @@ export default function MainHeader() {
                         color: '#000',
                       }),
                     }}
-                    placeholder={<div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500' }}>Find in and around..</div>}
+                    placeholder={<div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500' }}>Find in and around...</div>}
                     options={locations?.map((lt) => {
                       return {
                         value: lt.id,
