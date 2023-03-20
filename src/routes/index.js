@@ -163,7 +163,7 @@ export default function Router() {
       children: [
         { element: <HomePage />, index: true },
         { path: 'about-us', element: <About /> },
-        { path: 'contact-us/:id', element: <Contact key={Math.random()} /> },
+        { path: 'search-property/:id', element: <Contact key={Math.random()} /> },
         { path: 'team', element: <Faqs /> },
         { path: 'partner', element: <Partner /> },
         { path: 'search-property-detail/:id', element: <SearchPropertyDetailPage /> },

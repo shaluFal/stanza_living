@@ -2,8 +2,8 @@ import { m } from 'framer-motion';
 import React, { useCallback, useEffect, useState } from 'react';
 import { styled, emphasize } from '@mui/material/styles';
 import Popover from '@mui/material/Popover';
-import Select from 'react-select';
-import "./custom.css"
+// import Select from 'react-select';
+import './custom.css';
 import {
   Box,
   Container,
@@ -29,9 +29,19 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  Modal,
+  Radio,
+  RadioGroup,
+  Select,
 } from '@mui/material';
+import { FormLabel } from 'react-bootstrap';
 import axios from 'axios';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import KingBedOutlinedIcon from '@mui/icons-material/KingBedOutlined';
+import CallIcon from '@mui/icons-material/Call';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import DirectionsOutlinedIcon from '@mui/icons-material/DirectionsOutlined';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
 import IconButton from '@mui/material/IconButton';
@@ -71,6 +81,18 @@ const ContentStyle = styled('div')(({ theme }) => ({
     // bottom: theme.spacing(10),
   },
 }));
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 500,
+  bgcolor: 'background.paper',
+  borderRadius: '10px 10px',
+  boxShadow: 24,
+  p: 4,
+};
 
 const PrettoSlider = styled(Slider)({
   color: '#52af77',
@@ -161,9 +183,12 @@ export default function ContactHero() {
   }, []);
 
   const [locationid, setLocationId] = useState();
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const [openModal, setOpenModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const isDesktop = useResponsive('up', 'md');
   const checkboxLabel = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -401,7 +426,11 @@ export default function ContactHero() {
 
           case 'Budget': {
             if (filterOpt[key]) {
-              data = data.filter((dt) => Number(dt.rentMonthly) >= Number(filterOpt[key][0]) && Number(dt.rentMonthly) <= Number(filterOpt[key][1]));
+              data = data.filter(
+                (dt) =>
+                  Number(dt.rentMonthly) >= Number(filterOpt[key][0]) &&
+                  Number(dt.rentMonthly) <= Number(filterOpt[key][1])
+              );
             }
             break;
           }
@@ -467,13 +496,13 @@ export default function ContactHero() {
         sx={{
           display: 'flex',
           justifyContent: 'center',
-          paddingTop: "10px"
+          paddingTop: '10px',
         }}
       >
         <Grid item md={11}>
           <m.div sx={{ paddingLeft: '2%' }}>
             <Typography sx={{ paddingLeft: '2%', marginBottom: '5px', fontWeight: '500' }}>
-              Coliving/PG in Hyderabad
+              Coliving / <span style={{ color: 'grey' }}>PG in Hyderabad</span>
             </Typography>
 
             {isDesktop ? (
@@ -970,7 +999,7 @@ export default function ContactHero() {
                               style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}
                               onClick={(e) => handleFilterData(null, e, 'Amenities')}
                             >
-                              Save
+                              Apply
                             </Button>
                           </div>
                         </div>
@@ -1277,15 +1306,17 @@ export default function ContactHero() {
             {/* <h4 style={{marginTop: "2%", height: "100%"}}>&nbsp; | &nbsp;</h4> */}
           </m.div>
 
-          <m.div>
+          {/* <m.div>
             <Typography sx={{ marginTop: '2%', paddingLeft: '2%', fontWeight: '500' }}>
               Coliving/PG in Hyderabad
             </Typography>
-          </m.div>
+          </m.div> */}
           <m.div>
             <Grid container spacing={2}>
               <Grid item md={8}>
-                <Typography sx={{ marginTop: '2%', fontWeight: '700', marginBottom: '5%', paddingLeft: '2%' }}>
+                <Typography
+                  sx={{ marginTop: '2%', fontWeight: '700', marginBottom: '2%', paddingLeft: '2%', fontSize: '20px' }}
+                >
                   {propertyData?.length} PGs waiting to be yours in Hyderabad
                 </Typography>
 
@@ -1296,20 +1327,38 @@ export default function ContactHero() {
                       <div key={loc.facilityCode}>
                         <Card sx={{ padding: '3%', marginBottom: '4%', textDecoration: 'none' }}>
                           <Grid container spacing={2}>
-                            <Grid item xs={12} md={4} style={{
-                              overflow:"hidden"
-                            }}>
+                            <Grid
+                              item
+                              xs={12}
+                              md={4}
+                              style={{
+                                overflow: 'hidden',
+                              }}
+                            >
                               {loc.listOfFacilityImages?.length > 0 ? (
                                 <img
                                   src={loc.listOfFacilityImages[0]?.photoURL}
                                   alt=""
-                                  className='cardimgzoom'
-                                  style={{ width: '120%', height: '100%', borderRadius: "20px 20px", transition: "0.5s all ease-in-out" }}
+                                  className="cardimgzoom"
+                                  style={{
+                                    width: '120%',
+                                    height: '100%',
+                                    borderRadius: '20px 20px',
+                                    transition: '0.5s all ease-in-out',
+                                  }}
                                 />
                               ) : (
-                                <img 
-                                className='cardimgzoom'
-                                src={''} alt="" style={{ width: '120%', height: '100%', borderRadius: "20px 20px", transition: "0.5s all ease-in-out" }} />
+                                <img
+                                  className="cardimgzoom"
+                                  src={''}
+                                  alt=""
+                                  style={{
+                                    width: '120%',
+                                    height: '100%',
+                                    borderRadius: '20px 20px',
+                                    transition: '0.5s all ease-in-out',
+                                  }}
+                                />
                               )}
                             </Grid>
                             <Grid item xs={12} md={8}>
@@ -1317,27 +1366,45 @@ export default function ContactHero() {
                                 <Typography variant="subtitle1">
                                   <Link
                                     to={`/search-property-detail/${loc.facilityCode}`}
-                                    style={{ textDecoration: 'none', color: '#000', fontWeight: "700", fontSize: "18px" }}
+                                    style={{
+                                      textDecoration: 'none',
+                                      color: '#000',
+                                      fontWeight: '700',
+                                      fontSize: '20px',
+                                    }}
                                   >
                                     {loc.facilityName}
                                   </Link>
                                 </Typography>
 
-                                <Grid container sx={{ marginTop: '2%'}}>
+                                <Typography style={{ fontSize: '14px', color: 'grey', fontWeight: '600' }}>
+                                  {' '}
+                                  {loc.locationCode}{' '}
+                                </Typography>
+
+                                <Grid container sx={{ marginTop: '2%' }}>
                                   <Grid item xs={8} md={8} sx={{ display: 'flex' }}>
                                     {loc.listOfUnitTypes &&
                                       loc.listOfUnitTypes.map((typ) => {
-                                        return <div key={typ.facilityCode} style={{ fontSize: '15px', fontWeight: "500"}}>{typ.unitType} &nbsp;</div>;
+                                        return (
+                                          <div key={typ.facilityCode} style={{ fontSize: '16px', fontWeight: '500' }}>
+                                            {typ.unitType} &nbsp;
+                                          </div>
+                                        );
                                       })}
                                   </Grid>
-                                  <Grid item xs={4} md={4}>
-                                    <Typography sx={{ fontSize: '15px', fontWeight: "500"}}>View Directions</Typography>
+                                  <Grid item xs={4} md={4} sx={{display: "flex",fontSize: '15px', fontWeight: '500', color: '#00AB55'}}>
+                                    <Typography>
+                                      <DirectionsOutlinedIcon sx={{fontSize: "15px"}}/> View Directions
+                                    </Typography>
                                   </Grid>
                                 </Grid>
 
                                 <Grid container sx={{ marginTop: '2%' }} spacing={1}>
                                   <Grid item xs={12}>
-                                    <Typography sx={{color: "rgb(125, 125, 125)", fontWeight: "400"}}>Amenities: &nbsp; </Typography>
+                                    <Typography sx={{ color: 'rgb(125, 125, 125)', fontWeight: '400' }}>
+                                      Amenities: &nbsp;{' '}
+                                    </Typography>
                                   </Grid>
 
                                   {loc.facilityAmenities?.length > 0 &&
@@ -1360,11 +1427,65 @@ export default function ContactHero() {
                                     })}
                                 </Grid>
 
+                                <Grid container sx={{ marginTop: '4%' }} spacing={1}>
+                                  <Grid item xs={6}>
+                                    <Typography sx={{ display: 'flex', fontSize: '16px' }}>
+                                      <span style={{ color: 'rgb(125, 125, 125)', fontWeight: '400' }}>
+                                        Available: &nbsp;
+                                      </span>{' '}
+                                      &nbsp; <KingBedOutlinedIcon sx={{ fontSize: '28px', color: '#00AB55' }} />
+                                      &nbsp; {loc.available} Beds available
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item xs={6}>
+                                    <Typography sx={{ display: 'flex', fontSize: '16px', paddingLeft: '60px' }}>
+                                      <span style={{ color: 'rgb(125, 125, 125)', fontWeight: '400' }}>
+                                        Contact Us: &nbsp;
+                                      </span>{' '}
+                                      <CallIcon sx={{ color: '#00AB55' }} />
+                                      +91 9876543212
+                                    </Typography>
+                                  </Grid>
+                                </Grid>
+
+                                {/* <Grid container sx={{ marginTop: '2%' }} spacing={1}>
+                                  <Grid item xs={12}>
+                                    <Typography sx={{ color: 'rgb(125, 125, 125)', fontWeight: '400' }}>
+                                      Contact No: &nbsp;{' '}
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item>
+                                    <Typography sx={{ display: 'flex', fontSize: '16px' }}>+91 9876543212</Typography>
+                                  </Grid>
+                                </Grid> */}
+
+                                {/* <Grid container sx={{ marginTop: '2%' }} spacing={1}>
+                                  <Grid item xs={12}>
+                                    <Typography sx={{ color: 'rgb(125, 125, 125)', fontWeight: '400' }}>
+                                      Support: &nbsp;{' '}
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item>
+                                    <Typography sx={{ display: 'flex', fontSize: '16px' }}>
+                                      <SupportAgentIcon sx={{ fontSize: '28px', color: '#00AB55' }} />
+                                      &nbsp;
+                                    </Typography>
+                                  </Grid>
+                                </Grid> */}
+
                                 <Grid container spacing={2} sx={{ marginTop: '4%' }}>
                                   <Grid item xs={12} lg={4} md={12}>
                                     <Box sx={{ mb: 5 }}>
-                                      <Typography variant="subtitle1" sx={{color: "rgb(125, 125, 125)", fontWeight: "400"}}>Starts from</Typography>
-                                      <Typography sx={{color: "#000", fontWeight: "800"}}>Rs {loc.rentMonthly}/mo*</Typography>
+                                      <Typography
+                                        variant="subtitle1"
+                                        sx={{ color: 'rgb(125, 125, 125)', fontWeight: '400' }}
+                                      >
+                                        Starts from
+                                      </Typography>
+                                      <Typography sx={{ color: '#000', fontWeight: '700', fontSize: '20px' }}>
+                                        <CurrencyRupeeIcon style={{ fontSize: '17px' }} />
+                                        {loc.rentMonthly}/<span style={{ fontSize: '16px' }}>mo*</span>
+                                      </Typography>
                                     </Box>
                                   </Grid>
                                   <Grid item>
@@ -1374,9 +1495,24 @@ export default function ContactHero() {
                                         target="_blank"
                                         rel="noopener"
                                         href=""
-                                        style={{ fontSize: '14px', padding: '14px', fontWeight: "600" }}
+                                        style={{ fontSize: '14px', padding: '14px', fontWeight: '600' }}
+                                        onClick={handleOpen}
                                       >
                                         SCHEDULE A VISIT
+                                      </Button>
+                                    </Box>
+                                  </Grid>
+
+                                  <Grid item>
+                                    <Box>
+                                      <Button
+                                        variant="outlined"
+                                        target="_blank"
+                                        rel="noopener"
+                                        href=""
+                                        style={{ fontSize: '14px', padding: '14px', fontWeight: '600' }}
+                                      >
+                                        UNLOCK DISCOUNT
                                       </Button>
                                     </Box>
                                   </Grid>
@@ -1387,9 +1523,9 @@ export default function ContactHero() {
                                         target="_blank"
                                         rel="noopener"
                                         href=""
-                                        style={{ fontSize: '14px', padding: '14px', fontWeight: "600" }}
+                                        style={{ fontSize: '14px', padding: '14px', fontWeight: '600' }}
                                       >
-                                        UNLOCK DISCOUNT
+                                        <SupportAgentIcon sx={{ color: '#00AB55' }} /> &nbsp; Support
                                       </Button>
                                     </Box>
                                   </Grid>
@@ -1415,6 +1551,138 @@ export default function ContactHero() {
           </m.div>
         </Grid>
       </Grid>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          {/* <Typography id="modal-modal-title" variant="h6" component="h2">
+      Text in a modal
+    </Typography>
+    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+      Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+    </Typography> */}
+          {/* <Grid item md={4} xs={12}> */}
+          <Typography sx={{ marginBottom: '5%', fontWeight: '700', fontSize: '18px', marginTop: '6%' }}>
+            Schedule a Visit
+          </Typography>
+          <Card
+            style={{
+              padding: '4%',
+              border: '1px solid rgb(96, 195, 173)',
+              background: 'linear-gradient(199.5deg, rgba(96, 195, 173, 0.5) -74.79%, rgba(96, 195, 173, 0) 96.63%)',
+            }}
+          >
+            <Grid container spacing={4}>
+              <Grid item xs={6}>
+                <TextField
+                  id="filled-basic"
+                  label="First Name"
+                  variant="filled"
+                  sx={{ input: { background: '#fff' }, borderRadius: '20px 20px' }}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  id="filled-basic"
+                  label="Last Name"
+                  variant="filled"
+                  sx={{ input: { background: '#fff' }, borderRadius: '20px 20px' }}
+                />
+              </Grid>
+              <Grid item xs={10}>
+                <TextField
+                  fullWidth
+                  label="Mobile Number"
+                  id="fullWidth"
+                  variant="filled"
+                  sx={{ input: { background: '#fff' }, borderRadius: '20px 20px' }}
+                />
+              </Grid>
+              <Grid item>
+                <FormControl>
+                  <FormLabel id="demo-row-radio-buttons-group-label">I am a</FormLabel>
+                  <RadioGroup
+                    row
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    defaultValue="Working Professional"
+                    name="row-radio-buttons-group"
+                  >
+                    <FormControlLabel value="workingProfessional" control={<Radio />} label="Working Professional" />
+                    <FormControlLabel value="student" control={<Radio />} label="Student" />
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
+              <Grid item xs={10}>
+                <FormControl variant="filled" fullWidth>
+                  <InputLabel id="demo-simple-select-filled-label">Duration of your stay</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-filled-label"
+                    id="demo-simple-select-filled"
+                    // value={age}
+                    // onChange={handleChange}
+                    sx={{ background: '#fff' }}
+                  >
+                    <MenuItem value="lessThan3Months">Less than 3 months</MenuItem>
+                    <MenuItem value="3-6Months">3-6 months</MenuItem>
+                    <MenuItem value="moreThan6Months">More than 6 months</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item>
+                <Typography sx={{ marginBottom: '4%' }}>When are you planning to visit?</Typography>
+                <Grid container spacing={2}>
+                  <Grid item xs={4}>
+                    <Card sx={{ padding: '8%', textAlign: 'center', marginTop: '2%' }}>
+                      <p>15 Mar</p>
+                      <p>Wed</p>
+                    </Card>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Card sx={{ padding: '8%', textAlign: 'center', marginTop: '2%' }}>
+                      <p>16 Mar</p>
+                      <p>Wed</p>
+                    </Card>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Card sx={{ padding: '8%', textAlign: 'center', marginTop: '2%' }}>
+                      <p>17 Mar</p>
+                      <p>Wed</p>
+                    </Card>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item>
+                <Typography sx={{ marginBottom: '4%' }}>What is your preferred time slot?</Typography>
+                <Grid container spacing={2}>
+                  <Grid item xs={4}>
+                    <Card sx={{ padding: '8%', textAlign: 'center', marginTop: '2%' }}>
+                      <p>9-12</p>
+                    </Card>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Card sx={{ padding: '8%', textAlign: 'center', marginTop: '2%' }}>
+                      <p>12-3</p>
+                    </Card>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Card sx={{ padding: '8%', textAlign: 'center', marginTop: '2%' }}>
+                      <p>3-6</p>
+                    </Card>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Card>
+          <Button variant="contained" sx={{ width: '100%', marginTop: '6%', padding: '2%' }}>
+            Schedule a Visit
+          </Button>
+          {/* </Grid> */}
+        </Box>
+      </Modal>
     </>
   );
 }

@@ -159,7 +159,9 @@ export default function MainHeader() {
                         color: '#000',
                       }),
                     }}
-                    placeholder={<div style={{ color: 'rgb(41, 45, 50)', overflow:"hidden" }}>Choose Property Type</div>}
+                    placeholder={
+                      <div style={{ color: 'rgb(41, 45, 50)', overflow: 'hidden' }}>Choose Property Type</div>
+                    }
                     id="demo-simple-select"
                     label="choose property type"
                     inputProps={{ 'aria-label': 'Without label' }}
@@ -194,7 +196,7 @@ export default function MainHeader() {
                     })}
                     onChange={(data) => {
                       // handleModalClose();
-                      navigate(`/contact-us/${data.value}/`);
+                      navigate(`/search-property/${data.value}/`);
                     }}
                     components={{
                       DropdownIndicator: () => (

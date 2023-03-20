@@ -41,13 +41,13 @@ export default function HomeAdvertisement() {
       <Container component={MotionViewport} sx={{ position: 'relative', textAlign: 'center'}}>
         <Grid container spacing={6} sx={{ paddingTop: '150px' }}>
           <Grid item xs={12} md={6} sx={{ textAlign: 'left', marginTop: '100px', maxWidth: '475px' }}>
-            <Typography variant="h3" sx={{ fontSize: '2rem', lineHeight: '44px', fontWeight: '700' }}>
+            <Typography variant="h3" sx={{ fontSize: '3rem', lineHeight: '44px', fontWeight: '700', mb:1 }}>
               Chill in a<span style={{ color: 'rgb(96 195 173)', textAlign: 'left' }}> common area <br/> </span>
               that's anything but common
             </Typography>
-            <Typography sx={{ fontSize: '1rem', lineHeight: '26px', marginTop: '16px' }}>
-              Nope, we don't try to pass off a few plastic chairs and a TV as a common area. We've replaced them with
-              sofas, bean bags and large-screen TVs. And we've also added gaming zones, fitness centres and chillout
+            <Typography sx={{ fontSize: '1.2rem', lineHeight: '26px', marginTop: '16px' }}>
+              Nope, we don't try to pass off a few plastic chairs<br/> and a TV as a common area. We've replaced them <br/>with
+              sofas, bean bags and large-screen TVs. And <br/>we've also added gaming zones, fitness centres and<br/> chillout
               corners as a bonus.
             </Typography>
           </Grid>

@@ -21,8 +21,10 @@ import {
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { flexibleCompare } from '@fullcalendar/react';
 import { FormLabel } from 'react-bootstrap';
+import GoogleMapReact from 'google-map-react';
 import AppCarousel from '../sections/@dashboard/general/app/AppCarousel';
 import { _appFeatured } from '../_mock';
+
 import API from '../Helper/api';
 import { AppFeatured } from '../sections/@dashboard/general/app';
 import Page from '../components/Page';
@@ -40,6 +42,16 @@ const SearchPropertyDetailPage = () => {
     });
   }, []);
 
+  const AnyReactComponent = ({ text }) => <div>{text}</div>;
+
+  const defaultProps = {
+    center: {
+      lat: 10.99835602,
+      lng: 77.01502627,
+    },
+    zoom: 11,
+  };
+
   return (
     <Page title="Coliving">
       <Grid
@@ -47,6 +59,7 @@ const SearchPropertyDetailPage = () => {
         sx={{
           display: 'flex',
           justifyContent: 'center',
+          marginTop: { xs: '10%', md: '4%' },
           marginTop: { xs: '10%', md: '4%' },
         }}
       >
@@ -57,7 +70,8 @@ const SearchPropertyDetailPage = () => {
                 <h1>{property.facilityName}</h1>
 
                 <Typography sx={{ marginTop: '2px', marginBottom: '5px', color: 'rgb(125, 125, 125)' }}>
-                  Exeter House, Unnamed Road, Gachibowli, Hyderabad, Telangana 500075, India
+                  {/* Exeter House, Unnamed Road, Gachibowli, Hyderabad, Telangana 500075, India  */}
+                  {property.locationCode}, Hyderabad, Telangana 500075, India
                 </Typography>
 
                 <Grid container sx={{ marginTop: '20px' }}>
@@ -71,7 +85,9 @@ const SearchPropertyDetailPage = () => {
                 </Grid>
 
                 <Typography sx={{ marginTop: '20px', color: 'rgb(125, 125, 125)' }}>Starts from</Typography>
-                <Typography sx={{ fontWeight: '900', fontSize: '20px' }}>₹{property.rentMonthly}/mo*</Typography>
+                <Typography sx={{ fontWeight: '900', fontSize: '24px' }}>
+                  ₹{property.rentMonthly}/<span style={{ fontSize: '22px' }}>mo*</span>
+                </Typography>
                 <Typography sx={{ color: 'rgb(125, 125, 125)' }}>
                   *Denotes starting price (exclusive of GST) for 7-9 months' stay. Prices may vary with tenure, room
                   occupancy, <br />
@@ -161,9 +177,9 @@ const SearchPropertyDetailPage = () => {
                     })}
                 </Grid>
 
-                <Grid container spacing={2}>
+                <Grid container spacing={2} sx={{ marginBottom: '4%' }}>
                   <Grid item xs={12}>
-                    <Typography sx={{ marginTop: '15px', fontWeight: '500', marginBottom: '2%', fontSize: '17px' }}>
+                    <Typography sx={{ marginTop: '15px', fontWeight: '600', marginBottom: '2%', fontSize: '17px' }}>
                       Food Menu:
                     </Typography>
                   </Grid>
@@ -201,41 +217,99 @@ const SearchPropertyDetailPage = () => {
                           </Grid>
                         );
                       })}
-                    {/* <Grid container spacing={7}>
-                <Grid item>
-                  <Typography>Days</Typography>
-                  <Typography>Mon-Sun</Typography>
-                </Grid>
-                <Grid item sx={{ background: '#60c3ad1f' }}>
-                  {property.listOfFoodItems &&
-                    property.listOfFoodItems.map((loc, index) => {
-                      return (
-                        <Grid container key={loc.facilityCode} sx={{ paddingLeft: '16px' }}>
-                          <Grid item xs={12}>
-                            <Card
-                              sx={{
-                                borderRadius: '30px 30px',
-                                padding: '10px 6px 10px 15px',
-                                border: '0.6px solid rgb(190, 190, 190)',
-                                margin: '5px',
-                              }}
-                            >
-                              <p style={{ fontWeight: 'bold' }}>{loc.day} -</p>
-                              <p>Breakfast : {loc.breakfast}</p>
-                              <p>Lunch : {loc.lunch} </p>
-                              <p>Dinner : {loc.dinner}</p>
-                            </Card>
-                          </Grid>
-                        </Grid>
-                      );
-                    })}
-                </Grid>
-              </Grid> */}
                   </Card>
+                  <Typography style={{ color: 'grey', marginTop: '2%' }}>
+                    *This food menu is currently being served on the residence and is subject to change in future.
+                  </Typography>
                 </Grid>
+
+                <Grid container>
+                  <Grid item>
+                    <h3>Neighbourhood</h3>
+                    <p style={{color: "grey"}}>Getting to Exeter House and popular hotspots nearby</p>
+                  </Grid>
+                  <Grid item style={{ height: '100vh', width: '100%', marginTop: '2%' }}>
+                    <Card style={{width: "100%", height: "100%"}}>
+                    <GoogleMapReact
+                      bootstrapURLKeys={{ key: '' }}
+                      defaultCenter={defaultProps.center}
+                      defaultZoom={defaultProps.zoom}
+                    >
+                      <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" />
+                    </GoogleMapReact>
+                    </Card>
+                  </Grid>
+                </Grid>
+
+                <div style={{ marginBottom: '5%' }}>
+                  <h3>Details of {property.locationCode} House</h3>
+                  <Typography sx={{ mt: 1 }}>
+                    It's not your typical PG in {property.locationCode} House by Coliving is your second home. We say
+                    that because this fully-furnished residence for females, like our other residences for Working
+                    Professionals near Madhapur, Ameerpet, and Miyapur, is thoughtfully designed to not let you miss
+                    home, hundreds of miles away from it. And the home-like comforts provided by our amenities like
+                    housekeeping, high-speed internet, and delicious meals go a long way in doing so. Another breath of
+                    fresh air is our tech-enabled living experience, courtesy of one-of-a-kind technology like the
+                    Coliving - Resident App, biometric security, use of machine learning, and more.
+                    <br />
+                    Despite the technology that you won't find in any other PG hostel, we still like to depend on
+                    old-school methods for real human connection. Your calendar here will be full - like it is in every
+                    Coliving <span style={{ color: 'rgb(96 195 173)' }}>PG near {property.locationCode}</span> and TCS
+                    Synergy Park - with movie screenings, game nights, and other community events and workshops where
+                    you can bond with your fellow residents and experience life as a member of the Coliving family.
+                    <br />
+                    We're also implementing every safety measure possible to protect you from COVID-19, from regular
+                    sanitization to thermal monitoring. After all, that's what family is for, isn't it? All this and
+                    more sets Exeter House apart from any{' '}
+                    <span style={{ color: 'rgb(96 195 173)' }}>Female PG with ac in {property.locationCode}</span>. But
+                    if you're still unsure, that's alright. In fact, we'd like you to drop by for a visit and see for
+                    yourself, what makes your second home, your second home.
+                    <br />
+                    Click to explore, a list of{' '}
+                    <span style={{ color: 'rgb(96 195 173)' }}>PG females in Hyderabad</span> or
+                    <span style={{ color: 'rgb(96 195 173)' }}> Co-ed PGs in Hyderabad</span>
+                  </Typography>
+
+                  <h4 style={{ marginTop: '2%' }}>Frequently Asked Questions</h4>
+                  <Typography sx={{ fontSize: '16px', fontWeight: 600, marginTop: '1%' }}>
+                    How Safe Will you be from COVID-19 in a Coliving Residence?
+                  </Typography>
+                  <Typography>
+                    Simply put, for COVID-19, we have a strict no-entry policy. Our ‘COVID-19 Combat Ready’ Operation
+                    Framework includes every measure possible, from social distancing in common areas to thermal
+                    monitoring, in order to keep you safe. Read more about our best-in-class safety measures{' '}
+                    <span style={{ color: 'rgb(96 195 173)' }}>here</span>.
+                  </Typography>
+                  <Typography sx={{ fontSize: '16px', fontWeight: 600, marginTop: '1%' }}>
+                    Are there any Entry-Exit restrictions in Coliving Residences?
+                  </Typography>
+                  <Typography>
+                    Simple. A local hostel or{' '}
+                    <span style={{ color: 'rgb(96 195 173)' }}>PG near {property.locationCode}</span> will never be more
+                    than a hostel or a PG. But Coliving will never be less than your second home. And that is the one
+                    difference that makes all the difference.
+                    {/* Check Stanza Living Residences in other parts of Hyderabad:
+                  <p style={{ color: 'rgb(96 195 173)' }}></p> */}
+                  </Typography>
+                  <Typography sx={{ fontSize: '16px', fontWeight: 600, marginTop: '1%' }}>
+                    What are the Steps Taken to Ensure Security in the Residences?
+                  </Typography>
+                  <Typography>
+                    Every single Coliving residence is equipped with our multi-tier, tech-enabled security system.
+                    Because when it comes to your safety, anything less is not safe enough.
+                  </Typography>
+                  <Typography sx={{ fontSize: '16px', fontWeight: 600, marginTop: '1%' }}>
+                    How Can I Book a Bed With Coliving?
+                  </Typography>
+                  <Typography>
+                    We love your enthusiasm, but we’d still recommend dropping by to see the residence for yourself
+                    before making it your second home. Till then, if you wish, you can reserve your bed for Rs. 1000
+                    (the link’s there on the right).
+                  </Typography>
+                </div>
               </Grid>
               <Grid item md={4} xs={12}>
-                <Typography sx={{ marginBottom: '4%', fontWeight: '500', fontSize: '18px', marginTop: '6%' }}>
+                <Typography sx={{ marginBottom: '4%', fontWeight: '600', fontSize: '18px', marginTop: '6%' }}>
                   Schedule a Visit
                 </Typography>
                 <Card
@@ -253,6 +327,7 @@ const SearchPropertyDetailPage = () => {
                         label="First Name"
                         variant="filled"
                         sx={{ input: { background: '#fff' }, borderRadius: '20px 20px' }}
+                        sx={{ input: { background: '#fff' }, borderRadius: '20px 20px' }}
                       />
                     </Grid>
                     <Grid item xs={6}>
@@ -262,8 +337,21 @@ const SearchPropertyDetailPage = () => {
                         variant="filled"
                         sx={{ input: { background: '#fff' }, borderRadius: '20px 20px' }}
                       />
+                      <TextField
+                        id="filled-basic"
+                        label="Last Name"
+                        variant="filled"
+                        sx={{ input: { background: '#fff' }, borderRadius: '20px 20px' }}
+                      />
                     </Grid>
                     <Grid item xs={10}>
+                      <TextField
+                        fullWidth
+                        label="Mobile Number"
+                        id="fullWidth"
+                        variant="filled"
+                        sx={{ input: { background: '#fff' }, borderRadius: '20px 20px' }}
+                      />
                       <TextField
                         fullWidth
                         label="Mobile Number"

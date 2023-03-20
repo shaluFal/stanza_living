@@ -39,7 +39,7 @@ export default function HomeDarkMode() {
       }}
     >
       <Container sx={{ position: 'relative', transform: 'matrix(1, 0, 0, -1, 0, 0) rotate(0deg)' }}>
-        <Grid container spacing={5} direction="row-reverse" justifyContent="space-between" sx={{paddingBottom: "175px"}}>
+        <Grid container spacing={4} direction="row-reverse" justifyContent="space-between" sx={{paddingBottom: "175px"}}>
           <Grid item xs={12} md={6} sx={{ position: 'relative' }}>
             <m.div sx={{ width: '30%' }}>
               <Image alt="light mode" src="images/room_2.jpg" style={{ width: '45%', marginLeft: '40%' }} />
@@ -57,18 +57,18 @@ export default function HomeDarkMode() {
               <Image alt="dark mode" src="images/room_1.jpg" />
             </Box>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={6} sx={{ textAlign: 'left' }}>
             <ContentStyle>
               <m.div>
-                <Typography variant='h3' sx={{ mb: 3, fontSize: '2rem', lineHeight: '44px', fontWeight: '700' }}>
+                <Typography variant='h3' sx={{ mb: 2, fontSize: '3rem', lineHeight: '44px', fontWeight: '700' }}>
                   Step into a room that has <br/><span style={{ color: 'rgb(96 195 173)' }}>room for everything</span>
                 </Typography>
               </m.div>
 
               <m.div>
-                <Typography sx={{ color: 'black', mb: 5 }}>
-                  Your clothes and bag will not be fighting for space on the same chair. At Coliving, there's ample room
-                  for all your possessions. Even a framed photo of your family, for the rare occasions you miss home
+                <Typography sx={{ color: 'black', fontSize: "1.2rem" }}>
+                  Your clothes and bag will not be fighting for space<br/> on the same chair. At Coliving, there's ample<br/> room
+                  for all your possessions. Even a framed photo<br/> of your family, for the rare occasions you miss home
                 </Typography>
               </m.div>
             </ContentStyle>

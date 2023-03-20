@@ -97,12 +97,12 @@ export default function HomeHugePackElements() {
             </Grid>
 
             <Grid item xs={12} md={6} sx={{ textAlign: 'left', marginTop: '100px', maxWidth: '475px' }}>
-              <Typography variant='h3' sx={{ fontSize: '2rem', lineHeight: '44px', fontWeight: '700' }}>
+              <Typography variant='h3' sx={{ fontSize: '3rem', lineHeight: '44px', fontWeight: '700' }}>
                 Take your daily list of   <br />chores. And
                from <span style={{ color: 'rgb(96 195 173)', textAlign: 'left' }}>tear it up</span>
               </Typography>
-              <Typography sx={{ fontSize: '1rem', lineHeight: '26px', marginTop: '16px' }}>
-                You have better things to do than wash your clothes, clean up your room and cook your meals. So our team
+              <Typography sx={{ fontSize: '1.2rem', lineHeight: '26px', marginTop: '16px' }}>
+                You have better things to do than wash your clothes,<br/> clean up your room and cook your meals. So our <br/>team
                 of pros will do them all for you.
               </Typography>
             </Grid>

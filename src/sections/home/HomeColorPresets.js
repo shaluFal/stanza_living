@@ -87,13 +87,13 @@ export default function HomeColorPresets() {
             </Grid>
           </Grid>
           <Grid item xs={12} md={6} sx={{ textAlign: 'left', marginTop: '100px', maxWidth: '475px' }}>
-            <Typography variant="h3" sx={{ fontSize: '2rem', lineHeight: '44px', fontWeight: '700' }}>
+            <Typography variant="h3" sx={{ fontSize: '3rem', lineHeight: '44px', fontWeight: '700', mb: 1 }}>
               Start living your best life
               <br /> from <span style={{ color: 'rgb(96 195 173)', textAlign: 'left' }}>day one</span>
             </Typography>
-            <Typography variant="p" sx={{ fontSize: '1rem', lineHeight: '26px', marginTop: '10px' }}>
-              Bring a box full of hopes, dreams, ambitions… and of course, your personal belongings. Everything else -
-              furniture, appliances, food - has already been taken care of.
+            <Typography variant="p" sx={{ fontSize: '1.2rem', lineHeight: '26px', marginTop: '10px' }}>
+              Bring a box full of hopes, dreams, ambitions… and <br/>of course, your personal belongings. Everything else <br/>-
+              furniture, appliances, food - has already been <br/> taken care of.
             </Typography>
           </Grid>
         </Grid>

@@ -119,17 +119,17 @@ export default function AboutWhat() {
                   <Tab
                     label="The Why"
                     {...a11yProps(0)}
-                    sx={{ marginLeft: { md: '18%' }, marginRight: { md: '10%' } }}
+                    sx={{ marginLeft: { md: '18%' }, marginRight: { md: '10%' }, fontSize: "18px", fontWeight: 600 }}
                   />
                   <Tab
                     label="The What"
                     {...a11yProps(1)}
-                    sx={{ marginLeft: { md: '10%' }, marginRight: { md: '10%' } }}
+                    sx={{ marginLeft: { md: '10%' }, marginRight: { md: '10%' } , fontSize: "18px", fontWeight: 600}}
                   />
                   <Tab
                     label="The How"
                     {...a11yProps(2)}
-                    sx={{ marginLeft: { md: '10%' }, marginRight: { md: '10%' } }}
+                    sx={{ marginLeft: { md: '10%' }, marginRight: { md: '10%' }, fontSize: "18px", fontWeight: 600 }}
                   />
                 </Tabs>
               </Card>
@@ -149,7 +149,7 @@ export default function AboutWhat() {
                     <Typography
                       sx={{
                         color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'common.white'),
-                        fontSize: '1rem',
+                        fontSize: '1.1rem',
                         fontWeight: '500',
                       }}
                     >
@@ -212,7 +212,7 @@ export default function AboutWhat() {
                     <Typography
                       sx={{
                         color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'common.white'),
-                        fontSize: '1rem',
+                        fontSize: '1.1rem',
                         fontWeight: '500',
                       }}
                     >
@@ -230,7 +230,7 @@ export default function AboutWhat() {
                   You moved to a new city, <br />
                   <span style={{ color: 'rgb(96 195 173)' }}>so we moved there too</span>
                 </Typography>
-                <Typography sx={{ textAlign: 'center', marginTop: '5px', fontWeight: '500' }}>
+                <Typography sx={{ textAlign: 'center', marginTop: '5px', fontWeight: '500', fontSize: "1.1rem" }}>
                   Today, we've come a long way - from the two residences in Delhi to an <br />
                   impressive 450+ residences in more than 24+ cities across the country, and <br /> we promise we'll
                   soon be ready to welcome you in many more.

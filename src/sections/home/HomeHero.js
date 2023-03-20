@@ -147,7 +147,7 @@ export default function HomeHero() {
                   <Grid item>
                     <Card>
                       <Typography
-                        sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700', fontSize: '18px' }}
+                        sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700', fontSize: '20px' }}
                       >
                         Modern Student
                         <br /> Housing
@@ -160,7 +160,7 @@ export default function HomeHero() {
                   <Grid item>
                     <Card>
                       <Typography
-                        sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700', fontSize: '18px' }}
+                        sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700', fontSize: '20px' }}
                       >
                         Co-living <br /> Professionals
                       </Typography>
@@ -172,7 +172,7 @@ export default function HomeHero() {
                   <Grid item>
                     <Card>
                       <Typography
-                        sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700', fontSize: '18px' }}
+                        sx={{ position: 'absolute', top: '5%', left: '2%', fontWeight: '700', fontSize: '20px' }}
                       >
                         Managed <br /> Apartments
                       </Typography>
@@ -190,7 +190,7 @@ export default function HomeHero() {
               container
               sx={{
                 position: 'absolute',
-                top: { md: '40%', xs: '25%', lg: '40%' },
+                top: { md: '40%', xs: '23%', lg: '40%' },
                 padding: '2%',
                 borderRadius: '10px 0px 0px 10px',
               }}
@@ -202,7 +202,7 @@ export default function HomeHero() {
                       ...baseStyles,
                       borderRadius: '10px 0px 0px 10px',
                       padding: '12px',
-                      fontSize: '14px',
+                      fontSize: '16px',
                       fontWeight: '500',
                     }),
                   }}
@@ -222,7 +222,7 @@ export default function HomeHero() {
                       ...baseStyles,
                       borderRadius: '0px 10px 10px 0px',
                       padding: '12px',
-                      fontSize: '14px',
+                      fontSize: '16px',
                       fontWeight: '500',
                     }),
                   }}
@@ -235,7 +235,7 @@ export default function HomeHero() {
                   })}
                   onChange={(data) => {
                     // handleModalClose();
-                    navigate(`/contact-us/${data.value}/`);
+                    navigate(`/search-property/${data.value}/`);
                   }}
                   components={{
                     DropdownIndicator: () => (
@@ -317,7 +317,7 @@ export default function HomeHero() {
               </Grid>
             </Grid>
             {/* </Box> */}
-            <Divider style={{ color: '#fff' }} />
+            <Divider style={{ color: '#fff', paddingBottom: "5px" }} />
           </m.div>
         </Grid>
       </Grid>
