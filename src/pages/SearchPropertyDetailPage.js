@@ -59,8 +59,7 @@ const SearchPropertyDetailPage = () => {
         sx={{
           display: 'flex',
           justifyContent: 'center',
-          marginTop: { xs: '10%', md: '4%' },
-          marginTop: { xs: '10%', md: '4%' },
+          marginTop: { xs: '10%', md: '4%' }
         }}
       >
         <Grid item xs={12} md={10}>
@@ -228,8 +227,8 @@ const SearchPropertyDetailPage = () => {
                     <h3>Neighbourhood</h3>
                     <p style={{color: "grey"}}>Getting to Exeter House and popular hotspots nearby</p>
                   </Grid>
-                  <Grid item style={{ height: '100vh', width: '100%', marginTop: '2%' }}>
-                    <Card style={{width: "100%", height: "100%"}}>
+                  <Grid item xs={12}>
+                    <Card style={{ height: '50vh', width: '95%', marginTop: '2%' }}>
                     <GoogleMapReact
                       bootstrapURLKeys={{ key: '' }}
                       defaultCenter={defaultProps.center}
@@ -241,7 +240,7 @@ const SearchPropertyDetailPage = () => {
                   </Grid>
                 </Grid>
 
-                <div style={{ marginBottom: '5%' }}>
+                <div style={{ marginBottom: '5%', marginTop: "4%" }}>
                   <h3>Details of {property.locationCode} House</h3>
                   <Typography sx={{ mt: 1 }}>
                     It's not your typical PG in {property.locationCode} House by Coliving is your second home. We say
@@ -326,7 +325,6 @@ const SearchPropertyDetailPage = () => {
                         id="filled-basic"
                         label="First Name"
                         variant="filled"
-                        sx={{ input: { background: '#fff' }, borderRadius: '20px 20px' }}
                         sx={{ input: { background: '#fff' }, borderRadius: '20px 20px' }}
                       />
                     </Grid>
