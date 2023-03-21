@@ -102,8 +102,8 @@ const leftIcon = (customIcon, isRTL) => (
   <Iconify
     icon={customIcon || 'eva:arrow-right-fill'}
     sx={{
-      width: 20,
-      height: 20,
+      width: 60,
+      height: 60,
       transform: ' scaleX(-1)',
       ...(isRTL && { transform: ' scaleX(1)' }),
     }}
@@ -114,8 +114,8 @@ const rightIcon = (customIcon, isRTL) => (
   <Iconify
     icon={customIcon || 'eva:arrow-right-fill'}
     sx={{
-      width: 20,
-      height: 20,
+      width: 60,
+      height: 60,
       ...(isRTL && { transform: ' scaleX(-1)' }),
     }}
   />

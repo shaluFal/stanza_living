@@ -47,7 +47,7 @@ export default function HomeCleanInterfaces() {
 
         {/* </ContentStyle> */}
 
-        <Grid container spacing={7}>
+        <Grid container spacing={15}>
           <Grid item xs={12} md={6}>
             <Grid container spacing={2}>
               <Grid item xs={6}>

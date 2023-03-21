@@ -67,7 +67,7 @@ export default function HomeColorPresets() {
           </Typography>
         </m.div>
 
-        <Grid container spacing={5} sx={{ paddingTop: '100px' }}>
+        <Grid container spacing={15} sx={{ paddingTop: '100px' }}>
           <Grid item xs={12} md={6}>
             <Grid container spacing={2}>
               <Grid item xs={6}>

@@ -70,6 +70,26 @@ export default function AppCarousel({ list, ...other }) {
             //  <p>{ app.photoURL}</p>
           ))}
         </Slider>
+
+        <CarouselArrows
+        onNext={handleNext}
+        onPrevious={handlePrevious}
+        spacing={0}
+        sx={{
+          top: {md: 500, xs: 100},
+          right: 0,
+          left: 0,
+          position: 'absolute',
+          '& .arrow': {
+            p: 0,
+            width: {xs: 150, md: 400},
+            height: 100,
+            opacity: 0.5,
+            color: 'common.white',
+            '&:hover': { color: 'common.white', opacity: 2 },
+          },
+        }}
+      />
       </Card>
     </>
   );

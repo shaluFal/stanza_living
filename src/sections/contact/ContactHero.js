@@ -33,7 +33,13 @@ import {
   Radio,
   RadioGroup,
   Select,
+  Alert,
+  AlertTitle,
+  Stack,
 } from '@mui/material';
+// import Alert from '@mui/material/Alert';
+// import AlertTitle from '@mui/material/AlertTitle';
+// import Stack from '@mui/material/Stack';
 import { FormLabel } from 'react-bootstrap';
 import axios from 'axios';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -51,6 +57,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import TuneIcon from '@mui/icons-material/Tune';
 import _ from 'lodash';
+import AppCarousel from '../@dashboard/general/app/AppCarousel';
 import { _appFeatured } from '../../_mock';
 import useResponsive from '../../hooks/useResponsive';
 import { TextAnimate, MotionContainer, varFade } from '../../components/animate';
@@ -92,6 +99,19 @@ const style = {
   borderRadius: '10px 10px',
   boxShadow: 24,
   p: 4,
+};
+
+const stylePic = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: {xs: 350, md: 900},
+  bgcolor: 'background.paper',
+  borderRadius: '10px 10px',
+  border: 'none',
+  boxShadow: 24,
+  p: 2,
 };
 
 const PrettoSlider = styled(Slider)({
@@ -168,27 +188,31 @@ export default function ContactHero() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd')
-      .then((response) => {
-        setLocations(response.data?.listOfLocations);
-        setLocation(response.data?.listOfLocations);
-        // setLocations(lcsData);
-        // setLocation(lcsData);
-        // setPropertyData(pcsData);
-        // setAllData(pcsData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    //   API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd')
+    //     .then((response) => {
+    //       setLocations(response.data?.listOfLocations);
+    //       setLocation(response.data?.listOfLocations);
+    setLocations(lcsData);
+    setLocation(lcsData);
+    setPropertyData(pcsData);
+    setAllData(pcsData);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
   }, []);
 
   const [locationid, setLocationId] = useState();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [openPic, setPic] = useState(false);
+  const handleOpenPic = () => setPic(true);
+  const handleClosePic = () => setPic(false);
+
   const [openModal, setOpenModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  // const [open, setOpen] = useState(false);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const isDesktop = useResponsive('up', 'md');
   const checkboxLabel = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -217,11 +241,11 @@ export default function ContactHero() {
     }
   }, []);
 
-  useEffect(() => {
-    getAllLocations();
-    const locationid = window.location.pathname.split('/')[3];
-    // console.log('rrrrrrrrrr', locationid);
-  }, [getAllLocations, locationid]);
+  // useEffect(() => {
+  //   getAllLocations();
+  //   const locationid = window.location.pathname.split('/')[3];
+  //   // console.log('rrrrrrrrrr', locationid);
+  // }, [getAllLocations, locationid]);
 
   const defaultProps = {
     center: {
@@ -342,9 +366,12 @@ export default function ContactHero() {
       }
 
       case 'Gender': {
-        if (!currentFilter[type]) currentFilter[type] = 'Male';
+        // if (!currentFilter[type]) currentFilter[type] = 'Male';
 
-        currentFilter[type] = value;
+        if (currentFilter[type] === value) {
+          currentFilter[type] = null;
+        } else currentFilter[type] = value;
+
         setFilter(currentFilter);
         break;
       }
@@ -571,7 +598,8 @@ export default function ContactHero() {
                           </div>
                           {locations
                             ?.filter((ft) => String(ft.value).toLowerCase()?.includes(String(srcLoc).toLowerCase()))
-                            .map((item) => (
+                            .map((item, index) => (
+                              // <div key={index}>
                               <StyledBreadcrumb
                                 style={{
                                   border: '1px solid grey',
@@ -584,6 +612,7 @@ export default function ContactHero() {
                                 label={item.value}
                                 onClick={() => handleFilter('Locality', item)}
                               />
+                              // </div>
                             ))}
                           <hr />
                           <div
@@ -745,19 +774,21 @@ export default function ContactHero() {
                               label: 'Double Occupancy',
                               value: 'Double Occupancy',
                             },
-                          ]?.map((item) => (
-                            <StyledBreadcrumb
-                              style={{
-                                border: '1px solid grey',
-                                padding: '15px',
-                                margin: '10px',
-                                background: filter?.Occupancy === item.label ? 'red' : 'white',
-                              }}
-                              component="a"
-                              href="#"
-                              label={item.value}
-                              onClick={() => handleFilter('Occupancy', item.label)}
-                            />
+                          ]?.map((item, index) => (
+                            <div key={index}>
+                              <StyledBreadcrumb
+                                style={{
+                                  border: '1px solid grey',
+                                  padding: '15px',
+                                  margin: '10px',
+                                  background: filter?.Occupancy === item.label ? 'red' : 'white',
+                                }}
+                                component="a"
+                                href="#"
+                                label={item.value}
+                                onClick={() => handleFilter('Occupancy', item.label)}
+                              />
+                            </div>
                           ))}
                           <hr />
                           <div
@@ -1007,80 +1038,6 @@ export default function ContactHero() {
                     </div>
 
                     <span style={{ margin: '20px' }}> | </span>
-                    {/* <div>
-                      <Button
-                        variant="outlined"
-                        sx={{
-                          color: 'rgb(41, 45, 50)',
-                          fontWeight: '400',
-                          borderRadius: '40px',
-                          padding: '10px 20px',
-                          margin: '5px',
-                          border: '1px solid rgb(232, 232, 232)',
-                          fontSize: '13px',
-                        }}
-                        // onClick={filterHandleOpen}
-                      >
-                        My Wishlist
-                      </Button>
-                    </div>
-                    <div>
-                      <Button
-                        variant="outlined"
-                        sx={{
-                          color: 'rgb(41, 45, 50)',
-                          fontWeight: '400',
-                          borderRadius: '40px',
-                          padding: '10px 20px',
-                          margin: '5px',
-                          border: '1px solid rgb(232, 232, 232)',
-                          fontSize: '13px',
-                        }}
-                        onClick={filterHandleOpen}
-                      >
-                        <TuneRoundedIcon />
-                        &nbsp; More Filters
-                      </Button>
-                      <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-                        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-                          Filters
-                        </BootstrapDialogTitle>
-                        <hr />
-                        <DialogContent dividers>
-                          <Typography sx={{ p: 2 }}>Select Range: </Typography>
-                          {locations?.map((item) => (
-                            <StyledBreadcrumb
-                              style={{ border: '1px solid grey', padding: '15px', margin: '10px' }}
-                              component="a"
-                              href="#"
-                              label={item.value}
-                            />
-                          ))}
-                        </DialogContent>
-                        <hr />
-                        <DialogActions>
-                          <Button
-                            style={{
-                              textDecoration: 'underline',
-                              fontWeight: '100',
-                              color: 'black',
-                              padding: '0px 20px',
-                            }}
-                            autoFocus
-                            onClick={handleClose}
-                          >
-                            Clear
-                          </Button>
-                          <Button
-                            autoFocus
-                            onClick={handleClose}
-                            style={{ background: '#00AB55', color: 'white', padding: '15px' }}
-                          >
-                            Save
-                          </Button>
-                        </DialogActions>
-                      </BootstrapDialog>
-                    </div> */}
 
                     <div>
                       <Button
@@ -1122,52 +1079,27 @@ export default function ContactHero() {
                         >
                           <div style={{ marginBottom: '15px', display: 'grid' }}>
                             <Button
-                              onClick={() => {
+                              onClick={(e) => {
                                 let dd = [...propertyData];
                                 dd = _.sortBy(dd, 'rentMonthly');
 
                                 setPropertyData(dd);
+                                handleFilterTypes(e, 'Popularity');
                               }}
                             >
                               Price: Low to High
                             </Button>
                             <Button
-                              onClick={() => {
+                              onClick={(e) => {
                                 let dd = [...propertyData];
                                 dd = _.sortBy(dd, 'rentMonthly').reverse();
                                 setPropertyData(dd);
+                                handleFilterTypes(e, 'Popularity');
                               }}
                             >
                               Price: High to Low
                             </Button>
-                            {/* <Button>Sort By: Popularity</Button> */}
                           </div>
-                          {/* <hr />
-                          <div
-                            style={{
-                              display: 'flex',
-                              justifyContent: 'end',
-                              alignItems: 'center',
-                              padding: '15px 10px',
-                            }}
-                          >
-                            <Button
-                              style={{
-                                textDecoration: 'underline',
-                                fontWeight: '100',
-                                color: 'black',
-                                padding: '0px 40px',
-                              }}
-                            >
-                              Clear
-                            </Button>
-                            <Button
-                              style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}
-                              onClick={(e) => handleFilterTypes(e, 'Popularity')}
-                            >
-                              Save
-                            </Button>
-                          </div> */}
                         </div>
                       </Popover>
                     </div>
@@ -1176,46 +1108,6 @@ export default function ContactHero() {
               </Grid>
             ) : (
               <Grid container>
-                {/* <Grid item xs={3}>
-                  <div>
-                    <Button
-                      variant="outlined"
-                      sx={{
-                        color: 'rgb(41, 45, 50)',
-                        fontWeight: '400',
-                        borderRadius: '40px',
-                        padding: '7px 12px',
-                        margin: '5px',
-                        border: '1px solid rgb(232, 232, 232)',
-                        fontSize: '11px',
-                      }}
-                      // onClick={filterHandleOpen}
-                    >
-                      My Wishlist
-                    </Button>
-                  </div>
-                </Grid>
-
-                <Grid item xs={4}>
-                  <div>
-                    <Button
-                      variant="outlined"
-                      sx={{
-                        color: 'rgb(41, 45, 50)',
-                        fontWeight: '400',
-                        borderRadius: '40px',
-                        padding: '5px 10px',
-                        margin: '5px',
-                        border: '1px solid rgb(232, 232, 232)',
-                        fontSize: '10px',
-                      }}
-                      onClick={(e) => handleFilterTypes(e, 'Popularity')}
-                    >
-                      <TuneRoundedIcon />
-                      &nbsp; More Filters
-                    </Button>
-                  </div>
-                </Grid> */}
                 <Grid item xs={5}>
                   <div>
                     <Button
@@ -1273,44 +1165,15 @@ export default function ContactHero() {
                           >
                             Price: High to Low
                           </Button>
-                          {/* <Button>Sort By: Popularity</Button> */}
                         </div>
-                        {/* <hr />
-                        <div
-                          style={{
-                            display: 'flex',
-                            justifyContent: 'end',
-                            alignItems: 'center',
-                            padding: '15px 10px',
-                          }}
-                        >
-                          <Button
-                            style={{
-                              textDecoration: 'underline',
-                              fontWeight: '100',
-                              color: 'black',
-                              padding: '0px 40px',
-                            }}
-                          >
-                            Clear
-                          </Button>
-                          <Button style={{ background: '#00AB55', color: 'white', padding: '10px 30px' }}>Save</Button>
-                        </div> */}
                       </div>
                     </Popover>
                   </div>
                 </Grid>
               </Grid>
             )}
-
-            {/* <h4 style={{marginTop: "2%", height: "100%"}}>&nbsp; | &nbsp;</h4> */}
           </m.div>
 
-          {/* <m.div>
-            <Typography sx={{ marginTop: '2%', paddingLeft: '2%', fontWeight: '500' }}>
-              Coliving/PG in Hyderabad
-            </Typography>
-          </m.div> */}
           <m.div>
             <Grid container spacing={2}>
               <Grid item md={8}>
@@ -1320,12 +1183,11 @@ export default function ContactHero() {
                   {propertyData?.length} PGs waiting to be yours in Hyderabad
                 </Typography>
 
-                {propertyData &&
-                  propertyData?.length > 0 &&
-                  propertyData.map((loc) => {
+                {propertyData && propertyData?.length > 0 ? (
+                  propertyData.map((loc, index) => {
                     return (
-                      <div key={loc.facilityCode}>
-                        <Card sx={{ padding: '3%', marginBottom: '4%', textDecoration: 'none' }}>
+                      <div key={index}>
+                        <Card sx={{ padding: '1.5%', marginBottom: '4%', textDecoration: 'none' }}>
                           <Grid container spacing={2}>
                             <Grid
                               item
@@ -1334,6 +1196,7 @@ export default function ContactHero() {
                               style={{
                                 overflow: 'hidden',
                               }}
+                              onClick={handleOpenPic}
                             >
                               {loc.listOfFacilityImages?.length > 0 ? (
                                 <img
@@ -1377,7 +1240,9 @@ export default function ContactHero() {
                                   </Link>
                                 </Typography>
 
-                                <Typography style={{ fontSize: '14px', color: 'grey', fontWeight: '600' }}>
+                                <Typography
+                                  style={{ fontSize: '16px', color: 'grey', fontWeight: '600', marginTop: '2px' }}
+                                >
                                   {' '}
                                   {loc.locationCode}{' '}
                                 </Typography>
@@ -1385,32 +1250,43 @@ export default function ContactHero() {
                                 <Grid container sx={{ marginTop: '2%' }}>
                                   <Grid item xs={8} md={8} sx={{ display: 'flex' }}>
                                     {loc.listOfUnitTypes &&
-                                      loc.listOfUnitTypes.map((typ) => {
+                                      loc.listOfUnitTypes.map((typ, index) => {
                                         return (
-                                          <div key={typ.facilityCode} style={{ fontSize: '16px', fontWeight: '500' }}>
+                                          <div key={index} style={{ fontSize: '16px', fontWeight: '500' }}>
                                             {typ.unitType} &nbsp;
                                           </div>
                                         );
                                       })}
                                   </Grid>
-                                  <Grid item xs={4} md={4} sx={{display: "flex",fontSize: '15px', fontWeight: '500', color: '#00AB55'}}>
+                                  <Grid
+                                    item
+                                    xs={4}
+                                    md={4}
+                                    sx={{ display: 'flex', fontSize: '16px', fontWeight: '500', color: '#00AB55', textDecoration: "none" }}
+                                  >
                                     <Typography>
-                                      <DirectionsOutlinedIcon sx={{fontSize: "15px"}}/> View Directions
+                                     <Link to={`/search-property-detail/${loc.facilityCode}`}  style={{
+                                      color: '#00AB55', textDecoration: "none"
+                                     }}>
+                                     <DirectionsOutlinedIcon sx={{ fontSize: '16px'}} /> View Directions
+                                     </Link>
                                     </Typography>
                                   </Grid>
                                 </Grid>
 
                                 <Grid container sx={{ marginTop: '2%' }} spacing={1}>
                                   <Grid item xs={12}>
-                                    <Typography sx={{ color: 'rgb(125, 125, 125)', fontWeight: '400' }}>
+                                    <Typography
+                                      sx={{ color: 'rgb(125, 125, 125)', fontWeight: '400', fontSize: '16px' }}
+                                    >
                                       Amenities: &nbsp;{' '}
                                     </Typography>
                                   </Grid>
 
                                   {loc.facilityAmenities?.length > 0 &&
-                                    loc.facilityAmenities[0].amenityNames?.split(',').map((amn) => {
+                                    loc.facilityAmenities[0].amenityNames?.split(',').map((amn, index) => {
                                       return (
-                                        <div key={amn.facilityCode}>
+                                        <div key={index}>
                                           <Grid item sx={{ marginRight: '10px', marginTop: '5px' }}>
                                             <Card
                                               sx={{
@@ -1428,18 +1304,22 @@ export default function ContactHero() {
                                 </Grid>
 
                                 <Grid container sx={{ marginTop: '4%' }} spacing={1}>
-                                  <Grid item xs={6}>
+                                  <Grid item xs={12} md={6}>
                                     <Typography sx={{ display: 'flex', fontSize: '16px' }}>
-                                      <span style={{ color: 'rgb(125, 125, 125)', fontWeight: '400' }}>
+                                      <span
+                                        style={{ color: 'rgb(125, 125, 125)', fontWeight: '400', fontSize: '16px' }}
+                                      >
                                         Available: &nbsp;
                                       </span>{' '}
                                       &nbsp; <KingBedOutlinedIcon sx={{ fontSize: '28px', color: '#00AB55' }} />
                                       &nbsp; {loc.available} Beds available
                                     </Typography>
                                   </Grid>
-                                  <Grid item xs={6}>
-                                    <Typography sx={{ display: 'flex', fontSize: '16px', paddingLeft: '60px' }}>
-                                      <span style={{ color: 'rgb(125, 125, 125)', fontWeight: '400' }}>
+                                  <Grid item xs={12} md={6}>
+                                    <Typography sx={{ display: 'flex', fontSize: '16px', paddingLeft: { md: '15px' } }}>
+                                      <span
+                                        style={{ color: 'rgb(125, 125, 125)', fontWeight: '400', fontSize: '16px' }}
+                                      >
                                         Contact Us: &nbsp;
                                       </span>{' '}
                                       <CallIcon sx={{ color: '#00AB55' }} />
@@ -1448,32 +1328,7 @@ export default function ContactHero() {
                                   </Grid>
                                 </Grid>
 
-                                {/* <Grid container sx={{ marginTop: '2%' }} spacing={1}>
-                                  <Grid item xs={12}>
-                                    <Typography sx={{ color: 'rgb(125, 125, 125)', fontWeight: '400' }}>
-                                      Contact No: &nbsp;{' '}
-                                    </Typography>
-                                  </Grid>
-                                  <Grid item>
-                                    <Typography sx={{ display: 'flex', fontSize: '16px' }}>+91 9876543212</Typography>
-                                  </Grid>
-                                </Grid> */}
-
-                                {/* <Grid container sx={{ marginTop: '2%' }} spacing={1}>
-                                  <Grid item xs={12}>
-                                    <Typography sx={{ color: 'rgb(125, 125, 125)', fontWeight: '400' }}>
-                                      Support: &nbsp;{' '}
-                                    </Typography>
-                                  </Grid>
-                                  <Grid item>
-                                    <Typography sx={{ display: 'flex', fontSize: '16px' }}>
-                                      <SupportAgentIcon sx={{ fontSize: '28px', color: '#00AB55' }} />
-                                      &nbsp;
-                                    </Typography>
-                                  </Grid>
-                                </Grid> */}
-
-                                <Grid container spacing={2} sx={{ marginTop: '4%' }}>
+                                <Grid container spacing={2} sx={{ marginTop: '2.5%' }}>
                                   <Grid item xs={12} lg={4} md={12}>
                                     <Box sx={{ mb: 5 }}>
                                       <Typography
@@ -1536,7 +1391,15 @@ export default function ContactHero() {
                         </Card>
                       </div>
                     );
-                  })}
+                  })
+                ) : (
+                  <Stack sx={{ width: '100%' }} spacing={2}>
+                    <Alert severity="error">
+                      <AlertTitle>Error</AlertTitle>
+                      There are no matching properties with that filter— <strong>Please try to change the filter!</strong>
+                    </Alert>
+                  </Stack>
+                )}
               </Grid>
               <Grid item md={4} style={{ height: '100vh', width: '100%', marginTop: '6.5%' }}>
                 <GoogleMapReact
@@ -1559,13 +1422,6 @@ export default function ContactHero() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {/* <Typography id="modal-modal-title" variant="h6" component="h2">
-      Text in a modal
-    </Typography>
-    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-      Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-    </Typography> */}
-          {/* <Grid item md={4} xs={12}> */}
           <Typography sx={{ marginBottom: '5%', fontWeight: '700', fontSize: '18px', marginTop: '6%' }}>
             Schedule a Visit
           </Typography>
@@ -1681,6 +1537,29 @@ export default function ContactHero() {
             Schedule a Visit
           </Button>
           {/* </Grid> */}
+        </Box>
+      </Modal>
+
+      {/* Image gallery modal */}
+      <Modal
+        open={openPic}
+        onClose={handleClosePic}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={stylePic}>
+          {propertyData &&
+            propertyData.slice(0, 1).map((loc, index) => {
+              return (
+                <div key={index}>
+                  <Grid container sx={{ marginTop: '20px' }}>
+                    <Grid item xs={12}>
+                      {loc.listOfFacilityImages?.length > 0 ? <AppCarousel list={loc.listOfFacilityImages} /> : <></>}
+                    </Grid>
+                  </Grid>
+                </div>
+              );
+            })}
         </Box>
       </Modal>
     </>

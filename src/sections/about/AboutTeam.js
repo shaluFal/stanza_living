@@ -70,6 +70,7 @@ export default function AboutTeam() {
           sx={{
             mx: 'auto',
             maxWidth: 630,
+            fontSize: "1.2rem",
             color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'common.white'),
           }}
         >

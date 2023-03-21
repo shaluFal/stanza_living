@@ -113,6 +113,7 @@ export default function MainHeader() {
             alignItems: 'center',
             justifyContent: 'space-between',
             width: '90%',
+            fontSize: "18px"
           }}
         >
           <Logo />
@@ -125,10 +126,6 @@ export default function MainHeader() {
 
           <Box sx={{ flexGrow: 1 }} />
 
-          {/* <m.div> */}
-          {/* {isDesktop && (
-
-)} */}
           {!isHome && isDesktop && (
             <Box sx={{ width: '40%', paddingRight: '5%', marginLeft: '10px' }}>
               <Grid

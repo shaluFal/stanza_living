@@ -182,7 +182,7 @@ const SearchPropertyDetailPage = () => {
                       Food Menu:
                     </Typography>
                   </Grid>
-                  <Card sx={{ padding: '4%', width: '100%', background: '#60c3ad1f', marginBottom: '2%' }}>
+                  <Card sx={{ padding: '4%', width: '90%', background: '#60c3ad1f', marginBottom: '2%' }}>
                     {property.listOfFoodItems &&
                       property.listOfFoodItems.map((loc, index) => {
                         return (
@@ -335,21 +335,8 @@ const SearchPropertyDetailPage = () => {
                         variant="filled"
                         sx={{ input: { background: '#fff' }, borderRadius: '20px 20px' }}
                       />
-                      <TextField
-                        id="filled-basic"
-                        label="Last Name"
-                        variant="filled"
-                        sx={{ input: { background: '#fff' }, borderRadius: '20px 20px' }}
-                      />
                     </Grid>
                     <Grid item xs={10}>
-                      <TextField
-                        fullWidth
-                        label="Mobile Number"
-                        id="fullWidth"
-                        variant="filled"
-                        sx={{ input: { background: '#fff' }, borderRadius: '20px 20px' }}
-                      />
                       <TextField
                         fullWidth
                         label="Mobile Number"

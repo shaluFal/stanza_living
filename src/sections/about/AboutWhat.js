@@ -589,7 +589,7 @@ export default function AboutWhat() {
                           <Typography
                             sx={{
                               color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'common.white'),
-                              fontSize: '1rem',
+                              fontSize: '1.2rem',
                             }}
                           >
                             The sofa in the lounge will make you see your bestie and you arguing about whose day was
@@ -674,7 +674,7 @@ export default function AboutWhat() {
                           <Typography
                             sx={{
                               color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'common.white'),
-                              fontSize: '1rem',
+                              fontSize: '1.2rem',
                             }}
                           >
                             From something as apparent as the number of drawers in your wardrobe, to something as
@@ -729,6 +729,7 @@ export default function AboutWhat() {
                         <m.div variants={varFade().inRight}>
                           <Typography
                             sx={{
+                              fontSize: "1.2rem",
                               color: (theme) => (theme.palette.mode === 'light' ? 'text.secondary' : 'common.white'),
                             }}
                           >
