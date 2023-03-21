@@ -188,18 +188,18 @@ export default function ContactHero() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    //   API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd')
-    //     .then((response) => {
-    //       setLocations(response.data?.listOfLocations);
-    //       setLocation(response.data?.listOfLocations);
-    setLocations(lcsData);
-    setLocation(lcsData);
-    setPropertyData(pcsData);
-    setAllData(pcsData);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
+      API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd')
+        .then((response) => {
+          setLocations(response.data?.listOfLocations);
+          setLocation(response.data?.listOfLocations);
+    // setLocations(lcsData);
+    // setLocation(lcsData);
+    // setPropertyData(pcsData);
+    // setAllData(pcsData);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   }, []);
 
   const [locationid, setLocationId] = useState();
@@ -241,11 +241,11 @@ export default function ContactHero() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   getAllLocations();
-  //   const locationid = window.location.pathname.split('/')[3];
-  //   // console.log('rrrrrrrrrr', locationid);
-  // }, [getAllLocations, locationid]);
+  useEffect(() => {
+    getAllLocations();
+    const locationid = window.location.pathname.split('/')[3];
+    // console.log('rrrrrrrrrr', locationid);
+  }, [getAllLocations, locationid]);
 
   const defaultProps = {
     center: {
