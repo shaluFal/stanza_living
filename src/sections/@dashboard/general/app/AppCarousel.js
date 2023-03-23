@@ -72,24 +72,27 @@ export default function AppCarousel({ list, ...other }) {
         </Slider>
 
         <CarouselArrows
-        onNext={handleNext}
-        onPrevious={handlePrevious}
-        spacing={0}
-        sx={{
-          top: {md: 500, xs: 100},
-          right: 0,
-          left: 0,
-          position: 'absolute',
-          '& .arrow': {
-            p: 0,
-            width: {xs: 150, md: 400},
-            height: 100,
-            opacity: 0.5,
-            color: 'common.white',
-            '&:hover': { color: 'common.white', opacity: 2 },
-          },
-        }}
-      />
+          onNext={handleNext}
+          onPrevious={handlePrevious}
+          spacing={32}
+          sx={{
+            // top: {md: 400, xs: 100},
+            bottom: 25,
+            left: {md: 50},
+            right: {md: 50},
+            position: 'absolute',
+            '& .arrow': {
+             
+             
+              p: 0,
+              width: { xs: 30, md: 200 },
+              // height: 100,
+              opacity: 0.5,
+              color: 'common.grey',
+              '&:hover': { color: 'common.grey', opacity: 2 },
+            },
+          }}
+        />
       </Card>
     </>
   );
@@ -115,7 +118,7 @@ function CarouselItem({ item, isActive, index }) {
         alt=""
         src={photoURL}
         // sx={{ height: { xs: 300, md: 260, lg: 512 }, width: { xs: 320, md: 1200, lg: 900 }, textAlign: 'left' }}
-        sx={{maxHeight: "100%", maxWidth: "100%", textAlign: 'left' }}
+        sx={{ maxHeight: '100%', maxWidth: '100%', textAlign: 'left' }}
       />
     </Box>
   );

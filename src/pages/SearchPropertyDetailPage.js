@@ -107,9 +107,9 @@ const SearchPropertyDetailPage = () => {
                       Available occupancies :
                     </Typography>
                   </Grid>
-                  {property.listOfUnitTypes?.map((lt) => {
+                  {property.listOfUnitTypes?.map((lt, index) => {
                     return (
-                      <div style={{ margin: '5px', paddingLeft: '16px' }}>
+                      <div key={index} style={{ margin: '5px', paddingLeft: '16px' }}>
                         <Card
                           sx={{
                             borderRadius: '30px 30px',
@@ -133,9 +133,9 @@ const SearchPropertyDetailPage = () => {
                   </Grid>
 
                   {property.facilityAmenities?.length > 0 &&
-                    property.facilityAmenities[0].amenityNames?.split(',').map((loc) => {
+                    property.facilityAmenities[0].amenityNames?.split(',').map((loc, index) => {
                       return (
-                        <div key={loc.facilityCode} style={{ margin: '5px', paddingLeft: '16px' }}>
+                        <div key={index} style={{ margin: '5px', paddingLeft: '16px' }}>
                           <Card
                             sx={{
                               borderRadius: '30px 30px',
@@ -158,9 +158,9 @@ const SearchPropertyDetailPage = () => {
                   </Grid>
 
                   {property.facilityServices?.length > 0 &&
-                    property.facilityServices[0].serviceNames?.split(',').map((loc) => {
+                    property.facilityServices[0].serviceNames?.split(',').map((loc, index) => {
                       return (
-                        <div key={loc.facilityCode} style={{ margin: '5px', paddingLeft: '16px' }}>
+                        <div key={index} style={{ margin: '5px', paddingLeft: '16px' }}>
                           <Card
                             sx={{
                               borderRadius: '30px 30px',
@@ -186,7 +186,8 @@ const SearchPropertyDetailPage = () => {
                     {property.listOfFoodItems &&
                       property.listOfFoodItems.map((loc, index) => {
                         return (
-                          <Grid container key={loc.facilityCode} sx={{ paddingLeft: '16px', marginBottom: '10px' }}>
+                          <div key={index}>
+                          <Grid container  sx={{ paddingLeft: '16px', marginBottom: '10px' }}>
                             <Grid item xs={12}>
                               <Card
                                 sx={{
@@ -214,6 +215,7 @@ const SearchPropertyDetailPage = () => {
                               </Card>
                             </Grid>
                           </Grid>
+                          </div>
                         );
                       })}
                   </Card>

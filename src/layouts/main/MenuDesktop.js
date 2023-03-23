@@ -385,7 +385,7 @@ function MenuDesktopItem({
                 })}
                 onChange={(data) => {
                   handleModalClose();
-                  navigate(`/contact-us/${data.value}/`);
+                  navigate(`/search-property/${data.value}/`);
                 }}
                 components={{
                   DropdownIndicator: () => (

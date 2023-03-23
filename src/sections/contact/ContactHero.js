@@ -37,9 +37,6 @@ import {
   AlertTitle,
   Stack,
 } from '@mui/material';
-// import Alert from '@mui/material/Alert';
-// import AlertTitle from '@mui/material/AlertTitle';
-// import Stack from '@mui/material/Stack';
 import { FormLabel } from 'react-bootstrap';
 import axios from 'axios';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -106,7 +103,7 @@ const stylePic = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: {xs: 350, md: 900},
+  width: { xs: 350, md: 900 },
   bgcolor: 'background.paper',
   borderRadius: '10px 10px',
   border: 'none',
@@ -188,18 +185,18 @@ export default function ContactHero() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-      API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd')
-        .then((response) => {
-          setLocations(response.data?.listOfLocations);
-          setLocation(response.data?.listOfLocations);
-    // setLocations(lcsData);
-    // setLocation(lcsData);
-    // setPropertyData(pcsData);
-    // setAllData(pcsData);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    API.get('/api/WebsiteAPI/GetListOfLocations?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&CityCode=Hyd')
+      .then((response) => {
+        setLocations(response.data?.listOfLocations);
+        setLocation(response.data?.listOfLocations);
+        // setLocations(lcsData);
+        // setLocation(lcsData);
+        // setPropertyData(pcsData);
+        // setAllData(pcsData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const [locationid, setLocationId] = useState();
@@ -230,6 +227,8 @@ export default function ContactHero() {
         services: '',
         amountStartRange: '0',
         amountEndRange: '10000000',
+        gender: '',
+        occupancy: '',
       })
         .then((res) => {
           setPropertyData(res.data.listOfProperties);
@@ -1262,14 +1261,24 @@ export default function ContactHero() {
                                     item
                                     xs={4}
                                     md={4}
-                                    sx={{ display: 'flex', fontSize: '16px', fontWeight: '500', color: '#00AB55', textDecoration: "none" }}
+                                    sx={{
+                                      display: 'flex',
+                                      fontSize: '16px',
+                                      fontWeight: '500',
+                                      color: '#00AB55',
+                                      textDecoration: 'none',
+                                    }}
                                   >
                                     <Typography>
-                                     <Link to={`/search-property-detail/${loc.facilityCode}`}  style={{
-                                      color: '#00AB55', textDecoration: "none"
-                                     }}>
-                                     <DirectionsOutlinedIcon sx={{ fontSize: '16px'}} /> View Directions
-                                     </Link>
+                                      <Link
+                                        to={`/search-property-detail/${loc.facilityCode}`}
+                                        style={{
+                                          color: '#00AB55',
+                                          textDecoration: 'none',
+                                        }}
+                                      >
+                                        <DirectionsOutlinedIcon sx={{ fontSize: '16px' }} /> View Directions
+                                      </Link>
                                     </Typography>
                                   </Grid>
                                 </Grid>
@@ -1396,7 +1405,8 @@ export default function ContactHero() {
                   <Stack sx={{ width: '100%' }} spacing={2}>
                     <Alert severity="error">
                       <AlertTitle>Error</AlertTitle>
-                      There are no matching properties with that filter— <strong>Please try to change the filter!</strong>
+                      There are no matching properties with that filter—{' '}
+                      <strong>Please try to change the filter!</strong>
                     </Alert>
                   </Stack>
                 )}
