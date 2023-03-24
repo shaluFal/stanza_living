@@ -2,7 +2,7 @@ import { m } from 'framer-motion';
 import React, { useCallback, useEffect, useState } from 'react';
 import { styled, emphasize } from '@mui/material/styles';
 import Popover from '@mui/material/Popover';
-// import Select from 'react-select';
+import Select from 'react-select';
 import './custom.css';
 import {
   Box,
@@ -32,7 +32,7 @@ import {
   Modal,
   Radio,
   RadioGroup,
-  Select,
+  // Select,
   Alert,
   AlertTitle,
   Stack,
@@ -176,6 +176,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 export default function ContactHero() {
   const [location, setLocation] = React.useState([]);
   const [locations, setLocations] = React.useState([]);
+  const [propertyName, setPropertyName] = React.useState("");
   const [propertyData, setPropertyData] = React.useState([]);
   const [allData, setAllData] = React.useState([]);
   const [filter, setFilter] = React.useState({});
@@ -201,6 +202,7 @@ export default function ContactHero() {
 
   const [locationid, setLocationId] = useState();
   const [open, setOpen] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -233,6 +235,8 @@ export default function ContactHero() {
         .then((res) => {
           setPropertyData(res.data.listOfProperties);
           setAllData(res.data.listOfProperties);
+          setLoaded(true);
+          setPropertyName(res.data.listOfProperties);
         })
         .catch((err) => console.log(err));
     } catch (error) {
@@ -599,18 +603,20 @@ export default function ContactHero() {
                             ?.filter((ft) => String(ft.value).toLowerCase()?.includes(String(srcLoc).toLowerCase()))
                             .map((item, index) => (
                               // <div key={index}>
-                              <StyledBreadcrumb
-                                style={{
-                                  border: '1px solid grey',
-                                  padding: '15px',
-                                  margin: '10px',
-                                  background: filter?.Locality?.values?.includes(item.id) ? 'red' : 'white',
-                                }}
-                                component="a"
-                                href="#"
-                                label={item.value}
-                                onClick={() => handleFilter('Locality', item)}
-                              />
+                              <Link to={`/search-property/${item.id}/`}>
+                                <StyledBreadcrumb
+                                  style={{
+                                    border: '1px solid grey',
+                                    padding: '15px',
+                                    margin: '10px',
+                                    background: filter?.Locality?.values?.includes(item.id) ? 'red' : 'white',
+                                  }}
+                                  component="a"
+                                  href="#"
+                                  label={item.value}
+                                  // onClick={() => handleFilter('Locality', item)}
+                                />
+                              </Link>
                               // </div>
                             ))}
                           <hr />
@@ -1182,6 +1188,54 @@ export default function ContactHero() {
                   {propertyData?.length} PGs waiting to be yours in Hyderabad
                 </Typography>
 
+                <Grid
+            container
+            sx={{
+              borderRadius: '10px 0px 0px 10px',
+            }}
+          >
+            <Grid item sx={{ width: '40%', marginTop: '4px', marginBottom: '15px'}}>
+              <Select
+                styles={{
+                  control: (baseStyles, state) => ({
+                    ...baseStyles,
+                    borderRadius: '10px 10px 10px 10px',
+                    padding: '7px',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                  }),
+                }}
+                placeholder={<div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500' }}>Find in and around..</div>}
+                options={propertyName && propertyName?.length > 0 ? (
+                  propertyName.filter((pp) => String(pp.facilityName).toLowerCase().includes(String(pp.propertyName).toLowerCase()))).map((lt) => {
+                  return {
+                    value: lt.fid,
+                    label: lt.facilityName,
+                  };
+                }): (<></>)}
+
+                components={{
+                  DropdownIndicator: () => (
+                    <Image
+                      src="images/search-interface-symbol.png"
+                      alt=""
+                      style={{ width: '15px', marginRight: '10px' }}
+                    />
+                  ),
+                  IndicatorSeparator: () => null,
+                }}
+                onInputChange={(input) => {
+                  if (input) {
+                    setMenuIsOpen(true);
+                  } else {
+                    setMenuIsOpen(false);
+                  }
+                }}
+                menuIsOpen={menuIsOpen}
+              />
+            </Grid>
+          </Grid>
+
                 {propertyData && propertyData?.length > 0 ? (
                   propertyData.map((loc, index) => {
                     return (
@@ -1243,7 +1297,7 @@ export default function ContactHero() {
                                   style={{ fontSize: '16px', color: 'grey', fontWeight: '600', marginTop: '2px' }}
                                 >
                                   {' '}
-                                  {loc.locationCode}{' '}
+                                  {loc.addressLine1} {loc.addressLine2}
                                 </Typography>
 
                                 <Grid container sx={{ marginTop: '2%' }}>
@@ -1402,13 +1456,19 @@ export default function ContactHero() {
                     );
                   })
                 ) : (
-                  <Stack sx={{ width: '100%' }} spacing={2}>
-                    <Alert severity="error">
-                      <AlertTitle>Error</AlertTitle>
-                      There are no matching properties with that filter—{' '}
-                      <strong>Please try to change the filter!</strong>
-                    </Alert>
-                  </Stack>
+                  <>
+                    {loaded ? (
+                      <Stack sx={{ width: '100%' }} spacing={2}>
+                        <Alert severity="error">
+                          <AlertTitle>Error</AlertTitle>
+                          There are no matching properties with that filter—{' '}
+                          <strong>Please try to change the filter!</strong>
+                        </Alert>
+                      </Stack>
+                    ) : (
+                      <></>
+                    )}
+                  </>
                 )}
               </Grid>
               <Grid item md={4} style={{ height: '100vh', width: '100%', marginTop: '6.5%' }}>

@@ -227,7 +227,7 @@ const PermissionDenied = Loadable(lazy(() => import('../pages/dashboard/Permissi
 // MAIN
 const HomePage = Loadable(lazy(() => import('../pages/Home')));
 const About = Loadable(lazy(() => import('../pages/About')));
-const Contact = Loadable(lazy(() => import('../pages/Contact')));
+const Contact = Loadable(lazy(() => import('../pages/SearchProperty')));
 
 const Faqs = Loadable(lazy(() => import('../pages/Faqs')));
 const ComingSoon = Loadable(lazy(() => import('../pages/ComingSoon')));

@@ -78,12 +78,10 @@ export default function AppCarousel({ list, ...other }) {
           sx={{
             // top: {md: 400, xs: 100},
             bottom: 25,
-            left: {md: 50},
-            right: {md: 50},
+            left: { md: 50 },
+            right: { md: 50 },
             position: 'absolute',
             '& .arrow': {
-             
-             
               p: 0,
               width: { xs: 30, md: 200 },
               // height: 100,
