@@ -176,7 +176,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 export default function ContactHero() {
   const [location, setLocation] = React.useState([]);
   const [locations, setLocations] = React.useState([]);
-  const [propertyName, setPropertyName] = React.useState("");
+  const [propertyName, setPropertyName] = React.useState('');
   const [propertyData, setPropertyData] = React.useState([]);
   const [allData, setAllData] = React.useState([]);
   const [filter, setFilter] = React.useState({});
@@ -236,7 +236,6 @@ export default function ContactHero() {
           setPropertyData(res.data.listOfProperties);
           setAllData(res.data.listOfProperties);
           setLoaded(true);
-          setPropertyName(res.data.listOfProperties);
         })
         .catch((err) => console.log(err));
     } catch (error) {
@@ -610,6 +609,7 @@ export default function ContactHero() {
                                     padding: '15px',
                                     margin: '10px',
                                     background: filter?.Locality?.values?.includes(item.id) ? 'red' : 'white',
+                                    cursor: 'pointer'
                                   }}
                                   component="a"
                                   href="#"
@@ -1189,55 +1189,18 @@ export default function ContactHero() {
                 </Typography>
 
                 <Grid
-            container
-            sx={{
-              borderRadius: '10px 0px 0px 10px',
-            }}
-          >
-            <Grid item sx={{ width: '40%', marginTop: '4px', marginBottom: '15px'}}>
-              <Select
-                styles={{
-                  control: (baseStyles, state) => ({
-                    ...baseStyles,
-                    borderRadius: '10px 10px 10px 10px',
-                    padding: '7px',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                  }),
-                }}
-                placeholder={<div style={{ color: 'rgb(41, 45, 50)', fontWeight: '500' }}>Find in and around..</div>}
-                options={propertyName && propertyName?.length > 0 ? (
-                  propertyName.filter((pp) => String(pp.facilityName).toLowerCase().includes(String(pp.propertyName).toLowerCase()))).map((lt) => {
-                  return {
-                    value: lt.fid,
-                    label: lt.facilityName,
-                  };
-                }): (<></>)}
-
-                components={{
-                  DropdownIndicator: () => (
-                    <Image
-                      src="images/search-interface-symbol.png"
-                      alt=""
-                      style={{ width: '15px', marginRight: '10px' }}
-                    />
-                  ),
-                  IndicatorSeparator: () => null,
-                }}
-                onInputChange={(input) => {
-                  if (input) {
-                    setMenuIsOpen(true);
-                  } else {
-                    setMenuIsOpen(false);
-                  }
-                }}
-                menuIsOpen={menuIsOpen}
-              />
-            </Grid>
-          </Grid>
+                  container
+                  sx={{
+                    borderRadius: '10px 0px 0px 10px',
+                  }}
+                >
+                  <Grid item sx={{ width: '40%', marginTop: '4px', marginBottom: '15px' }}>
+                    <TextField id="propertyname" placeholder='Search with name...' variant="outlined" sx={{marginLeft: "5%"}} value={propertyName} onChange = {(e)=> setPropertyName(e.target.value)}/>
+                  </Grid>
+                </Grid>
 
                 {propertyData && propertyData?.length > 0 ? (
-                  propertyData.map((loc, index) => {
+                  propertyData.filter((pp) => String(pp.facilityName).toLowerCase().includes(String(propertyName).toLowerCase())).map((loc, index) => {
                     return (
                       <div key={index}>
                         <Card sx={{ padding: '1.5%', marginBottom: '4%', textDecoration: 'none' }}>
