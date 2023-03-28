@@ -37,7 +37,7 @@ import {
   AlertTitle,
   Stack,
 } from '@mui/material';
-import { FormLabel } from 'react-bootstrap';
+import { Col, FormLabel, Row } from 'react-bootstrap';
 import axios from 'axios';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import KingBedOutlinedIcon from '@mui/icons-material/KingBedOutlined';
@@ -65,6 +65,7 @@ import { AppFeatured } from '../@dashboard/general/app';
 import SearchPropertyDetailPage from '../../pages/SearchPropertyDetailPage';
 import Image from '../../components/Image';
 import { lcsData, pcsData } from './data';
+import GoogleMap from './GoogleMap';
 
 const RootStyle = styled('div')(({ theme }) => ({
   backgroundSize: 'cover',
@@ -609,7 +610,7 @@ export default function ContactHero() {
                                     padding: '15px',
                                     margin: '10px',
                                     background: filter?.Locality?.values?.includes(item.id) ? 'red' : 'white',
-                                    cursor: 'pointer'
+                                    cursor: 'pointer',
                                   }}
                                   component="a"
                                   href="#"
@@ -1195,229 +1196,240 @@ export default function ContactHero() {
                   }}
                 >
                   <Grid item sx={{ width: '40%', marginTop: '4px', marginBottom: '15px' }}>
-                    <TextField id="propertyname" placeholder='Search with name...' variant="outlined" sx={{marginLeft: "5%"}} value={propertyName} onChange = {(e)=> setPropertyName(e.target.value)}/>
+                    <TextField
+                      id="propertyname"
+                      placeholder="Search with name..."
+                      variant="outlined"
+                      sx={{ marginLeft: '5%' }}
+                      value={propertyName}
+                      onChange={(e) => setPropertyName(e.target.value)}
+                    />
                   </Grid>
                 </Grid>
 
                 {propertyData && propertyData?.length > 0 ? (
-                  propertyData.filter((pp) => String(pp.facilityName).toLowerCase().includes(String(propertyName).toLowerCase())).map((loc, index) => {
-                    return (
-                      <div key={index}>
-                        <Card sx={{ padding: '1.5%', marginBottom: '4%', textDecoration: 'none' }}>
-                          <Grid container spacing={2}>
-                            <Grid
-                              item
-                              xs={12}
-                              md={4}
-                              style={{
-                                overflow: 'hidden',
-                              }}
-                              onClick={handleOpenPic}
-                            >
-                              {loc.listOfFacilityImages?.length > 0 ? (
-                                <img
-                                  src={loc.listOfFacilityImages[0]?.photoURL}
-                                  alt=""
-                                  className="cardimgzoom"
-                                  style={{
-                                    width: '120%',
-                                    height: '100%',
-                                    borderRadius: '20px 20px',
-                                    transition: '0.5s all ease-in-out',
-                                  }}
-                                />
-                              ) : (
-                                <img
-                                  className="cardimgzoom"
-                                  src={''}
-                                  alt=""
-                                  style={{
-                                    width: '120%',
-                                    height: '100%',
-                                    borderRadius: '20px 20px',
-                                    transition: '0.5s all ease-in-out',
-                                  }}
-                                />
-                              )}
-                            </Grid>
-                            <Grid item xs={12} md={8}>
-                              <Box>
-                                <Typography variant="subtitle1">
-                                  <Link
-                                    to={`/search-property-detail/${loc.facilityCode}`}
+                  propertyData
+                    .filter((pp) => String(pp.facilityName).toLowerCase().includes(String(propertyName).toLowerCase()))
+                    .map((loc, index) => {
+                      return (
+                        <div key={index}>
+                          <Card sx={{ padding: '1.5%', marginBottom: '4%', textDecoration: 'none' }}>
+                            <Grid container spacing={2}>
+                              <Grid
+                                item
+                                xs={12}
+                                md={4}
+                                style={{
+                                  overflow: 'hidden',
+                                }}
+                                onClick={handleOpenPic}
+                              >
+                                {loc.listOfFacilityImages?.length > 0 ? (
+                                  <img
+                                    src={loc.listOfFacilityImages[0]?.photoURL}
+                                    alt=""
+                                    className="cardimgzoom"
                                     style={{
-                                      textDecoration: 'none',
-                                      color: '#000',
-                                      fontWeight: '700',
-                                      fontSize: '20px',
+                                      width: '120%',
+                                      height: '100%',
+                                      borderRadius: '20px 20px',
+                                      transition: '0.5s all ease-in-out',
                                     }}
+                                  />
+                                ) : (
+                                  <img
+                                    className="cardimgzoom"
+                                    src={''}
+                                    alt=""
+                                    style={{
+                                      width: '120%',
+                                      height: '100%',
+                                      borderRadius: '20px 20px',
+                                      transition: '0.5s all ease-in-out',
+                                    }}
+                                  />
+                                )}
+                              </Grid>
+                              <Grid item xs={12} md={8}>
+                                <Box>
+                                  <Typography variant="subtitle1">
+                                    <Link
+                                      to={`/search-property-detail/${loc.facilityCode}`}
+                                      style={{
+                                        textDecoration: 'none',
+                                        color: '#000',
+                                        fontWeight: '700',
+                                        fontSize: '20px',
+                                      }}
+                                    >
+                                      {loc.facilityName}
+                                    </Link>
+                                  </Typography>
+
+                                  <Typography
+                                    style={{ fontSize: '16px', color: 'grey', fontWeight: '600', marginTop: '2px' }}
                                   >
-                                    {loc.facilityName}
-                                  </Link>
-                                </Typography>
+                                    {' '}
+                                    {loc.addressLine1} {loc.addressLine2}
+                                  </Typography>
 
-                                <Typography
-                                  style={{ fontSize: '16px', color: 'grey', fontWeight: '600', marginTop: '2px' }}
-                                >
-                                  {' '}
-                                  {loc.addressLine1} {loc.addressLine2}
-                                </Typography>
+                                  <Grid container sx={{ marginTop: '2%' }}>
+                                    <Grid item xs={8} md={8} sx={{ display: 'flex' }}>
+                                      {loc.listOfUnitTypes &&
+                                        loc.listOfUnitTypes.map((typ, index) => {
+                                          return (
+                                            <div key={index} style={{ fontSize: '16px', fontWeight: '500' }}>
+                                              {typ.unitType} &nbsp;
+                                            </div>
+                                          );
+                                        })}
+                                    </Grid>
+                                    <Grid
+                                      item
+                                      xs={4}
+                                      md={4}
+                                      sx={{
+                                        display: 'flex',
+                                        fontSize: '16px',
+                                        fontWeight: '500',
+                                        color: '#00AB55',
+                                        textDecoration: 'none',
+                                      }}
+                                    >
+                                      <Typography>
+                                        <Link
+                                          to={`/search-property-detail/${loc.facilityCode}`}
+                                          style={{
+                                            color: '#00AB55',
+                                            textDecoration: 'none',
+                                          }}
+                                        >
+                                          <DirectionsOutlinedIcon sx={{ fontSize: '16px' }} /> View Directions
+                                        </Link>
+                                      </Typography>
+                                    </Grid>
+                                  </Grid>
 
-                                <Grid container sx={{ marginTop: '2%' }}>
-                                  <Grid item xs={8} md={8} sx={{ display: 'flex' }}>
-                                    {loc.listOfUnitTypes &&
-                                      loc.listOfUnitTypes.map((typ, index) => {
+                                  <Grid container sx={{ marginTop: '2%' }} spacing={1}>
+                                    <Grid item xs={12}>
+                                      <Typography
+                                        sx={{ color: 'rgb(125, 125, 125)', fontWeight: '400', fontSize: '16px' }}
+                                      >
+                                        Amenities: &nbsp;{' '}
+                                      </Typography>
+                                    </Grid>
+
+                                    {loc.facilityAmenities?.length > 0 &&
+                                      loc.facilityAmenities[0].amenityNames?.split(',').map((amn, index) => {
                                         return (
-                                          <div key={index} style={{ fontSize: '16px', fontWeight: '500' }}>
-                                            {typ.unitType} &nbsp;
+                                          <div key={index}>
+                                            <Grid item sx={{ marginRight: '10px', marginTop: '5px' }}>
+                                              <Card
+                                                sx={{
+                                                  borderRadius: '30px 30px',
+                                                  padding: '10px',
+                                                  border: '0.6px solid rgb(190, 190, 190)',
+                                                }}
+                                              >
+                                                <Typography sx={{ fontSize: '14px' }}>{amn} </Typography>
+                                              </Card>
+                                            </Grid>
                                           </div>
                                         );
                                       })}
                                   </Grid>
-                                  <Grid
-                                    item
-                                    xs={4}
-                                    md={4}
-                                    sx={{
-                                      display: 'flex',
-                                      fontSize: '16px',
-                                      fontWeight: '500',
-                                      color: '#00AB55',
-                                      textDecoration: 'none',
-                                    }}
-                                  >
-                                    <Typography>
-                                      <Link
-                                        to={`/search-property-detail/${loc.facilityCode}`}
-                                        style={{
-                                          color: '#00AB55',
-                                          textDecoration: 'none',
-                                        }}
-                                      >
-                                        <DirectionsOutlinedIcon sx={{ fontSize: '16px' }} /> View Directions
-                                      </Link>
-                                    </Typography>
-                                  </Grid>
-                                </Grid>
 
-                                <Grid container sx={{ marginTop: '2%' }} spacing={1}>
-                                  <Grid item xs={12}>
-                                    <Typography
-                                      sx={{ color: 'rgb(125, 125, 125)', fontWeight: '400', fontSize: '16px' }}
-                                    >
-                                      Amenities: &nbsp;{' '}
-                                    </Typography>
-                                  </Grid>
-
-                                  {loc.facilityAmenities?.length > 0 &&
-                                    loc.facilityAmenities[0].amenityNames?.split(',').map((amn, index) => {
-                                      return (
-                                        <div key={index}>
-                                          <Grid item sx={{ marginRight: '10px', marginTop: '5px' }}>
-                                            <Card
-                                              sx={{
-                                                borderRadius: '30px 30px',
-                                                padding: '10px',
-                                                border: '0.6px solid rgb(190, 190, 190)',
-                                              }}
-                                            >
-                                              <Typography sx={{ fontSize: '14px' }}>{amn} </Typography>
-                                            </Card>
-                                          </Grid>
-                                        </div>
-                                      );
-                                    })}
-                                </Grid>
-
-                                <Grid container sx={{ marginTop: '4%' }} spacing={1}>
-                                  <Grid item xs={12} md={6}>
-                                    <Typography sx={{ display: 'flex', fontSize: '16px' }}>
-                                      <span
-                                        style={{ color: 'rgb(125, 125, 125)', fontWeight: '400', fontSize: '16px' }}
-                                      >
-                                        Available: &nbsp;
-                                      </span>{' '}
-                                      &nbsp; <KingBedOutlinedIcon sx={{ fontSize: '28px', color: '#00AB55' }} />
-                                      &nbsp; {loc.available} Beds available
-                                    </Typography>
-                                  </Grid>
-                                  <Grid item xs={12} md={6}>
-                                    <Typography sx={{ display: 'flex', fontSize: '16px', paddingLeft: { md: '15px' } }}>
-                                      <span
-                                        style={{ color: 'rgb(125, 125, 125)', fontWeight: '400', fontSize: '16px' }}
-                                      >
-                                        Contact Us: &nbsp;
-                                      </span>{' '}
-                                      <CallIcon sx={{ color: '#00AB55' }} />
-                                      +91 9876543212
-                                    </Typography>
-                                  </Grid>
-                                </Grid>
-
-                                <Grid container spacing={2} sx={{ marginTop: '2.5%' }}>
-                                  <Grid item xs={12} lg={4} md={12}>
-                                    <Box sx={{ mb: 5 }}>
+                                  <Grid container sx={{ marginTop: '4%' }} spacing={1}>
+                                    <Grid item xs={12} md={6}>
+                                      <Typography sx={{ display: 'flex', fontSize: '16px' }}>
+                                        <span
+                                          style={{ color: 'rgb(125, 125, 125)', fontWeight: '400', fontSize: '16px' }}
+                                        >
+                                          Available: &nbsp;
+                                        </span>{' '}
+                                        &nbsp; <KingBedOutlinedIcon sx={{ fontSize: '28px', color: '#00AB55' }} />
+                                        &nbsp; {loc.available} Beds available
+                                      </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} md={6}>
                                       <Typography
-                                        variant="subtitle1"
-                                        sx={{ color: 'rgb(125, 125, 125)', fontWeight: '400' }}
+                                        sx={{ display: 'flex', fontSize: '16px', paddingLeft: { md: '15px' } }}
                                       >
-                                        Starts from
+                                        <span
+                                          style={{ color: 'rgb(125, 125, 125)', fontWeight: '400', fontSize: '16px' }}
+                                        >
+                                          Contact Us: &nbsp;
+                                        </span>{' '}
+                                        <CallIcon sx={{ color: '#00AB55' }} />
+                                        +91 9876543212
                                       </Typography>
-                                      <Typography sx={{ color: '#000', fontWeight: '700', fontSize: '20px' }}>
-                                        <CurrencyRupeeIcon style={{ fontSize: '17px' }} />
-                                        {loc.rentMonthly}/<span style={{ fontSize: '16px' }}>mo*</span>
-                                      </Typography>
-                                    </Box>
-                                  </Grid>
-                                  <Grid item>
-                                    <Box>
-                                      <Button
-                                        variant="contained"
-                                        target="_blank"
-                                        rel="noopener"
-                                        href=""
-                                        style={{ fontSize: '14px', padding: '14px', fontWeight: '600' }}
-                                        onClick={handleOpen}
-                                      >
-                                        SCHEDULE A VISIT
-                                      </Button>
-                                    </Box>
+                                    </Grid>
                                   </Grid>
 
-                                  <Grid item>
-                                    <Box>
-                                      <Button
-                                        variant="outlined"
-                                        target="_blank"
-                                        rel="noopener"
-                                        href=""
-                                        style={{ fontSize: '14px', padding: '14px', fontWeight: '600' }}
-                                      >
-                                        UNLOCK DISCOUNT
-                                      </Button>
-                                    </Box>
+                                  <Grid container spacing={2} sx={{ marginTop: '2.5%' }}>
+                                    <Grid item xs={12} lg={4} md={12}>
+                                      <Box sx={{ mb: 5 }}>
+                                        <Typography
+                                          variant="subtitle1"
+                                          sx={{ color: 'rgb(125, 125, 125)', fontWeight: '400' }}
+                                        >
+                                          Starts from
+                                        </Typography>
+                                        <Typography sx={{ color: '#000', fontWeight: '700', fontSize: '20px' }}>
+                                          <CurrencyRupeeIcon style={{ fontSize: '17px' }} />
+                                          {loc.rentMonthly}/<span style={{ fontSize: '16px' }}>mo*</span>
+                                        </Typography>
+                                      </Box>
+                                    </Grid>
+                                    <Grid item>
+                                      <Box>
+                                        <Button
+                                          variant="contained"
+                                          target="_blank"
+                                          rel="noopener"
+                                          href=""
+                                          style={{ fontSize: '14px', padding: '14px', fontWeight: '600' }}
+                                          onClick={handleOpen}
+                                        >
+                                          SCHEDULE A VISIT
+                                        </Button>
+                                      </Box>
+                                    </Grid>
+
+                                    <Grid item>
+                                      <Box>
+                                        <Button
+                                          variant="outlined"
+                                          target="_blank"
+                                          rel="noopener"
+                                          href=""
+                                          style={{ fontSize: '14px', padding: '14px', fontWeight: '600' }}
+                                        >
+                                          UNLOCK DISCOUNT
+                                        </Button>
+                                      </Box>
+                                    </Grid>
+                                    <Grid item>
+                                      <Box>
+                                        <Button
+                                          variant="outlined"
+                                          target="_blank"
+                                          rel="noopener"
+                                          href=""
+                                          style={{ fontSize: '14px', padding: '14px', fontWeight: '600' }}
+                                        >
+                                          <SupportAgentIcon sx={{ color: '#00AB55' }} /> &nbsp; Support
+                                        </Button>
+                                      </Box>
+                                    </Grid>
                                   </Grid>
-                                  <Grid item>
-                                    <Box>
-                                      <Button
-                                        variant="outlined"
-                                        target="_blank"
-                                        rel="noopener"
-                                        href=""
-                                        style={{ fontSize: '14px', padding: '14px', fontWeight: '600' }}
-                                      >
-                                        <SupportAgentIcon sx={{ color: '#00AB55' }} /> &nbsp; Support
-                                      </Button>
-                                    </Box>
-                                  </Grid>
-                                </Grid>
-                              </Box>
+                                </Box>
+                              </Grid>
                             </Grid>
-                          </Grid>
-                        </Card>
-                      </div>
-                    );
-                  })
+                          </Card>
+                        </div>
+                      );
+                    })
                 ) : (
                   <>
                     {loaded ? (
@@ -1434,14 +1446,17 @@ export default function ContactHero() {
                   </>
                 )}
               </Grid>
-              <Grid item md={4} style={{ height: '100vh', width: '100%', marginTop: '6.5%' }}>
-                <GoogleMapReact
+              <Grid item md={4} style={{ height: '100vh', width: '10%', marginTop: '8%' }}>
+                {/* <GoogleMapReact
                   bootstrapURLKeys={{ key: '' }}
                   defaultCenter={defaultProps.center}
                   defaultZoom={defaultProps.zoom}
                 >
                   <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" />
-                </GoogleMapReact>
+                </GoogleMapReact> */}
+                <Card style={{ height: '100vh', width: '100%', marginTop: '2%' }}>
+                  <GoogleMap locations={propertyData} />
+                </Card>
               </Grid>
             </Grid>
           </m.div>

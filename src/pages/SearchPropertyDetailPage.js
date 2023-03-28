@@ -28,6 +28,7 @@ import { _appFeatured } from '../_mock';
 import API from '../Helper/api';
 import { AppFeatured } from '../sections/@dashboard/general/app';
 import Page from '../components/Page';
+import GoogleMap from '../sections/contact/GoogleMap';
 
 const SearchPropertyDetailPage = () => {
   const [property, setProperty] = React.useState([]);
@@ -59,7 +60,7 @@ const SearchPropertyDetailPage = () => {
         sx={{
           display: 'flex',
           justifyContent: 'center',
-          marginTop: { xs: '10%', md: '4%' }
+          marginTop: { xs: '10%', md: '4%' },
         }}
       >
         <Grid item xs={12} md={10}>
@@ -187,34 +188,34 @@ const SearchPropertyDetailPage = () => {
                       property.listOfFoodItems.map((loc, index) => {
                         return (
                           <div key={index}>
-                          <Grid container  sx={{ paddingLeft: '16px', marginBottom: '10px' }}>
-                            <Grid item xs={12}>
-                              <Card
-                                sx={{
-                                  borderRadius: '30px 30px',
-                                  padding: '10px 6px 10px 15px',
-                                  border: '0.6px solid rgb(190, 190, 190)',
-                                  // margin: '5px',
-                                }}
-                              >
-                                <p style={{ fontWeight: '700', marginBottom: '1%', color: 'rgb(96 195 173)' }}>
-                                  {loc.day} -
-                                </p>
-                                <p>
-                                  <span style={{ fontWeight: '600', color: 'rgb(96 195 173)' }}>Breakfast :</span>{' '}
-                                  {loc.breakfast}
-                                </p>
-                                <p>
-                                  <span style={{ fontWeight: '600', color: 'rgb(96 195 173)' }}>Lunch : </span>
-                                  {loc.lunch}{' '}
-                                </p>
-                                <p>
-                                  <span style={{ fontWeight: '600', color: 'rgb(96 195 173)' }}>Dinner : </span>
-                                  {loc.dinner}
-                                </p>
-                              </Card>
+                            <Grid container sx={{ paddingLeft: '16px', marginBottom: '10px' }}>
+                              <Grid item xs={12}>
+                                <Card
+                                  sx={{
+                                    borderRadius: '30px 30px',
+                                    padding: '10px 6px 10px 15px',
+                                    border: '0.6px solid rgb(190, 190, 190)',
+                                    // margin: '5px',
+                                  }}
+                                >
+                                  <p style={{ fontWeight: '700', marginBottom: '1%', color: 'rgb(96 195 173)' }}>
+                                    {loc.day} -
+                                  </p>
+                                  <p>
+                                    <span style={{ fontWeight: '600', color: 'rgb(96 195 173)' }}>Breakfast :</span>{' '}
+                                    {loc.breakfast}
+                                  </p>
+                                  <p>
+                                    <span style={{ fontWeight: '600', color: 'rgb(96 195 173)' }}>Lunch : </span>
+                                    {loc.lunch}{' '}
+                                  </p>
+                                  <p>
+                                    <span style={{ fontWeight: '600', color: 'rgb(96 195 173)' }}>Dinner : </span>
+                                    {loc.dinner}
+                                  </p>
+                                </Card>
+                              </Grid>
                             </Grid>
-                          </Grid>
                           </div>
                         );
                       })}
@@ -227,22 +228,24 @@ const SearchPropertyDetailPage = () => {
                 <Grid container>
                   <Grid item>
                     <h3>Neighbourhood</h3>
-                    <p style={{color: "grey"}}>Getting to Exeter House and popular hotspots nearby</p>
+                    <p style={{ color: 'grey' }}>Getting to Exeter House and popular hotspots nearby</p>
                   </Grid>
                   <Grid item xs={12}>
                     <Card style={{ height: '50vh', width: '95%', marginTop: '2%' }}>
-                    <GoogleMapReact
+                      {/* <GoogleMapReact
                       bootstrapURLKeys={{ key: '' }}
                       defaultCenter={defaultProps.center}
                       defaultZoom={defaultProps.zoom}
                     >
                       <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" />
-                    </GoogleMapReact>
+                    </GoogleMapReact> */}
+
+                      <GoogleMap locations={[property]} />
                     </Card>
                   </Grid>
                 </Grid>
 
-                <div style={{ marginBottom: '5%', marginTop: "4%" }}>
+                <div style={{ marginBottom: '5%', marginTop: '4%' }}>
                   <h3>Details of {property.locationCode} House</h3>
                   <Typography sx={{ mt: 1 }}>
                     It's not your typical PG in {property.locationCode} House by Coliving is your second home. We say
