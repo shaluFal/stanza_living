@@ -183,6 +183,7 @@ export default function ContactHero() {
   const [filter, setFilter] = React.useState({});
   const [filterTypes, setFilterTypes] = React.useState([]);
   const [srcLoc, setSrcLoc] = React.useState('');
+  const [budMaxValue, setBudMaxValue] = React.useState(60000);
 
   const navigate = useNavigate();
 
@@ -236,6 +237,14 @@ export default function ContactHero() {
         .then((res) => {
           setPropertyData(res.data.listOfProperties);
           setAllData(res.data.listOfProperties);
+
+          const data = res.data.listOfProperties;
+
+          if (data.length > 0) {
+            let bb = data.map((b) => b.rentMonthly);
+            bb = _.sortBy(bb).reverse();
+            setBudMaxValue(Number(bb[0]));
+          }
           setLoaded(true);
         })
         .catch((err) => console.log(err));
@@ -353,7 +362,7 @@ export default function ContactHero() {
       }
 
       case 'Budget': {
-        if (!currentFilter[type]) currentFilter[type] = [5000, 12000];
+        if (!currentFilter[type]) currentFilter[type] = [0, 60000];
 
         currentFilter[type] = value;
         setFilter(currentFilter);
@@ -682,11 +691,11 @@ export default function ContactHero() {
                         <div style={{ maxHeight: '400px', maxWidth: '400px', padding: '10px 20px' }}>
                           <Typography sx={{ p: 2 }}>Select Range: </Typography>
                           <PrettoSlider
-                            value={filter?.Budget || [0, 12000]}
+                            value={filter?.Budget || [0, 60000]}
                             onChange={(e, value) => handleFilter('Budget', value, e)}
                             aria-label="pretto slider"
                             min={0}
-                            max={filter?.Budget ? filter?.Budget[1] : 12000}
+                            max={budMaxValue || 60000}
                           />
                           <div style={{ padding: '20px', display: 'flex', justifyContent: 'spaceBetween' }}>
                             <TextField
@@ -695,7 +704,7 @@ export default function ContactHero() {
                               variant="outlined"
                               value={filter?.Budget ? filter?.Budget[0] : 0}
                               onChange={(e) =>
-                                handleFilter('Budget', [e.target.value, filter?.Budget ? filter?.Budget[1] : 12000], e)
+                                handleFilter('Budget', [e.target.value, filter?.Budget ? filter?.Budget[1] : budMaxValue], e)
                               }
                               style={{ marginRight: '10px', maxWidth: '140px' }}
                             />
@@ -703,7 +712,7 @@ export default function ContactHero() {
                             <TextField
                               id="outlined-basic"
                               label="max price"
-                              value={filter?.Budget ? filter?.Budget[1] : 12000}
+                              value={filter?.Budget ? filter?.Budget[1] : budMaxValue}
                               onChange={(e) =>
                                 handleFilter('Budget', [filter?.Budget ? filter?.Budget[0] : 0, e.target.value], e)
                               }
