@@ -147,7 +147,7 @@ const mapStateToProps = () => {
 };
 
 const WrappedContainer = GoogleApiWrapper({
-  apiKey: 'AIzaSyCX6jqzkUVQ_jOE9R7AvUoG8SBr6IBmbZc',
+  apiKey: 'AIzaSyDF1GjTSIpY-mT5FzyvksD3hu-8tUSL2xk',
   LoadingContainer,
 })(ViewMapProperties);
 
