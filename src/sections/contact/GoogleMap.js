@@ -117,7 +117,7 @@ class ViewMapProperties extends Component {
             >
               {this.state.showLocations ? allRequests : null}
               <InfoWindow
-                onOpen={this.windowHasOpened}
+                // onOpen={this.windowHasOpened}
                 onClose={() => {
                   this.setState({
                     showingInfoWindow: false,
@@ -126,6 +126,7 @@ class ViewMapProperties extends Component {
                 }}
                 marker={this.state.activeMarker}
                 visible={this.state.showingInfoWindow}
+                maxWidth={200}
               >
                 <InfoWindowData
                   activeMarkerType={this.state.activeMarkerType}

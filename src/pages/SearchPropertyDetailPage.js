@@ -32,14 +32,25 @@ import GoogleMap from '../sections/contact/GoogleMap';
 
 const SearchPropertyDetailPage = () => {
   const [property, setProperty] = React.useState([]);
-
   React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search).get('direction');
     const facilityCode = window.location.pathname.split('/')[3];
     API.get(
       `/api/WebsiteAPI/GetPropertyData?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&FacilityCode=${facilityCode}`
     ).then((response) => {
       console.log(response.data);
       setProperty(response.data.propertyObject ? response.data.propertyObject : {});
+
+      if (params) {
+        setTimeout(() => {
+          const rect = document.getElementById('mapid')?.getBoundingClientRect();
+          window.scroll({
+            left: 0,
+            top: rect?.top,
+            behavior: 'smooth',
+          });
+        }, 1000);
+      }
     });
   }, []);
 
@@ -220,7 +231,7 @@ const SearchPropertyDetailPage = () => {
                         );
                       })}
                   </Card>
-                  <Typography style={{ color: 'grey', marginTop: '2%' }}>
+                  <Typography style={{ color: 'grey', marginTop: '2%' }} id="mapid">
                     *This food menu is currently being served on the residence and is subject to change in future.
                   </Typography>
                 </Grid>
@@ -240,7 +251,11 @@ const SearchPropertyDetailPage = () => {
                       <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" />
                     </GoogleMapReact> */}
 
-                      <GoogleMap locations={[property]} />
+                      {property ? (
+                        <GoogleMap key={Math.random()} locations={[property]} opened />
+                      ) : (
+                        <GoogleMap key={Math.random()} locations={[property]} opened />
+                      )}
                     </Card>
                   </Grid>
                 </Grid>

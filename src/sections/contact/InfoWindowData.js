@@ -49,18 +49,18 @@ class InfoWindowData extends Component {
           </Grid>
           <Grid item xs={8}>
             <Box>
-              <Typography variant="subtitle1" sx={{ fontSize: '16px' }}>
+              <Typography sx={{ fontSize: '24px', fontWeight: 'bold' }} className="w-100 text-wrap">
                 {this.props.activeMarkerData?.facilityName}
               </Typography>
 
-              <Typography style={{ fontSize: '12px', color: 'grey', fontWeight: '600', marginTop: '2px' }}>
-                {' '}
-                {this.props.activeMarkerData?.addressLine1} {this.props.activeMarkerData?.addressLine2}
+              <Typography className="w-100 text-wrap" style={{ fontSize: '10px', color: 'grey', marginTop: '2px' }}>
+                {this.props.activeMarkerData?.addressLine1}
+                {this.props.activeMarkerData?.addressLine2}
               </Typography>
 
               <Grid container spacing={2} sx={{ marginTop: '2.5%' }}>
                 <Grid item xs={12} lg={4} md={12}>
-                  <Box sx={{ mb: 5 }}>
+                  <Box sx={{ mb: 1 }}>
                     <Typography variant="subtitle1" sx={{ color: 'rgb(125, 125, 125)', fontWeight: '400' }}>
                       Starts from
                     </Typography>

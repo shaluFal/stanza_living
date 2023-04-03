@@ -35,6 +35,7 @@ import API from '../../Helper/api';
 // components
 import Iconify from '../../components/Iconify';
 import Image from '../../components/Image';
+import { MapImag } from '../../sections/contact/MapImages';
 
 // ----------------------------------------------------------------------
 
@@ -414,11 +415,7 @@ function MenuDesktopItem({
                 }}
                 components={{
                   DropdownIndicator: () => (
-                    <Image
-                      src="images/search-interface-symbol.png"
-                      alt=""
-                      style={{ width: '15px', marginRight: '10px' }}
-                    />
+                    <Image src={MapImag.Search} alt="" style={{ width: '15px', marginRight: '10px' }} />
                   ),
                   IndicatorSeparator: () => null,
                 }}
@@ -439,7 +436,7 @@ function MenuDesktopItem({
               <h5 style={{ marginTop: '4%', marginBottom: '6px' }}>Popular Cities</h5>
             </Grid>
             <Grid item xs={12}>
-              <img src="images/hyd.jpg" alt="" style={{ width: '60px', height: '60px', marginLeft: '10px' }} />
+              <img src={MapImag.Hyderabad} alt="" style={{ width: '60px', height: '60px', marginLeft: '10px' }} />
               <Typography sx={{ marginTop: '10px' }}>Hyderabad</Typography>
             </Grid>
           </Grid>

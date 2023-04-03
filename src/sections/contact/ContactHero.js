@@ -704,7 +704,11 @@ export default function ContactHero() {
                               variant="outlined"
                               value={filter?.Budget ? filter?.Budget[0] : 0}
                               onChange={(e) =>
-                                handleFilter('Budget', [e.target.value, filter?.Budget ? filter?.Budget[1] : budMaxValue], e)
+                                handleFilter(
+                                  'Budget',
+                                  [e.target.value, filter?.Budget ? filter?.Budget[1] : budMaxValue],
+                                  e
+                                )
                               }
                               style={{ marginRight: '10px', maxWidth: '140px' }}
                             />
@@ -1307,7 +1311,7 @@ export default function ContactHero() {
                                     >
                                       <Typography>
                                         <Link
-                                          to={`/search-property-detail/${loc.facilityCode}`}
+                                          to={`/search-property-detail/${loc.facilityCode}?direction=true`}
                                           style={{
                                             color: '#00AB55',
                                             textDecoration: 'none',
@@ -1464,7 +1468,11 @@ export default function ContactHero() {
                   <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" />
                 </GoogleMapReact> */}
                 <Card style={{ height: '100vh', width: '100%', marginTop: '2%' }}>
-                  <GoogleMap locations={propertyData} />
+                  {propertyData?.length > 0 ? (
+                    <GoogleMap key={Math.random()} locations={propertyData} />
+                  ) : (
+                    <GoogleMap key={Math.random()} locations={propertyData} />
+                  )}
                 </Card>
               </Grid>
             </Grid>
