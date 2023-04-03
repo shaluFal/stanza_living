@@ -51,6 +51,19 @@ const LinkStyle = styled(Link)(({ theme }) => ({
   },
 }));
 
+const TypoStyle = styled(Typography)(({ theme }) => ({
+  ...theme.typography.subtitle2,
+  color: theme.palette.text.primary,
+  marginRight: theme.spacing(5),
+  transition: theme.transitions.create('opacity', {
+    duration: theme.transitions.duration.shorter,
+  }),
+  '&:hover': {
+    opacity: 0.48,
+    textDecoration: 'none',
+  },
+}));
+
 const SubLinkStyle = styled((props) => (
   <ListItem sx={{ p: 0 }}>
     <Link target="_blank" rel="noopener" {...props}>
@@ -334,7 +347,7 @@ function MenuDesktopItem({
 
   return (
     <>
-      <LinkStyle
+      {/* <LinkStyle
         onClick={handleModalShow}
         to={path}
         component={RouterLink}
@@ -348,7 +361,21 @@ function MenuDesktopItem({
         }}
       >
         {title}
-      </LinkStyle>
+      </LinkStyle> */}
+
+      <TypoStyle
+        onClick={handleModalShow}
+        sx={{
+          color: '#007B55',
+          cursor: 'pointer',
+          '&.active': {
+            color: 'primary.main',
+          },
+        }}
+      >
+        {' '}
+        {title}
+      </TypoStyle>
 
       <Modal
         open={showModal}
@@ -356,9 +383,7 @@ function MenuDesktopItem({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Card
-          sx={{ width: '30%', marginTop: '2%', marginLeft: '40%', padding: '1%' }}
-        >
+        <Card sx={{ width: '30%', marginTop: '2%', marginLeft: '40%', padding: '1%' }}>
           <Grid
             container
             sx={{
@@ -415,7 +440,7 @@ function MenuDesktopItem({
             </Grid>
             <Grid item xs={12}>
               <img src="images/hyd.jpg" alt="" style={{ width: '60px', height: '60px', marginLeft: '10px' }} />
-              <Typography sx={{ marginTop: '10px'}}>Hyderabad</Typography>
+              <Typography sx={{ marginTop: '10px' }}>Hyderabad</Typography>
             </Grid>
           </Grid>
         </Card>
