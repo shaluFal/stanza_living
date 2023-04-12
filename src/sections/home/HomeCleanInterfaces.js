@@ -5,6 +5,9 @@ import { Box, Container, Grid, Typography, useTheme } from '@mui/material';
 // components
 import Image from '../../components/Image';
 import { MotionViewport, varFade } from '../../components/animate';
+import pgfood1 from "../../images/pgfood_1.jpg";
+import pgfood2 from "../../images/pgfood_2.jpg";
+import pgfood3 from "../../images/pgfood_3.jpg";
 
 // ----------------------------------------------------------------------
 
@@ -51,16 +54,16 @@ export default function HomeCleanInterfaces() {
           <Grid item xs={12} md={6}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <Image alt="" src={`images/pgfood_1.jpg`} style={{ width: '100%' }} />
+                <Image alt="" src={pgfood1} style={{ width: '100%' }} />
               </Grid>
               <Grid item xs={6}>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
-                    <Image alt="" src={`images/pgfood_2.jpg`} style={{ borderRadius: '10px 10px' }} />
+                    <Image alt="" src={pgfood2} style={{ borderRadius: '10px 10px' }} />
                   </Grid>
 
                   <Grid item xs={12}>
-                    <Image alt="" src={`images/pgfood_3.jpg`} style={{ borderRadius: '10px 10px' }} />
+                    <Image alt="" src={pgfood3} style={{ borderRadius: '10px 10px' }} />
                   </Grid>
                 </Grid>
               </Grid>

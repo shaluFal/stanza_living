@@ -64,7 +64,7 @@ root.render(
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <SettingsProvider>
               <CollapseDrawerProvider>
-                <BrowserRouter basename="/stanza">
+                <BrowserRouter>
                   <App />
                 </BrowserRouter>
               </CollapseDrawerProvider>

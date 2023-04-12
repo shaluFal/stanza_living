@@ -9,6 +9,7 @@ import { _homePlans } from '../../_mock';
 import Image from '../../components/Image';
 import Iconify from '../../components/Iconify';
 import { varFade, MotionViewport } from '../../components/animate';
+import phone from "../../images/phone.jpg";
 
 // ----------------------------------------------------------------------
 
@@ -83,7 +84,7 @@ export default function HomePricingPlans() {
                 </Grid>
               </Grid>
               <Grid item xs={12} md={4}>
-                <Image alt="" src={`images/phone.jpg`} style={{ paddingTop: '30%' }} />
+                <Image alt="" src={phone} style={{ paddingTop: '30%' }} />
               </Grid>
             </Grid>
           </m.div>

@@ -91,7 +91,7 @@ export default function Register() {
               visibleByDefault
               disabledEffect
               alt="register"
-              src="/stanza/assets/illustrations/illustration_register.png"
+              src="/assets/illustrations/illustration_register.png"
             />
           </SectionStyle>
         )}

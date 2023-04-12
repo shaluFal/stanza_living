@@ -25,6 +25,26 @@ import { _skills } from '../../_mock';
 import Image from '../../components/Image';
 import Iconify from '../../components/Iconify';
 import { MotionViewport, varFade } from '../../components/animate';
+import about from "../../images/about.jpg";
+import about1 from "../../images/about_1.jpg";
+import about2 from "../../images/about_2.jpg";
+import about3 from "../../images/about_3.jpg";
+import about4 from "../../images/about_4.jpg";
+import about5 from "../../images/about_5.jpg";
+import about6 from "../../images/about_6.jpg";
+import about7 from "../../images/about_7.jpg";
+import about8 from "../../images/about_8.jpg";
+import about9 from "../../images/about_9.jpg";
+import about10 from "../../images/about_10.jpg";
+import about11 from "../../images/about_11.jpg";
+import about12 from "../../images/about_12.jpg";
+import about13 from "../../images/about_13.jpg";
+import about14 from "../../images/about_14.jpg";
+import about15 from "../../images/about_15.jpg";
+import about16 from "../../images/about_16.jpg";
+import about17 from "../../images/about_17.jpg";
+import about18 from "../../images/about_18.jpg";
+import indiaMap from "../../images/indiaMap.jpg"
 
 // ----------------------------------------------------------------------
 
@@ -164,7 +184,7 @@ export default function AboutWhat() {
                   <m.div variants={varFade().inUp}>
                     <Image
                       alt="our office 1"
-                      src="images/about_1.jpg"
+                      src={about1}
                       sx={{
                         borderRadius: 2,
                         // boxShadow: shadow,
@@ -189,7 +209,7 @@ export default function AboutWhat() {
                   <m.div variants={varFade().inUp}>
                     <Image
                       alt="our office 1"
-                      src="images/about.jpg"
+                      src={about}
                       sx={{
                         borderRadius: 2,
                         // boxShadow: shadow,
@@ -277,7 +297,7 @@ export default function AboutWhat() {
                 </Grid>
 
                 <Typography sx={{ marginTop: '3%' }}>
-                  <Image src="images/indiaMap.jpg" style={{ width: '60%', marginLeft: '20%' }} />
+                  <Image src={indiaMap} style={{ width: '60%', marginLeft: '20%' }} />
                 </Typography>
               </m.div>
 
@@ -325,7 +345,7 @@ export default function AboutWhat() {
                   <m.div variants={varFade().inUp}>
                     <Image
                       alt="our office 1"
-                      src="images/about_5.jpg"
+                      src={about5}
                       sx={{
                         borderRadius: 2,
                         // boxShadow: shadow,
@@ -359,7 +379,7 @@ export default function AboutWhat() {
                           >
                             ET Now Global Real Estate Congress <br /> 2020
                           </Typography>
-                          <Image src="images/about_6.jpg" alt="" style={{ width: '60%', paddingTop: { xs: '100%' } }} />
+                          <Image src={about6} alt="" style={{ width: '60%', paddingTop: { xs: '100%' } }} />
                         </Grid>
                         <Grid item xs={4}>
                           <Typography
@@ -374,7 +394,7 @@ export default function AboutWhat() {
                           >
                             ET Now Global Real Estate Congress <br /> 2020
                           </Typography>
-                          <Image src="images/about_6.jpg" alt="" style={{ width: '60%' }} />
+                          <Image src={about6} alt="" style={{ width: '60%' }} />
                         </Grid>
                         <Grid item xs={4}>
                           <Typography
@@ -389,23 +409,7 @@ export default function AboutWhat() {
                           >
                             ET Now Global Real Estate Congress <br /> 2020
                           </Typography>
-                          <Image src="images/about_6.jpg" alt="" style={{ width: '60%' }} />
-                        </Grid>
-
-                        <Grid item xs={4}>
-                          <Typography
-                            sx={{
-                              width: '40%',
-                              textAlign: 'center',
-                              /* margin-top: 5%; */
-                              position: 'relative',
-                              top: '25%',
-                              left: '10%',
-                            }}
-                          >
-                            ET Now Global Real Estate Congress <br /> 2020
-                          </Typography>
-                          <Image src="images/about_6.jpg" alt="" style={{ width: '60%' }} />
+                          <Image src={about6} alt="" style={{ width: '60%' }} />
                         </Grid>
 
                         <Grid item xs={4}>
@@ -421,7 +425,7 @@ export default function AboutWhat() {
                           >
                             ET Now Global Real Estate Congress <br /> 2020
                           </Typography>
-                          <Image src="images/about_6.jpg" alt="" style={{ width: '60%' }} />
+                          <Image src={about6} alt="" style={{ width: '60%' }} />
                         </Grid>
 
                         <Grid item xs={4}>
@@ -437,7 +441,23 @@ export default function AboutWhat() {
                           >
                             ET Now Global Real Estate Congress <br /> 2020
                           </Typography>
-                          <Image src="images/about_6.jpg" alt="" style={{ width: '60%' }} />
+                          <Image src={about6} alt="" style={{ width: '60%' }} />
+                        </Grid>
+
+                        <Grid item xs={4}>
+                          <Typography
+                            sx={{
+                              width: '40%',
+                              textAlign: 'center',
+                              /* margin-top: 5%; */
+                              position: 'relative',
+                              top: '25%',
+                              left: '10%',
+                            }}
+                          >
+                            ET Now Global Real Estate Congress <br /> 2020
+                          </Typography>
+                          <Image src={about6} alt="" style={{ width: '60%' }} />
                         </Grid>
                       </Grid>
                     </Card>
@@ -471,14 +491,14 @@ export default function AboutWhat() {
                     <Grid container spacing={2} sx={{ paddingBottom: '8%' }}>
                       <Grid container spacing={1} sx={{ marginLeft: '2px' }}>
                         <Grid item xs={6}>
-                          <Image src="images/about_7.jpg" alt="" style={{ marginTop: '6%' }} />
+                          <Image src={about7} alt="" style={{ marginTop: '6%' }} />
                         </Grid>
                         <Grid item xs={6}>
-                          <Image src="images/about_8.jpg" alt="" />
+                          <Image src={about8} alt="" />
                         </Grid>
 
                         <Grid item xs={8} sx={{ marginLeft: '16%' }}>
-                          <Image src="images/about_9.jpg" alt="" />
+                          <Image src={about9} alt="" />
                         </Grid>
                       </Grid>
                       <Grid item xs={12}>
@@ -495,14 +515,14 @@ export default function AboutWhat() {
                     <Grid container spacing={2} sx={{ paddingBottom: '8%' }}>
                       <Grid container spacing={1} sx={{ marginLeft: '2px' }}>
                         <Grid item xs={6}>
-                          <Image src="images/about_10.jpg" alt="" style={{ marginTop: '6%' }} />
+                          <Image src={about10} alt="" style={{ marginTop: '6%' }} />
                         </Grid>
                         <Grid item xs={6}>
-                          <Image src="images/about_11.jpg" alt="" />
+                          <Image src={about11} alt="" />
                         </Grid>
 
                         <Grid item xs={8} sx={{ marginLeft: '16%' }}>
-                          <Image src="images/about_12.jpg" alt="" />
+                          <Image src={about12} alt="" />
                         </Grid>
                       </Grid>
                       <Grid item xs={12}>
@@ -521,14 +541,14 @@ export default function AboutWhat() {
                     <Grid container spacing={2} sx={{ paddingBottom: '8%' }}>
                       <Grid container spacing={1} sx={{ marginLeft: '2px' }}>
                         <Grid item xs={6}>
-                          <Image src="images/about_13.jpg" alt="" style={{ marginTop: '6%' }} />
+                          <Image src={about13} alt="" style={{ marginTop: '6%' }} />
                         </Grid>
                         <Grid item xs={6}>
-                          <Image src="images/about_14.jpg" alt="" />
+                          <Image src={about14} alt="" />
                         </Grid>
 
                         <Grid item xs={8} sx={{ marginLeft: '16%' }}>
-                          <Image src="images/about_15.jpg" alt="" />
+                          <Image src={about15} alt="" />
                         </Grid>
                       </Grid>
                       <Grid item xs={12}>
@@ -547,14 +567,14 @@ export default function AboutWhat() {
                     <Grid container spacing={2} sx={{ paddingBottom: '8%' }}>
                       <Grid container spacing={1} sx={{ marginLeft: '2px' }}>
                         <Grid item xs={6}>
-                          <Image src="images/about_16.jpg" alt="" style={{ marginTop: '6%' }} />
+                          <Image src={about16} alt="" style={{ marginTop: '6%' }} />
                         </Grid>
                         <Grid item xs={6}>
-                          <Image src="images/about_17.jpg" alt="" />
+                          <Image src={about17} alt="" />
                         </Grid>
 
                         <Grid item xs={8} sx={{ marginLeft: '16%' }}>
-                          <Image src="images/about_18.jpg" alt="" />
+                          <Image src={about18} alt="" />
                         </Grid>
                       </Grid>
                       <Grid item xs={12}>
@@ -604,7 +624,7 @@ export default function AboutWhat() {
                         <m.div variants={varFade().inUp}>
                           <Image
                             alt="our office 1"
-                            src="images/about_2.jpg"
+                            src={about2}
                             sx={{
                               borderRadius: 2,
                               // boxShadow: shadow,
@@ -653,7 +673,7 @@ export default function AboutWhat() {
                         <m.div variants={varFade().inUp}>
                           <Image
                             alt="our office 1"
-                            src="images/about_3.jpg"
+                            src={about3}
                             sx={{
                               borderRadius: 2,
                               // boxShadow: shadow,
@@ -745,7 +765,7 @@ export default function AboutWhat() {
                         <m.div variants={varFade().inUp}>
                           <Image
                             alt="our office 1"
-                            src="images/about_4.jpg"
+                            src={about4}
                             sx={{
                               borderRadius: 2,
                               // boxShadow: shadow,

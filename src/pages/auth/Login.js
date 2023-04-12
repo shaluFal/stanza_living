@@ -90,7 +90,7 @@ export default function Login() {
             <Image
               visibleByDefault
               disabledEffect
-              src="/stanza/assets/illustrations/illustration_login.png"
+              src="/assets/illustrations/illustration_login.png"
               alt="login"
             />
           </SectionStyle>

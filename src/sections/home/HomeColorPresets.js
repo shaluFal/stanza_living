@@ -19,6 +19,9 @@ import useSettings from '../../hooks/useSettings';
 // components
 import Image from '../../components/Image';
 import { MotionViewport, varFade } from '../../components/animate';
+import wall1 from "../../images/walls_1.jpg";
+import wall2 from "../../images/walls_2.jpg";
+import wall3 from "../../images/walls_3.jpg";
 
 // ----------------------------------------------------------------------
 
@@ -71,16 +74,16 @@ export default function HomeColorPresets() {
           <Grid item xs={12} md={6}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <Image alt="" src={`images/walls_1.jpg`} style={{ width: '95%' }} />
+                <Image alt="" src={wall1} style={{ width: '95%' }} />
               </Grid>
               <Grid item xs={6}>
                 <Grid container spacing={2}>
                   <Grid item>
-                    <Image alt="" src={`images/walls_2.jpg`} style={{ borderRadius: '10px 10px' }} />
+                    <Image alt="" src={wall2} style={{ borderRadius: '10px 10px' }} />
                   </Grid>
 
                   <Grid item>
-                    <Image alt="" src={`images/walls_3.jpg`} style={{ borderRadius: '10px 10px' }} />
+                    <Image alt="" src={wall3} style={{ borderRadius: '10px 10px' }} />
                   </Grid>
                 </Grid>
               </Grid>

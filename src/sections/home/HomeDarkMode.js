@@ -5,6 +5,8 @@ import { Box, Grid, Container, Typography } from '@mui/material';
 // components
 import Image from '../../components/Image';
 import { MotionViewport, varFade } from '../../components/animate';
+import room2 from "../../images/room_2.jpg";
+import room1 from "../../images/room_1.jpg";
 
 // ----------------------------------------------------------------------
 
@@ -42,7 +44,7 @@ export default function HomeDarkMode() {
         <Grid container spacing={4} direction="row-reverse" justifyContent="space-between" sx={{paddingBottom: "175px"}}>
           <Grid item xs={12} md={6} sx={{ position: 'relative' }}>
             <m.div sx={{ width: '30%' }}>
-              <Image alt="light mode" src="images/room_2.jpg" style={{ width: '45%', marginLeft: '40%' }} />
+              <Image alt="light mode" src={room2} style={{ width: '45%', marginLeft: '40%' }} />
             </m.div>
 
             <Box
@@ -54,7 +56,7 @@ export default function HomeDarkMode() {
                 position: 'absolute',
               }}
             >
-              <Image alt="dark mode" src="images/room_1.jpg" />
+              <Image alt="dark mode" src={room1} />
             </Box>
           </Grid>
           <Grid item xs={12} md={6} sx={{ textAlign: 'left' }}>

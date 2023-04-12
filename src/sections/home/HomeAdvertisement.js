@@ -19,6 +19,9 @@ import useSettings from '../../hooks/useSettings';
 // components
 import Image from '../../components/Image';
 import { MotionViewport, varFade } from '../../components/animate';
+import chill1 from "../../images/chill_1.jpg";
+import chill2 from "../../images/chill_2.jpg";
+import chill3 from "../../images/chill_3.jpg";
 
 // ----------------------------------------------------------------------
 
@@ -57,16 +60,16 @@ export default function HomeAdvertisement() {
               <Grid item xs={6} >
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
-                    <Image alt="" src={`images/chill_1.jpg`} style={{ borderRadius: '10px 10px' }} />
+                    <Image alt="" src={chill1} style={{ borderRadius: '10px 10px' }} />
                   </Grid>
 
                   <Grid item xs={12}>
-                    <Image alt="" src={`images/chill_2.jpg`} style={{ borderRadius: '10px 10px' }} />
+                    <Image alt="" src={chill2} style={{ borderRadius: '10px 10px' }} />
                   </Grid>
                 </Grid>
               </Grid>
               <Grid item xs={6}>
-                <Image alt="" src={`images/chill_3.jpg`} style={{ width: '94%' }} />
+                <Image alt="" src={chill3} style={{ width: '94%' }} />
               </Grid>
             </Grid>
           </Grid>

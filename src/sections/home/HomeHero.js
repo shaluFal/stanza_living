@@ -38,6 +38,9 @@ import TextIconLabel from '../../components/TextIconLabel';
 import { MotionContainer, varFade } from '../../components/animate';
 import InputStyle from '../../components/InputStyle';
 import { AppFeatured } from '../@dashboard/general/app';
+import modern1 from "../../images/modern_1.jpg";
+import modern2 from "../../images/modern_2.jpg";
+import modern3 from "../../images/modern_3.jpg";
 
 // import Searchbar from '../../layouts/dashboard/header/Searchbar';
 
@@ -152,7 +155,7 @@ export default function HomeHero() {
                         Modern Student
                         <br /> Housing
                       </Typography>
-                      <img src="images/modern_1.jpg" alt="" />
+                      <img src={modern1} alt="" />
                       <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
                     </Card>
                   </Grid>
@@ -164,7 +167,7 @@ export default function HomeHero() {
                       >
                         Co-living <br /> Professionals
                       </Typography>
-                      <img src="images/modern_2.jpg" alt="" />
+                      <img src={modern2} alt="" />
                       <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
                     </Card>
                   </Grid>
@@ -176,7 +179,7 @@ export default function HomeHero() {
                       >
                         Managed <br /> Apartments
                       </Typography>
-                      <img src="images/modern_3.jpg" alt="" />
+                      <img src={modern3} alt="" />
                       <ArrowForwardIcon sx={{ position: 'absolute', bottom: '10%', left: '5%' }} />
                     </Card>
                   </Grid>
@@ -240,7 +243,7 @@ export default function HomeHero() {
                   components={{
                     DropdownIndicator: () => (
                       <Image
-                        src="images/search-interface-symbol.png"
+                        src="../images/search-interface-symbol.png"
                         alt=""
                         style={{ width: '15px', marginRight: '10px' }}
                       />

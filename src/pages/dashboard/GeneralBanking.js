@@ -136,7 +136,7 @@ export default function GeneralBanking() {
                 price="$50"
                 title={`Invite friends \n and earn`}
                 description="Praesent egestas tristique nibh. Duis lobortis massa imperdiet quam."
-                img="/stanza/assets/illustrations/illustration_invite.png"
+                img="/assets/illustrations/illustration_invite.png"
               />
             </Stack>
           </Grid>
