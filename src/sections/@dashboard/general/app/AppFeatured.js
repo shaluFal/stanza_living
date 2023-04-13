@@ -9,6 +9,10 @@ import { CardContent, Box, Card, Typography, Link } from '@mui/material';
 import Image from '../../../../components/Image';
 import { MotionContainer, varFade } from '../../../../components/animate';
 import { CarouselDots, CarouselArrows } from '../../../../components/carousel';
+import feed1 from '../../../../images/feed_1.jpg';
+import feed2 from '../../../../images/feed_2.jpg';
+import feed3 from '../../../../images/feed_3.jpg';
+import feed4 from '../../../../images/feed_4.jpg';
 
 // ----------------------------------------------------------------------
 
@@ -64,7 +68,7 @@ export default function AppFeatured({ list, ...other }) {
     <Card {...other}>
       <Slider ref={carouselRef} {...settings}>
         {list.map((app, index) => (
-          <CarouselItem key={app.id} item={app} isActive={index === currentIndex} index={index+1}/>
+          <CarouselItem key={app.id} item={app} isActive={index === currentIndex} index={index + 1} />
         ))}
       </Slider>
 
@@ -101,7 +105,7 @@ CarouselItem.propTypes = {
   }),
 };
 
-function CarouselItem({ item, isActive,index }) {
+function CarouselItem({ item, isActive, index }) {
   const { image, title, description } = item;
 
   return (
@@ -117,19 +121,29 @@ function CarouselItem({ item, isActive,index }) {
           textAlign: 'left',
           position: 'absolute',
           color: 'rgb(35 39 40/var(--tw-text-opacity))',
-          top: '10%'
+          top: '10%',
         }}
       >
         <m.div variants={varFade().inRight}>
           <Link color="inherit" underline="none">
-            <Typography variant='h3' gutterBottom noWrap sx={{fontWeight: '900', marginTop: {xs: "10px", lg: "60px"}, right: {xs: '5px'}, fontSize: {xs: "15.5px", lg: '38px', md: "26px", xl: "50px"}}}>
+            <Typography
+              variant="h3"
+              gutterBottom
+              noWrap
+              sx={{
+                fontWeight: '900',
+                marginTop: { xs: '10px', lg: '60px' },
+                right: { xs: '5px' },
+                fontSize: { xs: '15.5px', lg: '38px', md: '26px', xl: '50px' },
+              }}
+            >
               {title}
             </Typography>
           </Link>
         </m.div>
 
         <m.div variants={varFade().inRight}>
-          <Typography variant="p" noWrap sx={{fontSize: {lg: "20px", xs: "12px", md: "14px"}}}>
+          <Typography variant="p" noWrap sx={{ fontSize: { lg: '20px', xs: '12px', md: '14px' } }}>
             {description}
           </Typography>
         </m.div>
@@ -137,7 +151,28 @@ function CarouselItem({ item, isActive,index }) {
 
       <OverlayStyle />
 
-      <Image alt={title} src={`images/feed_${index}.jpg`} style={{width: "56.5%", borderRadius: "20px 20px 20px 20px", backgroundColor: "white", marginLeft: "50%"}} />
+      <Image
+        alt={title}
+        src={index === 1 && feed1}
+        style={{ width: '53%', borderRadius: '20px 20px 20px 20px', backgroundColor: 'white', marginLeft: '50%' }}
+      />
+      <Image
+        alt={title}
+        src={index === 2 && feed2}
+        style={{ width: '53%', borderRadius: '20px 20px 20px 20px', backgroundColor: 'white', marginLeft: '50%' }}
+      />
+      <Image
+        alt={title}
+        src={index === 3 && feed3}
+        style={{ width: '53%', borderRadius: '20px 20px 20px 20px', backgroundColor: 'white', marginLeft: '50%' }}
+      />
+      <Image
+        alt={title}
+        src={index === 4 && feed4}
+        style={{ width: '53%', borderRadius: '20px 20px 20px 20px', backgroundColor: 'white', marginLeft: '50%' }}
+      />
+
+      {/* <img alt={title} src={`../../../../images/feed_${index}.jpg`} style={{width: "56.5%", borderRadius: "20px 20px 20px 20px", backgroundColor: "white", marginLeft: "50%"}} /> */}
       {/* sx={{ height: { xs: 300, md: 260, lg: 512 }, width: {xs: 320, md: 1200, lg: 850}, textAlign: 'left' }} */}
     </Box>
   );

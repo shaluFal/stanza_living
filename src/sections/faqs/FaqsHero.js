@@ -7,7 +7,7 @@ import { Box, Container, Stack, InputAdornment, Grid, Typography, Card } from '@
 import Iconify from '../../components/Iconify';
 import InputStyle from '../../components/InputStyle';
 import { MotionContainer, TextAnimate, varFade } from '../../components/animate';
-
+import team from "../../images/team.jpg";
 import Image from '../../components/Image';
 
 // ----------------------------------------------------------------------
@@ -54,7 +54,7 @@ export default function FaqsHero() {
           <Card sx={{padding: "4%", textAlign: "left"}}>
           <Image
             alt="our office 1"
-            src="images/team.jpg"
+            src={team}
             sx={{
               borderRadius: 2,
               // boxShadow: shadow,
@@ -71,7 +71,7 @@ export default function FaqsHero() {
           <Card sx={{padding: "4%", textAlign: "left"}}>
           <Image
             alt="our office 1"
-            src="images/team.jpg"
+            src={team}
             sx={{
               borderRadius: 2,
               // boxShadow: shadow,
@@ -87,7 +87,7 @@ export default function FaqsHero() {
           <Card sx={{padding: "4%", textAlign: "left"}}>
           <Image
             alt="our office 1"
-            src="images/team.jpg"
+            src={team}
             sx={{
               borderRadius: 2,
               // boxShadow: shadow,
@@ -103,7 +103,7 @@ export default function FaqsHero() {
           <Card sx={{padding: "4%", textAlign: "left"}}>
           <Image
             alt="our office 1"
-            src="images/team.jpg"
+            src={team}
             sx={{
               borderRadius: 2,
               // boxShadow: shadow,
@@ -119,7 +119,7 @@ export default function FaqsHero() {
           <Card sx={{padding: "4%", textAlign: "left"}}>
           <Image
             alt="our office 1"
-            src="images/team.jpg"
+            src={team}
             sx={{
               borderRadius: 2,
               // boxShadow: shadow,
@@ -135,7 +135,7 @@ export default function FaqsHero() {
           <Card sx={{padding: "4%", textAlign: "left"}}>
           <Image
             alt="our office 1"
-            src="images/team.jpg"
+            src={team}
             sx={{
               borderRadius: 2,
               // boxShadow: shadow,
@@ -151,7 +151,7 @@ export default function FaqsHero() {
           <Card sx={{padding: "4%", textAlign: "left"}}>
           <Image
             alt="our office 1"
-            src="images/team.jpg"
+            src={team}
             sx={{
               borderRadius: 2,
               // boxShadow: shadow,

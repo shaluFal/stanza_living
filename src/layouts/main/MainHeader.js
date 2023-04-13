@@ -17,6 +17,7 @@ import { HEADER } from '../../config';
 // components
 import Logo from '../../components/Logo';
 import Label from '../../components/Label';
+import search from "../../images/search-interface-symbol.png";
 
 //
 import MenuDesktop from './MenuDesktop';
@@ -198,7 +199,7 @@ export default function MainHeader() {
                     components={{
                       DropdownIndicator: () => (
                         <Image
-                          src="images/search-interface-symbol.png"
+                          src={search}
                           alt=""
                           style={{ width: '15px', marginRight: '10px', color: '#000' }}
                         />

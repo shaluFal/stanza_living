@@ -41,6 +41,7 @@ import { AppFeatured } from '../@dashboard/general/app';
 import modern1 from "../../images/modern_1.jpg";
 import modern2 from "../../images/modern_2.jpg";
 import modern3 from "../../images/modern_3.jpg";
+import search from "../../images/search-interface-symbol.png"
 
 // import Searchbar from '../../layouts/dashboard/header/Searchbar';
 
@@ -142,7 +143,7 @@ export default function HomeHero() {
         <Grid item xs={12} md={11}>
           <m.div>
             <Grid container spacing={1} sx={{ marginTop: '45px' }}>
-              <Grid item xs={12} md={8}>
+              <Grid item xs={12} md={8} >
                 <AppFeatured list={_appFeatured} sx={{ marginBottom: '2%' }} />
               </Grid>
               <Grid item xs={12} md={4}>
@@ -243,7 +244,7 @@ export default function HomeHero() {
                   components={{
                     DropdownIndicator: () => (
                       <Image
-                        src="../images/search-interface-symbol.png"
+                        src={search}
                         alt=""
                         style={{ width: '15px', marginRight: '10px' }}
                       />
@@ -264,7 +265,7 @@ export default function HomeHero() {
           </m.div>
 
           <m.div>
-            <Divider sx={{ paddingTop: '10px' }} />
+            <Divider sx={{marginTop: "40px"}}/>
             {/* <Box sx={{ py: 2, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', textAlign: 'center' }}> */}
             <Grid container sx={{ textAlign: 'center', paddingBottom: '6px' }}>
               <Grid item xs={12} md={4}>

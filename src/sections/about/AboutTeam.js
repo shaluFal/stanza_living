@@ -13,6 +13,14 @@ import Iconify from '../../components/Iconify';
 import { CarouselArrows } from '../../components/carousel';
 import SocialsButton from '../../components/SocialsButton';
 import { MotionViewport, varFade } from '../../components/animate';
+import spotlight1 from "../../images/spotlight_1.jpg";
+import spotlight2 from "../../images/spotlight_2.jpg";
+import spotlight3 from "../../images/spotlight_3.jpg";
+import spotlight4 from "../../images/spotlight_4.jpg";
+import spotlight5 from "../../images/spotlight_5.jpg";
+import spotlight6 from "../../images/spotlight_6.jpg";
+import spotlight7 from "../../images/spotlight_7.jpg";
+import spotlight8 from "../../images/spotlight_8.jpg";
 
 // ----------------------------------------------------------------------
 
@@ -81,10 +89,11 @@ export default function AboutTeam() {
       <Box sx={{ position: 'relative' }}>
         <CarouselArrows filled onNext={handleNext} onPrevious={handlePrevious}>
           <Slider ref={carouselRef} {...settings}>
-            {_carouselsMembers.map((member) => (
+            {_carouselsMembers.map((member, index) => (
               <Box key={member.id} component={m.div} variants={varFade().in} sx={{ px: 1.5, py: 10, display: 'flex', alignItems:'center' }}>
                 {/* <MemberCard member={member} /> */}
                 <img src={member.avatar} alt="" width={"250px"} height="100px" />
+                {/* <img src={index === 1 && spotlight1} alt="" width={"250px"} height="100px" /> */}
               </Box>
             ))}
           </Slider>

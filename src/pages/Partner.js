@@ -14,6 +14,9 @@ import Image from '../components/Image';
 import Iconify from '../components/Iconify';
 import { MotionViewport, varFade } from '../components/animate';
 import Card from '../theme/overrides/Card';
+import partner from "../images/partner.jpg";
+import partner1 from "../images/partner_1.jpg";
+import partner2 from "../images/partner_2.jpg";
 
 // ----------------------------------------------------------------------
 
@@ -118,7 +121,7 @@ export default function Partner() {
             <m.div variants={varFade().inUp}>
               <Image
                 alt="our office 1"
-                src="images/partner.jpg"
+                src={partner}
                 sx={{
                   borderRadius: 2,
                   // boxShadow: shadow,
@@ -134,7 +137,7 @@ export default function Partner() {
             <m.div variants={varFade().inUp}>
               <Image
                 alt="our office 1"
-                src="images/partner_1.jpg"
+                src={partner1}
                 sx={{
                   borderRadius: 2,
                   // boxShadow: shadow,
@@ -231,7 +234,7 @@ export default function Partner() {
             <m.div variants={varFade().inUp}>
               <Image
                 alt="our office 1"
-                src="images/partner_2.jpg"
+                src={partner2}
                 sx={{
                   borderRadius: 2,
                   // boxShadow: shadow,

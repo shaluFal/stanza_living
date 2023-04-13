@@ -1,5 +1,13 @@
 import _mock from './_mock';
 import { randomInArray } from './funcs';
+import spotlight1 from "../images/spotlight_1.jpg";
+import spotlight2 from "../images/spotlight_2.jpg";
+import spotlight3 from "../images/spotlight_3.jpg";
+import spotlight4 from "../images/spotlight_4.jpg";
+import spotlight5 from "../images/spotlight_5.jpg";
+import spotlight6 from "../images/spotlight_6.jpg";
+import spotlight7 from "../images/spotlight_7.jpg";
+import spotlight8 from "../images/spotlight_8.jpg";
 
 // ----------------------------------------------------------------------
 
@@ -15,7 +23,7 @@ export const _carouselsMembers = [...Array(5)].map((_, index) => ({
   id: _mock.id(index),
   name: _mock.name.fullName(index),
   role: _mock.role(index),
-  avatar: `../../images/spotlight_${index + 1}.jpg`,
+  avatar: (index === 1 ? spotlight1 : spotlight2)
 }));
 
 // ----------------------------------------------------------------------
