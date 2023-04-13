@@ -184,6 +184,7 @@ export default function ContactHero() {
   const [filterTypes, setFilterTypes] = React.useState([]);
   const [srcLoc, setSrcLoc] = React.useState('');
   const [budMaxValue, setBudMaxValue] = React.useState(60000);
+  const [selctedPropertyName, setSelctedPropertyName] = React.useState('');
 
   const navigate = useNavigate();
 
@@ -192,6 +193,13 @@ export default function ContactHero() {
       .then((response) => {
         setLocations(response.data?.listOfLocations);
         setLocation(response.data?.listOfLocations);
+        const locationid = window.location.pathname.split('/')[2];
+        for (let i = 0; i < response.data?.listOfLocations?.length; i += 1) {
+          if (response.data?.listOfLocations[i]?.id === locationid) {
+            setSelctedPropertyName(response.data?.listOfLocations[i]?.value);
+            break;
+          }
+        }
         // setLocations(lcsData);
         // setLocation(lcsData);
         // setPropertyData(pcsData);
@@ -221,7 +229,7 @@ export default function ContactHero() {
   const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
   const getAllLocations = useCallback(async () => {
-    const locationid = window.location.pathname.split('/')[3];
+    const locationid = window.location.pathname.split('/')[2];
 
     try {
       await API.post('/api/WebsiteAPI/GetListOfProperties', {
@@ -255,7 +263,7 @@ export default function ContactHero() {
 
   useEffect(() => {
     getAllLocations();
-    const locationid = window.location.pathname.split('/')[3];
+    const locationid = window.location.pathname.split('/')[2];
     // console.log('rrrrrrrrrr', locationid);
   }, [getAllLocations, locationid]);
 
@@ -963,86 +971,90 @@ export default function ContactHero() {
                             padding: '10px 20px',
                           }}
                         >
-                          <div style={{ marginBottom: '15px' }}>
-                            <div className='d-flex gap-3'>
-                            <Checkbox
-                              checked={filter.Amenities?.includes('Attached Balcony')}
-                              onClick={(e) => handleFilter('Amenities', 'Attached Balcony', e)}
-                              {...checkboxLabel}
-                            />
-                            Attached Balcony
-                           </div>
-                           <div>
-                            <Checkbox
-                              checked={filter.Amenities?.includes('Air Conditioning')}
-                              onClick={(e) => handleFilter('Amenities', 'Air Conditioning', e)}
-                              {...checkboxLabel}
-                            />
-                            Air Conditioning
-                            </div>
-                            <div className='d-flex gap-3'>
-                            <Checkbox
-                              checked={filter.Amenities?.includes('Attached Washroom')}
-                              onClick={(e) => handleFilter('Amenities', 'Attached Washroom', e)}
-                              {...checkboxLabel}
-                            />
-                            Attached Washroom
+                          <div style={{ marginBottom: '15px', display:"flex" }}>
+                            <div>
+                              <div className="d-flex gap-3">
+                                <Checkbox
+                                  checked={filter.Amenities?.includes('Attached Balcony')}
+                                  onClick={(e) => handleFilter('Amenities', 'Attached Balcony', e)}
+                                  {...checkboxLabel}
+                                />
+                                Attached Balcony
+                              </div>
+                              <div>
+                                <Checkbox
+                                  checked={filter.Amenities?.includes('Air Conditioning')}
+                                  onClick={(e) => handleFilter('Amenities', 'Air Conditioning', e)}
+                                  {...checkboxLabel}
+                                />
+                                Air Conditioning
+                              </div>
+                              <div className="d-flex gap-3">
+                                <Checkbox
+                                  checked={filter.Amenities?.includes('Attached Washroom')}
+                                  onClick={(e) => handleFilter('Amenities', 'Attached Washroom', e)}
+                                  {...checkboxLabel}
+                                />
+                                Attached Washroom
+                              </div>
+                              <div>
+                                <Checkbox
+                                  checked={filter.Amenities?.includes('Spacious Cupboard')}
+                                  onClick={(e) => handleFilter('Amenities', 'Spacious Cupboard', e)}
+                                  {...checkboxLabel}
+                                />
+                                Spacious Cupboard
+                              </div>
+                              <div className="d-flex gap-3">
+                                <Checkbox
+                                  checked={filter.Amenities?.includes('Storage Shelf')}
+                                  onClick={(e) => handleFilter('Amenities', 'Storage Shelf', e)}
+                                  {...checkboxLabel}
+                                />
+                                Storage Shelf
+                              </div>
                             </div>
                             <div>
-                            <Checkbox
-                              checked={filter.Amenities?.includes('Spacious Cupboard')}
-                              onClick={(e) => handleFilter('Amenities', 'Spacious Cupboard', e)}
-                              {...checkboxLabel}
-                            />
-                            Spacious Cupboard
-                            </div>
-                            <div  className='d-flex gap-3'>
-                            <Checkbox
-                              checked={filter.Amenities?.includes('Storage Shelf')}
-                              onClick={(e) => handleFilter('Amenities', 'Storage Shelf', e)}
-                              {...checkboxLabel}
-                            />
-                            Storage Shelf
-                            </div>
-                            <div>
-                            <Checkbox
-                              checked={filter.Amenities?.includes('Desert Cooler')}
-                              onClick={(e) => handleFilter('Amenities', 'Desert Cooler', e)}
-                              {...checkboxLabel}
-                            />
-                            Desert Cooler
-                            </div>
-                            <div  className='d-flex gap-3'>
-                            <Checkbox
-                              checked={filter.Amenities?.includes('Shared Washroom')}
-                              onClick={(e) => handleFilter('Amenities', 'Shared Washroom', e)}
-                              {...checkboxLabel}
-                            />
-                            Shared Washroom
-                            </div>
-                            <div>
-                            <Checkbox
-                              checked={filter.Amenities?.includes('Window')}
-                              onClick={(e) => handleFilter('Amenities', 'Window', e)}
-                              {...checkboxLabel}
-                            />
-                            Window
-                            </div>
-                            <div  className='d-flex gap-3'>
-                            <Checkbox
-                              checked={filter.Amenities?.includes('Lift Facility')}
-                              onClick={(e) => handleFilter('Amenities', 'Lift Facility', e)}
-                              {...checkboxLabel}
-                            />
-                            Lift Facility
-                            </div>
-                            <div>
-                            <Checkbox
-                              checked={filter.Amenities?.includes('Parking')}
-                              onClick={(e) => handleFilter('Amenities', 'Parking', e)}
-                              {...checkboxLabel}
-                            />
-                            Parking
+                              <div>
+                                <Checkbox
+                                  checked={filter.Amenities?.includes('Desert Cooler')}
+                                  onClick={(e) => handleFilter('Amenities', 'Desert Cooler', e)}
+                                  {...checkboxLabel}
+                                />
+                                Desert Cooler
+                              </div>
+                              <div className="d-flex gap-3">
+                                <Checkbox
+                                  checked={filter.Amenities?.includes('Shared Washroom')}
+                                  onClick={(e) => handleFilter('Amenities', 'Shared Washroom', e)}
+                                  {...checkboxLabel}
+                                />
+                                Shared Washroom
+                              </div>
+                              <div>
+                                <Checkbox
+                                  checked={filter.Amenities?.includes('Window')}
+                                  onClick={(e) => handleFilter('Amenities', 'Window', e)}
+                                  {...checkboxLabel}
+                                />
+                                Window
+                              </div>
+                              <div className="d-flex gap-3">
+                                <Checkbox
+                                  checked={filter.Amenities?.includes('Lift Facility')}
+                                  onClick={(e) => handleFilter('Amenities', 'Lift Facility', e)}
+                                  {...checkboxLabel}
+                                />
+                                Lift Facility
+                              </div>
+                              <div>
+                                <Checkbox
+                                  checked={filter.Amenities?.includes('Parking')}
+                                  onClick={(e) => handleFilter('Amenities', 'Parking', e)}
+                                  {...checkboxLabel}
+                                />
+                                Parking
+                              </div>
                             </div>
                           </div>
                           <hr />
@@ -1219,7 +1231,7 @@ export default function ContactHero() {
                 <Typography
                   sx={{ marginTop: '2%', fontWeight: '700', marginBottom: '2%', paddingLeft: '2%', fontSize: '20px' }}
                 >
-                  {propertyData?.length} PGs waiting to be yours in Hyderabad
+                  {propertyData?.length} PGs waiting to be yours in {selctedPropertyName}, Hyderabad
                 </Typography>
 
                 <Grid
@@ -1559,12 +1571,13 @@ export default function ContactHero() {
               </Grid>
               <Grid item xs={10}>
                 <FormControl variant="filled" fullWidth>
-                  <InputLabel id="demo-simple-select-filled-label">Duration of your stay</InputLabel>
+                  {/* <InputLabel id="demo-simple-select-filled-label">Duration of your stay</InputLabel> */}
                   <Select
                     labelId="demo-simple-select-filled-label"
                     id="demo-simple-select-filled"
                     // value={age}
                     // onChange={handleChange}
+                    placeholder="Duration of your stay"
                     sx={{ background: '#fff' }}
                   >
                     <MenuItem value="lessThan3Months">Less than 3 months</MenuItem>

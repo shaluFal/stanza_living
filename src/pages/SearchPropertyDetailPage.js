@@ -34,7 +34,7 @@ const SearchPropertyDetailPage = () => {
   const [property, setProperty] = React.useState([]);
   React.useEffect(() => {
     const params = new URLSearchParams(window.location.search).get('direction');
-    const facilityCode = window.location.pathname.split('/')[3];
+    const facilityCode = window.location.pathname.split('/')[2];
     API.get(
       `/api/WebsiteAPI/GetPropertyData?APIKey=eJgDBiLVjroiksSVS8jLW5YXcHUAJOe5ZeOx80T9mzo=&FacilityCode=${facilityCode}`
     ).then((response) => {

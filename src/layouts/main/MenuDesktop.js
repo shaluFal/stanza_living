@@ -67,7 +67,7 @@ const TypoStyle = styled(Typography)(({ theme }) => ({
 
 const SubLinkStyle = styled((props) => (
   <ListItem sx={{ p: 0 }}>
-    <Link target="_blank" rel="noopener" {...props}>
+    <Link rel="noopener" {...props}>
       {props.children}
     </Link>
   </ListItem>
@@ -439,7 +439,7 @@ function MenuDesktopItem({
               <h5 style={{ marginTop: '4%', marginBottom: '6px' }}>Popular Cities</h5>
             </Grid>
             <Grid item xs={12}>
-              <Link href="/" target="__blank"  underline="none" style={{cursor: "pointer"}}>
+              <Link href="/"  underline="none" style={{cursor: "pointer"}}>
               <img src={MapImag.Hyderabad} alt="" style={{ width: '60px', height: '60px', marginLeft: '10px' }} />
               <Typography sx={{ marginTop: '10px', color: "#000" }}>Hyderabad</Typography>
               </Link>
