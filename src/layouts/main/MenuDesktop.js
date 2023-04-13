@@ -266,7 +266,7 @@ function MenuDesktopItem({
               const { subheader, items } = list;
 
               return (
-                <Grid key={subheader} item xs={12} md={subheader === 'Dashboard' ? 6 : 2}>
+                <Grid key={subheader} item xs={12} lg={12} >
                   <List disablePadding>
                     {/* <ListSubheader
                       disableSticky
@@ -301,6 +301,7 @@ function MenuDesktopItem({
                               borderRadius: 2,
                               color: 'primary.main',
                               bgcolor: 'background.neutral',
+                              
                             }}
                           >
                             <Box
@@ -438,7 +439,7 @@ function MenuDesktopItem({
               <h5 style={{ marginTop: '4%', marginBottom: '6px' }}>Popular Cities</h5>
             </Grid>
             <Grid item xs={12}>
-              <Link href="/" target="/" rel="noopener" underline="none">
+              <Link href="/" target="__blank"  underline="none" style={{cursor: "pointer"}}>
               <img src={MapImag.Hyderabad} alt="" style={{ width: '60px', height: '60px', marginLeft: '10px' }} />
               <Typography sx={{ marginTop: '10px', color: "#000" }}>Hyderabad</Typography>
               </Link>

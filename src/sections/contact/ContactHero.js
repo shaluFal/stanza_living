@@ -971,7 +971,8 @@ export default function ContactHero() {
                               {...checkboxLabel}
                             />
                             Attached Balcony
-                           
+                           </div>
+                           <div>
                             <Checkbox
                               checked={filter.Amenities?.includes('Air Conditioning')}
                               onClick={(e) => handleFilter('Amenities', 'Air Conditioning', e)}
@@ -986,7 +987,8 @@ export default function ContactHero() {
                               {...checkboxLabel}
                             />
                             Attached Washroom
-                            
+                            </div>
+                            <div>
                             <Checkbox
                               checked={filter.Amenities?.includes('Spacious Cupboard')}
                               onClick={(e) => handleFilter('Amenities', 'Spacious Cupboard', e)}
@@ -1001,7 +1003,8 @@ export default function ContactHero() {
                               {...checkboxLabel}
                             />
                             Storage Shelf
-                            
+                            </div>
+                            <div>
                             <Checkbox
                               checked={filter.Amenities?.includes('Desert Cooler')}
                               onClick={(e) => handleFilter('Amenities', 'Desert Cooler', e)}
@@ -1016,7 +1019,8 @@ export default function ContactHero() {
                               {...checkboxLabel}
                             />
                             Shared Washroom
-                            
+                            </div>
+                            <div>
                             <Checkbox
                               checked={filter.Amenities?.includes('Window')}
                               onClick={(e) => handleFilter('Amenities', 'Window', e)}
@@ -1031,7 +1035,8 @@ export default function ContactHero() {
                               {...checkboxLabel}
                             />
                             Lift Facility
-                            
+                            </div>
+                            <div>
                             <Checkbox
                               checked={filter.Amenities?.includes('Parking')}
                               onClick={(e) => handleFilter('Amenities', 'Parking', e)}
