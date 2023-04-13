@@ -265,7 +265,7 @@ export default function HomeHero() {
           </m.div>
 
           <m.div>
-            <Divider sx={{marginTop: "40px"}}/>
+            <Divider sx={{marginTop: "10px"}}/>
             {/* <Box sx={{ py: 2, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', textAlign: 'center' }}> */}
             <Grid container sx={{ textAlign: 'center', paddingBottom: '6px' }}>
               <Grid item xs={12} md={4}>
