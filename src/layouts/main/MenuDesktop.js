@@ -249,10 +249,12 @@ function MenuDesktopItem({
           PaperProps={{
             sx: {
               px: 3,
-              pt: 5,
+              pt: 2,
               pb: 3,
-              right: 16,
+              right: 5,
               m: 'auto',
+              width: "15%",
+              marginRight: "6%",
               borderRadius: 2,
               maxWidth: (theme) => theme.breakpoints.values.lg,
               boxShadow: (theme) => theme.customShadows.z24,
@@ -436,8 +438,10 @@ function MenuDesktopItem({
               <h5 style={{ marginTop: '4%', marginBottom: '6px' }}>Popular Cities</h5>
             </Grid>
             <Grid item xs={12}>
+              <Link href="/" target="/" rel="noopener" underline="none">
               <img src={MapImag.Hyderabad} alt="" style={{ width: '60px', height: '60px', marginLeft: '10px' }} />
-              <Typography sx={{ marginTop: '10px' }}>Hyderabad</Typography>
+              <Typography sx={{ marginTop: '10px', color: "#000" }}>Hyderabad</Typography>
+              </Link>
             </Grid>
           </Grid>
         </Card>

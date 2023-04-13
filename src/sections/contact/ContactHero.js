@@ -964,66 +964,81 @@ export default function ContactHero() {
                           }}
                         >
                           <div style={{ marginBottom: '15px' }}>
+                            <div className='d-flex gap-3'>
                             <Checkbox
                               checked={filter.Amenities?.includes('Attached Balcony')}
                               onClick={(e) => handleFilter('Amenities', 'Attached Balcony', e)}
                               {...checkboxLabel}
                             />
                             Attached Balcony
+                           
                             <Checkbox
                               checked={filter.Amenities?.includes('Air Conditioning')}
                               onClick={(e) => handleFilter('Amenities', 'Air Conditioning', e)}
                               {...checkboxLabel}
                             />
                             Air Conditioning
+                            </div>
+                            <div className='d-flex gap-3'>
                             <Checkbox
                               checked={filter.Amenities?.includes('Attached Washroom')}
                               onClick={(e) => handleFilter('Amenities', 'Attached Washroom', e)}
                               {...checkboxLabel}
                             />
                             Attached Washroom
+                            
                             <Checkbox
                               checked={filter.Amenities?.includes('Spacious Cupboard')}
                               onClick={(e) => handleFilter('Amenities', 'Spacious Cupboard', e)}
                               {...checkboxLabel}
                             />
                             Spacious Cupboard
+                            </div>
+                            <div  className='d-flex gap-3'>
                             <Checkbox
                               checked={filter.Amenities?.includes('Storage Shelf')}
                               onClick={(e) => handleFilter('Amenities', 'Storage Shelf', e)}
                               {...checkboxLabel}
                             />
                             Storage Shelf
+                            
                             <Checkbox
                               checked={filter.Amenities?.includes('Desert Cooler')}
                               onClick={(e) => handleFilter('Amenities', 'Desert Cooler', e)}
                               {...checkboxLabel}
                             />
                             Desert Cooler
+                            </div>
+                            <div  className='d-flex gap-3'>
                             <Checkbox
                               checked={filter.Amenities?.includes('Shared Washroom')}
                               onClick={(e) => handleFilter('Amenities', 'Shared Washroom', e)}
                               {...checkboxLabel}
                             />
                             Shared Washroom
+                            
                             <Checkbox
                               checked={filter.Amenities?.includes('Window')}
                               onClick={(e) => handleFilter('Amenities', 'Window', e)}
                               {...checkboxLabel}
                             />
                             Window
+                            </div>
+                            <div  className='d-flex gap-3'>
                             <Checkbox
                               checked={filter.Amenities?.includes('Lift Facility')}
                               onClick={(e) => handleFilter('Amenities', 'Lift Facility', e)}
                               {...checkboxLabel}
                             />
                             Lift Facility
+                            
                             <Checkbox
                               checked={filter.Amenities?.includes('Parking')}
                               onClick={(e) => handleFilter('Amenities', 'Parking', e)}
                               {...checkboxLabel}
                             />
                             Parking
+                            </div>
                           </div>
                           <hr />
                           <div
@@ -1447,8 +1462,8 @@ export default function ContactHero() {
                   <>
                     {loaded ? (
                       <Stack sx={{ width: '100%' }} spacing={2}>
-                        <Alert severity="error">
-                          <AlertTitle>Error</AlertTitle>
+                        <Alert severity="warning">
+                          {/* <AlertTitle>Error</AlertTitle> */}
                           There are no matching properties with that filter—{' '}
                           <strong>Please try to change the filter!</strong>
                         </Alert>
