@@ -65,7 +65,7 @@ export default function AppFeatured({ list, ...other }) {
   };
 
   return (
-    <Card {...other}>
+    <Card {...other} sx={{ height: '100%' }}>
       <Slider ref={carouselRef} {...settings}>
         {list.map((app, index) => (
           <CarouselItem key={app.id} item={app} isActive={index === currentIndex} index={index + 1} />
@@ -151,27 +151,43 @@ function CarouselItem({ item, isActive, index }) {
 
       <OverlayStyle />
 
-      <Image
-        alt={title}
-        src={index === 1 && feed1}
-        style={{ width: '53%', borderRadius: '20px 20px 20px 20px', backgroundColor: 'white', marginLeft: '50%' }}
-      />
-      <Image
-        alt={title}
-        src={index === 2 && feed2}
-        style={{ width: '53%', borderRadius: '20px 20px 20px 20px', backgroundColor: 'white', marginLeft: '50%' }}
-      />
-      <Image
-        alt={title}
-        src={index === 3 && feed3}
-        style={{ width: '53%', borderRadius: '20px 20px 20px 20px', backgroundColor: 'white', marginLeft: '50%' }}
-      />
-      <Image
-        alt={title}
-        src={index === 4 && feed4}
-        style={{ width: '53%', borderRadius: '20px 20px 20px 20px', backgroundColor: 'white', marginLeft: '50%' }}
-      />
+      {index === 1 ? (
+        <Image
+          alt={title}
+          src={feed1}
+          style={{ width: '56.5%', borderRadius: '20px 20px 20px 20px', backgroundColor: 'white', marginLeft: '50%' }}
+        />
+      ) : (
+        <></>
+      )}
+      {index === 2 ? (
+        <Image
+          alt={title}
+          src={feed2}
+          style={{ width: '56.5%', borderRadius: '20px 20px 20px 20px', backgroundColor: 'white', marginLeft: '50%' }}
+        />
+      ) : (
+        <></>
+      )}
+      {index === 3 ? (
+        <Image
+          alt={title}
+          src={feed3}
+          style={{ width: '56.5%', borderRadius: '20px 20px 20px 20px', backgroundColor: 'white', marginLeft: '50%' }}
+        />
+      ) : (
+        <></>
+      )}
 
+      {index === 4 ? (
+        <Image
+          alt={title}
+          src={feed4}
+          style={{ width: '56.5%', borderRadius: '20px 20px 20px 20px', backgroundColor: 'white', marginLeft: '50%' }}
+        />
+      ) : (
+        <></>
+      )}
       {/* <img alt={title} src={`../../../../images/feed_${index}.jpg`} style={{width: "56.5%", borderRadius: "20px 20px 20px 20px", backgroundColor: "white", marginLeft: "50%"}} /> */}
       {/* sx={{ height: { xs: 300, md: 260, lg: 512 }, width: {xs: 320, md: 1200, lg: 850}, textAlign: 'left' }} */}
     </Box>
